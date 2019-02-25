@@ -32,6 +32,7 @@ namespace eTUTOR.Controllers
             model.SaveChanges();
             return RedirectToAction("ConfirmEmail", "User");
         }
+        [HttpPost]
         public ActionResult RegisterParent(parent parent/*, string fullname, string username, string email, string password, string phone, string address, DateTime birthday, string specialized, string job, string experience, string certificate, int status*/)
         {
 

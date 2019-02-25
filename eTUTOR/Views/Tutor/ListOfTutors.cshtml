@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<eTUTOR.Models.tutor>
+
 @{
     ViewBag.Title = "ListOfTutors";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -45,28 +46,27 @@
                         </form>
                     </div>
                     <div class="row multi-row-clearfix">
+                        @foreach (var item in Model) { 
                         <div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
                             <div class="team maxwidth400">
                                 <div class="thumb">
                                     <img class="img-fullwidth"
-                                    src="~/Content/img/teacher/team5.jpg" alt="">
+                                         src="~/Content/img/teacher/team5.jpg" alt="">
                                 </div>
                                 <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
-                                    <h4 class="name text-theme-color-2 mt-0">Andre Smith - <small>Gia sư</small></h4>
-                                    <p class="mb-20">Kinh nghiệm giảng dạy môn toán, lý hóa lớp 12</p>
+                                    <h4 class="name text-theme-color-2 mt-0">@item.fullname - <small>Gia sư</small></h4>
+                                    <p class="mb-20">@item.experience</p>
                                     <ul class="styled-icons icon-dark icon-circled icon-theme-colored icon-sm pull-left flip">
                                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                                     </ul>
-                                    <a class="btn btn-theme-colored btn-sm pull-right flip"
-                                       href="../../../app/Component/DetailTutorComponent/detailTutor.component.html">
-                                        Chi
-                                        tiết
-                                    </a>
+                                    
+                                    @Html.ActionLink("Chi tiết","ViewDetailTutor", new { id = item.tutor_id},new { @class = "btn btn-theme-colored btn-sm pull-right flip" })
                                 </div>
                             </div>
                         </div>
+                        }
                         <div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
                             <div class="team maxwidth400">
                                 <div class="thumb"><img class="img-fullwidth" src="~/Content/img/teacher/team6.jpg" alt=""></div>
@@ -212,7 +212,6 @@
         <!-- /teacher -->
     </div>
     <!-- body -->
-
     <!-- /body -->
     <!-- jQuery -->
     <script src="jquery.js"></script>

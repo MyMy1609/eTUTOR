@@ -1,4 +1,5 @@
-﻿
+﻿@model eTUTOR.Models.tutor
+
 @{
     ViewBag.Title = "ViewDetailTutor";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -37,7 +38,7 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <h2 class="name font-24 mt-0 mb-0">Sakib Smith</h2>
+                            <h2 class="name font-24 mt-0 mb-0">@Model.fullname</h2>
                             <h5 class="mt-5 text-theme-color-2">Chemistry Teachers</h5>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam vero expedita fugiat
@@ -80,8 +81,7 @@
                                             <div class="media-body">
                                                 <h5 class="mt-0 mb-0">Kinh nghiệm/ Chuyên ngành giảng dạy:</h5>
                                                 <p>
-                                                    Chemistry (BSc), Computer Science (BSc), English and Creative Writing
-                                                    (BA)
+                                                    @Model.experience
                                                 </p>
                                             </div>
                                         </div>
@@ -93,7 +93,7 @@
                                             </div>
                                             <div class="media-body">
                                                 <h5 class="mt-0 mb-0">Địa chỉ:</h5>
-                                                <p>Village 856 Broadway New York</p>
+                                                <p>@Model.address</p>
                                             </div>
                                         </div>
                                     </li>
@@ -105,8 +105,8 @@
                                             <div class="media-body">
                                                 <h5 class="mt-0 mb-0">Liên hệ:</h5>
                                                 <p>
-                                                    <span>Phone:</span> +262 695 2601<br><span>Email:</span>
-                                                    you@yourdomain.com
+                                                    <span>Phone:</span> @Model.phone<br><span>Email:</span>
+                                                    @Model.email
                                                 </p>
                                             </div>
                                         </div>
