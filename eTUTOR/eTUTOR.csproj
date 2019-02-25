@@ -175,6 +175,9 @@
     <Compile Include="Models\parent.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>eTUITORModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\schedule.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>

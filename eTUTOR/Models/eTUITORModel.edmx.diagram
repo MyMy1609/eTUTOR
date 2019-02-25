@@ -30,6 +30,7 @@
         <AssociationConnector Association="capstone2019Model.FK_session_student" ManuallyRouted="false" />
         <AssociationConnector Association="capstone2019Model.FK_session_tutor" ManuallyRouted="false" />
         <AssociationConnector Association="capstone2019Model.FK_tutor_status" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="capstone2019Model.sysdiagram" Width="1.5" PointX="10.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
