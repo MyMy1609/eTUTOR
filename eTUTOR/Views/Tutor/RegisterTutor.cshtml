@@ -1,0 +1,277 @@
+﻿
+@{
+    ViewBag.Title = "RegisterTutor";
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8">
+    <title>Wizard-v6</title>
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Font-->
+    <link type="text/css" href="~/Content/vendor/bootstrap/css/opensans-font.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" href="~/Content/vendor/font-awesome/fonts/material-design-iconic-font.min.css" rel="stylesheet" />
+    <!-- datepicker -->
+    <link href="~/Content/vendor/bootstrap/css/jquery-ui.min.css" rel="stylesheet" />
+    <!-- Main Style Css -->
+    <link href="~/Content/vendor/bootstrap/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="page-content container-fluid">
+        <!-- <div class="wizard-heading pt-1 pb-2">Đăng kí gia sư</div> -->
+        <div class="wizard-v6-content pt-4 pb-0">
+            <div class="wizard-form">
+                <form class="form-register" id="form-register" action="#" method="post">
+                    <div id="form-total">
+                        <!-- SECTION 1 -->
+                        <h2>
+                            <p class="step-icon"><span>1</span></p>
+                            <span class="step-text">Chọn lịch biểu</span>
+                        </h2>
+                        <section>
+                            <div class="inner">
+                                <div class="form-heading">
+                                    <h3>Lịch biểu</h3>
+                                    <span>1/3</span>
+                                </div>
+                                <!-- <div class="form-row">
+                                    <div class="form-holder">
+                                        <label class="form-row-inner">
+                                            <input type="text" class="form-control" id="first_name" name="first_name" required>
+                                            <span class="label">First Name</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-holder">
+                                        <label class="form-row-inner">
+                                            <input type="text" class="form-control" id="last_name" name="last_name" required>
+                                            <span class="label">Last Name</span>
+                                        </label>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="form-row">
+                                    <div class="form-holder">
+                                        <label class="form-row-inner">
+                                            <input type="text" class="form-control" id="phone" name="phone" required>
+                                            <span class="label">Phone Number</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-holder">
+                                        <label class="form-row-inner">
+                                            <input type="text" name="your_email_1" id="your_email_1" class="form-control"  required>
+                                            <span class="label">E-Mail</span>
+                                        </label>
+                                    </div>
+                                </div> -->
+                                <div class="form-row form-row-date row">
+                                    <div class="form-holder form-holder-2 ">
+                                        <!-- <label for="date" class="special-label"></label> -->
+                                        <select name="date" id="date" class="form-control"
+                                                style="width: 250px; margin-left: 69%">
+                                            <option value="15" selected>Thứ</option>
+                                            <option value="16">Thứ 2</option>
+                                            <option value="17">Thứ 3</option>
+                                            <option value="18">Thứ 4</option>
+                                            <option value="19">Thứ 5</option>
+                                            <option value="19">Thứ 6</option>
+                                            <option value="19">Thứ 7</option>
+                                            <option value="19">Chủ nhật</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-left: 0%">
+                                    <div class="form-check form-check-inline col-3">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                               value="option1">
+                                        <label class="form-check-label text-light" for="inlineCheckbox1">
+                                            7h - 8h30
+                                            (1/2)
+                                        </label>
+                                    </div>
+                                    <div class="col-1"></div>
+                                    <div class="form-check form-check-inline col-3">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
+                                               value="option2" disabled>
+                                        <label class="form-check-label text-light" for="inlineCheckbox2">
+                                            9h - 11h
+                                            (2/2)
+                                        </label>
+                                    </div>
+                                    <div class="col-1"></div>
+                                    <div class="form-check form-check-inline col-3">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
+                                               value="option3">
+                                        <label class="form-check-label text-light" for="inlineCheckbox2">
+                                            9h - 11h
+                                            (0/2)
+                                        </label>
+                                    </div>
+                                    <div class="col-1"></div>
+                                </div>
+                                <!-- <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <label class="form-row-inner">
+                                            <input type="text" class="form-control" id="address" name="address"
+                                                required>
+                                            <span class="label">Address Location</span>
+                                        </label>
+                                    </div>
+                                </div> -->
+                                <table class="table mt-4 text-light">
+                                    <thead>
+                                        <tr>
+                                            <th>Thứ</th>
+                                            <th>Thời gian học</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>7h - 8h30</td>
+                                            <td><i class="fa fa-window-close-o text-danger"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>10h - 12h30</td>
+                                            <td><i class="fa fa-window-close-o text-danger"></i></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <div>
+
+                                </div>
+                            </div>
+                        </section>
+                        <!-- SECTION 2 -->
+                        <h2>
+                            <p class="step-icon"><span>2</span></p>
+                            <span class="step-text">Đăng nhập</span>
+                        </h2>
+                        <section>
+                            <div class="inner">
+                                <div class="form-heading">
+                                    <h3>Thông tin đăng ký học</h3>
+                                    <span>2/3</span>
+                                </div>
+                                <div class="form-images">
+                                    <img src="~/Content/img/RegisterTutor/wizard_v6.jpg" style="width: 100%;"/>
+                                    
+                                </div>
+                                <!-- <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <label for="room" class="special-label-1">Choose a Room </label>
+                                        <select name="room" id="room" class="form-control">
+                                            <option value="Daily Design Metting - Metting Room No.1" selected>Daily
+                                                Design Metting - Metting Room No.1</option>
+                                            <option value="Single">Single</option>
+                                            <option value="Double">Double</option>
+                                        </select>
+                                        <span class="select-btn">
+                                            <i class="zmdi zmdi-chevron-down"></i>
+                                        </span>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="form-row">
+                                    <div class="form-holder">
+                                        <label for="day" class="special-label-1">Organization Day</label>
+                                        <input type="text" name="day" class="day" id="day" placeholder="15 / 08 / 2018">
+                                    </div>
+                                    <div class="form-holder">
+                                        <label for="time" class="special-label-1">Time Open </label>
+                                        <select name="time" id="time" class="form-control">
+                                            <option value="8:00am - 10.00am" selected>8:00am - 10.00am</option>
+                                            <option value="9:00am - 21:00pm">9:00am - 21:00pm</option>
+                                            <option value="10:00am - 22:00pm">10:00am - 22:00pm</option>
+                                            <option value="12:00am - 24:00pm">12:00am - 24:00pm</option>
+                                        </select>
+                                        <span class="select-btn">
+                                            <i class="zmdi zmdi-chevron-down"></i>
+                                        </span>
+                                    </div>
+                                </div> -->
+                                <div class="form-row pt-4 ml-5">
+                                    <div class="form-holder">
+                                        <label class="form-row-inner">
+                                            <input type="text" class="form-control" id="first_name" name="first_name"
+                                                   required>
+                                            <span class="label">Tên tài khoản</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-holder">
+                                        <label class="form-row-inner">
+                                            <input type="password" class="form-control" id="last_name" name="last_name"
+                                                   required>
+                                            <span class="label">Mật khẩu</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <p style="margin-left: 30%">Nếu bạn chưa đăng ký, vui lòng chọn <a href="#">Đăng ký</a></p>
+                            </div>
+                        </section>
+                        <!-- SECTION 3 -->
+                        <h2>
+                            <p class="step-icon"><span>3</span></p>
+                            <span class="step-text">Xác nhận</span>
+                        </h2>
+                        <section>
+                            <div class="inner">
+                                <div class="form-heading">
+                                    <h3>Comfirm Details</h3>
+                                    <span>3/3</span>
+                                </div>
+                                <div class="table-responsive">
+                                    <p>Tên tài khoản: <span>NguyenTuan</span></p>
+                                    <!-- <p>Email: <span>tuanngi@gmail.com</span></p>
+                                    <p>Số điện thoại <span>93465468</span></p> -->
+                                    <p>Gia sư: <span>Nguyễn Tuấn Vũ</span></p>
+                                    <table class="table text-light">
+                                        <thead>
+                                            <tr>
+                                                <th>Thứ</th>
+                                                <th>Thời gian học</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>2</th>
+                                                <td>7h - 8h30</td>
+                                                <td><i class="fa fa-window-close-o text-danger"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <th>3</th>
+                                                <td>10h - 12h30</td>
+                                                <td><i class="fa fa-window-close-o text-danger"></i></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="~/Content/vendor/bootstrap/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/jquery-ui.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/jquery.steps.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/main.js"></script>
+</body>
