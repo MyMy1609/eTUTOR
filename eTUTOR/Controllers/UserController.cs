@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,24 +18,49 @@ namespace eTUTOR.Controllers
             return View(user);
         }
         [HttpPost]
-        public ActionResult RegisterTuTor(tutor tutor/*, string fullname, string username, string email, string password, string phone, string address, DateTime birthday, string specialized, string job, string experience, string certificate, int status*/)
+        public ActionResult RegisterTuTor(tutor tutor, HttpPostedFileBase certificate)
         {
-           
+            tutor.status = 2;
             model.tutors.Add(tutor);
             model.SaveChanges();
-            //gan session
+
+            //save certificate
+
+            //create directory
+            string AppPath = AppDomain.CurrentDomain.BaseDirectory;
+            string filePath = AppPath + String.Format("App_Data\\certificates\\{0}", tutor.tutor_id);
+            DirectoryInfo direc = Directory.CreateDirectory(filePath);
+
+            //save certificate
+            if (certificate != null)
+            {
+                if (certificate.ContentLength > 0)
+                {
+                    try
+                    {
+                        string filename = Path.GetFileName(certificate.FileName);
+                        string path = Path.Combine(Server.MapPath(filePath), filename);
+                        certificate.SaveAs(path);
+                    }
+                    catch (Exception)
+                    {
+                        //throw error here
+                    }
+                }
+            }
             return RedirectToAction("ConfirmEmail","User");
-        }
-        public ActionResult RegisterStudent(student student/*, string fullname, string username, string email, string password, string phone, string address, DateTime birthday, string specialized, string job, string experience, string certificate, int status*/)
-        {
             
+        }
+        public ActionResult RegisterStudent(student student)
+        {
+            student.status = 2;
             model.students.Add(student);
             model.SaveChanges();
             return RedirectToAction("ConfirmEmail", "User");
         }
-        public ActionResult RegisterParent(parent parent/*, string fullname, string username, string email, string password, string phone, string address, DateTime birthday, string specialized, string job, string experience, string certificate, int status*/)
+        public ActionResult RegisterParent(parent parent)
         {
-
+            parent.status = 2;
             model.parents.Add(parent);
             model.SaveChanges();
             return RedirectToAction("ConfirmEmail", "User");
@@ -45,7 +71,6 @@ namespace eTUTOR.Controllers
         }
         public ActionResult ConfirmEmail()
         {
-            
             return View();
         }
 

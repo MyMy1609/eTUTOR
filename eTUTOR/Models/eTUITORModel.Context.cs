@@ -38,6 +38,5 @@ namespace eTUTOR.Models
         public DbSet<student> students { get; set; }
         public DbSet<submenu> submenus { get; set; }
         public DbSet<tutor> tutors { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

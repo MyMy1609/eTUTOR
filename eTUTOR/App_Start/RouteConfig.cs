@@ -11,6 +11,7 @@ namespace eTUTOR
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.LowercaseUrls = false;
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
