@@ -27,6 +27,7 @@ namespace eTUTOR.Models
         public string password { get; set; }
         public Nullable<int> status { get; set; }
         public Nullable<int> parent_id { get; set; }
+        public string email { get; set; }
     
         public virtual ICollection<comment> comments { get; set; }
         public virtual ICollection<history_lessons> history_lessons { get; set; }
