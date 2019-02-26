@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -20,7 +21,12 @@ namespace eTUTOR.Controllers
         [HttpPost]
         public ActionResult RegisterTuTor(tutor tutor, HttpPostedFileBase certificate)
         {
+            //add new tutor
             tutor.status = 2;
+            if (certificate !=null && certificate.ContentLength >0)
+            {
+                tutor.certificate = certificate.FileName;
+            }
             model.tutors.Add(tutor);
             model.SaveChanges();
 
@@ -32,24 +38,13 @@ namespace eTUTOR.Controllers
             DirectoryInfo direc = Directory.CreateDirectory(filePath);
 
             //save certificate
-            if (certificate != null)
+            if (certificate != null && certificate.ContentLength > 0)
             {
-                if (certificate.ContentLength > 0)
-                {
-                    try
-                    {
-                        string filename = Path.GetFileName(certificate.FileName);
-                        string path = Path.Combine(Server.MapPath(filePath), filename);
-                        certificate.SaveAs(path);
-                    }
-                    catch (Exception)
-                    {
-                        //throw error here
-                    }
-                }
+                string fileName = Path.GetFileName(certificate.FileName);
+                string path = String.Format("{0}\\{1}",filePath,fileName);
+                certificate.SaveAs(path);
             }
             return RedirectToAction("ConfirmEmail","User");
-            
         }
         public ActionResult RegisterStudent(student student)
         {
@@ -60,6 +55,7 @@ namespace eTUTOR.Controllers
         }
         public ActionResult RegisterParent(parent parent)
         {
+          
             parent.status = 2;
             model.parents.Add(parent);
             model.SaveChanges();

@@ -93,12 +93,12 @@
             <PropertyRef Name="parent_id" />
           </Key>
           <Property Name="parent_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fullname" Type="nvarchar" MaxLength="20" />
-          <Property Name="username" Type="nvarchar" MaxLength="10" />
-          <Property Name="email" Type="nvarchar" MaxLength="20" />
-          <Property Name="password" Type="nvarchar" MaxLength="20" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="30" />
+          <Property Name="username" Type="nvarchar" MaxLength="30" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" />
           <Property Name="phone" Type="nvarchar" MaxLength="15" />
-          <Property Name="address" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="255" />
           <Property Name="birthday" Type="date" />
           <Property Name="status" Type="int" />
         </EntityType>
@@ -141,12 +141,12 @@
             <PropertyRef Name="student_id" />
           </Key>
           <Property Name="student_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fullname" Type="nvarchar" MaxLength="20" />
-          <Property Name="username" Type="nvarchar" MaxLength="10" />
-          <Property Name="password" Type="nvarchar" MaxLength="20" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="50" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" />
           <Property Name="status" Type="int" />
           <Property Name="parent_id" Type="int" />
-          <Property Name="email" Type="nvarchar" MaxLength="20" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
           <Property Name="class" Type="int" />
         </EntityType>
         <EntityType Name="submenu">
@@ -162,17 +162,17 @@
             <PropertyRef Name="tutor_id" />
           </Key>
           <Property Name="tutor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fullname" Type="nvarchar" MaxLength="20" />
-          <Property Name="username" Type="nvarchar" MaxLength="10" />
-          <Property Name="email" Type="nvarchar" MaxLength="20" />
-          <Property Name="password" Type="nvarchar" MaxLength="20" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="50" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" />
           <Property Name="phone" Type="nvarchar" MaxLength="15" />
-          <Property Name="address" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="255" />
           <Property Name="birthday" Type="date" />
-          <Property Name="specialized" Type="nvarchar" MaxLength="50" />
-          <Property Name="job" Type="nvarchar" MaxLength="50" />
-          <Property Name="experience" Type="nvarchar" MaxLength="50" />
-          <Property Name="certificate" Type="nvarchar" MaxLength="50" />
+          <Property Name="specialized" Type="nvarchar" MaxLength="255" />
+          <Property Name="job" Type="nvarchar" MaxLength="100" />
+          <Property Name="experience" Type="nvarchar" MaxLength="100" />
+          <Property Name="certificate" Type="nvarchar" MaxLength="100" />
           <Property Name="status" Type="int" />
         </EntityType>
         <Association Name="FK_comment_student">
@@ -567,12 +567,12 @@
             <PropertyRef Name="parent_id" />
           </Key>
           <Property Name="parent_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fullname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="username" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fullname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="birthday" Type="DateTime" Precision="0" />
           <Property Name="status" Type="Int32" />
           <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_parent_status" FromRole="parent" ToRole="status" />
@@ -624,12 +624,12 @@
             <PropertyRef Name="student_id" />
           </Key>
           <Property Name="student_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fullname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="username" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Int32" />
           <Property Name="parent_id" Type="Int32" />
-          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="class" Type="Int32" />
           <NavigationProperty Name="comments" Relationship="capstone2019Model.FK_comment_student" FromRole="student" ToRole="comment" />
           <NavigationProperty Name="history_lessons" Relationship="capstone2019Model.FK_history_lessons_student" FromRole="student" ToRole="history_lessons" />
@@ -650,17 +650,17 @@
             <PropertyRef Name="tutor_id" />
           </Key>
           <Property Name="tutor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fullname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="username" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="birthday" Type="DateTime" Precision="0" />
-          <Property Name="specialized" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="job" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="experience" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="certificate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="specialized" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="job" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="experience" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="certificate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Int32" />
           <NavigationProperty Name="comments" Relationship="capstone2019Model.FK_comment_tutor" FromRole="tutor" ToRole="comment" />
           <NavigationProperty Name="contact_tutor" Relationship="capstone2019Model.FK_contatc_tutor_tutor" FromRole="tutor" ToRole="contact_tutor" />

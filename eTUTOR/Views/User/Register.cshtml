@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-holder">
                             <span class="lnr lnr-phone-handset"></span>
-                            <input type="text" class="form-control" placeholder="Số điện thoại">
+                            <input type="text" class="form-control" name="phone" placeholder="Số điện thoại">
                         </div>
                         <div class="form-holder">
                             <span class="lnr lnr-envelope"></span>
@@ -83,8 +83,8 @@
             var valRole = $(this).val();
             var form = [
                 "@Url.Action("RegisterTuTor","User")",
-                "@Url.Action("RegisterStudent", "User")",
-                "@Url.Action("RegisterParent", "User")"
+                "@Url.Action("RegisterParent", "User")",
+                "@Url.Action("RegisterStudent", "User")"
 
             ];
 
