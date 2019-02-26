@@ -97,7 +97,7 @@ namespace eTUTOR.Controllers
                     Session["FullName"] = student.fullname;
                     Session["UserID"] = student.student_id;
 
-                    return RedirectToAction("InfoOfStudent", "Student");
+                    return RedirectToAction("InfoOfStudent", "Student", new { id = Session["UserID"] });
                 }
             }
             if (parent != null)

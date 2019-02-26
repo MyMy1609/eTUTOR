@@ -29,6 +29,8 @@ namespace eTUTOR.Models
         public DbSet<admin> admins { get; set; }
         public DbSet<comment> comments { get; set; }
         public DbSet<common> commons { get; set; }
+        public DbSet<contact_admin> contact_admin { get; set; }
+        public DbSet<contact_tutor> contact_tutor { get; set; }
         public DbSet<contact> contacts { get; set; }
         public DbSet<history_lessons> history_lessons { get; set; }
         public DbSet<parent> parents { get; set; }
