@@ -87,7 +87,7 @@ namespace eTUTOR.Controllers
                     Session["FullName"] = tutor.fullname;
                     Session["UserID"] = tutor.tutor_id;
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("InfoOfTutor", "Tutor");
                 }
             }
             if (student != null)
@@ -97,7 +97,7 @@ namespace eTUTOR.Controllers
                     Session["FullName"] = student.fullname;
                     Session["UserID"] = student.student_id;
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("InfoOfParent", "Parent");
                 }
             }
             if (parent != null)
@@ -107,7 +107,7 @@ namespace eTUTOR.Controllers
                     Session["FullName"] = parent.fullname;
                     Session["UserID"] = parent.parent_id;
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("InfoOfParent", "Parent");
                 }
             }
             else
