@@ -1,4 +1,5 @@
-﻿
+﻿@model eTUTOR.Models.student
+@using eTUTOR.Models;
 @{
     ViewBag.Title = "InfoOfStudent";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -31,7 +32,7 @@
             <a href="#" style="display: inline-block">
                 <!-- <img src="https://cdn3.iconfinder.com/data/icons/block/32/box_edit-512.png" width="30px" height="30px"></a> -->
 
-                <div class="namepro ml-4" style="text-align: center;">Nguyễn Ngọc Ngân</div>
+                <div class="namepro ml-4" style="text-align: center;">@Html.DisplayFor(model => model.fullname)</div>
                 <table class="table">
                     <tr>
                         <td class="tdl">
