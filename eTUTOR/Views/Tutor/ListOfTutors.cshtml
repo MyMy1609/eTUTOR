@@ -1,4 +1,4 @@
-﻿@model eTUTOR.Models.tutor
+﻿
 @{
     ViewBag.Title = "ListOfTutors";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,20 +23,20 @@
 <body>
     <div class='thetop'></div>
     <!-- body -->
-    <div class="main-content" style="margin-top: 100px">
+    <div class="main-content" style="margin-top: 1  00px">
         <!-- teacher -->
         <section id="teachers" style="background: white">
             <div class="container">
                 <div class="section-content">
                     <div class="search">
-                        <form class="needs-validation" novalidate role="search" action="@Url.Action("SearchTutor","Tutor")" method="post">
-                            <div class="form" >
+                        <form class="needs-validation" novalidate>
+                            <div class="form">
                                 <div class="mb-3">
                                     <input type="text" class="form-control" id="validationTooltip01"
                                            placeholder="Tìm kiếm tên HS/ lớp/ môn" required
-                                           style="width: 400px; margin-left: 55%" name="search">
+                                           style="width: 400px; margin-left: 55%">
                                     <button class="btn btn-primary"
-                                            style="margin-left: 90%; margin-top: -71px; height: 46px;" type="submit">
+                                            style="margin-left: 90%; margin-top: -71px; height: 46px;">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
@@ -49,7 +49,7 @@
                             <div class="team maxwidth400">
                                 <div class="thumb">
                                     <img class="img-fullwidth"
-                                         src="~/Content/img/teacher/team5.jpg" alt="">
+                                    src="~/Content/img/teacher/team5.jpg" alt="">
                                 </div>
                                 <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
                                     <h4 class="name text-theme-color-2 mt-0">Andre Smith - <small>Gia sư</small></h4>
@@ -212,6 +212,7 @@
         <!-- /teacher -->
     </div>
     <!-- body -->
+
     <!-- /body -->
     <!-- jQuery -->
     <script src="jquery.js"></script>
