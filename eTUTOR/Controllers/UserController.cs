@@ -6,12 +6,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using eTUTOR.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace eTUTOR.Controllers
 {
     public class UserController : Controller
     {
         eTUITOREntities model = new eTUITOREntities();
+        MD5 md = MD5.Create();
         [HttpGet]
         public ActionResult Register()
         {
@@ -19,7 +22,7 @@ namespace eTUTOR.Controllers
             return View(user);
         }
         [HttpPost]
-        public ActionResult RegisterTuTor(tutor tutor, HttpPostedFileBase certificate)
+        public ActionResult RegisterTuTor(tutor tutor, HttpPostedFileBase certificate, string password)
         {
             //add new tutor
             tutor.status = 2;
@@ -27,6 +30,16 @@ namespace eTUTOR.Controllers
             {
                 tutor.certificate = certificate.FileName;
             }
+           
+            byte[] inputBytes = Encoding.ASCII.GetBytes(password);
+            byte[] hash = md.ComputeHash(inputBytes);
+            StringBuilder sbHash = new StringBuilder();
+            foreach (byte b in hash)
+            {
+                sbHash.Append(String.Format("{0:x2}", b));
+            }
+            tutor.password = sbHash.ToString();
+
             model.tutors.Add(tutor);
             model.SaveChanges();
 
@@ -46,17 +59,35 @@ namespace eTUTOR.Controllers
             }
             return RedirectToAction("ConfirmEmail","User");
         }
-        public ActionResult RegisterStudent(student student)
+        public ActionResult RegisterStudent(student student, string password)
         {
             student.status = 2;
+            byte[] inputBytes = Encoding.ASCII.GetBytes(password);
+            byte[] hash = md.ComputeHash(inputBytes);
+            StringBuilder sbHash = new StringBuilder();
+            foreach (byte b in hash)
+            {
+                sbHash.Append(String.Format("{0:x2}", b));
+            }
+            student.password = sbHash.ToString();
+
             model.students.Add(student);
             model.SaveChanges();
             return RedirectToAction("ConfirmEmail", "User");
         }
-        public ActionResult RegisterParent(parent parent)
+        public ActionResult RegisterParent(parent parent, string password)
         {
           
             parent.status = 2;
+            byte[] inputBytes = Encoding.ASCII.GetBytes(password);
+            byte[] hash = md.ComputeHash(inputBytes);
+            StringBuilder sbHash = new StringBuilder();
+            foreach (byte b in hash)
+            {
+                sbHash.Append(String.Format("{0:x2}", b));
+            }
+            parent.password = sbHash.ToString();
+
             model.parents.Add(parent);
             model.SaveChanges();
             return RedirectToAction("ConfirmEmail", "User");
