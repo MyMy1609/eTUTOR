@@ -23,19 +23,19 @@
 <body>
     <div class='thetop'></div>
     <!-- body -->
-    <div class="main-content" style="margin-top: 1  00px">
+    <div class="main-content" style="margin-top: 100px">
         <!-- teacher -->
         <section id="teachers" style="background: white">
             <div class="container">
                 <div class="section-content">
                     <div class="search">
-                        <form class="needs-validation" novalidate>
+                        <form class="needs-validation" novalidate role="search" action="@Url.Action("SearchTutor","Tutor","search")" method="post">
                             <div class="form">
                                 <div class="mb-3">
                                     <input type="text" class="form-control" id="validationTooltip01"
-                                           placeholder="Tìm kiếm tên HS/ lớp/ môn" required
+                                           placeholder="Tìm kiếm tên HS/ lớp/ môn" name="search" required
                                            style="width: 400px; margin-left: 55%">
-                                    <button class="btn btn-primary"
+                                    <button type="submit" class="btn btn-primary"
                                             style="margin-left: 90%; margin-top: -71px; height: 46px;">
                                         <i class="fa fa-search"></i>
                                     </button>
