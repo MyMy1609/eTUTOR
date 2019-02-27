@@ -1,6 +1,6 @@
 ﻿@model eTUTOR.Models.tutor
 @{
-    ViewBag.Title = "ListOfTutors";
+    ViewBag.Title = "Tutor search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -30,7 +30,7 @@
                 <div class="section-content">
                     <div class="search">
                         <form class="needs-validation" novalidate role="search" action="@Url.Action("SearchTutor","Tutor")" method="post">
-                            <div class="form" >
+                            <div class="form">
                                 <div class="mb-3">
                                     <input type="text" class="form-control" id="validationTooltip01"
                                            placeholder="Tìm kiếm tên HS/ lớp/ môn" required
@@ -52,7 +52,7 @@
                                          src="~/Content/img/teacher/team5.jpg" alt="">
                                 </div>
                                 <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
-                                    <h4 class="name text-theme-color-2 mt-0">Andre Smith - <small>Gia sư</small></h4>
+                                    <h4 class="name text-theme-color-2 mt-0">@Html.DisplayFor(model => model.fullname) - <small>Gia sư</small></h4>
                                     <p class="mb-20">Kinh nghiệm giảng dạy môn toán, lý hóa lớp 12</p>
                                     <ul class="styled-icons icon-dark icon-circled icon-theme-colored icon-sm pull-left flip">
                                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -60,14 +60,14 @@
                                         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                                     </ul>
                                     <a class="btn btn-theme-colored btn-sm pull-right flip"
-                                       href="../../../app/Component/DetailTutorComponent/detailTutor.component.html">
+                                       href=" @*../../../app/Component/DetailTutorComponent/detailTutor.component.html*@ #">
                                         Chi
                                         tiết
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
+                        @*<div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
                             <div class="team maxwidth400">
                                 <div class="thumb"><img class="img-fullwidth" src="~/Content/img/teacher/team6.jpg" alt=""></div>
                                 <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
@@ -85,8 +85,8 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
+                        </div>*@
+                        @*<div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
                             <div class="team maxwidth400">
                                 <div class="thumb"><img class="img-fullwidth" src="~/Content/img/teacher/team7.jpg" alt=""></div>
                                 <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
@@ -104,8 +104,8 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 sm-text-center">
+                        </div>*@
+                        @*<div class="col-sm-6 col-md-3 sm-text-center">
                             <div class="team maxwidth400">
                                 <div class="thumb"><img class="img-fullwidth" src="~/Content/img/teacher/team8.jpg" alt=""></div>
                                 <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
@@ -123,11 +123,11 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
 
                     </div>
                     <div class="row multi-row-clearfix pt-4">
-                        <div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
+                        @*<div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
                             <div class="team maxwidth400">
                                 <div class="thumb"><img class="img-fullwidth" src="~/Content/img/teacher/team5.jpg" alt=""></div>
                                 <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
@@ -145,8 +145,8 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
+                        </div>*@
+                        @*<div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
                             <div class="team maxwidth400">
                                 <div class="thumb"><img class="img-fullwidth" src="~/Content/img/teacher/team6.jpg" alt=""></div>
                                 <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
@@ -164,8 +164,8 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
+                        </div>*@
+                        @*<div class="col-sm-6 col-md-3 sm-text-center mb-sm-30">
                             <div class="team maxwidth400">
                                 <div class="thumb"><img class="img-fullwidth" src="~/Content/img/teacher/team7.jpg" alt=""></div>
                                 <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
@@ -183,8 +183,8 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 sm-text-center">
+                        </div>*@
+                        @*<div class="col-sm-6 col-md-3 sm-text-center">
                             <div class="team maxwidth400">
                                 <div class="thumb"><img class="img-fullwidth" src="~/Content/img/teacher/team8.jpg" alt=""></div>
                                 <div class="content border-1px border-bottom-theme-color-2-2px p-15 bg-light clearfix">
@@ -202,7 +202,7 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
 
                     </div>
                 </div>
