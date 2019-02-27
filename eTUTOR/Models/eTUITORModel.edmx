@@ -101,6 +101,7 @@
           <Property Name="address" Type="nvarchar" MaxLength="255" />
           <Property Name="birthday" Type="date" />
           <Property Name="status" Type="int" />
+          <Property Name="avatar" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="schedules">
           <Key>
@@ -148,6 +149,7 @@
           <Property Name="parent_id" Type="int" />
           <Property Name="email" Type="nvarchar" MaxLength="255" />
           <Property Name="class" Type="int" />
+          <Property Name="avatar" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="submenu">
           <Key>
@@ -174,6 +176,7 @@
           <Property Name="experience" Type="nvarchar" MaxLength="100" />
           <Property Name="certificate" Type="nvarchar" MaxLength="100" />
           <Property Name="status" Type="int" />
+          <Property Name="avatar" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <Association Name="FK_comment_student">
           <End Role="students" Type="Self.students" Multiplicity="0..1" />
@@ -575,6 +578,7 @@
           <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="birthday" Type="DateTime" Precision="0" />
           <Property Name="status" Type="Int32" />
+          <Property Name="avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_parent_status" FromRole="parent" ToRole="status" />
           <NavigationProperty Name="students" Relationship="capstone2019Model.FK_parent_student" FromRole="parent" ToRole="student" />
         </EntityType>
@@ -631,6 +635,7 @@
           <Property Name="parent_id" Type="Int32" />
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="class" Type="Int32" />
+          <Property Name="avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="comments" Relationship="capstone2019Model.FK_comment_student" FromRole="student" ToRole="comment" />
           <NavigationProperty Name="history_lessons" Relationship="capstone2019Model.FK_history_lessons_student" FromRole="student" ToRole="history_lessons" />
           <NavigationProperty Name="parent" Relationship="capstone2019Model.FK_parent_student" FromRole="student" ToRole="parent" />
@@ -662,6 +667,7 @@
           <Property Name="experience" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="certificate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Int32" />
+          <Property Name="avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="comments" Relationship="capstone2019Model.FK_comment_tutor" FromRole="tutor" ToRole="comment" />
           <NavigationProperty Name="contact_tutor" Relationship="capstone2019Model.FK_contatc_tutor_tutor" FromRole="tutor" ToRole="contact_tutor" />
           <NavigationProperty Name="history_lessons" Relationship="capstone2019Model.FK_history_lessons_tutor" FromRole="tutor" ToRole="history_lessons" />
@@ -925,6 +931,7 @@
           <EntitySetMapping Name="parents">
             <EntityTypeMapping TypeName="capstone2019Model.parent">
               <MappingFragment StoreEntitySet="parents">
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="birthday" ColumnName="birthday" />
                 <ScalarProperty Name="address" ColumnName="address" />
@@ -977,6 +984,7 @@
           <EntitySetMapping Name="students">
             <EntityTypeMapping TypeName="capstone2019Model.student">
               <MappingFragment StoreEntitySet="students">
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
                 <ScalarProperty Name="class" ColumnName="class" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="parent_id" ColumnName="parent_id" />
@@ -1000,6 +1008,7 @@
           <EntitySetMapping Name="tutors">
             <EntityTypeMapping TypeName="capstone2019Model.tutor">
               <MappingFragment StoreEntitySet="tutors">
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="certificate" ColumnName="certificate" />
                 <ScalarProperty Name="experience" ColumnName="experience" />
