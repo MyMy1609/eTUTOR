@@ -9,6 +9,7 @@ namespace eTUTOR.Controllers
     public class TutorController : Controller
     {
         eTUITOREntities tutor = new eTUITOREntities();
+        
         // GET: Tutor
         public ActionResult ListOfTutors()
         {
@@ -29,7 +30,7 @@ namespace eTUTOR.Controllers
         [HttpPost]
         public ActionResult SearchTutor(string search)
         {
-            var t = tutor.tutors.ToList().Where(x => x.fullname.Contains(search));
+            var t =  tutor.tutors.ToList().Where(x => x.fullname.Contains(search) || x.specialized.Contains(search));
             return View(t);
         }
     }

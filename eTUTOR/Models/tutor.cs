@@ -36,6 +36,7 @@ namespace eTUTOR.Models
         public string experience { get; set; }
         public string certificate { get; set; }
         public Nullable<int> status { get; set; }
+        public string avatar { get; set; }
     
         public virtual ICollection<comment> comments { get; set; }
         public virtual ICollection<contact_tutor> contact_tutor { get; set; }
