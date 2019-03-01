@@ -647,8 +647,10 @@
     <Content Include="Views\Parent\Detail.cshtml" />
     <Content Include="Views\Parent\listRegistCourse.cshtml" />
     <Content Include="Views\Student\listRegistCourse.cshtml" />
-    <Content Include="Views\API\SessionApprove.cshtml" />
+    <Content Include="Views\API\SessionApproved.cshtml" />
     <Content Include="Views\API\SessionList.cshtml" />
+    <Content Include="Views\Tutor\SessionOfTutor.cshtml" />
+    <Content Include="Views\Student\SessionOfStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -23,5 +23,9 @@ namespace eTUTOR.Controllers
             var listCourse = db.sessions.ToList().Where(x => x.status_tutor == 2 && x.student_id == prt.student_id);
             return View(listCourse);
         }
+        public ActionResult SessionOfStudent()
+        {
+            return View();
+        }
     }
 }

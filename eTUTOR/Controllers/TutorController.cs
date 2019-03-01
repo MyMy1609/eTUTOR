@@ -123,6 +123,10 @@ namespace eTUTOR.Controllers
             return RedirectToAction("Index", "Home");
 
         }
+        public ActionResult SessionOfTutor()
+        {
+            return View();
+        }
 
     }
 }
