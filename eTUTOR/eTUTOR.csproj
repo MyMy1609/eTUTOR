@@ -224,6 +224,7 @@
     <Content Include="Content\build\css\pe-icon-7-stroke.css" />
     <Content Include="Content\build\css\style.css" />
     <Content Include="Content\build\css\styleRegister.css" />
+    <Content Include="Content\build\css\TutorHomePage.component.css" />
     <Content Include="Content\build\fonts\fa-brands-400.html" />
     <Content Include="Content\build\fonts\fa-brands-400.svg" />
     <Content Include="Content\build\fonts\fa-regular-400.html" />
@@ -238,6 +239,7 @@
     <Content Include="Content\build\fonts\Linearicons-Free.svg" />
     <Content Include="Content\build\fonts\Pe-icon-7-strokebb1d.svg" />
     <Content Include="Content\build\js\page\home.js" />
+    <Content Include="Content\build\js\TutorHomePage.component.js" />
     <Content Include="Content\img\02.jpg" />
     <Content Include="Content\img\03.jpg" />
     <Content Include="Content\img\3.jpg" />

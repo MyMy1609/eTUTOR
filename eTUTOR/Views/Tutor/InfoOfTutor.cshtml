@@ -27,6 +27,7 @@
     @*<link href="~/Content/build/css/page/infoOfTutor.css" rel="stylesheet" />*@
     <link href="~/Content/vendor/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
     <link href="~/Content/build/css/TutorHomePage.component.css" rel="stylesheet" />
+    <link href="~/Content/build/css/TutorHomePage.component.css" rel="stylesheet" />
 }
 
 
@@ -290,7 +291,7 @@
                         </div>
                     </div>
 
-                    <div class="card" style="width: 900px">
+                    <div id="form-duyet" class="card" style="width: 900px">
                         <div class="card-header" role="tab" id="accord3" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 13px; margin-top:10px">
                             <h5 class="mb-0">
                                 <a class="collapsed" data-toggle="collapse" href="#collapse-pane-3" role="button" aria-expanded="false" aria-controls="collapse-pane-3" style="font-size:20px">
@@ -349,8 +350,9 @@
                                                 @session.status2.name
                                             </td>
                                             <td>
+                                                
                                                 <label class="switch">
-                                                    <input type="checkbox">
+                                                    <input type="checkbox" name="check" id="slider-duyet" onchange="duyetstudent(@session.session_id)">
                                                     <span class="slider round"></span>
                                                 </label>
                                             </td>
@@ -586,8 +588,8 @@
 
     <script src="~/Content/vendor/jquery/jquery.validate.min.js"></script>
     <script src="~/Content/vendor/lightbox2/dist/js/lightbox.min.js"></script>
-    <script>
-        <script src="~/Content/build/js/TutorHomePage.component.js"></script>
+    <
+    <script src="~/Content/build/js/TutorHomePage.component.js"></script>
 }
 <!--   Core JS Files   -->
 <script>
