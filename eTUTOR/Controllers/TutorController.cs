@@ -123,6 +123,17 @@ namespace eTUTOR.Controllers
             return RedirectToAction("Index", "Home");
 
         }
+        public ActionResult SessionOfTutor()
+        {
+            return View();
+        }
+
+        public ActionResult SearchTutor(string search)
+        {
+            var tutor = db.tutors.ToList().Where(x => x.fullname.Contains(search) || x.specialized.Contains(search));
+            return View(tutor);
+        }
+
 
         [HttpPost]
         public ActionResult Duyetkhoahoc(int id)
