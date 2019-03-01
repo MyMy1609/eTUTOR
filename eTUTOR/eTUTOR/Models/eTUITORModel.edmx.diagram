@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6f796b27a9b94329b2fd402d98898ee3" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="capstone2019Model.about" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="capstone2019Model.admin" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="capstone2019Model.comment" Width="1.5" PointX="7.5" PointY="4.875" />
+        <EntityTypeShape EntityType="capstone2019Model.common" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="capstone2019Model.contact_admin" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="capstone2019Model.contact_tutor" Width="1.5" PointX="5.25" PointY="9.5" />
+        <EntityTypeShape EntityType="capstone2019Model.contact" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="capstone2019Model.history_lessons" Width="1.5" PointX="10.5" PointY="8.25" />
+        <EntityTypeShape EntityType="capstone2019Model.parent" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="capstone2019Model.schedule" Width="1.5" PointX="5.25" PointY="12.5" />
+        <EntityTypeShape EntityType="capstone2019Model.session" Width="1.5" PointX="7.5" PointY="8.125" />
+        <EntityTypeShape EntityType="capstone2019Model.status" Width="1.5" PointX="0.75" PointY="9.125" />
+        <EntityTypeShape EntityType="capstone2019Model.student" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="capstone2019Model.submenu" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="capstone2019Model.tutor" Width="1.5" PointX="3" PointY="9.875" />
+        <AssociationConnector Association="capstone2019Model.FK_comment_student" />
+        <AssociationConnector Association="capstone2019Model.FK_comment_tutor" />
+        <AssociationConnector Association="capstone2019Model.FK_submenu_common" />
+        <AssociationConnector Association="capstone2019Model.FK_contatc_tutor_tutor" />
+        <AssociationConnector Association="capstone2019Model.FK_history_lessons_student" />
+        <AssociationConnector Association="capstone2019Model.FK_history_lessons_tutor" />
+        <AssociationConnector Association="capstone2019Model.FK_parent_status" />
+        <AssociationConnector Association="capstone2019Model.FK_parent_student" />
+        <AssociationConnector Association="capstone2019Model.FK_schedule_tutor" />
+        <AssociationConnector Association="capstone2019Model.FK_session_status" />
+        <AssociationConnector Association="capstone2019Model.FK_session_student" />
+        <AssociationConnector Association="capstone2019Model.FK_session_tutor" />
+        <AssociationConnector Association="capstone2019Model.FK_tutor_status" />
+        <EntityTypeShape EntityType="capstone2019Model.sysdiagram" Width="1.5" PointX="12.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
