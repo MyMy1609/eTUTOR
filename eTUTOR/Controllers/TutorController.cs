@@ -124,5 +124,12 @@ namespace eTUTOR.Controllers
 
         }
 
+        public ActionResult SearchTutor(string search)
+        {
+            var tutor = db.tutors.ToList().Where(x => x.fullname.Contains(search) || x.specialized.Contains(search));
+            return View(tutor);
+        }
+
+
     }
 }
