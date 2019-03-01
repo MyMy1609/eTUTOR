@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\HKI_Nam4\CAPSTONE-VERSION0.3\source\eTUTOR_USER\eTUTOR\eTUTOR\Models\eTUITORModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Luxury\Desktop\Capstone\eTUTOR\eTUTOR\Models\eTUITORModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

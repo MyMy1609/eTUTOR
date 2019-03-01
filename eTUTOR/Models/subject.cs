@@ -12,24 +12,18 @@ namespace eTUTOR.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class status
+    public partial class subject
     {
-        public status()
+        public subject()
         {
-            this.parents = new HashSet<parent>();
             this.sessions = new HashSet<session>();
-            this.tutors = new HashSet<tutor>();
-            this.sessions1 = new HashSet<session>();
-            this.sessions2 = new HashSet<session>();
         }
     
-        public int status_id { get; set; }
-        public string name { get; set; }
+        public int subject_id { get; set; }
+        public int tutor_id { get; set; }
+        public string subject_name { get; set; }
     
-        public virtual ICollection<parent> parents { get; set; }
         public virtual ICollection<session> sessions { get; set; }
-        public virtual ICollection<tutor> tutors { get; set; }
-        public virtual ICollection<session> sessions1 { get; set; }
-        public virtual ICollection<session> sessions2 { get; set; }
+        public virtual tutor tutor { get; set; }
     }
 }

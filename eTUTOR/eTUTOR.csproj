@@ -155,6 +155,12 @@
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TutorController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Models\contact_admin.cs">
+      <DependentUpon>eTUITORModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\contact_tutor.cs">
+      <DependentUpon>eTUITORModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\eTUITORModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -177,6 +183,9 @@
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\parent.cs">
+      <DependentUpon>eTUITORModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\subject.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
@@ -631,6 +640,8 @@
     <Content Include="Views\Parent\InfoOfParent.cshtml" />
     <Content Include="Views\Parent\listPr.cshtml" />
     <Content Include="Views\Parent\Detail.cshtml" />
+    <Content Include="Views\Parent\listRegistCourse.cshtml" />
+    <Content Include="Views\Student\listRegistCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

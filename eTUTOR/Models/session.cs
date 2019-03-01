@@ -17,16 +17,21 @@ namespace eTUTOR.Models
         public int session_id { get; set; }
         public Nullable<int> tutor_id { get; set; }
         public Nullable<int> student_id { get; set; }
-        public string subject { get; set; }
         public string @class { get; set; }
         public Nullable<System.TimeSpan> start_time { get; set; }
         public Nullable<System.TimeSpan> end_time { get; set; }
         public Nullable<int> total_sessions { get; set; }
         public string day_otw { get; set; }
         public Nullable<int> status_id { get; set; }
+        public Nullable<int> status_tutor { get; set; }
+        public Nullable<int> status_admin { get; set; }
+        public Nullable<int> subject_id { get; set; }
     
         public virtual status status { get; set; }
         public virtual student student { get; set; }
         public virtual tutor tutor { get; set; }
+        public virtual subject subject1 { get; set; }
+        public virtual status status1 { get; set; }
+        public virtual status status2 { get; set; }
     }
 }

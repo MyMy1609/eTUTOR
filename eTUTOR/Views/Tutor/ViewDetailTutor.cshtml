@@ -1,8 +1,11 @@
 ﻿@model eTUTOR.Models.tutor
-
+@using eTUTOR.Models
 @{
     ViewBag.Title = "ViewDetailTutor";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    eTUITOREntities db = new eTUITOREntities();
+    var sch = db.schedules.ToList().Where(x => x.tutor_id == Model.tutor_id);
+    var sj = db.subjects.ToList().Where(x => x.tutor_id == Model.tutor_id);
 }
 
 <!DOCTYPE html>
@@ -64,8 +67,8 @@
                                 <li><a href="#"><i class="fab fa-skype"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                             </ul>
-                            <a class="btn btn-success" href="../../../app/Component/RegisterTutorProcessComponent/index.html">Đăng kí gia sư</a>
-
+                            @Html.ActionLink("Đăng kí gia sư", "RegisterTutor", new { id = Model.tutor_id }, new { @class = "btn btn-success" })
+                            
                         </div>
                     </div>
                     <div class="row mt-30">

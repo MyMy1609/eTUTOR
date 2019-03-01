@@ -33,9 +33,92 @@ namespace eTUTOR.Controllers
         {
             return View();
         }
-        public ActionResult RegisterTutor()
+        [HttpGet]
+        public ActionResult RegisterTutor(int? id)
         {
-            return View();
+            var tatu = db.tutors.FirstOrDefault(x => x.tutor_id == id);
+            if(tatu == null)
+            {
+                ViewBag.mes = "Vui lòng chọn Tutor";
+                RedirectToAction("ListOfTutors", "Tutor");
+            }
+            return View(tatu);
         }
+        [HttpPost]
+        public ActionResult ConfirmScheduleTutor(int idgiasu, int idmonhoc, int[] idschedule)
+        {   
+            string idst = Session["UserID"].ToString();
+            int idStudent = int.Parse(idst);
+            string id = Session["username"].ToString();
+            var std = db.students.FirstOrDefault(x => x.username == id);
+            var prt = db.parents.FirstOrDefault(x => x.username == id);
+            if (std != null) {
+                foreach(var item in idschedule) {
+                    var schh = db.schedules.FirstOrDefault( x=> x.schedule_id == item);
+                    session newss = new session();
+                    newss.day_otw = schh.day_otw;
+                    newss.start_time = schh.start_time;
+                    newss.end_time = schh.end_time;
+                    newss.@class = "10";
+                    newss.student_id = idStudent;
+                    newss.tutor_id = idgiasu;
+                    newss.total_sessions = 10;
+                    newss.subject_id = idmonhoc;
+                    newss.status_admin = 2;
+                    newss.status_tutor = 2;
+                    newss.status_id = 2;
+                    db.sessions.Add(newss);
+                    db.SaveChanges();
+                }
+               
+                return RedirectToAction("listRegistCourse", "Student");
+            }
+            if (prt != null)
+            {
+                foreach (var item in idschedule)
+                {
+                    var schh = db.schedules.FirstOrDefault(x => x.schedule_id == item);
+                    session newss = new session();
+                    newss.day_otw = schh.day_otw;
+                    newss.start_time = schh.start_time;
+                    newss.end_time = schh.end_time;
+                    newss.@class = "10";
+                    newss.student_id = idStudent;
+                    newss.tutor_id = idgiasu;
+                    newss.total_sessions = 10;
+                    newss.subject_id = idmonhoc;
+                    newss.status_admin = 2;
+                    newss.status_tutor = 2;
+                    newss.status_id = 2;
+
+                    db.sessions.Add(newss);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("listRegistCourse", "Parent");
+            }
+            return RedirectToAction("Login", "User");
+
+        }
+        public ActionResult ddd()
+        {
+            var schh = db.schedules.FirstOrDefault(x => x.schedule_id == 3);
+            session newss = new session();
+            newss.day_otw = schh.day_otw;
+            newss.start_time = schh.start_time;
+            newss.end_time = schh.end_time;
+            newss.@class = "10";
+            newss.student_id = 12;
+            newss.tutor_id = 4;
+            newss.total_sessions = 10;
+            newss.subject_id = 5;
+            newss.status_admin = 2;
+            newss.status_tutor = 2;
+            newss.status_id = 2;
+            db.sessions.Add(newss);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+
+        }
+
     }
 }
