@@ -46,7 +46,7 @@ namespace eTUTOR.Controllers
             List<session> sessionList;
             if (day == "all")
             {
-                 sessionList = db.sessions.Where(m => m.student_id == student_id).ToList();
+                sessionList = db.sessions.Where(m => m.student_id == student_id).ToList();
             }
             else
             {
@@ -89,11 +89,11 @@ namespace eTUTOR.Controllers
             List<session> sessionApproved;
             if (day == "all")
             {
-                sessionApproved = db.sessions.Where(m => m.tutor_id == tutor_id).ToList();
+                sessionApproved = db.sessions.Where(m => m.tutor_id == tutor_id && m.status_admin == 2).ToList();
             }
             else
             {
-                sessionApproved = db.sessions.Where(m => m.day_otw == day && m.tutor_id == tutor_id && m.status_admin ==1).ToList();
+                sessionApproved = db.sessions.Where(m => m.day_otw == day && m.tutor_id == tutor_id && m.status_admin == 2).ToList();
             }
             ViewData["sessionapproved"] = sessionApproved;
             return PartialView("SessionApproved");
