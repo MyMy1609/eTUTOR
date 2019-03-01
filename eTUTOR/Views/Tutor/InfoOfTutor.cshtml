@@ -1,7 +1,10 @@
-﻿
+﻿@model eTUTOR.Models.tutor
+@using eTUTOR.Models;
 @{
     ViewBag.Title = "InfoOfTutor";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    eTUITOREntities db = new eTUITOREntities();
+    var sessionlist = ViewData["sessionlist"] as List<eTUTOR.Models.session>;
 }
 
 
@@ -22,7 +25,8 @@
     <link href="~/Content/vendor/bootstrap/css/parent.css" rel="stylesheet" />
     <link href="~/Content/vendor/bootstrap/css/avatar.css" rel="stylesheet" />
     @*<link href="~/Content/build/css/page/infoOfTutor.css" rel="stylesheet" />*@
-
+    <link href="~/Content/vendor/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
+    <link href="~/Content/build/css/TutorHomePage.component.css" rel="stylesheet" />
 }
 
 
@@ -30,25 +34,18 @@
 
     <div class="container row mt-3">
         <div class="left col-4">
-            <img src="~/Content/img/teacher/1.png" class="ml-4 mt-4" height="250px" width="250px"
+            <img src="~/Content/img/avatar/tutor/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height="250px" width="250px"
                  alt="avatar" style="border-radius: 20%;margin-top: 0px;" />
             <a href="#" style="display: inline-block">
-                <div class="namepro ml-4" style="text-align: center;">Nguyễn Ngọc Ngân</div>
+                <div class="namepro ml-4" style="text-align: center;">@Html.DisplayFor(model => model.fullname)</div>
                 <table class="table">
-                    <tr>
-                        <td class="tdl">
-                            Họ và tên
-                        </td>
-                        <td class="tdr">
-                            Nguyễn Ngọc Ngân
-                        </td>
-                    </tr>
+
                     <tr>
                         <td class="tdl">
                             Tên đăng nhập
                         </td>
                         <td class="tdr">
-                            ngannguyen
+                            @Html.DisplayFor(model => model.username)
                         </td>
                     </tr>
                     <tr>
@@ -56,7 +53,7 @@
                             Địa chỉ
                         </td>
                         <td class="tdr">
-                            69 Trần Duy Hưng, Cầu Giấy, Hà Nội
+                            @Html.DisplayFor(model => model.address)
                         </td>
                     </tr>
                     <tr>
@@ -64,7 +61,7 @@
                             Ngày sinh
                         </td>
                         <td class="tdr">
-                            10/9/2002
+                            @Html.DisplayFor(model => model.birthday)
                         </td>
                     </tr>
                     <tr>
@@ -72,7 +69,7 @@
                             Số điện thoại
                         </td>
                         <td class="tdr">
-                            094673874624
+                            @Html.DisplayFor(model => model.phone)
                         </td>
                     </tr>
                     <tr>
@@ -80,7 +77,7 @@
                             Email
                         </td>
                         <td class="tdr">
-                            ngannguyen193@gmail.com
+                            @Html.DisplayFor(model => model.email)
                         </td>
                     </tr>
                     <tr>
@@ -88,9 +85,7 @@
                             Chuyên ngành giảng dạy
                         </td>
                         <td class="tdr">
-                            Toán lớp 10 đến lớp 12
-                            Hóa nâng cao lớp 12
-                            Lý cơ bản lớp 10
+                            @Html.DisplayFor(model => model.specialized)
                         </td>
                     </tr>
                     <tr>
@@ -98,7 +93,7 @@
                             Công việc hiện tại
                         </td>
                         <td class="tdr">
-                            Đang giảng dạy tại Trường THCS Lý Tự Trọng
+                            @Html.DisplayFor(model => model.job)
                         </td>
                     </tr>
                     <tr>
@@ -106,16 +101,7 @@
                             Kinh nghiệm
                         </td>
                         <td class="tdr">
-                            <div class="form-wrapper">
-                                <select name="" id="" class="form-control" style="border: none">
-                                    <option value="" disabled selected>Năm kinh nghiệm</option>
-                                    <option value="1">Không kinh nghiệm</option>
-                                    <option value="2">+1</option>
-                                    <option value="3">+3</option>
-                                    <option value="4">+5</option>
-                                </select>
-                                <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
-                            </div>
+                            @Html.DisplayFor(model => model.experience)
                         </td>
                     </tr>
                     <tr>
@@ -123,30 +109,7 @@
                             Bằng cấp
                         </td>
                         <td class="tdr">
-                            <div class="slider-wrapper">
-                                <ul class="s-thumbs">
-                                    <li>
-                                        <a href="#slide-1">
-                                            <img src="~/Content/img/chung_chi/cc_1.jpg" alt="" width="50" height="50" />
-                                        </a>
-                                    </li>
-                                    @*<li>
-                                            <a href="#slide-2">
-                                                <img src="~/Content/img/chung_chi/cc_2.jpg" width="50" height="50" />
-                                            </a>
-                                        </li>*@
-                                </ul>
-
-                                <ul class="s-slides">
-                                    <li id="slide-1" class="slideLeft">
-                                        <img src="~/Content/img/chung_chi/cc_1.jpg" />
-                                    </li>
-                                    @*<li id="slide-2" class="slideRight">
-                                            <img src="~/Content/img/chung_chi/cc_2.jpg" />
-                                        </li>*@
-                                </ul>
-                            </div>
-                            <input type="file" class="mt-3" />
+                            <img src="~/Content/img/certificates/@Model.tutor_id/@Model.certificate" />
                         </td>
                     </tr>
                     <tr>
@@ -298,7 +261,7 @@
                         <div class="card-header" role="tab" id="accord2" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 0px">
                             <h5 class="mb-0">
                                 <a class="collapsed" data-toggle="collapse" href="#collapse-pane-2" role="button" aria-expanded="false" aria-controls="collapse-pane-2" style="font-size:20px">
-                                    Danh sách buổi học đang hoạt động
+                                    Danh sách buổi học
                                 </a>
                             </h5>
                         </div>
@@ -306,58 +269,23 @@
                              data-parent="#demo-accordion-collapse">
                             <div class="card-body">
                                 <div class="form-wrapper pb-3">
-                                    <select name="" id="" class="form-control"
+                                    <select name="" id="select-dotw" class="form-control"
                                             style="border: none; border: 2px solid black; width: 30%; margin-left: 70%">
                                         <option value="" disabled selected>Chọn thứ cần lọc</option>
-                                        <option value="1">Thứ 2</option>
-                                        <option value="2">Thứ 3</option>
-                                        <option value="3">Thứ 4</option>
-                                        <option value="4">Thứ 5</option>
-                                        <option value="5">Thứ 6</option>
-                                        <option value="6">Thứ 7</option>
-                                        <option value="7">Chủ nhật</option>
+                                        <option value="-1">Chọn hết</option>
+                                        <option value="2">Thứ 2</option>
+                                        <option value="3">Thứ 3</option>
+                                        <option value="4">Thứ 4</option>
+                                        <option value="5">Thứ 5</option>
+                                        <option value="6">Thứ 6</option>
+                                        <option value="7">Thứ 7</option>
+                                        <option value="8">Chủ nhật</option>
                                     </select>
                                     <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
                                 </div>
-                                <table class="table" style="text-align: center;">
-                                    <tr>
-                                        <th>
-                                            Thứ
-                                        </th>
-                                        <th>
-                                            Thời gian học
-                                        </th>
-                                        <th>
-                                            Học sinh
-                                        </th>
-                                        <th>
-                                            Tổng buổi đã học
-                                        </th>
-                                        <th>
-                                            Vào học
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Thứ 2
-                                        </td>
-                                        <td>
-                                            7h30 - 9h
-                                        </td>
-                                        <td>
-                                            <a href="#">nhitran</a> - <a href="#">tuanle</a>
-                                        </td>
-                                        <td>
-                                            5/30 <br>
+                                <div id="sessionapproved">
 
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <img src="https://static.thenounproject.com/png/6076-200.png" width="30" height="30">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -366,27 +294,14 @@
                         <div class="card-header" role="tab" id="accord3" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 13px; margin-top:10px">
                             <h5 class="mb-0">
                                 <a class="collapsed" data-toggle="collapse" href="#collapse-pane-3" role="button" aria-expanded="false" aria-controls="collapse-pane-3" style="font-size:20px">
-                                    Duyệt học gia đăng ký học
+                                    Duyệt học sinh đăng ký học
                                 </a>
                             </h5>
                         </div>
                         <div id="collapse-pane-3" class="collapse" role="tabpanel" aria-labelledby="accord3"
                              data-parent="#demo-accordion-collapse">
                             <div class="card-body">
-                                <div class="form-wrapper pb-3">
-                                    <select name="" id="" class="form-control"
-                                            style="border: none; border: 2px solid black; width: 30%; margin-left: 70%">
-                                        <option value="" disabled selected>Chọn thứ cần lọc</option>
-                                        <option value="1">Thứ 2</option>
-                                        <option value="2">Thứ 3</option>
-                                        <option value="3">Thứ 4</option>
-                                        <option value="4">Thứ 5</option>
-                                        <option value="5">Thứ 6</option>
-                                        <option value="6">Thứ 7</option>
-                                        <option value="7">Chủ nhật</option>
-                                    </select>
-                                    <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
-                                </div>
+
                                 <table class="table" style="text-align: center;">
                                     <tr>
                                         <th>
@@ -399,32 +314,49 @@
                                             Học sinh
                                         </th>
                                         <th>
-                                            Tổng buổi đã học
+                                            Số lượng đăng ký
+                                        </th>
+
+                                        <th>
+                                            Admin
                                         </th>
                                         <th>
-                                            Vào học
+                                            Tutor
+                                        </th>
+                                        <th>
+                                            Duyệt
                                         </th>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            Thứ 2
-                                        </td>
-                                        <td>
-                                            7h30 - 9h
-                                        </td>
-                                        <td>
-                                            <a href="#">nhitran</a> - <a href="#">tuanle</a>
-                                        </td>
-                                        <td>
-                                            5/30 <br>
+                                    @foreach (var session in sessionlist)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @session.day_otw
+                                            </td>
+                                            <td>
+                                                @session.start_time - @session.end_time
+                                            </td>
+                                            <td>
+                                                <a href="#">@session.student.fullname</a>
+                                            </td>
+                                            <td>
+                                                @session.total_sessions
+                                            </td>
+                                            <td>
+                                                @session.status1.name
+                                            </td>
+                                            <td>
+                                                @session.status2.name
+                                            </td>
+                                            <td>
+                                                <label class="switch">
+                                                    <input type="checkbox">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    }
 
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <img src="https://static.thenounproject.com/png/6076-200.png" width="30" height="30">
-                                            </a>
-                                        </td>
-                                    </tr>
                                 </table>
                             </div>
                         </div>
@@ -444,7 +376,7 @@
                                 <h6 class="ml-3"> <strong>Thêm buổi học</strong> </h6>
                                 <div class="row" style="margin-top:30px">
                                     <div class="form-wrapper col-3">
-                                        <select name="" id="" class="form-control" style=" border: 2px solid black ; width: 125px; border-radius:6px">
+                                        <select name="" class="form-control" style=" border: 2px solid black ; width: 125px; border-radius:6px">
                                             <option value="" disabled selected>Thứ</option>
                                             <option value="1">Thứ 2</option>
                                             <option value="2">Thứ 3</option>
@@ -576,51 +508,51 @@
                                         <th>
                                             Thời gian học
                                         </th>
-
                                         <th>
-                                            Ngày đã học
+                                            Ngày học
                                         </th>
                                         <th>
                                             Học sinh
                                         </th>
                                         <th>
+                                            Môn
+                                        </th>
+                                        <th>
+                                            Lớp
+                                        </th>
+                                        <th>
                                             Số buổi đã học
                                         </th>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            Thứ 2
-                                        </td>
-                                        <td>
-                                            7h30 - 9h
-                                        </td>
-                                        <td>
-                                            13/3/2019
-                                        </td>
-                                        <td>
-                                            nhannguyen - tuanhong
-                                        </td>
-                                        <td>
-                                            5/20
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Thứ 3
-                                        </td>
-                                        <td>
-                                            8h30 - 10h
-                                        </td>
-                                        <td>
-                                            1/2/2019
-                                        </td>
-                                        <td>
-                                            nhiha - hongngoc
-                                        </td>
-                                        <td>
-                                            10/30
-                                        </td>
-                                    </tr>
+                                    @foreach (var ses in db.history_lessons.ToList().Where(x => x.tutor_id == int.Parse(Session["UserID"].ToString())))
+                                    {
+                                        <tr>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => ses.day_otw)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => ses.start_time) - @Html.DisplayFor(modelItem => ses.end_time)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => ses.day)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => ses.student.fullname)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => ses.subject)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => ses.student.@class)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => ses.total_sessions)
+                                            </td>
+                                        </tr>
+                                    }
+
+
                                 </table>
                             </div>
                         </div>
@@ -653,5 +585,31 @@
     <script src="~/Content/vendor/jquery/gsdk-bootstrap-wizard.js"></script>
 
     <script src="~/Content/vendor/jquery/jquery.validate.min.js"></script>
+    <script src="~/Content/vendor/lightbox2/dist/js/lightbox.min.js"></script>
+    <script>
+        <script src="~/Content/build/js/TutorHomePage.component.js"></script>
+}
+<!--   Core JS Files   -->
+<script>
+        $(function () {
+            getSessionApproved(-1);
+            $("#select-dotw").on("change", function () {
+                var dotw = $(this).val();
+                getSessionApproved(dotw);
+            });
+        })
+    function getSessionApproved(dotw) {
+            $.ajax({
+                type: "GET",
+                url: "/api/getSessionApproved/",
+                data: {dotw : dotw, tutor_id : @int.Parse(Session["UserID"].ToString())},
+                dataType: "html",
+                success: function (response) {
+                    $('#sessionapproved').html(response)
+                }
+            });
+        }
+</script>
+
 }
 <!--   Core JS Files   -->

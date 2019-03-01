@@ -29,9 +29,13 @@ namespace eTUTOR.Controllers
                 return View(tatu);
             }
         }
-        public ActionResult InfoOfTutor()
+        public ActionResult InfoOfTutor(int id)
         {
-            return View();
+            var tutor_id = int.Parse(Session["UserID"].ToString());
+            var info = db.tutors.FirstOrDefault(x => x.tutor_id == id);
+            List<session> sessionList = db.sessions.Where(x => x.tutor_id == tutor_id && x.status_admin == 2).ToList();
+            ViewData["sessionlist"] = sessionList;
+            return View(info);
         }
         [HttpGet]
         public ActionResult RegisterTutor(int? id)

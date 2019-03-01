@@ -27,11 +27,11 @@ namespace eTUTOR.Models
         public Nullable<int> status_admin { get; set; }
         public Nullable<int> subject_id { get; set; }
     
+        public virtual subject subject { get; set; }
         public virtual status status { get; set; }
-        public virtual student student { get; set; }
-        public virtual tutor tutor { get; set; }
-        public virtual subject subject1 { get; set; }
         public virtual status status1 { get; set; }
         public virtual status status2 { get; set; }
+        public virtual student student { get; set; }
+        public virtual tutor tutor { get; set; }
     }
 }

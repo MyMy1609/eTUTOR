@@ -1,0 +1,56 @@
+﻿@{ 
+    var sessionlist = ViewData["sessionlist"] as List<eTUTOR.Models.session>;
+}
+<table class="table" style="text-align: center;">
+    <tr>
+        <th>
+            Thứ
+        </th>
+        <th>
+            Thời gian học
+        </th>
+
+        <th>
+            Ngày đã học
+        </th>
+        <th>
+            Gia sư
+        </th>
+        <th>
+            Số buổi đã học
+        </th>
+    </tr>
+    @if (!sessionlist.Any())
+    {
+        <tr>
+            <td colspan="5">Hông có buổi học nào</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var session in sessionlist)
+        {
+            <tr>
+                <td>
+                    @session.day_otw
+                </td>
+                <td>
+                    @session.start_time - @session.end_time
+                </td>
+
+                <td>
+                    @session.tutor.fullname
+                </td>
+
+                <td>
+                    @session.total_sessions
+                </td>
+                <td>
+                    <a href="hocLiveStreamComponent/hocLiveStream.component.html">
+                        <img src="https://static.thenounproject.com/png/6076-200.png" width="30" height="30">
+                    </a>
+                </td>
+            </tr>
+        }
+    }
+</table>

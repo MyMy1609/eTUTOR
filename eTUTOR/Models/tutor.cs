@@ -17,10 +17,10 @@ namespace eTUTOR.Models
         public tutor()
         {
             this.comments = new HashSet<comment>();
+            this.contact_tutor = new HashSet<contact_tutor>();
             this.history_lessons = new HashSet<history_lessons>();
             this.schedules = new HashSet<schedule>();
             this.sessions = new HashSet<session>();
-            this.contact_tutor = new HashSet<contact_tutor>();
             this.subjects = new HashSet<subject>();
         }
     
@@ -40,11 +40,11 @@ namespace eTUTOR.Models
         public string avatar { get; set; }
     
         public virtual ICollection<comment> comments { get; set; }
+        public virtual ICollection<contact_tutor> contact_tutor { get; set; }
         public virtual ICollection<history_lessons> history_lessons { get; set; }
         public virtual ICollection<schedule> schedules { get; set; }
         public virtual ICollection<session> sessions { get; set; }
         public virtual status status1 { get; set; }
-        public virtual ICollection<contact_tutor> contact_tutor { get; set; }
         public virtual ICollection<subject> subjects { get; set; }
     }
 }

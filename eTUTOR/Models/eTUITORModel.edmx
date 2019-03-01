@@ -171,16 +171,6 @@
           <Property Name="common_id" Type="int" />
           <Property Name="name" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="tutors">
           <Key>
             <PropertyRef Name="tutor_id" />
@@ -199,6 +189,22 @@
           <Property Name="certificate" Type="nvarchar" MaxLength="100" />
           <Property Name="status" Type="int" />
           <Property Name="avatar" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="typeUser">
+          <Key>
+            <PropertyRef Name="tu_id" />
+          </Key>
+          <Property Name="tu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tu_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="us_id" />
+          </Key>
+          <Property Name="us_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="us_usname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="us_pw" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="us_type" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__sessions__subjec__1BC821DD">
           <End Role="subject" Type="Self.subject" Multiplicity="0..1" />
@@ -221,6 +227,18 @@
             </Principal>
             <Dependent Role="subject">
               <PropertyRef Name="tutor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__us_type__208CD6FA">
+          <End Role="typeUser" Type="Self.typeUser" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="typeUser">
+              <PropertyRef Name="tu_id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="us_type" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -420,8 +438,9 @@
           <EntitySet Name="students" EntityType="Self.students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="submenu" EntityType="Self.submenu" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tutors" EntityType="Self.tutors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="typeUser" EntityType="Self.typeUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__sessions__subjec__1BC821DD" Association="Self.FK__sessions__subjec__1BC821DD">
             <End Role="subject" EntitySet="subject" />
             <End Role="sessions" EntitySet="sessions" />
@@ -429,6 +448,10 @@
           <AssociationSet Name="FK__subject__tutor_i__19DFD96B" Association="Self.FK__subject__tutor_i__19DFD96B">
             <End Role="tutors" EntitySet="tutors" />
             <End Role="subject" EntitySet="subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__us_type__208CD6FA" Association="Self.FK__Users__us_type__208CD6FA">
+            <End Role="typeUser" EntitySet="typeUser" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_comment_student" Association="Self.FK_comment_student">
             <End Role="students" EntitySet="students" />
@@ -495,6 +518,98 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="capstone2019Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="eTUITOREntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="abouts" EntityType="capstone2019Model.about" />
+          <EntitySet Name="admins" EntityType="capstone2019Model.admin" />
+          <EntitySet Name="comments" EntityType="capstone2019Model.comment" />
+          <EntitySet Name="commons" EntityType="capstone2019Model.common" />
+          <EntitySet Name="contact_admin" EntityType="capstone2019Model.contact_admin" />
+          <EntitySet Name="contact_tutor" EntityType="capstone2019Model.contact_tutor" />
+          <EntitySet Name="contacts" EntityType="capstone2019Model.contact" />
+          <EntitySet Name="history_lessons" EntityType="capstone2019Model.history_lessons" />
+          <EntitySet Name="parents" EntityType="capstone2019Model.parent" />
+          <EntitySet Name="schedules" EntityType="capstone2019Model.schedule" />
+          <EntitySet Name="sessions" EntityType="capstone2019Model.session" />
+          <EntitySet Name="status" EntityType="capstone2019Model.status" />
+          <EntitySet Name="students" EntityType="capstone2019Model.student" />
+          <EntitySet Name="subjects" EntityType="capstone2019Model.subject" />
+          <EntitySet Name="submenus" EntityType="capstone2019Model.submenu" />
+          <EntitySet Name="tutors" EntityType="capstone2019Model.tutor" />
+          <EntitySet Name="typeUsers" EntityType="capstone2019Model.typeUser" />
+          <EntitySet Name="Users" EntityType="capstone2019Model.User" />
+          <AssociationSet Name="FK_comment_student" Association="capstone2019Model.FK_comment_student">
+            <End Role="student" EntitySet="students" />
+            <End Role="comment" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_tutor" Association="capstone2019Model.FK_comment_tutor">
+            <End Role="tutor" EntitySet="tutors" />
+            <End Role="comment" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_submenu_common" Association="capstone2019Model.FK_submenu_common">
+            <End Role="common" EntitySet="commons" />
+            <End Role="submenu" EntitySet="submenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contatc_tutor_tutor" Association="capstone2019Model.FK_contatc_tutor_tutor">
+            <End Role="tutor" EntitySet="tutors" />
+            <End Role="contact_tutor" EntitySet="contact_tutor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_lessons_student" Association="capstone2019Model.FK_history_lessons_student">
+            <End Role="student" EntitySet="students" />
+            <End Role="history_lessons" EntitySet="history_lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_lessons_tutor" Association="capstone2019Model.FK_history_lessons_tutor">
+            <End Role="tutor" EntitySet="tutors" />
+            <End Role="history_lessons" EntitySet="history_lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_parent_status" Association="capstone2019Model.FK_parent_status">
+            <End Role="status" EntitySet="status" />
+            <End Role="parent" EntitySet="parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_parent_student" Association="capstone2019Model.FK_parent_student">
+            <End Role="parent" EntitySet="parents" />
+            <End Role="student" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_schedule_tutor" Association="capstone2019Model.FK_schedule_tutor">
+            <End Role="tutor" EntitySet="tutors" />
+            <End Role="schedule" EntitySet="schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK__sessions__subjec__1BC821DD" Association="capstone2019Model.FK__sessions__subjec__1BC821DD">
+            <End Role="subject" EntitySet="subjects" />
+            <End Role="session" EntitySet="sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_session_status" Association="capstone2019Model.FK_session_status">
+            <End Role="status" EntitySet="status" />
+            <End Role="session" EntitySet="sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_session_status_admin" Association="capstone2019Model.FK_session_status_admin">
+            <End Role="status" EntitySet="status" />
+            <End Role="session" EntitySet="sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_session_status_tutor" Association="capstone2019Model.FK_session_status_tutor">
+            <End Role="status" EntitySet="status" />
+            <End Role="session" EntitySet="sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_session_student" Association="capstone2019Model.FK_session_student">
+            <End Role="student" EntitySet="students" />
+            <End Role="session" EntitySet="sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_session_tutor" Association="capstone2019Model.FK_session_tutor">
+            <End Role="tutor" EntitySet="tutors" />
+            <End Role="session" EntitySet="sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tutor_status" Association="capstone2019Model.FK_tutor_status">
+            <End Role="status" EntitySet="status" />
+            <End Role="tutor" EntitySet="tutors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__subject__tutor_i__19DFD96B" Association="capstone2019Model.FK__subject__tutor_i__19DFD96B">
+            <End Role="tutor" EntitySet="tutors" />
+            <End Role="subject" EntitySet="subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__us_type__208CD6FA" Association="capstone2019Model.FK__Users__us_type__208CD6FA">
+            <End Role="typeUser" EntitySet="typeUsers" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="about">
           <Key>
             <PropertyRef Name="about_id" />
@@ -521,8 +636,8 @@
           <Property Name="student_id" Type="Int32" />
           <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="tutor_id" Type="Int32" />
-          <NavigationProperty Name="student" Relationship="Self.FK_comment_student" FromRole="comments" ToRole="students" />
-          <NavigationProperty Name="tutor" Relationship="Self.FK_comment_tutor" FromRole="comments" ToRole="tutors" />
+          <NavigationProperty Name="student" Relationship="capstone2019Model.FK_comment_student" FromRole="comment" ToRole="student" />
+          <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_comment_tutor" FromRole="comment" ToRole="tutor" />
         </EntityType>
         <EntityType Name="common">
           <Key>
@@ -532,7 +647,30 @@
           <Property Name="menu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="footer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="submenus" Relationship="Self.FK_submenu_common" FromRole="common" ToRole="submenu" />
+          <NavigationProperty Name="submenus" Relationship="capstone2019Model.FK_submenu_common" FromRole="common" ToRole="submenu" />
+        </EntityType>
+        <EntityType Name="contact_admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="contact_tutor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tutor_id" Type="Int32" />
+          <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_contatc_tutor_tutor" FromRole="contact_tutor" ToRole="tutor" />
         </EntityType>
         <EntityType Name="contact">
           <Key>
@@ -558,8 +696,8 @@
           <Property Name="total_sessions" Type="Int32" />
           <Property Name="day_otw" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="day" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="student" Relationship="Self.FK_history_lessons_student" FromRole="history_lessons" ToRole="students" />
-          <NavigationProperty Name="tutor" Relationship="Self.FK_history_lessons_tutor" FromRole="history_lessons" ToRole="tutors" />
+          <NavigationProperty Name="student" Relationship="capstone2019Model.FK_history_lessons_student" FromRole="history_lessons" ToRole="student" />
+          <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_history_lessons_tutor" FromRole="history_lessons" ToRole="tutor" />
         </EntityType>
         <EntityType Name="parent">
           <Key>
@@ -574,28 +712,28 @@
           <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="birthday" Type="DateTime" Precision="0" />
           <Property Name="status" Type="Int32" />
-          <NavigationProperty Name="status1" Relationship="Self.FK_parent_status" FromRole="parents" ToRole="status" />
-          <NavigationProperty Name="students" Relationship="Self.FK_parent_student" FromRole="parents" ToRole="students" />
           <Property Name="avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_parent_status" FromRole="parent" ToRole="status" />
+          <NavigationProperty Name="students" Relationship="capstone2019Model.FK_parent_student" FromRole="parent" ToRole="student" />
         </EntityType>
         <EntityType Name="schedule">
           <Key>
             <PropertyRef Name="schedule_id" />
           </Key>
           <Property Name="schedule_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="day_otw" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="day_otw" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="start_time" Type="Time" Precision="7" />
           <Property Name="end_time" Type="Time" Precision="7" />
           <Property Name="note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Boolean" />
           <Property Name="tutor_id" Type="Int32" />
-          <NavigationProperty Name="tutor" Relationship="Self.FK_schedule_tutor" FromRole="schedules" ToRole="tutors" />
+          <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_schedule_tutor" FromRole="schedule" ToRole="tutor" />
         </EntityType>
         <EntityType Name="session">
           <Key>
             <PropertyRef Name="session_id" />
           </Key>
-          <Property Name="session_id" Type="Int32" Nullable="false" />
+          <Property Name="session_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tutor_id" Type="Int32" />
           <Property Name="student_id" Type="Int32" />
           <Property Name="class" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -604,15 +742,15 @@
           <Property Name="total_sessions" Type="Int32" />
           <Property Name="day_otw" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="status_id" Type="Int32" />
-          <NavigationProperty Name="status" Relationship="Self.FK_session_status" FromRole="sessions" ToRole="status" />
-          <NavigationProperty Name="student" Relationship="Self.FK_session_student" FromRole="sessions" ToRole="students" />
-          <NavigationProperty Name="tutor" Relationship="Self.FK_session_tutor" FromRole="sessions" ToRole="tutors" />
           <Property Name="status_tutor" Type="Int32" />
           <Property Name="status_admin" Type="Int32" />
           <Property Name="subject_id" Type="Int32" />
-          <NavigationProperty Name="subject1" Relationship="capstone2019Model.FK__sessions__subjec__1BC821DD" FromRole="session" ToRole="subject" />
+          <NavigationProperty Name="subject" Relationship="capstone2019Model.FK__sessions__subjec__1BC821DD" FromRole="session" ToRole="subject" />
+          <NavigationProperty Name="status" Relationship="capstone2019Model.FK_session_status" FromRole="session" ToRole="status" />
           <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_session_status_admin" FromRole="session" ToRole="status" />
           <NavigationProperty Name="status2" Relationship="capstone2019Model.FK_session_status_tutor" FromRole="session" ToRole="status" />
+          <NavigationProperty Name="student" Relationship="capstone2019Model.FK_session_student" FromRole="session" ToRole="student" />
+          <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_session_tutor" FromRole="session" ToRole="tutor" />
         </EntityType>
         <EntityType Name="status">
           <Key>
@@ -620,11 +758,11 @@
           </Key>
           <Property Name="status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="parents" Relationship="Self.FK_parent_status" FromRole="status" ToRole="parents" />
-          <NavigationProperty Name="sessions" Relationship="Self.FK_session_status" FromRole="status" ToRole="sessions" />
-          <NavigationProperty Name="tutors" Relationship="Self.FK_tutor_status" FromRole="status" ToRole="tutors" />
+          <NavigationProperty Name="parents" Relationship="capstone2019Model.FK_parent_status" FromRole="status" ToRole="parent" />
+          <NavigationProperty Name="sessions" Relationship="capstone2019Model.FK_session_status" FromRole="status" ToRole="session" />
           <NavigationProperty Name="sessions1" Relationship="capstone2019Model.FK_session_status_admin" FromRole="status" ToRole="session" />
           <NavigationProperty Name="sessions2" Relationship="capstone2019Model.FK_session_status_tutor" FromRole="status" ToRole="session" />
+          <NavigationProperty Name="tutors" Relationship="capstone2019Model.FK_tutor_status" FromRole="status" ToRole="tutor" />
         </EntityType>
         <EntityType Name="student">
           <Key>
@@ -636,314 +774,15 @@
           <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Int32" />
           <Property Name="parent_id" Type="Int32" />
-          <NavigationProperty Name="comments" Relationship="Self.FK_comment_student" FromRole="students" ToRole="comments" />
-          <NavigationProperty Name="history_lessons" Relationship="Self.FK_history_lessons_student" FromRole="students" ToRole="history_lessons" />
-          <NavigationProperty Name="parent" Relationship="Self.FK_parent_student" FromRole="students" ToRole="parents" />
-          <NavigationProperty Name="sessions" Relationship="Self.FK_session_student" FromRole="students" ToRole="sessions" />
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="class" Type="Int32" />
           <Property Name="avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="birthday" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="submenu">
-          <Key>
-            <PropertyRef Name="submenu_id" />
-          </Key>
-          <Property Name="submenu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="common_id" Type="Int32" />
-          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="common" Relationship="Self.FK_submenu_common" FromRole="submenu" ToRole="common" />
-        </EntityType>
-        <EntityType Name="tutor">
-          <Key>
-            <PropertyRef Name="tutor_id" />
-          </Key>
-          <Property Name="tutor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="birthday" Type="DateTime" Precision="0" />
-          <Property Name="specialized" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="job" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="experience" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="certificate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="Int32" />
-          <NavigationProperty Name="comments" Relationship="Self.FK_comment_tutor" FromRole="tutors" ToRole="comments" />
-          <NavigationProperty Name="history_lessons" Relationship="Self.FK_history_lessons_tutor" FromRole="tutors" ToRole="history_lessons" />
-          <NavigationProperty Name="schedules" Relationship="Self.FK_schedule_tutor" FromRole="tutors" ToRole="schedules" />
-          <NavigationProperty Name="sessions" Relationship="Self.FK_session_tutor" FromRole="tutors" ToRole="sessions" />
-          <NavigationProperty Name="status1" Relationship="Self.FK_tutor_status" FromRole="tutors" ToRole="status" />
-          <Property Name="avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="contact_tutor" Relationship="capstone2019Model.FK_contatc_tutor_tutor" FromRole="tutor" ToRole="contact_tutor" />
-          <NavigationProperty Name="subjects" Relationship="capstone2019Model.FK__subject__tutor_i__19DFD96B" FromRole="tutor" ToRole="subject" />
-        </EntityType>
-        <Association Name="FK_comment_student">
-          <End Role="students" Type="Self.student" Multiplicity="0..1" />
-          <End Role="comments" Type="Self.comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="student_id" />
-            </Principal>
-            <Dependent Role="comments">
-              <PropertyRef Name="student_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_comment_tutor">
-          <End Role="tutors" Type="Self.tutor" Multiplicity="0..1" />
-          <End Role="comments" Type="Self.comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tutors">
-              <PropertyRef Name="tutor_id" />
-            </Principal>
-            <Dependent Role="comments">
-              <PropertyRef Name="tutor_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_submenu_common">
-          <End Role="common" Type="Self.common" Multiplicity="0..1" />
-          <End Role="submenu" Type="Self.submenu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="common">
-              <PropertyRef Name="common_id" />
-            </Principal>
-            <Dependent Role="submenu">
-              <PropertyRef Name="common_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_history_lessons_student">
-          <End Role="students" Type="Self.student" Multiplicity="0..1" />
-          <End Role="history_lessons" Type="Self.history_lessons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="student_id" />
-            </Principal>
-            <Dependent Role="history_lessons">
-              <PropertyRef Name="student_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_history_lessons_tutor">
-          <End Role="tutors" Type="Self.tutor" Multiplicity="0..1" />
-          <End Role="history_lessons" Type="Self.history_lessons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tutors">
-              <PropertyRef Name="tutor_id" />
-            </Principal>
-            <Dependent Role="history_lessons">
-              <PropertyRef Name="tutor_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_parent_status">
-          <End Role="status" Type="Self.status" Multiplicity="0..1" />
-          <End Role="parents" Type="Self.parent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="status">
-              <PropertyRef Name="status_id" />
-            </Principal>
-            <Dependent Role="parents">
-              <PropertyRef Name="status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_parent_student">
-          <End Role="parents" Type="Self.parent" Multiplicity="0..1" />
-          <End Role="students" Type="Self.student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="parents">
-              <PropertyRef Name="parent_id" />
-            </Principal>
-            <Dependent Role="students">
-              <PropertyRef Name="parent_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_schedule_tutor">
-          <End Role="tutors" Type="Self.tutor" Multiplicity="0..1" />
-          <End Role="schedules" Type="Self.schedule" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tutors">
-              <PropertyRef Name="tutor_id" />
-            </Principal>
-            <Dependent Role="schedules">
-              <PropertyRef Name="tutor_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_session_status">
-          <End Role="status" Type="Self.status" Multiplicity="0..1" />
-          <End Role="sessions" Type="Self.session" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="status">
-              <PropertyRef Name="status_id" />
-            </Principal>
-            <Dependent Role="sessions">
-              <PropertyRef Name="status_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_session_student">
-          <End Role="students" Type="Self.student" Multiplicity="0..1" />
-          <End Role="sessions" Type="Self.session" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="student_id" />
-            </Principal>
-            <Dependent Role="sessions">
-              <PropertyRef Name="student_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_session_tutor">
-          <End Role="tutors" Type="Self.tutor" Multiplicity="0..1" />
-          <End Role="sessions" Type="Self.session" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tutors">
-              <PropertyRef Name="tutor_id" />
-            </Principal>
-            <Dependent Role="sessions">
-              <PropertyRef Name="tutor_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tutor_status">
-          <End Role="status" Type="Self.status" Multiplicity="0..1" />
-          <End Role="tutors" Type="Self.tutor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="status">
-              <PropertyRef Name="status_id" />
-            </Principal>
-            <Dependent Role="tutors">
-              <PropertyRef Name="status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="eTUITOREntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="abouts" EntityType="Self.about" />
-          <EntitySet Name="admins" EntityType="Self.admin" />
-          <EntitySet Name="comments" EntityType="Self.comment" />
-          <EntitySet Name="commons" EntityType="Self.common" />
-          <EntitySet Name="contacts" EntityType="Self.contact" />
-          <EntitySet Name="history_lessons" EntityType="Self.history_lessons" />
-          <EntitySet Name="parents" EntityType="Self.parent" />
-          <EntitySet Name="schedules" EntityType="Self.schedule" />
-          <EntitySet Name="sessions" EntityType="Self.session" />
-          <EntitySet Name="status" EntityType="Self.status" />
-          <EntitySet Name="students" EntityType="Self.student" />
-          <EntitySet Name="submenus" EntityType="Self.submenu" />
-          <EntitySet Name="tutors" EntityType="Self.tutor" />
-          <AssociationSet Name="FK_comment_student" Association="Self.FK_comment_student">
-            <End Role="students" EntitySet="students" />
-            <End Role="comments" EntitySet="comments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_comment_tutor" Association="Self.FK_comment_tutor">
-            <End Role="tutors" EntitySet="tutors" />
-            <End Role="comments" EntitySet="comments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_submenu_common" Association="Self.FK_submenu_common">
-            <End Role="common" EntitySet="commons" />
-            <End Role="submenu" EntitySet="submenus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_history_lessons_student" Association="Self.FK_history_lessons_student">
-            <End Role="students" EntitySet="students" />
-            <End Role="history_lessons" EntitySet="history_lessons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_history_lessons_tutor" Association="Self.FK_history_lessons_tutor">
-            <End Role="tutors" EntitySet="tutors" />
-            <End Role="history_lessons" EntitySet="history_lessons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_parent_status" Association="Self.FK_parent_status">
-            <End Role="status" EntitySet="status" />
-            <End Role="parents" EntitySet="parents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_parent_student" Association="Self.FK_parent_student">
-            <End Role="parents" EntitySet="parents" />
-            <End Role="students" EntitySet="students" />
-          </AssociationSet>
-          <AssociationSet Name="FK_schedule_tutor" Association="Self.FK_schedule_tutor">
-            <End Role="tutors" EntitySet="tutors" />
-            <End Role="schedules" EntitySet="schedules" />
-          </AssociationSet>
-          <AssociationSet Name="FK_session_status" Association="Self.FK_session_status">
-            <End Role="status" EntitySet="status" />
-            <End Role="sessions" EntitySet="sessions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_session_student" Association="Self.FK_session_student">
-            <End Role="students" EntitySet="students" />
-            <End Role="sessions" EntitySet="sessions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_session_tutor" Association="Self.FK_session_tutor">
-            <End Role="tutors" EntitySet="tutors" />
-            <End Role="sessions" EntitySet="sessions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tutor_status" Association="Self.FK_tutor_status">
-            <End Role="status" EntitySet="status" />
-            <End Role="tutors" EntitySet="tutors" />
-          </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="capstone2019Model.sysdiagram" />
-          <EntitySet Name="contact_admin" EntityType="capstone2019Model.contact_admin" />
-          <EntitySet Name="contact_tutor" EntityType="capstone2019Model.contact_tutor" />
-          <EntitySet Name="subjects" EntityType="capstone2019Model.subject" />
-          <AssociationSet Name="FK_contatc_tutor_tutor" Association="capstone2019Model.FK_contatc_tutor_tutor">
-            <End Role="tutor" EntitySet="tutors" />
-            <End Role="contact_tutor" EntitySet="contact_tutor" />
-          </AssociationSet>
-          <AssociationSet Name="FK__sessions__subjec__1BC821DD" Association="capstone2019Model.FK__sessions__subjec__1BC821DD">
-            <End Role="subject" EntitySet="subjects" />
-            <End Role="session" EntitySet="sessions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_session_status_admin" Association="capstone2019Model.FK_session_status_admin">
-            <End Role="status" EntitySet="status" />
-            <End Role="session" EntitySet="sessions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_session_status_tutor" Association="capstone2019Model.FK_session_status_tutor">
-            <End Role="status" EntitySet="status" />
-            <End Role="session" EntitySet="sessions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__subject__tutor_i__19DFD96B" Association="capstone2019Model.FK__subject__tutor_i__19DFD96B">
-            <End Role="tutor" EntitySet="tutors" />
-            <End Role="subject" EntitySet="subjects" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="contact_admin">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fullname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="content" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="contact_tutor">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fullname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="content" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="tutor_id" Type="Int32" />
-          <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_contatc_tutor_tutor" FromRole="contact_tutor" ToRole="tutor" />
+          <NavigationProperty Name="comments" Relationship="capstone2019Model.FK_comment_student" FromRole="student" ToRole="comment" />
+          <NavigationProperty Name="history_lessons" Relationship="capstone2019Model.FK_history_lessons_student" FromRole="student" ToRole="history_lessons" />
+          <NavigationProperty Name="parent" Relationship="capstone2019Model.FK_parent_student" FromRole="student" ToRole="parent" />
+          <NavigationProperty Name="sessions" Relationship="capstone2019Model.FK_session_student" FromRole="student" ToRole="session" />
         </EntityType>
         <EntityType Name="subject">
           <Key>
@@ -955,6 +794,95 @@
           <NavigationProperty Name="sessions" Relationship="capstone2019Model.FK__sessions__subjec__1BC821DD" FromRole="subject" ToRole="session" />
           <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK__subject__tutor_i__19DFD96B" FromRole="subject" ToRole="tutor" />
         </EntityType>
+        <EntityType Name="submenu">
+          <Key>
+            <PropertyRef Name="submenu_id" />
+          </Key>
+          <Property Name="submenu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="common_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="common" Relationship="capstone2019Model.FK_submenu_common" FromRole="submenu" ToRole="common" />
+        </EntityType>
+        <EntityType Name="tutor">
+          <Key>
+            <PropertyRef Name="tutor_id" />
+          </Key>
+          <Property Name="tutor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <Property Name="specialized" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="job" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="experience" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="certificate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="comments" Relationship="capstone2019Model.FK_comment_tutor" FromRole="tutor" ToRole="comment" />
+          <NavigationProperty Name="contact_tutor" Relationship="capstone2019Model.FK_contatc_tutor_tutor" FromRole="tutor" ToRole="contact_tutor" />
+          <NavigationProperty Name="history_lessons" Relationship="capstone2019Model.FK_history_lessons_tutor" FromRole="tutor" ToRole="history_lessons" />
+          <NavigationProperty Name="schedules" Relationship="capstone2019Model.FK_schedule_tutor" FromRole="tutor" ToRole="schedule" />
+          <NavigationProperty Name="sessions" Relationship="capstone2019Model.FK_session_tutor" FromRole="tutor" ToRole="session" />
+          <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_tutor_status" FromRole="tutor" ToRole="status" />
+          <NavigationProperty Name="subjects" Relationship="capstone2019Model.FK__subject__tutor_i__19DFD96B" FromRole="tutor" ToRole="subject" />
+        </EntityType>
+        <EntityType Name="typeUser">
+          <Key>
+            <PropertyRef Name="tu_id" />
+          </Key>
+          <Property Name="tu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tu_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="capstone2019Model.FK__Users__us_type__208CD6FA" FromRole="typeUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="us_id" />
+          </Key>
+          <Property Name="us_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="us_usname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="us_pw" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="us_type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="typeUser" Relationship="capstone2019Model.FK__Users__us_type__208CD6FA" FromRole="User" ToRole="typeUser" />
+        </EntityType>
+        <Association Name="FK_comment_student">
+          <End Type="capstone2019Model.student" Role="student" Multiplicity="0..1" />
+          <End Type="capstone2019Model.comment" Role="comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="student_id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_tutor">
+          <End Type="capstone2019Model.tutor" Role="tutor" Multiplicity="0..1" />
+          <End Type="capstone2019Model.comment" Role="comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tutor">
+              <PropertyRef Name="tutor_id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="tutor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_submenu_common">
+          <End Type="capstone2019Model.common" Role="common" Multiplicity="0..1" />
+          <End Type="capstone2019Model.submenu" Role="submenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="common">
+              <PropertyRef Name="common_id" />
+            </Principal>
+            <Dependent Role="submenu">
+              <PropertyRef Name="common_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_contatc_tutor_tutor">
           <End Type="capstone2019Model.tutor" Role="tutor" Multiplicity="0..1" />
           <End Type="capstone2019Model.contact_tutor" Role="contact_tutor" Multiplicity="*" />
@@ -963,6 +891,66 @@
               <PropertyRef Name="tutor_id" />
             </Principal>
             <Dependent Role="contact_tutor">
+              <PropertyRef Name="tutor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_lessons_student">
+          <End Type="capstone2019Model.student" Role="student" Multiplicity="0..1" />
+          <End Type="capstone2019Model.history_lessons" Role="history_lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="student_id" />
+            </Principal>
+            <Dependent Role="history_lessons">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_lessons_tutor">
+          <End Type="capstone2019Model.tutor" Role="tutor" Multiplicity="0..1" />
+          <End Type="capstone2019Model.history_lessons" Role="history_lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tutor">
+              <PropertyRef Name="tutor_id" />
+            </Principal>
+            <Dependent Role="history_lessons">
+              <PropertyRef Name="tutor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_parent_status">
+          <End Type="capstone2019Model.status" Role="status" Multiplicity="0..1" />
+          <End Type="capstone2019Model.parent" Role="parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="status_id" />
+            </Principal>
+            <Dependent Role="parent">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_parent_student">
+          <End Type="capstone2019Model.parent" Role="parent" Multiplicity="0..1" />
+          <End Type="capstone2019Model.student" Role="student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parent">
+              <PropertyRef Name="parent_id" />
+            </Principal>
+            <Dependent Role="student">
+              <PropertyRef Name="parent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_schedule_tutor">
+          <End Type="capstone2019Model.tutor" Role="tutor" Multiplicity="0..1" />
+          <End Type="capstone2019Model.schedule" Role="schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tutor">
+              <PropertyRef Name="tutor_id" />
+            </Principal>
+            <Dependent Role="schedule">
               <PropertyRef Name="tutor_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -976,6 +964,18 @@
             </Principal>
             <Dependent Role="session">
               <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_session_status">
+          <End Type="capstone2019Model.status" Role="status" Multiplicity="0..1" />
+          <End Type="capstone2019Model.session" Role="session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="status_id" />
+            </Principal>
+            <Dependent Role="session">
+              <PropertyRef Name="status_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1003,6 +1003,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_session_student">
+          <End Type="capstone2019Model.student" Role="student" Multiplicity="0..1" />
+          <End Type="capstone2019Model.session" Role="session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="student_id" />
+            </Principal>
+            <Dependent Role="session">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_session_tutor">
+          <End Type="capstone2019Model.tutor" Role="tutor" Multiplicity="0..1" />
+          <End Type="capstone2019Model.session" Role="session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tutor">
+              <PropertyRef Name="tutor_id" />
+            </Principal>
+            <Dependent Role="session">
+              <PropertyRef Name="tutor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tutor_status">
+          <End Type="capstone2019Model.status" Role="status" Multiplicity="0..1" />
+          <End Type="capstone2019Model.tutor" Role="tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="status_id" />
+            </Principal>
+            <Dependent Role="tutor">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__subject__tutor_i__19DFD96B">
           <End Type="capstone2019Model.tutor" Role="tutor" Multiplicity="1" />
           <End Type="capstone2019Model.subject" Role="subject" Multiplicity="*" />
@@ -1015,7 +1051,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK__Users__us_type__208CD6FA">
+          <End Type="capstone2019Model.typeUser" Role="typeUser" Multiplicity="1" />
+          <End Type="capstone2019Model.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="typeUser">
+              <PropertyRef Name="tu_id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="us_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1024,179 +1072,40 @@
           <EntitySetMapping Name="abouts">
             <EntityTypeMapping TypeName="capstone2019Model.about">
               <MappingFragment StoreEntitySet="about">
-                <ScalarProperty Name="about_id" ColumnName="about_id" />
-                <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="about_id" ColumnName="about_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="admins">
             <EntityTypeMapping TypeName="capstone2019Model.admin">
               <MappingFragment StoreEntitySet="admin">
-                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="comments">
             <EntityTypeMapping TypeName="capstone2019Model.comment">
               <MappingFragment StoreEntitySet="comments">
-                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
-                <ScalarProperty Name="student_id" ColumnName="student_id" />
-                <ScalarProperty Name="content" ColumnName="content" />
                 <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="commons">
             <EntityTypeMapping TypeName="capstone2019Model.common">
               <MappingFragment StoreEntitySet="common">
-                <ScalarProperty Name="common_id" ColumnName="common_id" />
-                <ScalarProperty Name="menu" ColumnName="menu" />
-                <ScalarProperty Name="header" ColumnName="header" />
                 <ScalarProperty Name="footer" ColumnName="footer" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="contacts">
-            <EntityTypeMapping TypeName="capstone2019Model.contact">
-              <MappingFragment StoreEntitySet="contacts">
-                <ScalarProperty Name="contact_id" ColumnName="contact_id" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="content" ColumnName="content" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="history_lessons">
-            <EntityTypeMapping TypeName="capstone2019Model.history_lessons">
-              <MappingFragment StoreEntitySet="history_lessons">
-                <ScalarProperty Name="hl_id" ColumnName="hl_id" />
-                <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
-                <ScalarProperty Name="student_id" ColumnName="student_id" />
-                <ScalarProperty Name="subject" ColumnName="subject" />
-                <ScalarProperty Name="class" ColumnName="class" />
-                <ScalarProperty Name="start_time" ColumnName="start_time" />
-                <ScalarProperty Name="end_time" ColumnName="end_time" />
-                <ScalarProperty Name="total_sessions" ColumnName="total_sessions" />
-                <ScalarProperty Name="day_otw" ColumnName="day_otw" />
-                <ScalarProperty Name="day" ColumnName="day" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="parents">
-            <EntityTypeMapping TypeName="capstone2019Model.parent">
-              <MappingFragment StoreEntitySet="parents">
-                <ScalarProperty Name="avatar" ColumnName="avatar" />
-                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="birthday" ColumnName="birthday" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="schedules">
-            <EntityTypeMapping TypeName="capstone2019Model.schedule">
-              <MappingFragment StoreEntitySet="schedules">
-                <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
-                <ScalarProperty Name="day_otw" ColumnName="day_otw" />
-                <ScalarProperty Name="start_time" ColumnName="start_time" />
-                <ScalarProperty Name="end_time" ColumnName="end_time" />
-                <ScalarProperty Name="note" ColumnName="note" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sessions">
-            <EntityTypeMapping TypeName="capstone2019Model.session">
-              <MappingFragment StoreEntitySet="sessions">
-                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
-                <ScalarProperty Name="status_admin" ColumnName="status_admin" />
-                <ScalarProperty Name="status_tutor" ColumnName="status_tutor" />
-                <ScalarProperty Name="session_id" ColumnName="session_id" />
-                <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
-                <ScalarProperty Name="student_id" ColumnName="student_id" />
-                <ScalarProperty Name="class" ColumnName="class" />
-                <ScalarProperty Name="start_time" ColumnName="start_time" />
-                <ScalarProperty Name="end_time" ColumnName="end_time" />
-                <ScalarProperty Name="total_sessions" ColumnName="total_sessions" />
-                <ScalarProperty Name="day_otw" ColumnName="day_otw" />
-                <ScalarProperty Name="status_id" ColumnName="status_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="status">
-            <EntityTypeMapping TypeName="capstone2019Model.status">
-              <MappingFragment StoreEntitySet="status">
-                <ScalarProperty Name="status_id" ColumnName="status_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="students">
-            <EntityTypeMapping TypeName="capstone2019Model.student">
-              <MappingFragment StoreEntitySet="students">
-                <ScalarProperty Name="birthday" ColumnName="birthday" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="avatar" ColumnName="avatar" />
-                <ScalarProperty Name="class" ColumnName="class" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="student_id" ColumnName="student_id" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="submenus">
-            <EntityTypeMapping TypeName="capstone2019Model.submenu">
-              <MappingFragment StoreEntitySet="submenu">
-                <ScalarProperty Name="submenu_id" ColumnName="submenu_id" />
+                <ScalarProperty Name="header" ColumnName="header" />
+                <ScalarProperty Name="menu" ColumnName="menu" />
                 <ScalarProperty Name="common_id" ColumnName="common_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tutors">
-            <EntityTypeMapping TypeName="capstone2019Model.tutor">
-              <MappingFragment StoreEntitySet="tutors">
-                <ScalarProperty Name="avatar" ColumnName="avatar" />
-                <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="birthday" ColumnName="birthday" />
-                <ScalarProperty Name="specialized" ColumnName="specialized" />
-                <ScalarProperty Name="job" ColumnName="job" />
-                <ScalarProperty Name="experience" ColumnName="experience" />
-                <ScalarProperty Name="certificate" ColumnName="certificate" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="capstone2019Model.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1224,12 +1133,158 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="contacts">
+            <EntityTypeMapping TypeName="capstone2019Model.contact">
+              <MappingFragment StoreEntitySet="contacts">
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="contact_id" ColumnName="contact_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="history_lessons">
+            <EntityTypeMapping TypeName="capstone2019Model.history_lessons">
+              <MappingFragment StoreEntitySet="history_lessons">
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="day_otw" ColumnName="day_otw" />
+                <ScalarProperty Name="total_sessions" ColumnName="total_sessions" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="class" ColumnName="class" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+                <ScalarProperty Name="hl_id" ColumnName="hl_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parents">
+            <EntityTypeMapping TypeName="capstone2019Model.parent">
+              <MappingFragment StoreEntitySet="parents">
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="schedules">
+            <EntityTypeMapping TypeName="capstone2019Model.schedule">
+              <MappingFragment StoreEntitySet="schedules">
+                <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="day_otw" ColumnName="day_otw" />
+                <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sessions">
+            <EntityTypeMapping TypeName="capstone2019Model.session">
+              <MappingFragment StoreEntitySet="sessions">
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+                <ScalarProperty Name="status_admin" ColumnName="status_admin" />
+                <ScalarProperty Name="status_tutor" ColumnName="status_tutor" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="day_otw" ColumnName="day_otw" />
+                <ScalarProperty Name="total_sessions" ColumnName="total_sessions" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="class" ColumnName="class" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+                <ScalarProperty Name="session_id" ColumnName="session_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="capstone2019Model.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="capstone2019Model.student">
+              <MappingFragment StoreEntitySet="students">
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="class" ColumnName="class" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="subjects">
             <EntityTypeMapping TypeName="capstone2019Model.subject">
               <MappingFragment StoreEntitySet="subject">
                 <ScalarProperty Name="subject_name" ColumnName="subject_name" />
                 <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
                 <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="submenus">
+            <EntityTypeMapping TypeName="capstone2019Model.submenu">
+              <MappingFragment StoreEntitySet="submenu">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="common_id" ColumnName="common_id" />
+                <ScalarProperty Name="submenu_id" ColumnName="submenu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tutors">
+            <EntityTypeMapping TypeName="capstone2019Model.tutor">
+              <MappingFragment StoreEntitySet="tutors">
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="certificate" ColumnName="certificate" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+                <ScalarProperty Name="job" ColumnName="job" />
+                <ScalarProperty Name="specialized" ColumnName="specialized" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="typeUsers">
+            <EntityTypeMapping TypeName="capstone2019Model.typeUser">
+              <MappingFragment StoreEntitySet="typeUser">
+                <ScalarProperty Name="tu_name" ColumnName="tu_name" />
+                <ScalarProperty Name="tu_id" ColumnName="tu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="capstone2019Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="us_type" ColumnName="us_type" />
+                <ScalarProperty Name="us_pw" ColumnName="us_pw" />
+                <ScalarProperty Name="us_usname" ColumnName="us_usname" />
+                <ScalarProperty Name="us_id" ColumnName="us_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -132,6 +132,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
     <Compile Include="Models\about.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
@@ -188,7 +189,10 @@
     <Compile Include="Models\subject.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
+    <Compile Include="Models\typeUser.cs">
+      <DependentUpon>eTUITORModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -210,6 +214,7 @@
     <Compile Include="Models\tutor.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Service\CommonService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\build\css\css-plugin-collections.css" />
@@ -642,6 +647,8 @@
     <Content Include="Views\Parent\Detail.cshtml" />
     <Content Include="Views\Parent\listRegistCourse.cshtml" />
     <Content Include="Views\Student\listRegistCourse.cshtml" />
+    <Content Include="Views\API\SessionApprove.cshtml" />
+    <Content Include="Views\API\SessionList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -666,7 +673,7 @@
     <Folder Include="Content\build\img\svg-icons\" />
     <Folder Include="Content\build\img\teacher\" />
     <Folder Include="Content\build\img\testimonials\" />
-    <Folder Include="Views\Notify\" />
+    <Folder Include="Content\img\certificates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
