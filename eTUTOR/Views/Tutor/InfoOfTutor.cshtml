@@ -28,6 +28,7 @@
     @*<link href="~/Content/build/css/page/infoOfTutor.css" rel="stylesheet" />*@
     <link href="~/Content/vendor/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
     <link href="~/Content/build/css/TutorHomePage.component.css" rel="stylesheet" />
+    <link href="~/Content/build/css/TutorHomePage.component.css" rel="stylesheet" />
 }
 
 
@@ -351,8 +352,9 @@
                                                 @session.status2.name
                                             </td>
                                             <td>
+                                                
                                                 <label class="switch">
-                                                    <input type="checkbox">
+                                                    <input type="checkbox" name="check" id="slider-duyet" onchange="duyetstudent(@session.session_id)">
                                                     <span class="slider round"></span>
                                                 </label>
                                             </td>
@@ -618,7 +620,7 @@
 
     <script src="~/Content/vendor/jquery/jquery.validate.min.js"></script>
     <script src="~/Content/vendor/lightbox2/dist/js/lightbox.min.js"></script>
-    @*<script src="~/Content/build/js/TutorHomePage.component.js"></script>*@
+    <script src="~/Content/build/js/TutorHomePage.component.js"></script>
 
     <script>
         $(function () {

@@ -151,5 +151,22 @@ namespace eTUTOR.Controllers
             return View();
         }
 
+        public ActionResult SearchTutor(string search)
+        {
+            var tutor = db.tutors.ToList().Where(x => x.fullname.Contains(search) || x.specialized.Contains(search));
+            return View(tutor);
+        }
+
+
+        [HttpPost]
+        public ActionResult Duyetkhoahoc(int id)
+        {
+            int asd = id;
+            var se = db.sessions.Find(id);
+            se.status_tutor = 1;
+            db.SaveChanges();
+            return RedirectToAction("Duyetkhoahoc");
+        }
+
     }
 }
