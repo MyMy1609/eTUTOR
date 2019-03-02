@@ -127,8 +127,27 @@ namespace eTUTOR.Controllers
             return RedirectToAction("Index", "Home");
 
         }
-        public ActionResult SessionOfTutor()
+        public ActionResult SessionOfTutor(string p)
         {
+            ViewData["IsNewGroup"] = false;
+            if (string.IsNullOrWhiteSpace(p))
+            {
+                //Guid g = Guid.NewGuid();
+                //p = Convert.ToBase64String(g.ToByteArray());
+                //p = p.Replace("=", "");
+                //p = p.Replace("+", "");
+                p = "demo";
+                ViewData["IsNewGroup"] = true;
+                ViewData["url"] = "http://localhost:52781/Student/SessionOfStudent?p=" + p;
+            }
+            else
+            {
+                ViewData["url"] = "http://localhost:52781/Student/SessionOfStudent";
+            }
+
+            ViewData["GroupName"] = p;
+            ViewBag.GroupName = p;
+
             return View();
         }
 
