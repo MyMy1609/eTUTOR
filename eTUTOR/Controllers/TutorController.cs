@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using eTUTOR.Models;
@@ -13,6 +14,7 @@ namespace eTUTOR.Controllers
         // GET: Tutor
         public ActionResult ListOfTutors()
         {
+
             var listTT = db.tutors.ToList();
             return View(listTT);
         }
@@ -35,6 +37,8 @@ namespace eTUTOR.Controllers
             var info = db.tutors.FirstOrDefault(x => x.tutor_id == id);
             List<session> sessionList = db.sessions.Where(x => x.tutor_id == tutor_id && x.status_admin == 2).ToList();
             ViewData["sessionlist"] = sessionList;
+            List<schedule> scheduleList = db.schedules.Where(x => x.tutor_id == tutor_id).ToList();
+            ViewData["scheduleList"] = scheduleList;
             return View(info);
         }
         [HttpGet]
@@ -125,6 +129,25 @@ namespace eTUTOR.Controllers
         }
         public ActionResult SessionOfTutor()
         {
+            return View();
+        }
+
+        public ActionResult CreateSchedule(schedule schedule)
+        {
+            schedule.status = 2;
+            schedule.tutor_id = int.Parse(Session["UserID"].ToString());
+            db.schedules.Add(schedule);
+            db.SaveChanges();
+            return RedirectToAction("InfoOfTutor", "Tutor", new { id = Session["UserID"] });
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteSchedule(int id)
+        {
+            schedule sch = db.schedules.Find(id);
+            db.schedules.Remove(sch);
+            db.SaveChanges();
             return View();
         }
 

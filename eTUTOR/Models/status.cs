@@ -17,6 +17,7 @@ namespace eTUTOR.Models
         public status()
         {
             this.parents = new HashSet<parent>();
+            this.schedules = new HashSet<schedule>();
             this.sessions = new HashSet<session>();
             this.sessions1 = new HashSet<session>();
             this.sessions2 = new HashSet<session>();
@@ -27,6 +28,7 @@ namespace eTUTOR.Models
         public string name { get; set; }
     
         public virtual ICollection<parent> parents { get; set; }
+        public virtual ICollection<schedule> schedules { get; set; }
         public virtual ICollection<session> sessions { get; set; }
         public virtual ICollection<session> sessions1 { get; set; }
         public virtual ICollection<session> sessions2 { get; set; }

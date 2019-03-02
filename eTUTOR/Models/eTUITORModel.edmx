@@ -111,8 +111,8 @@
           <Property Name="day_otw" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="start_time" Type="time" Precision="7" />
           <Property Name="end_time" Type="time" Precision="7" />
-          <Property Name="note" Type="nvarchar" MaxLength="50" />
-          <Property Name="status" Type="bit" />
+          <Property Name="note" Type="nvarchar(max)" />
+          <Property Name="status" Type="int" />
           <Property Name="tutor_id" Type="int" />
         </EntityType>
         <EntityType Name="sessions">
@@ -326,6 +326,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_schedule_status">
+          <End Role="status" Type="Self.status" Multiplicity="0..1" />
+          <End Role="schedules" Type="Self.schedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="status_id" />
+            </Principal>
+            <Dependent Role="schedules">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_schedule_tutor">
           <End Role="tutors" Type="Self.tutors" Multiplicity="0..1" />
           <End Role="schedules" Type="Self.schedules" Multiplicity="*" />
@@ -481,6 +493,10 @@
             <End Role="parents" EntitySet="parents" />
             <End Role="students" EntitySet="students" />
           </AssociationSet>
+          <AssociationSet Name="FK_schedule_status" Association="Self.FK_schedule_status">
+            <End Role="status" EntitySet="status" />
+            <End Role="schedules" EntitySet="schedules" />
+          </AssociationSet>
           <AssociationSet Name="FK_schedule_tutor" Association="Self.FK_schedule_tutor">
             <End Role="tutors" EntitySet="tutors" />
             <End Role="schedules" EntitySet="schedules" />
@@ -568,6 +584,10 @@
           <AssociationSet Name="FK_parent_student" Association="capstone2019Model.FK_parent_student">
             <End Role="parent" EntitySet="parents" />
             <End Role="student" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_schedule_status" Association="capstone2019Model.FK_schedule_status">
+            <End Role="status" EntitySet="status" />
+            <End Role="schedule" EntitySet="schedules" />
           </AssociationSet>
           <AssociationSet Name="FK_schedule_tutor" Association="capstone2019Model.FK_schedule_tutor">
             <End Role="tutor" EntitySet="tutors" />
@@ -724,9 +744,10 @@
           <Property Name="day_otw" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="start_time" Type="Time" Precision="7" />
           <Property Name="end_time" Type="Time" Precision="7" />
-          <Property Name="note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="Boolean" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" />
           <Property Name="tutor_id" Type="Int32" />
+          <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_schedule_status" FromRole="schedule" ToRole="status" />
           <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_schedule_tutor" FromRole="schedule" ToRole="tutor" />
         </EntityType>
         <EntityType Name="session">
@@ -759,6 +780,7 @@
           <Property Name="status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="parents" Relationship="capstone2019Model.FK_parent_status" FromRole="status" ToRole="parent" />
+          <NavigationProperty Name="schedules" Relationship="capstone2019Model.FK_schedule_status" FromRole="status" ToRole="schedule" />
           <NavigationProperty Name="sessions" Relationship="capstone2019Model.FK_session_status" FromRole="status" ToRole="session" />
           <NavigationProperty Name="sessions1" Relationship="capstone2019Model.FK_session_status_admin" FromRole="status" ToRole="session" />
           <NavigationProperty Name="sessions2" Relationship="capstone2019Model.FK_session_status_tutor" FromRole="status" ToRole="session" />
@@ -940,6 +962,18 @@
             </Principal>
             <Dependent Role="student">
               <PropertyRef Name="parent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_schedule_status">
+          <End Type="capstone2019Model.status" Role="status" Multiplicity="0..1" />
+          <End Type="capstone2019Model.schedule" Role="schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="status_id" />
+            </Principal>
+            <Dependent Role="schedule">
+              <PropertyRef Name="status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

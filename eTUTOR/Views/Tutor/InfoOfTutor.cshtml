@@ -4,7 +4,8 @@
     ViewBag.Title = "InfoOfTutor";
     Layout = "~/Views/Shared/_Layout.cshtml";
     eTUITOREntities db = new eTUITOREntities();
-    var sessionlist = ViewData["sessionlist"] as List<eTUTOR.Models.session>;
+    var sessionlist = ViewData["sessionlist"] as List<eTUTOR.Models.session>;  /*use for line 331*/
+    var scheduleList = ViewData["scheduleList"] as List<eTUTOR.Models.schedule>; /*use for line 437*/
 }
 
 
@@ -114,6 +115,7 @@
                     </tr>
                     <tr>
                         <td class="tdl"></td>
+                        @*Chỉnh sửa*@
                         <td>
                             <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#myModal"
                                     style="margin-left: 65%">
@@ -256,7 +258,7 @@
             <div>
                 <h3 style="border: 2px solid pink; border-radius: 10px; width: 900px;" class="p-3 pl-3">KÊNH GIA SƯ</h3>
                 <div id="demo-accordion-collapse" role="tablist">
-
+                    @*Danh sách buổi học*@
                     <div class="card" style="width: 900px">
                         <div class="card-header" role="tab" id="accord2" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 0px">
                             <h5 class="mb-0">
@@ -289,7 +291,7 @@
                             </div>
                         </div>
                     </div>
-
+                    @*Duyệt học sinh đăng ký học*@
                     <div class="card" style="width: 900px">
                         <div class="card-header" role="tab" id="accord3" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 13px; margin-top:10px">
                             <h5 class="mb-0">
@@ -361,7 +363,7 @@
                             </div>
                         </div>
                     </div>
-
+                    @*Quản lý lịch biểu*@
                     <div class="card" style="width: 900px">
                         <div class="card-header" role="tab" id="accord4" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 13px; margin-top:10px">
                             <h5 class="mb-0">
@@ -374,120 +376,150 @@
                              data-parent="#demo-accordion-collapse">
                             <div class="card-body row">
                                 <h6 class="ml-3"> <strong>Thêm buổi học</strong> </h6>
-                                <div class="row" style="margin-top:30px">
-                                    <div class="form-wrapper col-3">
-                                        <select name="" class="form-control" style=" border: 2px solid black ; width: 125px; border-radius:6px">
-                                            <option value="" disabled selected>Thứ</option>
-                                            <option value="1">Thứ 2</option>
-                                            <option value="2">Thứ 3</option>
-                                            <option value="3">Thứ 4</option>
-                                            <option value="4">Thứ 5</option>
-                                            <option value="5">Thứ 6</option>
-                                            <option value="6">Thứ 7</option>
-                                            <option value="7">Chủ nhật</option>
-                                        </select>
-                                        <br>
-                                        <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
-                                    </div>
-                                    <div class="col-3">
-                                        <input type="text" style="border-radius: 5px; border: 2px solid black; height: 65%; ; width: 120px"
-                                               placeholder="Thời gian học">
-                                    </div>
-                                    <div class="col-3">
-                                        <input type="datetime"
-                                               style="border-radius: 5px; border: 2px solid black; height: 65%; ; width: 120px"
-                                               placeholder="Lịch khai giảng">
-                                    </div>
-                                    <div class="col-2">
-                                        <input type="number"
-                                               style="border-radius: 5px; border: 2px solid black; height: 65%; ; width: 100px"
-                                               placeholder="Buổi học">
-
-                                    </div>
-                                    <div class="col-1">
-                                        <button class="btn btn-primary" style="background-color:blue; font-size:17px; color:white; border-radius: 100%">+</button>
-                                    </div>
-                                </div>
+                                <form action="/Tutor/CreateSchedule" method="post" onsubmit="return ">
+                                    <div class="row" style="margin-top:30px">
+                                        <div class="form-wrapper col-3">
+                                            <select name="day_otw" class="form-control" style=" width: 225px; border-radius:6px">
+                                                <option value="" disabled selected>Thứ</option>
+                                                <option value="Thứ 2">Thứ 2</option>
+                                                <option value="Thứ 3">Thứ 3</option>
+                                                <option value="Thứ 4">Thứ 4</option>
+                                                <option value="Thứ 5">Thứ 5</option>
+                                                <option value="Thứ 6">Thứ 6</option>
+                                                <option value="Thứ 7">Thứ 7</option>
+                                                <option value="Chủ nhật">Chủ nhật</option>
+                                            </select>
+                                            <br>
+                                            <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+                                        </div>
+                                        <div class="col-3">
+                                            <input type="text" name="start_time" style="border-radius: 5px;  height: 65%; width: 220px"
+                                                   placeholder="Giờ bắt đầu">
+                                        </div>
+                                        <div class="col-3">
+                                            <input type="datetime" name="end_time"
+                                                   style="border-radius: 5px; height: 65%; width: 220px"
+                                                   placeholder="Giờ kết thúc">
+                                        </div> <br />
+                                        <div >
+                                        <textarea rows="4" cols="93" name="note" form="usrform" style="border-radius: 5px; margin-left: 15px " placeholder="Chú thích"></textarea>
+                                            
+                                        </div>
+                                        <div class="form-wrapper col-3">
+                                            <div class="col-1">
+                                                <button type="submit"  id="btn-create-schedule" class="btn btn-primary" style="background-color:crimson;margin-top:30px; font-size:17px; color:white; border-radius: 100%">+</button>
+                                            </div>
+                                        </div>
+</form>
                                 <table class="table" style="text-align: center;">
-                                    <tr>
-                                        <th>
-                                            Thứ
-                                        </th>
-                                        <th>
-                                            Thời gian học
-                                        </th>
-                                        <th>
-                                            Lịch khai giảng
-                                        </th>
-                                        <th>
-                                            Buổi học
-                                        </th>
-                                        <th>
-                                            Tình trạng
-                                        </th>
-                                        <th>
-                                            Đăng kí
-                                        </th>
-                                        <th>
-                                            Thao tác
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            2
-                                        </td>
-                                        <td>
-                                            7h30 - 9h
-                                        </td>
-                                        <td>
-                                            1/2/2019
-                                        </td>
-                                        <td>
-                                            30
-                                        </td>
-                                        <td>
-                                            Chờ duyệt
-                                        </td>
-                                        <td>
-                                            <a href=""><i class="fa fa-check-square text-success"></i></a>
-                                        </td>
-                                        <td>
-                                            <a href="">
-                                                <i class="fa fa-window-close text-danger"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            2
-                                        </td>
-                                        <td>
-                                            7h30 - 9h
-                                        </td>
-                                        <td>
-                                            1/2/2019
-                                        </td>
-                                        <td>
-                                            30
-                                        </td>
-                                        <td>
-                                            -
-                                        </td>
-                                        <td>
-                                            <a href=""><i class="fa fa-check-square text-success"></i></a>
-                                        </td>
-                                        <td>
-                                            <a href="">
-                                                <i class="fa fa-window-close text-danger"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <th>
+                                                Thứ
+                                            </th>
+                                            <th>
+                                                Thời gian học
+                                            </th>
+                                            <th>
+                                                Trạng thái
+                                            </th>
 
-                                </table>
+                                            <th>
+                                                Xóa
+                                            </th>
+                                        </tr>
+                                        @foreach (var schedule in scheduleList)
+                                        {
+                                        <tr>
+                                            <td>
+                                                @schedule.day_otw
+                                            </td>
+                                            <td>
+                                                @schedule.start_time - @schedule.end_time
+                                            </td>
+
+                                            <td>
+                                                @schedule.status1.name
+                                            </td>
+
+                                            
+                                            <td>
+                                                <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#myModal1">
+                                                    <i class="fa fa-window-close text-danger"></i>
+                                                </button>
+                                                <div class="modal" id="myModal1">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title" style="margin-left: 30%">LỊCH BIỂU</h4>
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            </div>
+
+                                                            <div class="modal-body">
+                                                                <dl class="dl-horizontal">
+                                                                    
+                                                                        <dt>
+                                                                            Thứ
+                                                                        </dt>
+
+                                                                        <dd>
+                                                                            @schedule.day_otw
+                                                                        </dd>
+
+                                                                        <dt>
+                                                                            Thời gian
+                                                                        </dt>
+
+                                                                        <dd>
+                                                                            @schedule.start_time - @schedule.end_time
+                                                                        </dd>
+
+                                                                        <dt>
+                                                                            Mô tả
+                                                                        </dt>
+
+                                                                        <dd>
+                                                                            @schedule.note
+                                                                        </dd>
+
+                                                                        <dt>
+                                                                            Trạng thái
+                                                                        </dt>
+
+                                                                        <dd>
+                                                                            @schedule.status1.name
+                                                                        </dd>
+
+                                                                </dl>
+
+                                                                @using (Html.BeginForm())
+                                                                {
+                                                                    @Html.AntiForgeryToken()
+
+                                                                    <div class="form-actions no-color">
+                                                                        <input type="submit" value="Delete" class="btn btn-default" data-dismiss="modal"/> |
+                                                                    </div>
+                                                                }
+                                                            </div>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        }
+
+
+
+                                    </table>
                             </div>
                         </div>
                     </div>
-
+                    @*lịch sử dạy học*@
                     <div class="card" style="width: 900px">
                         <div class="card-header mt-2" role="tab" id="accord6" style="border-radius: 10px; background-color: indianred; font-size: 20px; padding-left: 10px; padding-bottom: 15px">
                             <h5 class="mb-0">

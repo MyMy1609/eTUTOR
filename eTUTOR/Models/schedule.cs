@@ -19,9 +19,10 @@ namespace eTUTOR.Models
         public Nullable<System.TimeSpan> start_time { get; set; }
         public Nullable<System.TimeSpan> end_time { get; set; }
         public string note { get; set; }
-        public Nullable<bool> status { get; set; }
+        public Nullable<int> status { get; set; }
         public Nullable<int> tutor_id { get; set; }
     
+        public virtual status status1 { get; set; }
         public virtual tutor tutor { get; set; }
     }
 }

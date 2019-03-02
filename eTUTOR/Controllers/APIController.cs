@@ -89,11 +89,11 @@ namespace eTUTOR.Controllers
             List<session> sessionApproved;
             if (day == "all")
             {
-                sessionApproved = db.sessions.Where(m => m.tutor_id == tutor_id && m.status_admin == 2).ToList();
+                sessionApproved = db.sessions.Where(m => m.tutor_id == tutor_id && m.status_admin == 1).ToList();
             }
             else
             {
-                sessionApproved = db.sessions.Where(m => m.day_otw == day && m.tutor_id == tutor_id && m.status_admin == 2).ToList();
+                sessionApproved = db.sessions.Where(m => m.day_otw == day && m.tutor_id == tutor_id && m.status_admin == 1).ToList();
             }
             ViewData["sessionapproved"] = sessionApproved;
             return PartialView("SessionApproved");
