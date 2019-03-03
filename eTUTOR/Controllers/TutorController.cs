@@ -107,7 +107,49 @@ namespace eTUTOR.Controllers
             return RedirectToAction("Login", "User");
 
         }
-        
+        public ActionResult ddd()
+        {
+            var schh = db.schedules.FirstOrDefault(x => x.schedule_id == 3);
+            session newss = new session();
+            newss.day_otw = schh.day_otw;
+            newss.start_time = schh.start_time;
+            newss.end_time = schh.end_time;
+            newss.@class = "10";
+            newss.student_id = 12;
+            newss.tutor_id = 4;
+            newss.total_sessions = 10;
+            newss.subject_id = 5;
+            newss.status_admin = 2;
+            newss.status_tutor = 2;
+            newss.status_id = 2;
+            db.sessions.Add(newss);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+
+        }
+        public ActionResult SessionOfTutor(string p)
+        {
+            ViewData["IsNewGroup"] = false;
+            if (string.IsNullOrWhiteSpace(p))
+            {
+                //Guid g = Guid.NewGuid();
+                //p = Convert.ToBase64String(g.ToByteArray());
+                //p = p.Replace("=", "");
+                //p = p.Replace("+", "");
+                p = "demo";
+                ViewData["IsNewGroup"] = true;
+                ViewData["url"] = "http://localhost:52781/Student/SessionOfStudent?p=" + p;
+            }
+            else
+            {
+                ViewData["url"] = "http://localhost:52781/Student/SessionOfStudent";
+            }
+
+            ViewData["GroupName"] = p;
+            ViewBag.GroupName = p;
+
+            return View();
+        }
         public ActionResult SessionOfTutor()
         {
             return View();

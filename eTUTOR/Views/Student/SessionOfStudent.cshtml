@@ -1,7 +1,53 @@
 ﻿
 @{
     ViewBag.Title = "SessionOfStudent";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
-<h2 style="margin-top:90px;margin-left:35%;margin-bottom:400px; color:crimson">BUỔI HỌC CỦA HỌC SINH</h2>
-
+@*<h2 style="margin-top:90px;margin-left:35%;margin-bottom:400px; color:crimson">BUỔI HỌC CỦA HỌC SINH</h2>*@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Etutor</title>
+    <!-- Latest compiled and minified CSS -->
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">*@
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <base href="/">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="wb">
+                <div class="text-center">WHITE BOARD</div>
+                @*<a href="@ViewData["url"]" target="_blank">@ViewData["url"]</a>*@
+                <div id="container">
+                    <canvas id="whiteBoard" class="mr-5"></canvas>
+                    <div id="status"></div>
+                </div>
+                <div class="container-cam">
+                    <div class="mr-5">
+                        <canvas id="streamVideo"></canvas>
+                        <audio id="localAudio" autoplay></audio>
+                        <audio id="remoteAudio" autoplay></audio>
+                        <div class="input-group">
+                            <button id="stopStream" class="btn btn-danger" type="button">Stop Cam 0</button>
+                        </div>
+                    </div>
+                    <input type="hidden" id="sessinId" value="@Session.SessionID" />
+                    <input type="hidden" id="groupName" value="@ViewData["GroupName"]" />
+                </div>
+            </div>
+        </div><br />
+    </div>
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
+    <script type="text/javascript" src="~/signalr/hubs"></script>
+    <script type="text/javascript" src="~/Scripts/whiteboard.js"></script>
+    <script type="text/javascript" src="~/Scripts/peer.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jsmpg.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/main_send.js"></script>
+</body>
+</html>

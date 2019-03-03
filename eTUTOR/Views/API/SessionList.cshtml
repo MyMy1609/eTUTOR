@@ -46,7 +46,7 @@
                     @session.total_sessions
                 </td>
                 <td>
-                    <a href="@Url.Action("SessionOfStudent","Student")">
+                    <a href="@Url.Action("SessionOfStudent","Student", new { p = @session.session_id })")">
                         <img src="https://static.thenounproject.com/png/6076-200.png" width="30" height="30">
                     </a>
                 </td>

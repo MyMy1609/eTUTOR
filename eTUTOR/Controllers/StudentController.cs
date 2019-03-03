@@ -23,8 +23,27 @@ namespace eTUTOR.Controllers
             var listCourse = db.sessions.ToList().Where(x => x.status_tutor == 2 && x.student_id == prt.student_id);
             return View(listCourse);
         }
-        public ActionResult SessionOfStudent()
+        public ActionResult SessionOfStudent(string p)
         {
+            ViewData["IsNewGroup"] = false;
+            if (string.IsNullOrWhiteSpace(p))
+            {
+                //Guid g = Guid.NewGuid();
+                //p = Convert.ToBase64String(g.ToByteArray());
+                //p = p.Replace("=", "");
+                //p = p.Replace("+", "");
+                p = "demo";
+                ViewData["IsNewGroup"] = true;
+                ViewData["url"] = Request.Url.AbsoluteUri.ToString();
+            }
+            else
+            {
+                ViewData["url"] = Request.Url.AbsoluteUri.ToString();
+            }
+
+            ViewData["GroupName"] = p;
+            ViewBag.GroupName = p;
+
             return View();
         }
     }
