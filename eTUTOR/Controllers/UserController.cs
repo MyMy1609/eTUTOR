@@ -99,7 +99,7 @@ namespace eTUTOR.Controllers
                 {
                     Session["FullName"] = tutor.fullname;
                     Session["UserID"] = tutor.tutor_id;
-
+                    Session["Role"] = "tutor";
                     return RedirectToAction("InfoOfTutor", "Tutor", new { id = Session["UserID"] });
                 }
             }
@@ -109,7 +109,7 @@ namespace eTUTOR.Controllers
                 {
                     Session["FullName"] = student.fullname;
                     Session["UserID"] = student.student_id;
-
+                    Session["Role"] = "student";
                     return RedirectToAction("InfoOfStudent", "Student", new { id = Session["UserID"] });
                 }
             }
@@ -119,7 +119,7 @@ namespace eTUTOR.Controllers
                 {
                     Session["FullName"] = parent.fullname;
                     Session["UserID"] = parent.parent_id;
-
+                    Session["Role"] = "parent";
                     return RedirectToAction("InfoOfParent", "Parent");
                 }
             }
@@ -130,15 +130,13 @@ namespace eTUTOR.Controllers
             return View();
         }
 
-        public ActionResult Logout(int id)
+        public ActionResult Logout()
         {
-            var user = model.tutors.FirstOrDefault(x => x.tutor_id == id);
-            if (user != null)
-            {
-                Session["FullName"] = null;
-                Session["UserID"] = null;
-            }
+            Session.Remove("FullName");
+            Session.Remove("UserID");
+            Session.Remove("Role");
             return RedirectToAction("Login");
         }
+        
     }
 }

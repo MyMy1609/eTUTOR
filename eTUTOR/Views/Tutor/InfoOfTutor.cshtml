@@ -323,9 +323,7 @@
                                         <th>
                                             Admin
                                         </th>
-                                        <th>
-                                            Tutor
-                                        </th>
+                                        
                                         <th>
                                             Duyệt
                                         </th>
@@ -348,9 +346,7 @@
                                             <td>
                                                 @session.status1.name
                                             </td>
-                                            <td>
-                                                @session.status2.name
-                                            </td>
+                                            
                                             <td>
                                                 
                                                 <label class="switch">
@@ -414,110 +410,107 @@
                                         </div>
 </form>
                                 <table class="table" style="text-align: center;">
-                                        <tr>
-                                            <th>
-                                                Thứ
-                                            </th>
-                                            <th>
-                                                Thời gian học
-                                            </th>
-                                            <th>
-                                                Trạng thái
-                                            </th>
+                                    <tr>
+                                        <th>
+                                            Thứ
+                                        </th>
+                                        <th>
+                                            Thời gian học
+                                        </th>
+                                        <th>
+                                            Trạng thái
+                                        </th>
 
-                                            <th>
-                                                Xóa
-                                            </th>
-                                        </tr>
-                                        @foreach (var schedule in scheduleList)
-                                        {
-                                        <tr>
-                                            <td>
-                                                @schedule.day_otw
-                                            </td>
-                                            <td>
-                                                @schedule.start_time - @schedule.end_time
-                                            </td>
+                                        <th>
+                                            Xóa
+                                        </th>
+                                    </tr>
+                                    @foreach (var schedule in scheduleList)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @schedule.day_otw
+                                        </td>
+                                        <td>
+                                            @schedule.start_time - @schedule.end_time
+                                        </td>
 
-                                            <td>
-                                                @schedule.status1.name
-                                            </td>
+                                        <td>
+                                            @schedule.status1.name
+                                        </td>
 
-                                            
-                                            <td>
-                                                <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#myModal1">
-                                                    <i class="fa fa-window-close text-danger"></i>
-                                                </button>
-                                                <div class="modal" id="myModal1">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
 
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title" style="margin-left: 30%">LỊCH BIỂU</h4>
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            </div>
+                                        <td>
+                                            <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#myModal1">
+                                                <i class="fa fa-window-close text-danger"></i>
+                                            </button>
+                                            <div class="modal" id="myModal1">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
 
-                                                            <div class="modal-body">
-                                                                <dl class="dl-horizontal">
-                                                                    
-                                                                        <dt>
-                                                                            Thứ
-                                                                        </dt>
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" style="margin-left: 30%">LỊCH BIỂU</h4>
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
 
-                                                                        <dd>
-                                                                            @schedule.day_otw
-                                                                        </dd>
+                                                        <div class="modal-body">
+                                                            <dl class="dl-horizontal">
 
-                                                                        <dt>
-                                                                            Thời gian
-                                                                        </dt>
+                                                                <dt>
+                                                                    Thứ
+                                                                </dt>
 
-                                                                        <dd>
-                                                                            @schedule.start_time - @schedule.end_time
-                                                                        </dd>
+                                                                <dd>
+                                                                    @schedule.day_otw
+                                                                </dd>
 
-                                                                        <dt>
-                                                                            Mô tả
-                                                                        </dt>
+                                                                <dt>
+                                                                    Thời gian
+                                                                </dt>
 
-                                                                        <dd>
-                                                                            @schedule.note
-                                                                        </dd>
+                                                                <dd>
+                                                                    @schedule.start_time - @schedule.end_time
+                                                                </dd>
 
-                                                                        <dt>
-                                                                            Trạng thái
-                                                                        </dt>
+                                                                <dt>
+                                                                    Mô tả
+                                                                </dt>
 
-                                                                        <dd>
-                                                                            @schedule.status1.name
-                                                                        </dd>
+                                                                <dd>
+                                                                    @schedule.note
+                                                                </dd>
 
-                                                                </dl>
+                                                                <dt>
+                                                                    Trạng thái
+                                                                </dt>
 
-                                                                @using (Html.BeginForm())
-                                                                {
-                                                                    @Html.AntiForgeryToken()
+                                                                <dd>
+                                                                    @schedule.status1.name 
+                                                                </dd>
 
-                                                                    <div class="form-actions no-color">
-                                                                        <input type="submit" value="Delete" class="btn btn-default" data-dismiss="modal"/> |
-                                                                    </div>
-                                                                }
-                                                            </div>
+                                                            </dl>
 
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
-                                                            </div>
+
 
                                                         </div>
+
+                                                        <div class="modal-footer">
+                                                            @Html.ActionLink("Delete", "DeleteSchedule", "Tutor", new { @id = schedule.schedule_id })
+
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
+                                                        </div>
+
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                      
+                                    }
 
 
 
-                                    </table>
+                                </table>
                             </div>
                         </div>
                     </div>

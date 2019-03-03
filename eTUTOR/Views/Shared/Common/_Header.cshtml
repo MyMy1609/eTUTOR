@@ -1,4 +1,22 @@
-﻿<header class="menu" once="menu">
+﻿@{ 
+    var userRole = Session["Role"] != null ? Session["Role"].ToString() : "";
+    var InfoHref="";
+    var userId = Session["UserID"] != null ? Session["UserID"].ToString() : "";
+    if (userRole == "tutor")
+    {
+        InfoHref = Url.Action("InfoOfTutor", "Tutor", new { id = userId });
+    }
+    else if(userRole == "parent")
+    {
+        InfoHref = Url.Action("InfoOfParent", "Parent", new { id = userId });
+    }
+    else if (userRole == "student")
+    {
+        InfoHref = Url.Action("InfoOfStudent", "Student", new { id = userId });
+    }
+}
+
+<header class="menu" once="menu">
     <nav class="navbar navbar-expand-md  navbar-dropdown align-items-center navbar-dark nav--dark">
         <div class="menu-logo">
             <div class="navbar-brand">
@@ -59,10 +77,9 @@
                             @Session["FullName"]
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="nav-item p-2" href="#">Thông tin cá nhân</a>
-
+                            <a class="nav-item p-2" href="@InfoHref">Thông tin cá nhân</a>
                             <div class="dropdown-divider"></div>
-                            <a class="nav-item p-2" href="/User/Logout/@Session["UserID"]">Đăng xuất</a>
+                            <a class="nav-item p-2" href="/User/Logout">Đăng xuất</a>
                         </div>
                     </li>
 

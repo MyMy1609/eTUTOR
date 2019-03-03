@@ -35,7 +35,7 @@ namespace eTUTOR.Controllers
         {
             var tutor_id = int.Parse(Session["UserID"].ToString());
             var info = db.tutors.FirstOrDefault(x => x.tutor_id == id);
-            List<session> sessionList = db.sessions.Where(x => x.tutor_id == tutor_id && x.status_admin == 2).ToList();
+            List<session> sessionList = db.sessions.Where(x => x.tutor_id == tutor_id && x.status_admin == 2 ).ToList();
             ViewData["sessionlist"] = sessionList;
             List<schedule> scheduleList = db.schedules.Where(x => x.tutor_id == tutor_id).ToList();
             ViewData["scheduleList"] = scheduleList;
@@ -107,26 +107,7 @@ namespace eTUTOR.Controllers
             return RedirectToAction("Login", "User");
 
         }
-        public ActionResult ddd()
-        {
-            var schh = db.schedules.FirstOrDefault(x => x.schedule_id == 3);
-            session newss = new session();
-            newss.day_otw = schh.day_otw;
-            newss.start_time = schh.start_time;
-            newss.end_time = schh.end_time;
-            newss.@class = "10";
-            newss.student_id = 12;
-            newss.tutor_id = 4;
-            newss.total_sessions = 10;
-            newss.subject_id = 5;
-            newss.status_admin = 2;
-            newss.status_tutor = 2;
-            newss.status_id = 2;
-            db.sessions.Add(newss);
-            db.SaveChanges();
-            return RedirectToAction("Index", "Home");
-
-        }
+        
         public ActionResult SessionOfTutor()
         {
             return View();
@@ -141,14 +122,12 @@ namespace eTUTOR.Controllers
             return RedirectToAction("InfoOfTutor", "Tutor", new { id = Session["UserID"] });
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteSchedule(int id)
         {
-            schedule sch = db.schedules.Find(id);
+            schedule sch = db.schedules.Single(x => x.schedule_id == id);
             db.schedules.Remove(sch);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("InfoOfTutor", "Tutor", new { id = Session["UserID"] });
         }
 
         public ActionResult SearchTutor(string search)

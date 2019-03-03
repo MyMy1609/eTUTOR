@@ -10,7 +10,7 @@ namespace eTUTOR.Controllers
     public class StudentController : Controller
     {
         eTUITOREntities db = new eTUITOREntities();
-        // GET: Student
+        // GETA : Student
         public ActionResult InfoOfStudent(int id)
         {
             var info = db.students.FirstOrDefault(x => x.student_id == id);
