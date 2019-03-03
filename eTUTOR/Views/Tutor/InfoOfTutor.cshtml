@@ -420,13 +420,13 @@
                                         <th>
                                             Trạng thái
                                         </th>
-
                                         <th>
                                             Xóa
                                         </th>
                                     </tr>
-                                    @foreach (var schedule in scheduleList)
-                                    {
+                                     @foreach (var schedule in scheduleList)
+                                     {
+
                                     <tr>
                                         <td>
                                             @schedule.day_otw
@@ -439,12 +439,12 @@
                                             @schedule.status1.name
                                         </td>
 
-
+                                        
                                         <td>
-                                            <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#myModal1">
-                                                <i class="fa fa-window-close text-danger"></i>
+                                            <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#a-@schedule.schedule_id" >
+<i class="fa fa-window-close text-danger"></i>
                                             </button>
-                                            <div class="modal" id="myModal1">
+                                            <div class="modal" id="a-@schedule.schedule_id">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
 
@@ -461,7 +461,7 @@
                                                                 </dt>
 
                                                                 <dd>
-                                                                    @schedule.day_otw
+                                                                    @schedule.day_otw 
                                                                 </dd>
 
                                                                 <dt>
@@ -484,7 +484,7 @@
                                                                     Trạng thái
                                                                 </dt>
 
-                                                                <dd>
+                                                                <dd id="nameSch">
                                                                     @schedule.status1.name 
                                                                 </dd>
 
@@ -495,7 +495,7 @@
                                                         </div>
 
                                                         <div class="modal-footer">
-                                                            @Html.ActionLink("Delete", "DeleteSchedule", "Tutor", new { @id = schedule.schedule_id })
+                                                            @Html.ActionLink("Delete", "DeleteSchedule", "Tutor", new {  id  = schedule.schedule_id  },null)
 
                                                             <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
                                                         </div>
@@ -506,7 +506,7 @@
                                         </td>
                                     </tr>
                                       
-                                    }
+                                      }
 
 
 
@@ -632,8 +632,10 @@
                 success: function (response) {
                     $('#sessionapproved').html(response)
                 }
-            });
+        });
+
         }
+        
     </script>
 }
 <!--   Core JS Files   -->

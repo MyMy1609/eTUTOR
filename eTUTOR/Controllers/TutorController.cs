@@ -151,6 +151,7 @@ namespace eTUTOR.Controllers
             return View();
         }
 
+        
         public ActionResult CreateSchedule(schedule schedule)
         {
             schedule.status = 2;
@@ -159,7 +160,8 @@ namespace eTUTOR.Controllers
             db.SaveChanges();
             return RedirectToAction("InfoOfTutor", "Tutor", new { id = Session["UserID"] });
         }
-
+       
+        
         public ActionResult DeleteSchedule(int id)
         {
             schedule sch = db.schedules.Single(x => x.schedule_id == id);
