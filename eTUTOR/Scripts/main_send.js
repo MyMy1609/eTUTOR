@@ -39,8 +39,12 @@
     }
     
     function initialize() {
-        // Create own peer object with connection to shared PeerJS server
-        peer = new Peer(null, { key: 'lwjd5qra8257b9' });
+        peer = new Peer(null, {
+            host: "localhost",
+            port: "9000",
+            path: "/",
+            secure: false,
+        });
 
         peer.on('open', function (id) {
             const whiteboard = document.getElementById("whiteBoard");
@@ -77,7 +81,13 @@
             console.log(err);
         });
     };
-    
+
+    /**
+     * Create the connection between the two Peers.
+     *
+     * Sets up callbacks that handle any events related to the
+     * connection and data received on it.
+     */
     function join() {
         // Close old connection
         if (conn) {
@@ -134,7 +144,7 @@
     // Send message
     function startStream() {
         if (conn.open) {
-            const client_send = new WebSocket(`ws://localhost:7000/live?cam=0&course=${course_id}`);
+            const client_send = new WebSocket(`ws://localhost:8081/live?cam=0&course=${course_id}`);
             player_send = new jsmpeg(client_send, { canvas: canvas_send });
             client_send.onmessage = (event) => {
                 conn.send(event.data);

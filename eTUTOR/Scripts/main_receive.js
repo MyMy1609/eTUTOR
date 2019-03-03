@@ -44,7 +44,12 @@
 
     function initialize() {
         
-        peer = new Peer(course_id, { key: 'lwjd5qra8257b9' });
+        peer = new Peer(course_id, {
+            host: "localhost",
+            port: "9000",
+            path: "/",
+            secure: false,
+        });
 
         peer.on('open', function (id) {
             
@@ -55,7 +60,7 @@
                 lastPeerId = peer.id;
             }
 
-            client_receive = new WebSocket(`ws://localhost:7000/live`);
+            client_receive = new WebSocket(`ws://localhost:8081/live`);
             player_receive = new jsmpeg(client_receive, { canvas: canvas_receive });
 
             console.log('ID: ' + peer.id);
@@ -97,6 +102,10 @@
         });
     };
 
+    /**
+     * Triggered once a connection has been achieved.
+     * Defines callbacks to handle incoming data and connection events.
+     */
     function ready() {
         current_connect_cam.classList.add("circle__green");
         current_connect_text.innerText = " (Online) ";
