@@ -1,10 +1,10 @@
 (function () {
 
     var lastPeerId = null;
-    var peer = null; // own peer object
+    var peer = null;
     var conn = null;
-    let player1 = null;
-    const canvas1 = document.getElementById("streamVideo");
+    let player_send = null;
+    const canvas_send = document.getElementById("streamVideo");
     const stopStream = document.getElementById("stopStream");
     const ws_url = location.origin.replace(/^http/, 'ws');
 
@@ -18,7 +18,6 @@
     }
 
     const course_id = getParameterByName('p');
-
 
     navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia ||
         navigator.mediaDevices.webkitGetUserMedia ||
@@ -38,21 +37,10 @@
         audio.srcObject = stream;
         audio.play();
     }
-
-    /**
-     * Create the Peer object for our end of the connection.
-     *
-     * Sets up callbacks that handle any events related to our
-     * peer object.
-     */
+    
     function initialize() {
         // Create own peer object with connection to shared PeerJS server
-        peer = new Peer(null, {
-            host: "localhost",
-            port: "9000",
-            path: "/",
-            secure: false,
-        });
+        peer = new Peer(null, { key: 'lwjd5qra8257b9' });
 
         peer.on('open', function (id) {
             const whiteboard = document.getElementById("whiteBoard");
@@ -89,13 +77,7 @@
             console.log(err);
         });
     };
-
-    /**
-     * Create the connection between the two Peers.
-     *
-     * Sets up callbacks that handle any events related to the
-     * connection and data received on it.
-     */
+    
     function join() {
         // Close old connection
         if (conn) {
@@ -119,8 +101,7 @@
         });
         // Handle incoming data (messages only since this is the signal sender)
         conn.on('data', function (data) {
-            alert(data);
-            // addMessage("<span class=\"peerMsg\">Peer:</span> " + data);
+            console.log(data);
         });
         conn.on('close', function () {
             // status.innerHTML = "Connection closed";
@@ -145,19 +126,19 @@
     };
 
     function stopStreams() {
-        player1.stop();
+        player_send.stop();
         conn.close();
-        window.location.href = "/";
+        window.history.back();
     };
 
     // Send message
     function startStream() {
         if (conn.open) {
-            const client1 = new WebSocket(`ws://192.168.1.11:7000/live?cam=0&course=${course_id}`);
-            player1 = new jsmpeg(client1, { canvas: canvas1 });
-            client1.onmessage = (event) => {
+            const client_send = new WebSocket(`ws://localhost:7000/live?cam=0&course=${course_id}`);
+            player_send = new jsmpeg(client_send, { canvas: canvas_send });
+            client_send.onmessage = (event) => {
                 conn.send(event.data);
-                player1.receiveSocketMessage(event);
+                player_send.receiveSocketMessage(event);
             }
             // Caller
             openAudio()
@@ -180,8 +161,6 @@
             peer.destroy();
         }
     };
-    // Start peer connection on click
-    // connectButton.addEventListener('click', join);
 
     // Since all our callbacks are setup, start the process of obtaining an ID
     initialize();

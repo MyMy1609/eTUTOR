@@ -243,6 +243,7 @@
     <Compile Include="SignalRhub\whiteboardHub.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\build\css\css-plugin-collections.css" />
     <Content Include="Content\build\css\flaticon.css" />
     <Content Include="Content\build\css\InfoOfParent.css" />

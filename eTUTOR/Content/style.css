@@ -3,10 +3,27 @@ canvas#streamVideo {
     width: 100% !important;
     height: 25% !important;
 }.wb{width:100%!important;height:calc(50vh/2)!important;}
+.current_connect {
+    width: 15px;
+    height: 15px;
+    top: 2px;
+    right: 2px;
+    background-color: #ddd;
+}
+.circle__item {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #929b92;
+    border-radius: 100%;
+    display: inline-block;
+}
+.circle__green {
+    background-color: #18dc18;
+}
 body {
     font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
     background-color: white;
-	min-width: 450px;
+    min-width: 450px;
 }
 
 h1 {

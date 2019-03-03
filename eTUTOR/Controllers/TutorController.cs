@@ -150,10 +150,6 @@ namespace eTUTOR.Controllers
 
             return View();
         }
-        public ActionResult SessionOfTutor()
-        {
-            return View();
-        }
 
         public ActionResult CreateSchedule(schedule schedule)
         {

@@ -3,11 +3,13 @@
     "use strict";
 
     var lastPeerId = null;
-    var peer = null; // Own peer object
+    var peer = null; 
     var conn = null;
-    var client1 = null;
-    var player1 = null;
-    const canvas1 = document.getElementById("streamVideo");
+    var client_receive = null;
+    var player_receive = null;
+    var current_connect_cam = document.getElementById("current_connect");
+    var current_connect_text = document.getElementById("current_connect_text");
+    const canvas_receive = document.getElementById("streamVideo");
     const ws_url = location.origin.replace(/^http/, 'ws');
 
     function getParameterByName(name, url) {
@@ -40,23 +42,12 @@
         audio.play();
     }
 
-    /**
-     * Create the Peer object for our end of the connection.
-     *
-     * Sets up callbacks that handle any events related to our
-     * peer object.
-     */
     function initialize() {
-        // Create own peer object with connection to shared PeerJS server
-        peer = new Peer(course_id, {
-            host: "localhost",
-            port: "9000",
-            path: "/",
-            secure: false,
-        });
+        
+        peer = new Peer(course_id, { key: 'lwjd5qra8257b9' });
 
         peer.on('open', function (id) {
-            // Workaround for peer.reconnect deleting previous id
+            
             if (peer.id === null) {
                 console.log('Received null id from peer open');
                 peer.id = lastPeerId;
@@ -64,8 +55,8 @@
                 lastPeerId = peer.id;
             }
 
-            client1 = new WebSocket(`ws://192.168.1.11:7000/live`);
-            player1 = new jsmpeg(client1, { canvas: canvas1 });
+            client_receive = new WebSocket(`ws://localhost:7000/live`);
+            player_receive = new jsmpeg(client_receive, { canvas: canvas_receive });
 
             console.log('ID: ' + peer.id);
             // recvId.innerHTML = "ID: " + peer.id;
@@ -106,11 +97,15 @@
         });
     };
 
-    /**
-     * Triggered once a connection has been achieved.
-     * Defines callbacks to handle incoming data and connection events.
-     */
     function ready() {
+        current_connect_cam.classList.add("circle__green");
+        current_connect_text.innerText = " (Online) ";
+        conn.on('data', function (data) {
+            const obj = new Object();
+            obj.data = data;
+            player_receive.receiveSocketMessage(obj);
+        });
+
         //Answer
         peer.on('call', call => {
             openAudio()
@@ -122,16 +117,12 @@
                 .catch(err => console.log(err));
         });
 
-        conn.on('data', function (data) {
-            const obj = new Object();
-            obj.data = data;
-            player1.receiveSocketMessage(obj);
-        });
-
         conn.on('close', function () {
-            ImgForClose();
-            alert(conn.peer + ' has left the room');
+            current_connect_cam.classList.remove("circle__green");
+            current_connect_text.innerText = " (Offline) ";
+            //alert(conn.peer + ' has left the room');
             conn = null;
+            ImgForClose();
         });
     }
 
