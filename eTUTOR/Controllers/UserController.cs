@@ -123,7 +123,7 @@ namespace eTUTOR.Controllers
                     Session["UserID"] = parent.parent_id;
                     Session["username"] = parent.username;
                     Session["Role"] = "parent";
-                    return RedirectToAction("InfoOfParent", "Parent");
+                    return RedirectToAction("InfoOfParent", "Parent", new { id = Session["UserID"] });
                 }
             }
             else

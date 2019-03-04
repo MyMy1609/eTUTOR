@@ -11,9 +11,10 @@ namespace eTUTOR.Controllers
     {
         eTUITOREntities db = new eTUITOREntities();
         // GET: Parent
-        public ActionResult InfoOfParent()
+        public ActionResult InfoOfParent(int id)
         {
-            return View();
+            var info = db.parents.FirstOrDefault(x => x.parent_id == id);
+            return View(info);
         }
         public ActionResult listPr()
         {

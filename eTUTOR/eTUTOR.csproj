@@ -705,6 +705,7 @@
     <Content Include="Views\Student\SessionOfStudent.cshtml" />
     <Content Include="Views\Tutor\SearchTutor.cshtml" />
     <Content Include="Scripts\jsmpg.min.js.map" />
+    <Content Include="Views\API\SessionTutorList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

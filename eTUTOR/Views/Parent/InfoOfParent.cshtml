@@ -1,7 +1,9 @@
-﻿
+﻿@model eTUTOR.Models.parent
+@using eTUTOR.Models;
 @{
     ViewBag.Title = "InfoOfParent";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    eTUITOREntities db = new eTUITOREntities();
 }
 
 @section css{
@@ -27,27 +29,19 @@
 
     <div class="container row">
         <div class="left col-4">
-            <img src="~/Content/img/teacher/1.png" class="ml-4 mt-4" height="250px" width="250px"
+            <img src="~/Content/img/avatar/parent/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height="250px" width="250px"
                  alt="avatar" style="border-radius: 20%;margin-top: 0px;">
             <a href="#" style="display: inline-block">
                 <!-- <img src="https://cdn3.iconfinder.com/data/icons/block/32/box_edit-512.png" width="30px" height="30px"></a> -->
 
-                <div class="namepro ml-4" style="text-align: center;">Nguyễn Ngọc Ngân</div>
+                <div class="namepro ml-4" style="text-align: center;">@Html.DisplayFor(model => model.fullname)</div>
                 <table class="table">
-                    <tr>
-                        <td class="tdl">
-                            Họ và tên
-                        </td>
-                        <td class="tdr">
-                            Nguyễn Ngọc Ngân
-                        </td>
-                    </tr>
                     <tr>
                         <td class="tdl">
                             Tên đăng nhập
                         </td>
                         <td class="tdr">
-                            ngannguyen
+                            @Html.DisplayFor(model => model.username)
                         </td>
                     </tr>
                     <tr>
@@ -55,7 +49,7 @@
                             Địa chỉ
                         </td>
                         <td class="tdr">
-                            69 Trần Duy Hưng, Cầu Giấy, Hà Nội
+                            @Html.DisplayFor(model => model.address)
                         </td>
                     </tr>
 
@@ -64,7 +58,7 @@
                             Số điện thoại
                         </td>
                         <td class="tdr">
-                            094673874624
+                            @Html.DisplayFor(model => model.phone)
                         </td>
                     </tr>
                     <tr>
@@ -72,7 +66,7 @@
                             Email
                         </td>
                         <td class="tdr">
-                            ngannguyen193@gmail.com
+                            @Html.DisplayFor(model => model.email)
                         </td>
                     </tr>
                     <tr>
@@ -153,13 +147,13 @@
         </div>
         <div class="right col-6">
             <div>
-                <h3 style="border: 2px solid pink; border-radius: 10px; width: 948px;" class="p-3 pl-3">KÊNH HỌC SINH</h3>
+                <h3 style="border: 2px solid pink; border-radius: 10px; width: 948px;" class="p-3 pl-3">KÊNH PHỤ HUYNH</h3>
                 <div id="demo-accordion-collapse" role="tablist">
 
                     <div class="card" style="width: 900px">
                         <div class="card-header" role="tab" id="accord2" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 0px">
                             <h5 class="mb-0">
-                                <a class="collapsed" data-toggle="collapse" href="#collapse-pane-2" role="button" aria-expanded="false" aria-controls="collapse-pane-2">
+                                <a class="collapsed" data-toggle="collapse" href="#collapse-pane-2" role="button" aria-expanded="false" aria-controls="collapse-pane-2" style="font-size:20px" style="font-size:20px">
                                     Danh sách buổi học
                                 </a>
                             </h5>
@@ -167,59 +161,27 @@
                         <div id="collapse-pane-2" class="collapse" role="tabpanel" aria-labelledby="accord2"
                              data-parent="#demo-accordion-collapse">
                             <div class="card-body">
+
                                 <div class="form-wrapper pb-3">
-                                    <select name="" id="" class="form-control"
+                                    <select name="" id="select-dotw" class="form-control"
                                             style="border: none; border: 2px solid black; width: 30%; margin-left: 70%">
                                         <option value="" disabled selected>Chọn thứ cần lọc</option>
-                                        <option value="1">Thứ 2</option>
-                                        <option value="2">Thứ 3</option>
-                                        <option value="3">Thứ 4</option>
-                                        <option value="4">Thứ 5</option>
-                                        <option value="5">Thứ 6</option>
-                                        <option value="6">Thứ 7</option>
-                                        <option value="7">Chủ nhật</option>
+                                        <option value="-1">Chọn hết</option>
+                                        <option value="2">Thứ 2</option>
+                                        <option value="3">Thứ 3</option>
+                                        <option value="4">Thứ 4</option>
+                                        <option value="5">Thứ 5</option>
+                                        <option value="6">Thứ 6</option>
+                                        <option value="7">Thứ 7</option>
+                                        <option value="8">Chủ nhật</option>
                                     </select>
                                     <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
-                                </div>
-                                <table class="table" style="text-align: center;">
-                                    <tr>
-                                        <th>
-                                            Thứ
-                                        </th>
-                                        <th>
-                                            Thời gian học
-                                        </th>
-                                        <th>
-                                            Gia sư
-                                        </th>
-                                        <th>
-                                            Tổng buổi đã học
-                                        </th>
-                                        <th>
-                                            Vào học
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Thứ 2
-                                        </td>
-                                        <td>
-                                            7h30 - 9h
-                                        </td>
-                                        <td>
-                                            Mr.Hùng
-                                        </td>
-                                        <td>
-                                            5/30 <br>
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <img src="https://static.thenounproject.com/png/6076-200.png" width="30" height="30">
-                                            </a>
-                                        </td>
-                                    </tr>
 
-                                </table>
+                                </div>
+
+                                <div id="sessionlist">
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -271,7 +233,7 @@
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <img src="~/Content/img/avatar/1.jpg" class="pb-2" style="height: 150px; width: 150px; margin-left: 40%" alt=""/>
+                                                    <img src="~/Content/img/avatar/1.jpg" class="pb-2" style="height: 150px; width: 150px; margin-left: 40%" alt="" />
                                                     <br>
                                                     <input type="file" style=" width: 150px; margin-left: 40%">
                                                     <table class="table pt-2">
@@ -394,7 +356,7 @@
                                                     Email
                                                 </td>
                                                 <td class="tdr">
-                                                   sgirg@gmail.com
+                                                    sgirg@gmail.com
                                                 </td>
                                             </tr>
                                         </table>
@@ -408,7 +370,7 @@
                         <div class="card-header" role="tab" id="accord6" style="border-radius: 10px; background-color: indianred; font-size: 20px; padding-left: 10px; padding-bottom: 15px; margin-top:10px">
                             <h5 class="mb-0">
                                 <a class="collapsed" data-toggle="collapse" href="#collapse-pane-6" role="button" aria-expanded="false"
-                                   aria-controls="collapse-pane-6">
+                                   aria-controls="collapse-pane-6" style="font-size:20px">
                                     Xem lịch sử học tập
                                 </a>
                             </h5>
@@ -500,5 +462,26 @@
     <script src="~/Content/vendor/jquery/gsdk-bootstrap-wizard.js"></script>
 
     <script src="~/Content/vendor/jquery/jquery.validate.min.js"></script>
+
+    <script>
+        $(function () {
+            getSessionList(-1);
+            $("#select-dotw").on("change", function () {
+                var dotw = $(this).val();
+                getSessionList(dotw);
+            });
+        })
+        function getSessionList(dotw) {
+            $.ajax({
+                type: "GET",
+                url: "/api/getSessionList/",
+                data: {dotw : dotw, student_id : @int.Parse(Session["UserID"].ToString())},
+                dataType: "html",
+                success: function (response) {
+                    $('#sessionlist').html(response)
+                }
+            });
+        }
+    </script>
 }
 <!--   Core JS Files   -->
