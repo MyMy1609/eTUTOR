@@ -24,18 +24,19 @@ namespace eTUTOR.Controllers
 
         public ActionResult Contact()
         {
-            var contact = new contact();
-            return View(contact);
+            var contact_admin = new contact_admin();
+            return View(contact_admin);
         }
 
         [HttpPost]
-        public ActionResult Contact(contact contact, string fullname, string phone, string email, string content)
+        public ActionResult Contact(contact_admin contact_admin, string fullname, string phone, string email, string title, string content)
         {
-            contact.fullname = fullname;
-            contact.phone = phone;
-            contact.email = email;
-            contact.content = content;
-            model.contacts.Add(contact);
+            contact_admin.fullname = fullname;
+            contact_admin.phone = phone;
+            contact_admin.email = email;
+            contact_admin.title = title;
+            contact_admin.content = content;
+            model.contact_admin.Add(contact_admin);
             model.SaveChanges();
             return RedirectToAction("Confirm", "Home");
         }
