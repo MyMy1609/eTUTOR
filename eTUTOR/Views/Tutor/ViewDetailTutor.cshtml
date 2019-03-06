@@ -6,6 +6,8 @@
     eTUITOREntities db = new eTUITOREntities();
     var sch = db.schedules.ToList().Where(x => x.tutor_id == Model.tutor_id);
     var sj = db.subjects.ToList().Where(x => x.tutor_id == Model.tutor_id);
+    //var student = db.students.ToString();
+
 }
 
 @section css{
@@ -122,6 +124,7 @@
 
 
                     </div>
+
                     <div class="col-md-4">
                         <div class="clearfix">
                             <h4 class="line-bottom">Liên hệ nhanh</h4>
@@ -161,7 +164,34 @@
                         </form>
                     </div>
                 </div>
-            </div>
+                <!--Comment section-->
+                <h4 class="line-bottom">Đánh giá:</h4>
+                @*<div class="row mt-30">*@
+                @foreach (var item in Model.comments)
+                {
+
+
+                    <div class="row" style="margin:10px">
+                        <div class="col-sm-1">
+                            <div class="thumbnail">
+                                <img class="img-responsive user-photo" src="@item.student.avatar" srcset="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                            </div><!-- /thumbnail -->
+                        </div><!-- /col-sm-1 -->
+                        <div class="col-sm-5">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>@item.student.username</strong> <span class="text-muted">|</span>
+                                </div>
+                                <div class="panel-body">
+                                    @item.content
+                                </div><!-- /panel-body -->
+                            </div><!-- /panel panel-default -->
+                        </div><!-- /col-sm-5 -->
+
+                    </div>
+                }
+                    <!--End comment section-->
+                @*  *@</div>
         </div>
     </section>
 </div>
