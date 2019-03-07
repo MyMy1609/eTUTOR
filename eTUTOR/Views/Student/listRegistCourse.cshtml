@@ -64,7 +64,7 @@
                     @Html.DisplayFor(modelItem => item.day_otw)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.subject1.subject_name)
+                    @Html.DisplayFor(modelItem => item.subject.subject_name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.status1.name)
@@ -72,7 +72,7 @@
 
 
                 <td>
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Delete", "deleteRegister", new {  id=item.session_id })
                 </td>
             </tr>
 

@@ -4,6 +4,7 @@
     ViewBag.Title = "InfoOfStudent";
     Layout = "~/Views/Shared/_Layout.cshtml";
     eTUITOREntities db = new eTUITOREntities();
+    var ses = db.sessions.ToList().Where(x => x.student_id == Model.student_id && x.status.status_id != 1);
 }
 @section css{
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -291,6 +292,78 @@
                                             <td>
                                                 @Html.DisplayFor(modelItem => hl.total_sessions)
                                             </td>
+
+                                        </tr>
+                                    }
+
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card" style="width: 900px">
+                        <div class="card-header" role="tab" id="accord6" style="border-radius: 10px; background-color: indianred; font-size: 20px; padding-left: 10px; padding-bottom: 15px; margin-top:10px">
+                            <h5 class="mb-0">
+                                <a class="collapsed" data-toggle="collapse" href="#collapse-pane-7" role="button" aria-expanded="false"
+                                   aria-controls="collapse-pane-6" style="font-size:20px">
+                                    Lịch sử đăng ký khóa học
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapse-pane-7" class="collapse" role="tabpanel" aria-labelledby="accord6"
+                             data-parent="#demo-accordion-collapse">
+                            <div class="card-body">
+
+                                <table class="table" style="text-align: center;">
+                                    <tr>
+                                        <th>
+                                            Thứ
+                                        </th>
+                                        <th>
+                                            Gia sư
+                                        </th>
+                                        <th>
+                                            Môn học
+                                        </th>
+                                        <th>
+                                            Thời gian học
+                                        </th>
+                                        <th>
+                                            Tổng bài học
+                                        </th>
+                                        <th>
+                                            Trạng thái
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                    @foreach (var ss in ses)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @ss.day_otw
+                                            </td>
+                                            <td>
+                                                @ss.tutor.fullname
+                                            </td>
+                                            <td>
+                                                @ss.subject.subject_name
+                                            </td>
+
+                                            <td>
+                                                @ss.start_time - @ss.end_time
+                                            </td>
+                                            <td>
+                                                @ss.total_sessions
+                                            </td>
+                                            <td>
+                                                @if (ss.status_tutor == 2)
+                                                {<p>Chờ gia sư duyệt</p>}
+                                                else if (ss.status_admin == 2)
+                                                { <p>Chờ admin duyệt</p>}
+                                            </td>
+
 
                                         </tr>
                                     }

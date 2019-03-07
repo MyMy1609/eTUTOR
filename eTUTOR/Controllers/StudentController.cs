@@ -23,6 +23,13 @@ namespace eTUTOR.Controllers
             var listCourse = db.sessions.ToList().Where(x => x.status_tutor == 2 && x.student_id == prt.student_id);
             return View(listCourse);
         }
+        public ActionResult deleteRegister(int id)
+        {
+            var ss = db.sessions.FirstOrDefault(x => x.session_id == id);
+            db.sessions.Remove(ss);
+            db.SaveChanges();
+            return RedirectToAction("listRegistCourse");
+        }
         public ActionResult SessionOfStudent(string p)
         {
             ViewData["IsNewGroup"] = false;

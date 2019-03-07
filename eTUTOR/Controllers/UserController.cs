@@ -108,6 +108,8 @@ namespace eTUTOR.Controllers
                 if (student.password.Equals(password))
                 {
                     Session["FullName"] = student.fullname;
+
+                    Session["username"] = student.username;
                     Session["UserID"] = student.student_id;
                     Session["Role"] = "student";
                     return RedirectToAction("InfoOfStudent", "Student", new { id = Session["UserID"] });
@@ -118,6 +120,7 @@ namespace eTUTOR.Controllers
                 if (parent.password.Equals(password))
                 {
                     Session["FullName"] = parent.fullname;
+                    Session["username"] = parent.username;
                     Session["UserID"] = parent.parent_id;
                     Session["Role"] = "parent";
                     return RedirectToAction("InfoOfParent", "Parent");
