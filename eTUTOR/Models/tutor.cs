@@ -38,6 +38,8 @@ namespace eTUTOR.Models
         public string certificate { get; set; }
         public Nullable<int> status { get; set; }
         public string avatar { get; set; }
+        public Nullable<int> status_register { get; set; }
+        public Nullable<System.DateTime> dateCreate { get; set; }
     
         public virtual ICollection<comment> comments { get; set; }
         public virtual ICollection<contact_tutor> contact_tutor { get; set; }
@@ -46,5 +48,6 @@ namespace eTUTOR.Models
         public virtual ICollection<session> sessions { get; set; }
         public virtual status status1 { get; set; }
         public virtual ICollection<subject> subjects { get; set; }
+        public virtual status status2 { get; set; }
     }
 }

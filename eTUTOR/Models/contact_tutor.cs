@@ -20,6 +20,7 @@ namespace eTUTOR.Models
         public string title { get; set; }
         public string content { get; set; }
         public Nullable<int> tutor_id { get; set; }
+        public Nullable<System.DateTime> dateTimeCt { get; set; }
     
         public virtual tutor tutor { get; set; }
     }

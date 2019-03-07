@@ -19,5 +19,6 @@ namespace eTUTOR.Models
         public string email { get; set; }
         public string phone { get; set; }
         public string content { get; set; }
+        public Nullable<System.DateTime> dateTimeCt { get; set; }
     }
 }

@@ -29,6 +29,7 @@ namespace eTUTOR.Models
         public Nullable<System.DateTime> birthday { get; set; }
         public Nullable<int> status { get; set; }
         public string avatar { get; set; }
+        public Nullable<System.DateTime> dateRegist { get; set; }
     
         public virtual status status1 { get; set; }
         public virtual ICollection<student> students { get; set; }

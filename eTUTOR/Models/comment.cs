@@ -18,6 +18,7 @@ namespace eTUTOR.Models
         public Nullable<int> student_id { get; set; }
         public string content { get; set; }
         public Nullable<int> tutor_id { get; set; }
+        public Nullable<System.DateTime> dateTimeCmt { get; set; }
     
         public virtual student student { get; set; }
         public virtual tutor tutor { get; set; }

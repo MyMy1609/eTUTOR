@@ -21,6 +21,7 @@ namespace eTUTOR.Models
         public string note { get; set; }
         public Nullable<int> status { get; set; }
         public Nullable<int> tutor_id { get; set; }
+        public Nullable<System.DateTime> dateCreate { get; set; }
     
         public virtual status status1 { get; set; }
         public virtual tutor tutor { get; set; }

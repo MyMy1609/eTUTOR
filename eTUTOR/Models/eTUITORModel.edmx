@@ -31,6 +31,7 @@
           <Property Name="student_id" Type="int" />
           <Property Name="content" Type="nvarchar(max)" />
           <Property Name="tutor_id" Type="int" />
+          <Property Name="dateTimeCmt" Type="datetime" />
         </EntityType>
         <EntityType Name="common">
           <Key>
@@ -51,6 +52,7 @@
           <Property Name="email" Type="nvarchar" MaxLength="30" />
           <Property Name="title" Type="nvarchar" MaxLength="30" />
           <Property Name="content" Type="nvarchar" MaxLength="255" />
+          <Property Name="dateTimeCt" Type="datetime" />
         </EntityType>
         <EntityType Name="contact_tutor">
           <Key>
@@ -62,6 +64,7 @@
           <Property Name="title" Type="nvarchar" MaxLength="30" />
           <Property Name="content" Type="nvarchar" MaxLength="255" />
           <Property Name="tutor_id" Type="int" />
+          <Property Name="dateTimeCt" Type="datetime" />
         </EntityType>
         <EntityType Name="contacts">
           <Key>
@@ -72,6 +75,7 @@
           <Property Name="email" Type="nvarchar" MaxLength="20" />
           <Property Name="phone" Type="nvarchar" MaxLength="15" />
           <Property Name="content" Type="nvarchar(max)" />
+          <Property Name="dateTimeCt" Type="datetime" />
         </EntityType>
         <EntityType Name="history_lessons">
           <Key>
@@ -102,6 +106,7 @@
           <Property Name="birthday" Type="date" />
           <Property Name="status" Type="int" />
           <Property Name="avatar" Type="nvarchar" MaxLength="255" />
+          <Property Name="dateRegist" Type="date" />
         </EntityType>
         <EntityType Name="schedules">
           <Key>
@@ -114,6 +119,7 @@
           <Property Name="note" Type="nvarchar(max)" />
           <Property Name="status" Type="int" />
           <Property Name="tutor_id" Type="int" />
+          <Property Name="dateCreate" Type="date" />
         </EntityType>
         <EntityType Name="sessions">
           <Key>
@@ -131,6 +137,7 @@
           <Property Name="status_tutor" Type="int" />
           <Property Name="status_admin" Type="int" />
           <Property Name="subject_id" Type="int" />
+          <Property Name="dateCreate" Type="date" />
         </EntityType>
         <EntityType Name="status">
           <Key>
@@ -154,6 +161,7 @@
           <Property Name="avatar" Type="nvarchar" MaxLength="255" />
           <Property Name="phone" Type="nvarchar" MaxLength="15" />
           <Property Name="birthday" Type="date" />
+          <Property Name="dateCreate" Type="date" />
         </EntityType>
         <EntityType Name="subject">
           <Key>
@@ -199,6 +207,8 @@
           <Property Name="certificate" Type="nvarchar" MaxLength="100" />
           <Property Name="status" Type="int" />
           <Property Name="avatar" Type="nvarchar" MaxLength="255" />
+          <Property Name="status_register" Type="int" />
+          <Property Name="dateCreate" Type="date" />
         </EntityType>
         <EntityType Name="typeUser">
           <Key>
@@ -444,6 +454,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tutor_status_register">
+          <End Role="status" Type="Self.status" Multiplicity="0..1" />
+          <End Role="tutors" Type="Self.tutors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="status_id" />
+            </Principal>
+            <Dependent Role="tutors">
+              <PropertyRef Name="status_register" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="capstone2019ModelStoreContainer">
           <EntitySet Name="about" EntityType="Self.about" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
@@ -537,6 +559,10 @@
             <End Role="submenu" EntitySet="submenu" />
           </AssociationSet>
           <AssociationSet Name="FK_tutor_status" Association="Self.FK_tutor_status">
+            <End Role="status" EntitySet="status" />
+            <End Role="tutors" EntitySet="tutors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tutor_status_register" Association="Self.FK_tutor_status_register">
             <End Role="status" EntitySet="status" />
             <End Role="tutors" EntitySet="tutors" />
           </AssociationSet>
@@ -641,6 +667,10 @@
             <End Role="typeUser" EntitySet="typeUsers" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <AssociationSet Name="FK_tutor_status_register" Association="capstone2019Model.FK_tutor_status_register">
+            <End Role="status" EntitySet="status" />
+            <End Role="tutor" EntitySet="tutors" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="about">
           <Key>
@@ -670,6 +700,7 @@
           <Property Name="tutor_id" Type="Int32" />
           <NavigationProperty Name="student" Relationship="capstone2019Model.FK_comment_student" FromRole="comment" ToRole="student" />
           <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_comment_tutor" FromRole="comment" ToRole="tutor" />
+          <Property Name="dateTimeCmt" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="common">
           <Key>
@@ -691,6 +722,7 @@
           <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="content" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="dateTimeCt" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="contact_tutor">
           <Key>
@@ -703,6 +735,7 @@
           <Property Name="content" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="tutor_id" Type="Int32" />
           <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_contatc_tutor_tutor" FromRole="contact_tutor" ToRole="tutor" />
+          <Property Name="dateTimeCt" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="contact">
           <Key>
@@ -713,6 +746,7 @@
           <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dateTimeCt" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="history_lessons">
           <Key>
@@ -747,6 +781,7 @@
           <Property Name="avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_parent_status" FromRole="parent" ToRole="status" />
           <NavigationProperty Name="students" Relationship="capstone2019Model.FK_parent_student" FromRole="parent" ToRole="student" />
+          <Property Name="dateRegist" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="schedule">
           <Key>
@@ -761,6 +796,7 @@
           <Property Name="tutor_id" Type="Int32" />
           <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_schedule_status" FromRole="schedule" ToRole="status" />
           <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_schedule_tutor" FromRole="schedule" ToRole="tutor" />
+          <Property Name="dateCreate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="session">
           <Key>
@@ -784,6 +820,7 @@
           <NavigationProperty Name="status2" Relationship="capstone2019Model.FK_session_status_tutor" FromRole="session" ToRole="status" />
           <NavigationProperty Name="student" Relationship="capstone2019Model.FK_session_student" FromRole="session" ToRole="student" />
           <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_session_tutor" FromRole="session" ToRole="tutor" />
+          <Property Name="dateCreate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="status">
           <Key>
@@ -797,6 +834,7 @@
           <NavigationProperty Name="sessions1" Relationship="capstone2019Model.FK_session_status_admin" FromRole="status" ToRole="session" />
           <NavigationProperty Name="sessions2" Relationship="capstone2019Model.FK_session_status_tutor" FromRole="status" ToRole="session" />
           <NavigationProperty Name="tutors" Relationship="capstone2019Model.FK_tutor_status" FromRole="status" ToRole="tutor" />
+          <NavigationProperty Name="tutors1" Relationship="capstone2019Model.FK_tutor_status_register" FromRole="status" ToRole="tutor" />
         </EntityType>
         <EntityType Name="student">
           <Key>
@@ -817,6 +855,7 @@
           <NavigationProperty Name="history_lessons" Relationship="capstone2019Model.FK_history_lessons_student" FromRole="student" ToRole="history_lessons" />
           <NavigationProperty Name="parent" Relationship="capstone2019Model.FK_parent_student" FromRole="student" ToRole="parent" />
           <NavigationProperty Name="sessions" Relationship="capstone2019Model.FK_session_student" FromRole="student" ToRole="session" />
+          <Property Name="dateCreate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="subject">
           <Key>
@@ -872,6 +911,9 @@
           <NavigationProperty Name="sessions" Relationship="capstone2019Model.FK_session_tutor" FromRole="tutor" ToRole="session" />
           <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_tutor_status" FromRole="tutor" ToRole="status" />
           <NavigationProperty Name="subjects" Relationship="capstone2019Model.FK__subject__tutor_i__19DFD96B" FromRole="tutor" ToRole="subject" />
+          <Property Name="status_register" Type="Int32" />
+          <Property Name="dateCreate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="status2" Relationship="capstone2019Model.FK_tutor_status_register" FromRole="tutor" ToRole="status" />
         </EntityType>
         <EntityType Name="typeUser">
           <Key>
@@ -1119,6 +1161,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tutor_status_register">
+          <End Type="capstone2019Model.status" Role="status" Multiplicity="0..1" />
+          <End Type="capstone2019Model.tutor" Role="tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="status_id" />
+            </Principal>
+            <Dependent Role="tutor">
+              <PropertyRef Name="status_register" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1148,6 +1202,7 @@
           <EntitySetMapping Name="comments">
             <EntityTypeMapping TypeName="capstone2019Model.comment">
               <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="dateTimeCmt" ColumnName="dateTimeCmt" />
                 <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
                 <ScalarProperty Name="content" ColumnName="content" />
                 <ScalarProperty Name="student_id" ColumnName="student_id" />
@@ -1168,6 +1223,7 @@
           <EntitySetMapping Name="contact_admin">
             <EntityTypeMapping TypeName="capstone2019Model.contact_admin">
               <MappingFragment StoreEntitySet="contact_admin">
+                <ScalarProperty Name="dateTimeCt" ColumnName="dateTimeCt" />
                 <ScalarProperty Name="content" ColumnName="content" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="email" ColumnName="email" />
@@ -1180,6 +1236,7 @@
           <EntitySetMapping Name="contact_tutor">
             <EntityTypeMapping TypeName="capstone2019Model.contact_tutor">
               <MappingFragment StoreEntitySet="contact_tutor">
+                <ScalarProperty Name="dateTimeCt" ColumnName="dateTimeCt" />
                 <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
                 <ScalarProperty Name="content" ColumnName="content" />
                 <ScalarProperty Name="title" ColumnName="title" />
@@ -1192,6 +1249,7 @@
           <EntitySetMapping Name="contacts">
             <EntityTypeMapping TypeName="capstone2019Model.contact">
               <MappingFragment StoreEntitySet="contacts">
+                <ScalarProperty Name="dateTimeCt" ColumnName="dateTimeCt" />
                 <ScalarProperty Name="content" ColumnName="content" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="email" ColumnName="email" />
@@ -1219,6 +1277,7 @@
           <EntitySetMapping Name="parents">
             <EntityTypeMapping TypeName="capstone2019Model.parent">
               <MappingFragment StoreEntitySet="parents">
+                <ScalarProperty Name="dateRegist" ColumnName="dateRegist" />
                 <ScalarProperty Name="avatar" ColumnName="avatar" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="birthday" ColumnName="birthday" />
@@ -1235,6 +1294,7 @@
           <EntitySetMapping Name="schedules">
             <EntityTypeMapping TypeName="capstone2019Model.schedule">
               <MappingFragment StoreEntitySet="schedules">
+                <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
                 <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="note" ColumnName="note" />
@@ -1248,6 +1308,7 @@
           <EntitySetMapping Name="sessions">
             <EntityTypeMapping TypeName="capstone2019Model.session">
               <MappingFragment StoreEntitySet="sessions">
+                <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
                 <ScalarProperty Name="subject_id" ColumnName="subject_id" />
                 <ScalarProperty Name="status_admin" ColumnName="status_admin" />
                 <ScalarProperty Name="status_tutor" ColumnName="status_tutor" />
@@ -1274,6 +1335,7 @@
           <EntitySetMapping Name="students">
             <EntityTypeMapping TypeName="capstone2019Model.student">
               <MappingFragment StoreEntitySet="students">
+                <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
                 <ScalarProperty Name="birthday" ColumnName="birthday" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="avatar" ColumnName="avatar" />
@@ -1320,6 +1382,8 @@
           <EntitySetMapping Name="tutors">
             <EntityTypeMapping TypeName="capstone2019Model.tutor">
               <MappingFragment StoreEntitySet="tutors">
+                <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
+                <ScalarProperty Name="status_register" ColumnName="status_register" />
                 <ScalarProperty Name="avatar" ColumnName="avatar" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="certificate" ColumnName="certificate" />
