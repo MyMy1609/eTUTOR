@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using eTUTOR.Models;
@@ -187,5 +188,56 @@ namespace eTUTOR.Controllers
             return RedirectToAction("Duyetkhoahoc");
         }
 
+        [HttpPost]
+        public ActionResult Contact(string name, string email, string subject, string message)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var senderemail = new MailAddress("hoak21t@gmail.com", "Tutor");//mail tutor
+                    //var receiveremail = new MailAddress("hoak21t@gmail.com", "Công ty"); //mail công ty
+
+                    var password = "phuhoa1995";// mật khẩu địa chỉ mail   
+                    var sub = subject;
+                    var body = "Tên: " + name + " Email: " + email + " Tiêu đề: " + subject + " Nội dung: " + message;
+                    // nội dung tin nhắn
+
+
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderemail.Address, password)
+
+
+                    };
+
+                    //using (var mess = new MailMessage(senderemail, receiveremail)
+                    //{
+                    //    Subject = subject,
+                    //    Body = body
+                    //}
+                    //)
+                    //{
+                    //    smtp.Send(mess);
+                    //}
+                    return RedirectToAction("Confirm", "Tutor");
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.Error = "There are some problem in sending email";
+            }
+            return View();
+        }
+
+        public ActionResult Confirm()
+        {
+            return View();
+        }
     }
 }

@@ -715,6 +715,7 @@
     <Content Include="Scripts\jsmpg.min.js.map" />
     <Content Include="Views\API\SessionTutorList.cshtml" />
     <Content Include="Views\Home\Confirm.cshtml" />
+    <Content Include="Views\Tutor\Confirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

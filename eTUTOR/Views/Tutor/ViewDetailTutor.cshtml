@@ -129,30 +129,30 @@
                         <div class="clearfix">
                             <h4 class="line-bottom">Liên hệ nhanh</h4>
                         </div>
-                        <form id="contact-form" class="contact-form-transparent">
+                        <form id="contact-form" class="contact-form-transparent" action="/Tutor/Contact" method="post">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <input type="text" placeholder="Họ tên" id="contact_name"
-                                               name="contact_name" required="" class="form-control">
+                                               name="name" required="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <input type="text" placeholder=" Email" id="contact_email"
-                                               name="contact_email" class="form-control" required="">
+                                               name="email" class="form-control" required="">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <input type="text" placeholder="Chủ đề" id="contact_subject"
-                                               name="contact_subject" class="form-control" required="">
+                                               name="subject" class="form-control" required="">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <textarea rows="5" placeholder="Lời nhắn..." id="contact_message"
-                                          name="contact_message" required="" class="form-control"></textarea>
+                                          name="message" required="" class="form-control"></textarea>
                             </div>
                             <div class="form-group">
                                 <button data-loading-text="Please wait..."
