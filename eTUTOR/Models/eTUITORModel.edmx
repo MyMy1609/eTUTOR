@@ -92,6 +92,19 @@
           <Property Name="day_otw" Type="nvarchar" MaxLength="50" />
           <Property Name="day" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'capstone2019.dbo.notice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="notice">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="content" />
+            <PropertyRef Name="recive" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="content" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="recive" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="dateCreate" Type="date" />
+        </EntityType>
         <EntityType Name="parents">
           <Key>
             <PropertyRef Name="parent_id" />
@@ -486,6 +499,14 @@
           <EntitySet Name="tutors" EntityType="Self.tutors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="typeUser" EntityType="Self.typeUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notice" EntityType="Self.notice" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[notice].[id] AS [id], 
+[notice].[content] AS [content], 
+[notice].[recive] AS [recive], 
+[notice].[dateCreate] AS [dateCreate]
+FROM [dbo].[notice] AS [notice]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__sessions__subjec__1BC821DD" Association="Self.FK__sessions__subjec__1BC821DD">
             <End Role="subject" EntitySet="subject" />
             <End Role="sessions" EntitySet="sessions" />
@@ -671,6 +692,7 @@
             <End Role="status" EntitySet="status" />
             <End Role="tutor" EntitySet="tutors" />
           </AssociationSet>
+          <EntitySet Name="notices" EntityType="capstone2019Model.notice" />
         </EntityContainer>
         <EntityType Name="about">
           <Key>
@@ -1173,6 +1195,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="notice">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="content" />
+            <PropertyRef Name="recive" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="content" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="recive" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dateCreate" Type="DateTime" Precision="0" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1416,6 +1449,16 @@
                 <ScalarProperty Name="us_pw" ColumnName="us_pw" />
                 <ScalarProperty Name="us_usname" ColumnName="us_usname" />
                 <ScalarProperty Name="us_id" ColumnName="us_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notices">
+            <EntityTypeMapping TypeName="capstone2019Model.notice">
+              <MappingFragment StoreEntitySet="notice">
+                <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
+                <ScalarProperty Name="recive" ColumnName="recive" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
