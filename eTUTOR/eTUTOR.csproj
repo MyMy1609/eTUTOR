@@ -213,6 +213,9 @@
     <Compile Include="Models\subject.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>eTUITORModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\typeUser.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
@@ -343,6 +346,13 @@
     <Content Include="Content\img\admin\avatar-2.jpg" />
     <Content Include="Content\img\admin\avatar-3.jpg" />
     <Content Include="Content\img\avatar\1.jpg" />
+    <Content Include="Content\img\avatar\parent\baby_3.jpg" />
+    <Content Include="Content\img\avatar\student\boyaas.jpg" />
+    <Content Include="Content\img\avatar\student\children-kids-photo-png-32604.png" />
+    <Content Include="Content\img\avatar\student\happy-child-4.jpg" />
+    <Content Include="Content\img\avatar\student\vyvy.jpg" />
+    <Content Include="Content\img\avatar\tutor\2.png" />
+    <Content Include="Content\img\avatar\tutor\tr5.jpg" />
     <Content Include="Content\img\background1.jpg" />
     <Content Include="Content\img\background6.jpg" />
     <Content Include="Content\img\banner\brt-1.jpg" />
@@ -703,6 +713,8 @@
     <Content Include="Views\Student\SessionOfStudent.cshtml" />
     <Content Include="Views\Tutor\SearchTutor.cshtml" />
     <Content Include="Scripts\jsmpg.min.js.map" />
+    <Content Include="Views\API\SessionTutorList.cshtml" />
+    <Content Include="Views\Home\Confirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

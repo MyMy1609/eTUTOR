@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="capstone2019Model.comment" Width="1.5" PointX="10.5" PointY="17" />
         <EntityTypeShape EntityType="capstone2019Model.common" Width="1.5" PointX="0.75" PointY="3.875" />
         <EntityTypeShape EntityType="capstone2019Model.contact_admin" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="capstone2019Model.contact_tutor" Width="1.5" PointX="5.25" PointY="10.125" />
+        <EntityTypeShape EntityType="capstone2019Model.contact_tutor" Width="1.5" PointX="5.25" PointY="7.375" />
         <EntityTypeShape EntityType="capstone2019Model.contact" Width="1.5" PointX="7.75" PointY="3.75" />
         <EntityTypeShape EntityType="capstone2019Model.history_lessons" Width="1.5" PointX="10.5" PointY="12.375" />
         <EntityTypeShape EntityType="capstone2019Model.parent" Width="1.5" PointX="3" PointY="17" />
@@ -18,8 +18,9 @@
         <EntityTypeShape EntityType="capstone2019Model.session" Width="1.5" PointX="7.5" PointY="12.75" />
         <EntityTypeShape EntityType="capstone2019Model.status" Width="1.5" PointX="0.75" PointY="11" />
         <EntityTypeShape EntityType="capstone2019Model.student" Width="1.5" PointX="5.25" PointY="16.75" />
-        <EntityTypeShape EntityType="capstone2019Model.subject" Width="1.5" PointX="5.25" PointY="7.375" />
+        <EntityTypeShape EntityType="capstone2019Model.subject" Width="1.5" PointX="5.25" PointY="10.5" />
         <EntityTypeShape EntityType="capstone2019Model.submenu" Width="1.5" PointX="3" PointY="4" />
+        <EntityTypeShape EntityType="capstone2019Model.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" />
         <EntityTypeShape EntityType="capstone2019Model.tutor" Width="1.5" PointX="3" PointY="7.375" />
         <EntityTypeShape EntityType="capstone2019Model.typeUser" Width="1.5" PointX="0.75" PointY="1.125" />
         <EntityTypeShape EntityType="capstone2019Model.User" Width="1.5" PointX="3" PointY="0.875" />

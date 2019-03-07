@@ -99,6 +99,7 @@ namespace eTUTOR.Controllers
                 {
                     Session["FullName"] = tutor.fullname;
                     Session["UserID"] = tutor.tutor_id;
+                    Session["username"] = tutor.username;
                     Session["Role"] = "tutor";
                     return RedirectToAction("InfoOfTutor", "Tutor", new { id = Session["UserID"] });
                 }
@@ -111,6 +112,7 @@ namespace eTUTOR.Controllers
 
                     Session["username"] = student.username;
                     Session["UserID"] = student.student_id;
+                    Session["username"] = student.username;
                     Session["Role"] = "student";
                     return RedirectToAction("InfoOfStudent", "Student", new { id = Session["UserID"] });
                 }
@@ -122,8 +124,9 @@ namespace eTUTOR.Controllers
                     Session["FullName"] = parent.fullname;
                     Session["username"] = parent.username;
                     Session["UserID"] = parent.parent_id;
+                    Session["username"] = parent.username;
                     Session["Role"] = "parent";
-                    return RedirectToAction("InfoOfParent", "Parent");
+                    return RedirectToAction("InfoOfParent", "Parent", new { id = Session["UserID"] });
                 }
             }
             else

@@ -11,9 +11,10 @@ namespace eTUTOR.Controllers
     {
         eTUITOREntities db = new eTUITOREntities();
         // GET: Parent
-        public ActionResult InfoOfParent()
+        public ActionResult InfoOfParent(int id)
         {
-            return View();
+            var info = db.parents.FirstOrDefault(x => x.parent_id == id);
+            return View(info);
         }
         public ActionResult listPr()
         {
@@ -32,6 +33,14 @@ namespace eTUTOR.Controllers
             var prt = db.parents.FirstOrDefault(x => x.username == id);
             var listCourse = db.sessions.ToList().Where(x => x.status_tutor == 2 && x.student_id == prt.parent_id);
             return View(listCourse);
+        }
+        [HttpPost]
+        public ActionResult CreateChildAccount(student student)
+        {
+            student.parent_id = int.Parse(Session["UserID"].ToString());
+            db.students.Add(student);
+            db.SaveChanges();
+            return RedirectToAction("InfoOfParent","Parent", new { id = Session["UserID"] });
         }
     }
 }

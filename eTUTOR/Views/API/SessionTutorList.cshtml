@@ -1,4 +1,9 @@
-﻿@{ 
+﻿@*<a href="@Url.Action("SessionOfStudent","Parent", new { p = @session.session_id })" )" target="_blank">
+    <img src="https://static.thenounproject.com/png/6076-200.png" width="30" height="30">
+</a>*@
+
+
+@{
     var sessionlist = ViewData["sessionlist"] as List<eTUTOR.Models.session>;
 }
 <table class="table" style="text-align: center;">
@@ -11,13 +16,16 @@
         </th>
 
         <th>
-           Gia sư
+            Ngày đã học
+        </th>
+        <th>
+            Gia sư
+        </th>
+        <th>
+            Học sinh
         </th>
         <th>
             Số buổi đã học
-        </th>
-        <th>
-           Vào học
         </th>
     </tr>
     @if (!sessionlist.Any())
@@ -41,12 +49,14 @@
                 <td>
                     @session.tutor.fullname
                 </td>
-
+                <td>
+                    @session.student.fullname
+                </td>
                 <td>
                     @session.total_sessions
                 </td>
                 <td>
-                    <a href="@Url.Action("SessionOfStudent","Student", new { p = @session.session_id })")" target="_blank">
+                    <a href="@Url.Action("SessionOfStudent","Parent", new { p = @session.session_id })" )" target="_blank">
                         <img src="https://static.thenounproject.com/png/6076-200.png" width="30" height="30">
                     </a>
                 </td>

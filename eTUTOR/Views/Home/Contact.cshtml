@@ -67,16 +67,16 @@
             </div>
         </div>
         <div class="col-4 container m-0">
-            <form class="contact100-form validate-form" style="padding: 0; margin-left: 5%">
+            <form class="contact100-form validate-form" style="padding: 0; margin-left: 5%" action="/Home/Contact", method="post">
                 <span class="contact100-form-title mb-4" style="padding-bottom: 0; padding-top: 10%">
                     Hãy liên hệ với chúng tôi
                 </span>
                 <div class="wrap-input100 validate-input" data-validate="Tên không rỗng" style="margin-top: 5%">
-                    <input id="name" class="input100 " type="text" name="name" placeholder="Họ tên">
+                    <input id="name" class="input100 " type="text" name="fullname" placeholder="Họ tên">
                     <span class="focus-input100"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Số điện thoại không rỗng">
-                    <input id="soDT" class="input100" type="text" name="name" placeholder="Số điện thoại">
+                    <input id="soDT" class="input100" type="text" name="phone" placeholder="Số điện thoại">
                     <span class="focus-input100"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Email không rỗng và phải đúng định dạng: ex@abc.xyz">
@@ -84,16 +84,16 @@
                     <span class="focus-input100"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Chủ đề không được rỗng">
-                    <input id="chuDe" class="input100" type="text" name="name" placeholder="Chủ đề">
+                    <input id="chuDe" class="input100" type="text" name="title" placeholder="Chủ đề">
                     <span class="focus-input100"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Message is required">
-                    <textarea id="message" class="input100" name="message" placeholder="Nội dung cần liên hệ với chúng tôi..."></textarea>
+                    <textarea id="message" class="input100" name="content" placeholder="Nội dung cần liên hệ với chúng tôi..."></textarea>
                     <span class="focus-input100"></span>
                 </div>
 
                 <div class="container-contact100-form-btn">
-                    <button class="contact100-form-btn mr-3">
+                    <button class="contact100-form-btn mr-3" type="submit">
                         Gửi ngay
                     </button>
                 </div>
