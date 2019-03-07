@@ -44,5 +44,6 @@ namespace eTUTOR.Models
         public DbSet<tutor> tutors { get; set; }
         public DbSet<typeUser> typeUsers { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<notice> notices { get; set; }
     }
 }
