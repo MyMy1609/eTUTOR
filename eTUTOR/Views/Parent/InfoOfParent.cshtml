@@ -22,6 +22,12 @@
     <link href="~/Content/vendor/bootstrap/css/demo.css" rel="stylesheet" />
     <link href="~/Content/vendor/bootstrap/css/parent.css" rel="stylesheet" />
     <link href="~/Content/vendor/bootstrap/css/avatar.css" rel="stylesheet" />
+    <style>
+        .error {
+            color: red;
+            text-align: left;
+        }
+    </style>
 }
 
 
@@ -31,118 +37,118 @@
         <div class="left col-4">
             <img src="~/Content/img/avatar/parent/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height="250px" width="250px"
                  alt="avatar" style="border-radius: 20%;margin-top: 0px;">
-            <a href="#" style="display: inline-block">
-                <!-- <img src="https://cdn3.iconfinder.com/data/icons/block/32/box_edit-512.png" width="30px" height="30px"></a> -->
+            <a href="#" style="display: inline-block"></a>
+            <!-- <img src="https://cdn3.iconfinder.com/data/icons/block/32/box_edit-512.png" width="30px" height="30px"></a> -->
 
-                <div class="namepro ml-4" style="text-align: center;">@Html.DisplayFor(model => model.fullname)</div>
-                <table class="table">
-                    <tr>
-                        <td class="tdl">
-                            Tên đăng nhập
-                        </td>
-                        <td class="tdr">
-                            @Html.DisplayFor(model => model.username)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tdl">
-                            Địa chỉ
-                        </td>
-                        <td class="tdr">
-                            @Html.DisplayFor(model => model.address)
-                        </td>
-                    </tr>
+            <div class="namepro ml-4" style="text-align: center;">@Html.DisplayFor(model => model.fullname)</div>
+            <table class="table">
+                <tr>
+                    <td class="tdl">
+                        Tên đăng nhập
+                    </td>
+                    <td class="tdr">
+                        @Html.DisplayFor(model => model.username)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdl">
+                        Địa chỉ
+                    </td>
+                    <td class="tdr">
+                        @Html.DisplayFor(model => model.address)
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="tdl">
-                            Số điện thoại
-                        </td>
-                        <td class="tdr">
-                            @Html.DisplayFor(model => model.phone)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tdl">
-                            Email
-                        </td>
-                        <td class="tdr">
-                            @Html.DisplayFor(model => model.email)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tdl"></td>
-                        <td>
-                            <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#myModal"
-                                    style="margin-left: 65%">
-                                Chỉnh sửa
-                            </button>
-                            <div class="modal" id="myModal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
+                <tr>
+                    <td class="tdl">
+                        Số điện thoại
+                    </td>
+                    <td class="tdr">
+                        @Html.DisplayFor(model => model.phone)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdl">
+                        Email
+                    </td>
+                    <td class="tdr">
+                        @Html.DisplayFor(model => model.email)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdl"></td>
+                    <td>
+                        <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#myModal"
+                                style="margin-left: 65%">
+                            Chỉnh sửa
+                        </button>
+                        <div class="modal" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
 
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" style="margin-left: 30%">Chỉnh sửa Tiểu sử</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <div class="modal-body">
-                                            <table class="table">
-                                                <tr>
-                                                    <td class="tdl">
-                                                        Họ và tên
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <input type="text" placeholder="Nguyễn Ngọc Ngân">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="tdl">
-                                                        Tên đăng nhập
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <input type="text" placeholder="ngannguyen193">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="tdl">
-                                                        Địa chỉ
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <input type="text" placeholder="69 Trần Duy Hưng, Cầu Giấy, Hà Nội">
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="tdl">
-                                                        Số điện thoại
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <input type="text" placeholder="027823643">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="tdl">
-                                                        Email
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <input type="email" placeholder="ngannguyen193@gmail.com">
-                                                    </td>
-                                                </tr>
-
-
-                                            </table>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
-                                        </div>
-
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" style="margin-left: 30%">Chỉnh sửa Tiểu sử</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
+
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <tr>
+                                                <td class="tdl">
+                                                    Họ và tên
+                                                </td>
+                                                <td class="tdr">
+                                                    <input type="text" placeholder="Nguyễn Ngọc Ngân">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdl">
+                                                    Tên đăng nhập
+                                                </td>
+                                                <td class="tdr">
+                                                    <input type="text" placeholder="ngannguyen193">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdl">
+                                                    Địa chỉ
+                                                </td>
+                                                <td class="tdr">
+                                                    <input type="text" placeholder="69 Trần Duy Hưng, Cầu Giấy, Hà Nội">
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="tdl">
+                                                    Số điện thoại
+                                                </td>
+                                                <td class="tdr">
+                                                    <input type="text" placeholder="027823643">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdl">
+                                                    Email
+                                                </td>
+                                                <td class="tdr">
+                                                    <input type="email" placeholder="ngannguyen193@gmail.com">
+                                                </td>
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
+                                    </div>
+
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
         </div>
         <div class="right col-6">
@@ -218,150 +224,161 @@
                         <div id="collapse-pane-5" class="collapse" role="tabpanel" aria-labelledby="accord5"
                              data-parent="#demo-accordion-collapse">
                             <div class="card-body">
-                                <div class="row pt-1">
-                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"
-                                            style="border-radius: 50%;  font-size: 26px; margin-left: 80%">
-                                        +
-                                    </button>
-                                    <div class="modal fade" id="myModal" role="dialog">
-                                        <div class="modal-dialog">
+                               
+                                    <div class="row pt-1">
+                                        <button type="button" id="btn-show-modal" class="btn btn-primary btn-lg" style="border-radius: 50%;  font-size: 26px; margin-left: 80%">
+                                            +
+                                        </button>
+                                        <div class="modal fade" id="myModal1" role="dialog">
+                                            <div class="modal-dialog">
 
-                                            <!-- Modal content-->
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Thêm tài khoản con</h4>
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Thêm tài khoản con</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table pt-2">
+                                                            <tr>
+                                                                <td class="tdl">
+                                                                    Ảnh đại diện
+                                                                </td>
+                                                                <td class="tdr">
+                                                                    <input type="file" id="avatar" style=" width: 170px; margin-left: 20%">
+                                                                    <div id="avatar-error" class="error"></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdl">
+                                                                    Họ và tên
+                                                                </td>
+                                                                <td class="tdr">
+                                                                    <input type="text" id="fullname">
+                                                                    <div id="fullname-error" class="error"></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdl">
+                                                                    Tên đăng nhập
+                                                                </td>
+                                                                <td class="tdr">
+                                                                    <input type="text" id="username">
+                                                                    <div id="username-error" class="error"></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdl">
+                                                                    Mật khẩu
+                                                                </td>
+                                                                <td class="tdr">
+                                                                    <input type="password" id="password">
+                                                                    <div id="password-error" class="error"></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdl">
+                                                                    Ngày sinh
+                                                                </td>
+                                                                <td class="tdr">
+                                                                    <input type="date" id="birthday">
+                                                                    <div id="birthday-error" class="error"></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdl" style="padding-top: 19px;">
+                                                                    Lớp
+                                                                </td>
+                                                                <td class="tdr">
+                                                                    <div class="form-wrapper">
+                                                                        <select id="class" class="form-control" style="width: 300px">
+                                                                            <option value="-1" disabled selected>Lớp</option>
+                                                                            <option value="1">Lớp 1</option>
+                                                                            <option value="2">Lớp 2</option>
+                                                                            <option value="3">Lớp 3</option>
+                                                                            <option value="4">Lớp 4</option>
+                                                                            <option value="5">Lớp 5</option>
+                                                                            <option value="6">Lớp 6</option>
+                                                                            <option value="7">Lớp 7</option>
+                                                                            <option value="8">Lớp 8</option>
+                                                                            <option value="9">Lớp 9</option>
+                                                                            <option value="10">Lớp 10</option>
+                                                                            <option value="11">Lớp 11</option>
+                                                                            <option value="12">Lớp 12</option>
+                                                                        </select>
+                                                                        <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+                                                                    </div>
+                                                                    <div id="class-error" class="error"></div>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class="tdl">
+                                                                    Email
+                                                                </td>
+                                                                <td class="tdr">
+                                                                    <input type="text" id="email">
+                                                                    <div id="email-error" class="error"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" id="btn-addchild">Thêm</button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <img src="~/Content/img/avatar/1.jpg" class="pb-2" style="height: 150px; width: 150px; margin-left: 40%" alt="" />
-                                                    <br>
-                                                    <input type="file" style=" width: 150px; margin-left: 40%">
-                                                    <table class="table pt-2">
-                                                        <tr>
-                                                            <td class="tdl">
-                                                                Tên đăng nhập
-                                                            </td>
-                                                            <td class="tdr">
-                                                                <input type="text" placeholder="ngannguyen193">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="tdl">
-                                                                Mật khẩu
-                                                            </td>
-                                                            <td class="tdr">
-                                                                <input type="password" placeholder="ngannguyen193">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="tdl">
-                                                                Ngày sinh
-                                                            </td>
-                                                            <td class="tdr">
-                                                                <input type="datetime-local" placeholder="12/12/2002">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="tdl" style="padding-top: 19px;">
-                                                                Lớp
-                                                            </td>
-                                                            <td class="tdr">
-                                                                <div class="form-wrapper">
-                                                                    <select name="" id="" class="form-control" style="width: 300px">
-                                                                        <option value="" disabled selected>Lớp</option>
-                                                                        <option value="1">Lớp 1</option>
-                                                                        <option value="2">Lớp 2</option>
-                                                                        <option value="3">Lớp 3</option>
-                                                                        <option value="4">Lớp 4</option>
-                                                                        <option value="5">Lớp 5</option>
-                                                                        <option value="6">Lớp 6</option>
-                                                                        <option value="7">Lớp 7</option>
-                                                                        <option value="8">Lớp 8</option>
-                                                                        <option value="9">Lớp 9</option>
-                                                                        <option value="10">Lớp 10</option>
-                                                                        <option value="11">Lớp 11</option>
-                                                                        <option value="12">Lớp 12</option>
-                                                                    </select>
-                                                                    <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="tdl">
-                                                                Trường
-                                                            </td>
-                                                            <td class="tdr">
-                                                                <input type="text" placeholder="THPT Võ Thị Sáu">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="tdl">
-                                                                Email
-                                                            </td>
-                                                            <td class="tdr">
-                                                                <input type="text" placeholder="scholas@gmail.com">
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Thêm</button>
-                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                </div>
+
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row pt-3">
-                                    <div class="col-4">
-                                        <img src="~/Content/img/avatar/1.jpg" class="pb-2" style="height: 150px; width: 150px; margin-left: 40%" alt="" />
-                                    </div>
-                                    <div class="col-8">
-                                        <table class="table">
-                                            <tr>
-                                                <td class="tdl">
-                                                    Tên tài khoản
-                                                </td>
-                                                <td class="tdr">
-                                                    contraicungcuame
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl">
-                                                    Ngày sinh
-                                                </td>
-                                                <td class="tdr">
-                                                    10/9/2002
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl">
-                                                    Lớp
-                                                </td>
-                                                <td class="tdr">
-                                                    Lớp 1
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl">
-                                                    Học sinh trường
-                                                </td>
-                                                <td class="tdr">
-                                                    Tiểu học số 1 Tây Giang
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl">
-                                                    Email
-                                                </td>
-                                                <td class="tdr">
-                                                    sgirg@gmail.com
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
+                                
+                                    
+                                    @foreach (var childAccount in Model.students.ToList().Where(x => x.parent_id == int.Parse(Session["UserID"].ToString())))
+                                    {
+                                        <div class="row pt-3">
+                                            <div class="col-4">
+                                                <img src="~/Content/img/avatar/student/@childAccount.avatar" class="pb-2" style="height: 150px; width: 150px; margin-left: 40%" alt="" />
+                                            </div>
+                                            <div class="col-8">
+                                                <table class="table">
+                                                    <tr>
+                                                        <td class="tdl">
+                                                            Tên tài khoản
+                                                        </td>
+                                                        <td class="tdr">
+                                                            @childAccount.fullname
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tdl">
+                                                            Tên tài khoản
+                                                        </td>
+                                                        <td class="tdr">
+                                                            @childAccount.username
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tdl">
+                                                            Ngày sinh
+                                                        </td>
+                                                        <td class="tdr">
+                                                            @childAccount.birthday
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tdl">
+                                                            Email
+                                                        </td>
+                                                        <td class="tdr">
+                                                            @childAccount.email
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    }
+
                             </div>
                         </div>
                     </div>
@@ -381,6 +398,9 @@
                                 <table class="table" style="text-align: center;">
                                     <tr>
                                         <th>
+                                            Tên người học
+                                        </th>
+                                        <th>
                                             Thứ
                                         </th>
                                         <th>
@@ -397,40 +417,31 @@
                                             Số buổi đã học
                                         </th>
                                     </tr>
+                                    @foreach (var hl in db.history_lessons.ToList().Where(x => x.student_id == int.Parse(Session["UserID"].ToString())))
+                                    {
                                     <tr>
                                         <td>
-                                            Thứ 2
+                                            @hl.student.fullname
                                         </td>
                                         <td>
-                                            7h30 - 9h
+                                            @hl.day_otw
                                         </td>
                                         <td>
-                                            13/3/2019
+                                            @hl.start_time - @hl.end_time
                                         </td>
                                         <td>
-                                            Cô Mi
+                                            @hl.day
                                         </td>
                                         <td>
-                                            5/20
+                                            @hl.tutor.fullname
+                                        </td>
+                                        <td>
+                                            @hl.total_sessions
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            Thứ 3
-                                        </td>
-                                        <td>
-                                            8h30 - 10h
-                                        </td>
-                                        <td>
-                                            1/2/2019
-                                        </td>
-                                        <td>
-                                            Thầy Dũng
-                                        </td>
-                                        <td>
-                                            10/30
-                                        </td>
-                                    </tr>
+                                    }
+
+
                                 </table>
                             </div>
                         </div>
@@ -466,11 +477,106 @@
     <script>
         $(function () {
             getSessionList(-1);
+           
             $("#select-dotw").on("change", function () {
                 var dotw = $(this).val();
                 getSessionList(dotw);
             });
+            $("#btn-show-modal").on("click", function () {
+                // set default value form
+                $(".error").html("");
+                $("input").val("");
+                $("select").val(-1);
+                $("#myModal1").modal("show");
+            })
+
+            $("#btn-addchild").on("click", function () {
+                var child = {
+                    fullname: $("#fullname").val(),
+                    username: $("#username").val(),
+                    password: $("#password").val(),
+                    birthday: $("#birthday").val(),
+                    class: $("#class").val(),
+                    email: $("#email").val()
+                }
+                var check = {
+                    fullname: false,
+                    username: false,
+                    password: false,
+                    birthday: false,
+                    class: false,
+                    email: false
+                }
+                //fullname
+                if (child.fullname == "") {
+                    $("#fullname-error").html("Xin nhập fullname");
+                    check.username = false;
+                } else {
+                    $("#fullname-error").html("");
+                    check.fullname = true;
+                }
+                //username
+                if (child.username == "") {
+                    $("#username-error").html("Xin nhập username");
+                    check.username = false;
+                } else {
+                    $("#username-error").html("");
+                    check.username = true;
+                }
+                //password
+                if (child.password == "") {
+                    $("#password-error").html("Xin nhập password");
+                    check.password = false;
+                } else {
+                    $("#password-error").html("");
+                    check.password = true;
+                }
+
+                //birthday
+                if (child.birthday == "") {
+                    $("#birthday-error").html("Xin nhập birthday");
+                    check.birthday = false;
+                } else {
+                    $("#birthday-error").html("");
+                    check.birthday = true;
+                }
+
+                //class
+                if (child.class == null) {
+                    $("#class-error").html("Xin chọn class");
+                    check.class = false;
+                } else {
+                    $("#class-error").html("");
+                    check.class = true;
+                }
+
+                //email
+                if (child.email == "") {
+                    $("#email-error").html("Xin nhập email");
+                    check.email = false;
+                } else {
+                    $("#email-error").html("");
+                    check.email = true;
+                }
+                if (check.username && check.password && check.birthday && check.email && check.class && check.fullname) {
+                    child = JSON.stringify(child);
+                    addChild(child);
+                }
+            });
+
         })
+        function addChild(data) {
+            $.ajax({
+                type: "GET",
+                url: "/api/addChild/",
+                data: { data: data },
+                dataType: "json",
+                success: function (response) {
+                    alert(response.message);
+                    $("#myModal1").modal("hide");
+                }
+            });
+        }
         function getSessionList(dotw) {
             $.ajax({
                 type: "GET",
