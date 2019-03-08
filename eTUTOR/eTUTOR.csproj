@@ -207,13 +207,13 @@
     <Compile Include="Models\history_lessons.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\notice.cs">
+      <DependentUpon>eTUITORModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\parent.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\subject.cs">
-      <DependentUpon>eTUITORModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\typeUser.cs">

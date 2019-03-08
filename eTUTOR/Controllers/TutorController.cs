@@ -195,10 +195,10 @@ namespace eTUTOR.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var senderemail = new MailAddress("hoak21t@gmail.com", "Tutor");//mail tutor
-                    //var receiveremail = new MailAddress("hoak21t@gmail.com", "Công ty"); //mail công ty
+                    var senderemail = new MailAddress("ppcrentalteam04@gmail.com","tutor"); // mail tutor 
+                    var receiveremail = new MailAddress("hoak21t@gmail.com", "Cong ty"); //mail cong ty
 
-                    var password = "phuhoa1995";// mật khẩu địa chỉ mail   
+                    var password = "K21t1team04";// mật khẩu địa chỉ mail 
                     var sub = subject;
                     var body = "Tên: " + name + " Email: " + email + " Tiêu đề: " + subject + " Nội dung: " + message;
                     // nội dung tin nhắn
@@ -216,15 +216,15 @@ namespace eTUTOR.Controllers
 
                     };
 
-                    //using (var mess = new MailMessage(senderemail, receiveremail)
-                    //{
-                    //    Subject = subject,
-                    //    Body = body
-                    //}
-                    //)
-                    //{
-                    //    smtp.Send(mess);
-                    //}
+                    using (var mess = new MailMessage(senderemail, receiveremail)
+                    {
+                        Subject = subject,
+                        Body = body
+                    }
+                    )
+                    {
+                        smtp.Send(mess);
+                    }
                     return RedirectToAction("Confirm", "Tutor");
                 }
             }
