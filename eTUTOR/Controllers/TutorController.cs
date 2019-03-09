@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using eTUTOR.Models;
+using Newtonsoft.Json.Linq;
+
 
 namespace eTUTOR.Controllers
 {
@@ -31,10 +34,10 @@ namespace eTUTOR.Controllers
                 return View(tatu);
             }
         }
-        public ActionResult InfoOfTutor(int id)
+        public ActionResult InfoOfTutor()
         {
             var tutor_id = int.Parse(Session["UserID"].ToString());
-            var info = db.tutors.FirstOrDefault(x => x.tutor_id == id);
+            var info = db.tutors.FirstOrDefault(x => x.tutor_id == tutor_id);
             List<session> sessionList = db.sessions.Where(x => x.tutor_id == tutor_id && x.status_admin == 2 ).ToList();
             ViewData["sessionlist"] = sessionList;
             List<schedule> scheduleList = db.schedules.Where(x => x.tutor_id == tutor_id).ToList();
@@ -187,5 +190,56 @@ namespace eTUTOR.Controllers
             return RedirectToAction("Duyetkhoahoc");
         }
 
+        [HttpPost]
+        public ActionResult Contact(string name, string email, string subject, string message)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var senderemail = new MailAddress("ppcrentalteam04@gmail.com","tutor"); // mail tutor 
+                    var receiveremail = new MailAddress("hoak21t@gmail.com", "Cong ty"); //mail cong ty
+
+                    var password = "K21t1team04";// mật khẩu địa chỉ mail 
+                    var sub = subject;
+                    var body = "Tên: " + name + " Email: " + email + " Tiêu đề: " + subject + " Nội dung: " + message;
+                    // nội dung tin nhắn
+
+
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderemail.Address, password)
+
+
+                    };
+
+                    using (var mess = new MailMessage(senderemail, receiveremail)
+                    {
+                        Subject = subject,
+                        Body = body
+                    }
+                    )
+                    {
+                        smtp.Send(mess);
+                    }
+                    return RedirectToAction("Confirm", "Tutor");
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.Error = "There are some problem in sending email";
+            }
+            return View();
+        }
+
+        public ActionResult Confirm()
+        {
+            return View();
+        }
     }
 }

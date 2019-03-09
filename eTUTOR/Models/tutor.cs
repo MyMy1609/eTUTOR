@@ -47,7 +47,7 @@ namespace eTUTOR.Models
         public virtual ICollection<schedule> schedules { get; set; }
         public virtual ICollection<session> sessions { get; set; }
         public virtual status status1 { get; set; }
-        public virtual ICollection<subject> subjects { get; set; }
         public virtual status status2 { get; set; }
+        public virtual ICollection<subject> subjects { get; set; }
     }
 }

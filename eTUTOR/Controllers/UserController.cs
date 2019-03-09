@@ -153,6 +153,7 @@ namespace eTUTOR.Controllers
             var tutor = model.tutors.FirstOrDefault(x => x.email == email);
             var student = model.students.FirstOrDefault(x => x.username == email);
             var parent = model.parents.FirstOrDefault(x => x.email == email);
+            var admin = model.admins.FirstOrDefault(x => x.email == email);
             password = commonService.hash(password);
             if (tutor != null)
             {
@@ -162,7 +163,7 @@ namespace eTUTOR.Controllers
                     Session["UserID"] = tutor.tutor_id;
                     Session["username"] = tutor.username;
                     Session["Role"] = "tutor";
-                    return RedirectToAction("InfoOfTutor", "Tutor", new { id = Session["UserID"] });
+                    return RedirectToAction("InfoOfTutor", "Tutor");
                 }
             }
             if (student != null)
@@ -175,7 +176,7 @@ namespace eTUTOR.Controllers
                     Session["UserID"] = student.student_id;
                     Session["username"] = student.username;
                     Session["Role"] = "student";
-                    return RedirectToAction("InfoOfStudent", "Student", new { id = Session["UserID"] });
+                    return RedirectToAction("InfoOfStudent", "Student");
                 }
             }
             if (parent != null)
@@ -187,13 +188,23 @@ namespace eTUTOR.Controllers
                     Session["UserID"] = parent.parent_id;
                     Session["username"] = parent.username;
                     Session["Role"] = "parent";
-                    return RedirectToAction("InfoOfParent", "Parent", new { id = Session["UserID"] });
+                    return RedirectToAction("InfoOfParent", "Parent");
                 }
             }
-            else
+            if (admin != null)
             {
-                ViewBag.mgs = "tài khoản không tồn tại";
+                if (admin.password.Equals(password))
+                {
+                    Session["FullName"] = admin.fullname;
+                    Session["UserID"] = admin.admin_id;
+                    Session["username"] = admin.username;
+                    Session["Role"] = "admin";
+                    return RedirectToAction("dashboard", "home", new { area = "admin" });
+                }
             }
+            
+            //error
+            ViewBag.mgs = "tài khoản không tồn tại";
             return View();
         }
 
