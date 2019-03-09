@@ -207,6 +207,9 @@
     <Compile Include="Models\history_lessons.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\notice.cs">
+      <DependentUpon>eTUITORModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\parent.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
@@ -715,6 +718,7 @@
     <Content Include="Scripts\jsmpg.min.js.map" />
     <Content Include="Views\API\SessionTutorList.cshtml" />
     <Content Include="Views\Home\Confirm.cshtml" />
+    <Content Include="Views\User\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

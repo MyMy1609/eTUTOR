@@ -9,9 +9,13 @@ using eTUTOR.Models;
 using eTUTOR.Service;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.Mail;
+using System.Web.UI;
+using System.Net.Mail;
 
 namespace eTUTOR.Controllers
 {
+
     public class UserController : Controller
     {
         //===================================================
@@ -81,6 +85,63 @@ namespace eTUTOR.Controllers
         {
             return View();
         }
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+        public ActionResult CheckForgotPW(string username, string email)
+        {
+            var student = model.students.FirstOrDefault(x => x.username == username);
+            var parent = model.parents.FirstOrDefault(x => x.username == username);
+            var tutorr = model.tutors.FirstOrDefault(x => x.username == username);
+            if (student != null)
+            {
+                if (student.email != email)
+                {
+                    ViewBag.Err = "Email sai rồi !";
+                    return View("ForgotPassword");
+                }
+                string newPW = CreateLostPassword(10);
+                CapNhatMatKhau(student.username, newPW, "std");
+                guiMail(student.username, newPW, email);
+                ViewBag.sc = "Đã đổi mật khẩu, bạn vui lòng vô mail để lấy mật khẩu nhé !";
+                return RedirectToAction("Login");
+
+            }
+            if(parent != null)
+            {
+                if (parent.email != email)
+                {
+                    ViewBag.Err = "Email sai rồi !";
+                    return View("ForgotPassword");
+                }
+                string newPW = CreateLostPassword(10);
+                CapNhatMatKhau(parent.username, newPW, "std");
+                guiMail(parent.username, newPW, email);
+                ViewBag.sc = "Đã đổi mật khẩu, bạn vui lòng vô mail để lấy mật khẩu nhé !";
+                return RedirectToAction("Login");
+            }
+            if (tutorr != null)
+            {
+                if (tutorr.email != email)
+                {
+                    ViewBag.Err = "Email sai rồi !";
+                    return View("ForgotPassword");
+                }
+                string newPW = CreateLostPassword(10);
+                CapNhatMatKhau(tutorr.username, newPW, "std");
+                guiMail(tutorr.username, newPW, email);
+                ViewBag.sc = "Đã đổi mật khẩu, bạn vui lòng vô mail để lấy mật khẩu nhé !";
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                ViewBag.Err = "Tên đăng nhập sai rồi !";
+                return RedirectToAction("ForgotPassword");
+            }
+
+            
+        }
         public ActionResult ConfirmEmail()
         {
             return View();
@@ -138,11 +199,94 @@ namespace eTUTOR.Controllers
 
         public ActionResult Logout()
         {
-            Session.Remove("FullName");
-            Session.Remove("UserID");
-            Session.Remove("Role");
+            Session.Clear();
             return RedirectToAction("Login");
         }
-        
+        //tạo pass mới ngẫu nhiên
+        public string CreateLostPassword(int PasswordLength)
+        {
+            string _allowedChars = "abcdefghijk0123456789mnopqrstuvwxyz";
+            Random randNum = new Random(); char[] chars = new char[PasswordLength];
+            int allowedCharCount = _allowedChars.Length;
+            for (int i = 0; i < PasswordLength; i++)
+            {
+                chars[i] = _allowedChars[(int)((_allowedChars.Length) * randNum.NextDouble())];
+            }
+            return new string(chars);
+        }
+
+        private void CapNhatMatKhau(string TenDangNhap, string MatKhau, string typeUser)
+        {
+            if (typeUser == "std")
+            {
+                var stdd = model.students.FirstOrDefault(x => x.username == TenDangNhap);
+                stdd.password = commonService.hash(MatKhau) ;
+                model.SaveChanges();
+
+            }
+            else if (typeUser == "tutorr")
+            {
+                var tt = model.tutors.FirstOrDefault(x => x.username == TenDangNhap);
+                tt.password = commonService.hash(MatKhau);
+                model.SaveChanges();
+            }
+            else
+            {
+                var pr = model.parents.FirstOrDefault(x => x.username == TenDangNhap);
+                pr.password = commonService.hash(MatKhau);
+                model.SaveChanges();
+            }
+        }
+        //nội dung gửi maill
+        private string NoiDungMail(string TenDangNhap, string PW)
+        {
+            string NoiDung = "";
+            NoiDung = "Đây là Mail gửi đến từ website của ETUTOR. ";
+            NoiDung += "Mật khẩu mới của bạn là: " + PW;
+            NoiDung += ". Sau khi đăng nhập bạn nhớ đổi lại mật khẩu để tiện cho việc đăng nhập lần tiếp theo";
+            NoiDung += "Vui lòng không trả lời Mail này!";
+            return NoiDung;
+        }
+        public void guiMail(string TenDangNhap, string PW, string mail)
+        {
+            /*
+            MailMessage objEmail = new MailMessage
+            {
+                To = mail,
+                From = "trancongdu1997@gmail.com",
+                Subject = "Thông tin về mật khẩu của bạn",
+                BodyEncoding = Encoding.UTF8,
+                Body = NoiDungMail(TenDangNhap, PW),
+                Priority = MailPriority.High,
+                BodyFormat = MailFormat.Html
+            };
+
+            try
+            {
+                SmtpMail.Send(objEmail);
+            }
+            catch (Exception exc)
+            {
+                Response.Write("Send failure: " + exc.ToString());
+            }
+            */
+            using (System.Net.Mail.MailMessage emailMessage = new System.Net.Mail.MailMessage())
+            {
+                emailMessage.From = new MailAddress("td159855@gmail.com");
+                emailMessage.To.Add(new MailAddress(mail));
+                emailMessage.Subject = "eTUTOR - Lay lai mat khau";
+                emailMessage.Body = NoiDungMail(TenDangNhap, PW);
+                emailMessage.Priority = System.Net.Mail.MailPriority.Normal;
+                using (SmtpClient MailClient = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    MailClient.EnableSsl = true;
+                    MailClient.Credentials = new System.Net.NetworkCredential("td159855@gmail.com", "215437331");
+                    MailClient.Send(emailMessage);
+                }
+            }
+        }
+
+
     }
+
 }
