@@ -11,9 +11,10 @@ namespace eTUTOR.Controllers
     {
         eTUITOREntities db = new eTUITOREntities();
         // GETA : Student
-        public ActionResult InfoOfStudent(int id)
+        public ActionResult InfoOfStudent()
         {
-            var info = db.students.FirstOrDefault(x => x.student_id == id);
+            var student_id = int.Parse(Session["UserID"].ToString());
+            var info = db.students.FirstOrDefault(x => x.student_id == student_id);
             return View(info);
         }
         public ActionResult listRegistCourse()

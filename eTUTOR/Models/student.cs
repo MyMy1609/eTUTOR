@@ -25,10 +25,10 @@ namespace eTUTOR.Models
         public string fullname { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public Nullable<int> status { get; set; }
+        public int status { get; set; }
         public Nullable<int> parent_id { get; set; }
         public string email { get; set; }
-        public Nullable<int> @class { get; set; }
+        public int @class { get; set; }
         public string avatar { get; set; }
         public string phone { get; set; }
         public Nullable<System.DateTime> birthday { get; set; }

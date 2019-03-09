@@ -6,6 +6,8 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using eTUTOR.Models;
+using Newtonsoft.Json.Linq;
+
 
 namespace eTUTOR.Controllers
 {
@@ -32,10 +34,10 @@ namespace eTUTOR.Controllers
                 return View(tatu);
             }
         }
-        public ActionResult InfoOfTutor(int id)
+        public ActionResult InfoOfTutor()
         {
             var tutor_id = int.Parse(Session["UserID"].ToString());
-            var info = db.tutors.FirstOrDefault(x => x.tutor_id == id);
+            var info = db.tutors.FirstOrDefault(x => x.tutor_id == tutor_id);
             List<session> sessionList = db.sessions.Where(x => x.tutor_id == tutor_id && x.status_admin == 2 ).ToList();
             ViewData["sessionlist"] = sessionList;
             List<schedule> scheduleList = db.schedules.Where(x => x.tutor_id == tutor_id).ToList();

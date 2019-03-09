@@ -7,6 +7,9 @@
     var sessionlist = ViewData["sessionlist"] as List<eTUTOR.Models.session>;  /*use for line 331*/
     var scheduleList = ViewData["scheduleList"] as List<eTUTOR.Models.schedule>; /*use for line 437*/
     var comment = db.comments.ToList().Where(x => x.tutor_id == Model.tutor_id); /*use for line 594 - danh sách comment của gia sư*/
+    DateTime birthday = Model.birthday.GetValueOrDefault();
+    string birthdayformat = birthday.ToString("dd/MM/yyyy");
+
 }
 
 
@@ -43,209 +46,202 @@
             <div class="namepro ml-4" style="text-align: center;">@Html.DisplayFor(model => model.fullname)</div>
             <table class="table">
 
-                <tr>
-                    <td class="tdl">
-                        Tên đăng nhập
-                    </td>
-                    <td class="tdr">
-                        @Html.DisplayFor(model => model.username)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdl">
-                        Địa chỉ
-                    </td>
-                    <td class="tdr">
-                        @Html.DisplayFor(model => model.address)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdl">
-                        Ngày sinh
-                    </td>
-                    <td class="tdr">
-                        @Html.DisplayFor(model => model.birthday)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdl">
-                        Số điện thoại
-                    </td>
-                    <td class="tdr">
-                        @Html.DisplayFor(model => model.phone)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdl">
-                        Email
-                    </td>
-                    <td class="tdr">
-                        @Html.DisplayFor(model => model.email)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdl">
-                        Chuyên ngành giảng dạy
-                    </td>
-                    <td class="tdr">
-                        @Html.DisplayFor(model => model.specialized)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdl">
-                        Công việc hiện tại
-                    </td>
-                    <td class="tdr">
-                        @Html.DisplayFor(model => model.job)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdl" style="padding-top: 19px;">
-                        Kinh nghiệm
-                    </td>
-                    <td class="tdr">
-                        @Html.DisplayFor(model => model.experience)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdl">
-                        Bằng cấp
-                    </td>
-                    <td class="tdr">
-                        <img src="~/Content/img/certificates/@Model.tutor_id/@Model.certificate" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdl"></td>
-                    @*Chỉnh sửa*@
-                    <td>
-                        <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#myModal"
-                                style="margin-left: 65%">
-                            Chỉnh sửa
-                        </button>
-                        <div class="modal" id="myModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
+                    <tr>
+                        <td class="tdl">
+                            Tên đăng nhập
+                        </td>
+                        <td class="tdr">
+                            @Html.DisplayFor(model => model.username)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdl">
+                            Địa chỉ
+                        </td>
+                        <td class="tdr">
+                            @Html.DisplayFor(model => model.address)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdl">
+                            Ngày sinh
+                        </td>
+                        <td class="tdr">
+                            @birthdayformat
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdl">
+                            Số điện thoại
+                        </td>
+                        <td class="tdr">
+                            @Html.DisplayFor(model => model.phone)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdl">
+                            Email
+                        </td>
+                        <td class="tdr">
+                            @Html.DisplayFor(model => model.email)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdl">
+                            Chuyên ngành giảng dạy
+                        </td>
+                        <td class="tdr">
+                            @Html.DisplayFor(model => model.specialized)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdl">
+                            Công việc hiện tại
+                        </td>
+                        <td class="tdr">
+                            @Html.DisplayFor(model => model.job)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdl" style="padding-top: 19px;">
+                            Kinh nghiệm
+                        </td>
+                        <td class="tdr">
+                            @Html.DisplayFor(model => model.experience)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdl">
+                            Bằng cấp
+                        </td>
+                        <td class="tdr">
+                            <img src="~/Content/img/certificates/@Model.tutor_id/@Model.certificate" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdl"></td>
+                        @*Chỉnh sửa*@
+                        <td>
+                            <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#myModal"
+                                    style="margin-left: 65%">
+                                Chỉnh sửa
+                            </button>
+                            <div class="modal" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
 
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" style="margin-left: 30%">Chỉnh sửa Tiểu sử</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" style="margin-left: 30%">Chỉnh sửa Tiểu sử</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
 
-                                    <div class="modal-body">
-                                        <table class="table">
-                                            <tr>
-                                                <td class="tdl">
-                                                    Họ và tên
-                                                </td>
-                                                <td class="tdr">
-                                                    <input type="text" placeholder="Nguyễn Ngọc Ngân">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl">
-                                                    Tên đăng nhập
-                                                </td>
-                                                <td class="tdr">
-                                                    <input type="text" placeholder="ngannguyen193">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl">
-                                                    Địa chỉ
-                                                </td>
-                                                <td class="tdr">
-                                                    <input type="text" placeholder="69 Trần Duy Hưng, Cầu Giấy, Hà Nội">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl">
-                                                    Ngày sinh
-                                                </td>
-                                                <td class="tdr">
-                                                    <input type="datetime-local" placeholder="12/12/2002">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl">
-                                                    Số điện thoại
-                                                </td>
-                                                <td class="tdr">
-                                                    <input type="text" placeholder="027823643">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl">
-                                                    Email
-                                                </td>
-                                                <td class="tdr">
-                                                    <input type="email" placeholder="ngannguyen193@gmail.com">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl">
-                                                    Chuyên ngành dạy
-                                                </td>
-                                                <td class="tdr">
-                                                    <textarea rows="3" cols="30">
-                                                            Luyện thi đại học khối A
-                                                        </textarea>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl">
-                                                    Công việc hiện tại
-                                                </td>
-                                                <td class="tdr">
-                                                    <input type="text" placeholder="Trường THCS Lý Tự Trọng" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl" style="padding-top: 19px;">
-                                                    Kinh nghiệm
-                                                </td>
-                                                <td class="tdr">
-                                                    <div class="form-wrapper">
-                                                        <select name="" id="" class="form-control" style="border: none">
-                                                            <option value="" disabled selected>Năm kinh nghiệm</option>
-                                                            <option value="1">Không kinh nghiệm</option>
-                                                            <option value="2">+1</option>
-                                                            <option value="3">+3</option>
-                                                            <option value="4">+5</option>
-                                                        </select>
-                                                        <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tdl">
-                                                    Bằng cấp
-                                                </td>
-                                                <td class="tdr">
-                                                    <div class="slider-wrapper">
-                                                        <ul class="s-thumbs">
-                                                            <li>
-                                                                <a href="#slide-1">
-                                                                    <img src="~/Content/img/chung_chi/cc_1.jpg" alt="" width="50" height="50" />
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+                                        <div class="modal-body">
+                                            <table class="table">
+                                                <tr>
+                                                    <td class="tdl">
+                                                        Họ và tên
+                                                    </td>
+                                                    <td class="tdr">
+                                                        <input type="text" id="fullname" value="@Model.fullname">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdl">
+                                                        Tên đăng nhập
+                                                    </td>
+                                                    <td class="tdr">
+                                                        <input type="text" id="username" value="@Model.username">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdl">
+                                                        Địa chỉ
+                                                    </td>
+                                                    <td class="tdr">
+                                                        <input type="text" id="address" value="@Model.address">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdl">
+                                                        Ngày sinh
+                                                    </td>
+                                                    <td class="tdr">
+                                                        
+                                                        <input type="datetime" id="birthday" value="@birthdayformat">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdl">
+                                                        Số điện thoại
+                                                    </td>
+                                                    <td class="tdr">
+                                                        <input type="text" id="phone" value="@Model.phone">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdl">
+                                                        Email
+                                                    </td>
+                                                    <td class="tdr">
+                                                        <input type="email" id="email" value="@Model.email" disabled>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdl">
+                                                        Chuyên ngành dạy
+                                                    </td>
+                                                    <td class="tdr">
+                                                        <input type="email" id="specialized" value="@Model.specialized" >
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdl">
+                                                        Công việc hiện tại
+                                                    </td>
+                                                    <td class="tdr">
+                                                        <input type="email" id="job" value="@Model.job">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdl" style="padding-top: 19px;">
+                                                        Kinh nghiệm
+                                                    </td>
+                                                    <td class="tdr">
+                                                        <div class="form-wrapper">
+                                                            <input type="email" id="experience" value="@Model.experience">
+                                                            <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdl">
+                                                        Bằng cấp
+                                                    </td>
+                                                    <td class="tdr">
+                                                        <div class="slider-wrapper">
+                                                            <ul class="s-thumbs">
+                                                                <li>
+                                                                    <a href="#slide-1">
+                                                                        <img src="~/Content/img/chung_chi/cc_1.jpg" alt="" width="50" height="50" />
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
 
-                                                        <ul class="s-slides">
-                                                            <li id="slide-1" class="slideLeft">
-                                                                <img src="~/Content/img/chung_chi/cc_1.jpg" style="width:150px" />
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <input type="file" class="mt-3" />
-                                                </td>
-                                            </tr>
+                                                            <ul class="s-slides">
+                                                                <li id="slide-1" class="slideLeft">
+                                                                    <img src="~/Content/img/chung_chi/cc_1.jpg" style="width:150px" />
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <input type="file" class="mt-3" />
+                                                    </td>
+                                                </tr>
 
                                         </table>
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
+                                        <button type="button" class="btn btn-primary" id="btn-profile-save">Lưu</button>
                                     </div>
 
                                 </div>
@@ -652,18 +648,56 @@
                 var dotw = $(this).val();
                 getSessionApproved(dotw);
             });
-        })
-    function getSessionApproved(dotw) {
-            $.ajax({
-                type: "GET",
-                url: "/api/getSessionApproved/",
-                data: {dotw : dotw, tutor_id : @int.Parse(Session["UserID"].ToString())},
-                dataType: "html",
-                success: function (response) {
-                    $('#sessionapproved').html(response)
+            $("#btn-profile-save").on("click", function () {
+                var user = {
+                    fullname: $("#fullname").val(),
+                    username: $("#username").val(),
+                    address: $("#address").val(),
+                    birthday: $("#birthday").val(),
+                    phone: $("#phone").val(),
+                    email: $("#email").val(),
+                    specialized: $("#specialized").val(),
+                    job: $("#job").val(),
+                    experience: $(" #experience").val(),
                 }
-        });
-
+                let check = {
+                    fullname: false,
+                    username: false,
+                    address: false,
+                    birthday: false,
+                    phone: false,
+                    email: false,
+                    specialized: false,
+                    job: false,
+                    experience: false
+                }
+                user = JSON.stringify(user);
+                editProfileTutor(user);
+                
+            })
+        })
+        function getSessionApproved(dotw) {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/getSessionApproved/",
+                    data: {dotw : dotw, tutor_id : @int.Parse(Session["UserID"].ToString())},
+                    dataType: "html",
+                    success: function (response) {
+                        $('#sessionapproved').html(response)
+                    }
+                });
+        }
+        function editProfileTutor(data) {
+            $.ajax({
+                type: "POST",
+                url: "/api/editProfileTutor/",
+                data: { data: data },
+                dataType: "json",
+                success: function (response) {
+                    alert(response.message);
+                    window.location.reload();
+                }
+            });
         }
 
     </script>

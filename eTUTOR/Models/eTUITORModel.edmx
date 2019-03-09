@@ -18,10 +18,10 @@
             <PropertyRef Name="admin_id" />
           </Key>
           <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fullname" Type="nvarchar" MaxLength="20" />
-          <Property Name="username" Type="nvarchar" MaxLength="10" />
-          <Property Name="email" Type="nvarchar" MaxLength="20" />
-          <Property Name="password" Type="nvarchar" MaxLength="20" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="password" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="comments">
           <Key>
@@ -164,13 +164,13 @@ warning 6002: The table/view 'capstone2019.dbo.notice' does not have a primary k
             <PropertyRef Name="student_id" />
           </Key>
           <Property Name="student_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fullname" Type="nvarchar" MaxLength="50" />
-          <Property Name="username" Type="nvarchar" MaxLength="50" />
-          <Property Name="password" Type="nvarchar(max)" />
-          <Property Name="status" Type="int" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
           <Property Name="parent_id" Type="int" />
           <Property Name="email" Type="nvarchar" MaxLength="255" />
-          <Property Name="class" Type="int" />
+          <Property Name="class" Type="int" Nullable="false" />
           <Property Name="avatar" Type="nvarchar" MaxLength="255" />
           <Property Name="phone" Type="nvarchar" MaxLength="15" />
           <Property Name="birthday" Type="date" />
@@ -695,10 +695,10 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
             <PropertyRef Name="admin_id" />
           </Key>
           <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fullname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="username" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fullname" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="comment">
           <Key>
@@ -851,13 +851,13 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
             <PropertyRef Name="student_id" />
           </Key>
           <Property Name="student_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="Int32" />
+          <Property Name="fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" Nullable="false" />
           <Property Name="parent_id" Type="Int32" />
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="class" Type="Int32" />
+          <Property Name="class" Type="Int32" Nullable="false" />
           <Property Name="avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="birthday" Type="DateTime" Precision="0" />

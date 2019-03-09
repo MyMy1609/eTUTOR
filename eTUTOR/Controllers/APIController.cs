@@ -103,6 +103,7 @@ namespace eTUTOR.Controllers
             return PartialView("SessionApproved");
 
         }
+        [HttpPost]
         public JsonResult addChild(string data)
         {
             int parentId = int.Parse(Session["UserID"].ToString());
@@ -123,6 +124,74 @@ namespace eTUTOR.Controllers
             db.students.Add(st);
             db.SaveChanges();
             message = "add student sucess";
+            var response = new { message = message, status = status };
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        
+        [HttpPost]
+        public JsonResult editProfile(string data)
+        {
+        
+            int parentId = int.Parse(Session["UserID"].ToString());
+            string message;
+            var status = HttpStatusCode.OK;
+            JObject parent = JObject.Parse(data);
+            parent pr = db.parents.Find(parentId);
+           
+            pr.fullname = parent["fullname"].ToString();
+            pr.username = parent["username"].ToString();
+            pr.address = parent["address"].ToString();
+            pr.phone = parent["phone"].ToString();
+            pr.email = parent["email"].ToString();
+            
+            db.SaveChanges();
+            message = "update profile sucess";
+            var response = new { message = message, status = status };
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult editProfileTutor(string data)
+        {
+
+            int tutorId = int.Parse(Session["UserID"].ToString());
+            string message;
+            var status = HttpStatusCode.OK;
+            JObject tutor = JObject.Parse(data);
+            tutor tt = db.tutors.Find(tutorId);
+
+            tt.fullname = tutor["fullname"].ToString();
+            tt.username = tutor["username"].ToString();
+            tt.address = tutor["address"].ToString();
+            tt.birthday = DateTime.ParseExact(tutor["birthday"].ToString(), "dd/MM/yyyy", null);
+            tt.phone = tutor["phone"].ToString();
+            tt.email = tutor["email"].ToString();
+            tt.specialized = tutor["specialized"].ToString();
+            tt.job = tutor["job"].ToString();
+            tt.experience = tutor["experience"].ToString();
+
+            db.SaveChanges();
+            message = "update profile sucess";
+            var response = new { message = message, status = status };
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult editProfileStudent(string data)
+        {
+
+            int studentId = int.Parse(Session["UserID"].ToString());
+            string message;
+            var status = HttpStatusCode.OK;
+            JObject student = JObject.Parse(data);
+            student st = db.students.Find(studentId);
+
+            st.fullname = student["fullname"].ToString();
+            st.username = student["username"].ToString();
+            st.parent.address = student["address"].ToString();
+            st.birthday = DateTime.ParseExact(student["birthday"].ToString(), "dd/MM/yyyy", null);
+            st.phone = student["phone"].ToString();
+            st.email = student["email"].ToString();
+            st.@class = int.Parse(student["class"].ToString());
+
+            db.SaveChanges();
+            message = "update profile sucess";
             var response = new { message = message, status = status };
             return Json(response, JsonRequestBehavior.AllowGet);
         }
