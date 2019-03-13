@@ -213,12 +213,9 @@
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\notice.cs">
-<<<<<<< HEAD
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\parent.cs">
-=======
->>>>>>> ec00ff1ada8b9b9dbc121eaaaa0255fb4210ad85
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\parent.cs">
@@ -870,11 +867,8 @@
     <Content Include="Scripts\jsmpg.min.js.map" />
     <Content Include="Views\API\SessionTutorList.cshtml" />
     <Content Include="Views\Home\Confirm.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\User\ForgotPassword.cshtml" />
-=======
     <Content Include="Views\Tutor\Confirm.cshtml" />
->>>>>>> ec00ff1ada8b9b9dbc121eaaaa0255fb4210ad85
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
