@@ -5,14 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="capstone2019Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="about">
-          <Key>
-            <PropertyRef Name="about_id" />
-          </Key>
-          <Property Name="about_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="title" Type="nvarchar" MaxLength="30" />
-          <Property Name="content" Type="nvarchar(max)" />
-        </EntityType>
         <EntityType Name="admin">
           <Key>
             <PropertyRef Name="admin_id" />
@@ -151,6 +143,7 @@ warning 6002: The table/view 'capstone2019.dbo.notice' does not have a primary k
           <Property Name="status_admin" Type="int" />
           <Property Name="subject_id" Type="int" />
           <Property Name="dateCreate" Type="date" />
+          <Property Name="schedule_id" Type="int" />
         </EntityType>
         <EntityType Name="status">
           <Key>
@@ -433,6 +426,18 @@ warning 6002: The table/view 'capstone2019.dbo.notice' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_sessions_schedules1">
+          <End Role="schedules" Type="Self.schedules" Multiplicity="0..1" />
+          <End Role="sessions" Type="Self.sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schedules">
+              <PropertyRef Name="schedule_id" />
+            </Principal>
+            <Dependent Role="sessions">
+              <PropertyRef Name="schedule_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_submenu_common">
           <End Role="common" Type="Self.common" Multiplicity="0..1" />
           <End Role="submenu" Type="Self.submenu" Multiplicity="*" />
@@ -470,7 +475,6 @@ warning 6002: The table/view 'capstone2019.dbo.notice' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="capstone2019ModelStoreContainer">
-          <EntitySet Name="about" EntityType="Self.about" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="comments" EntityType="Self.comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="common" EntityType="Self.common" Schema="dbo" store:Type="Tables" />
@@ -564,6 +568,10 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
             <End Role="tutors" EntitySet="tutors" />
             <End Role="sessions" EntitySet="sessions" />
           </AssociationSet>
+          <AssociationSet Name="FK_sessions_schedules1" Association="Self.FK_sessions_schedules1">
+            <End Role="schedules" EntitySet="schedules" />
+            <End Role="sessions" EntitySet="sessions" />
+          </AssociationSet>
           <AssociationSet Name="FK_submenu_common" Association="Self.FK_submenu_common">
             <End Role="common" EntitySet="common" />
             <End Role="submenu" EntitySet="submenu" />
@@ -582,7 +590,6 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
     <edmx:ConceptualModels>
       <Schema Namespace="capstone2019Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="eTUITOREntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="abouts" EntityType="capstone2019Model.about" />
           <EntitySet Name="admins" EntityType="capstone2019Model.admin" />
           <EntitySet Name="comments" EntityType="capstone2019Model.comment" />
           <EntitySet Name="commons" EntityType="capstone2019Model.common" />
@@ -641,6 +648,10 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
             <End Role="tutor" EntitySet="tutors" />
             <End Role="schedule" EntitySet="schedules" />
           </AssociationSet>
+          <AssociationSet Name="FK_sessions_schedules1" Association="capstone2019Model.FK_sessions_schedules1">
+            <End Role="schedule" EntitySet="schedules" />
+            <End Role="session" EntitySet="sessions" />
+          </AssociationSet>
           <AssociationSet Name="FK__sessions__subjec__1BC821DD" Association="capstone2019Model.FK__sessions__subjec__1BC821DD">
             <End Role="subject" EntitySet="subjects" />
             <End Role="session" EntitySet="sessions" />
@@ -682,14 +693,6 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="about">
-          <Key>
-            <PropertyRef Name="about_id" />
-          </Key>
-          <Property Name="about_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="admin">
           <Key>
             <PropertyRef Name="admin_id" />
@@ -807,6 +810,7 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
           <Property Name="dateCreate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_schedule_status" FromRole="schedule" ToRole="status" />
           <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_schedule_tutor" FromRole="schedule" ToRole="tutor" />
+          <NavigationProperty Name="sessions" Relationship="capstone2019Model.FK_sessions_schedules1" FromRole="schedule" ToRole="session" />
         </EntityType>
         <EntityType Name="session">
           <Key>
@@ -825,6 +829,8 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
           <Property Name="status_admin" Type="Int32" />
           <Property Name="subject_id" Type="Int32" />
           <Property Name="dateCreate" Type="DateTime" Precision="0" />
+          <Property Name="schedule_id" Type="Int32" />
+          <NavigationProperty Name="schedule" Relationship="capstone2019Model.FK_sessions_schedules1" FromRole="session" ToRole="schedule" />
           <NavigationProperty Name="subject" Relationship="capstone2019Model.FK__sessions__subjec__1BC821DD" FromRole="session" ToRole="subject" />
           <NavigationProperty Name="status" Relationship="capstone2019Model.FK_session_status" FromRole="session" ToRole="status" />
           <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_session_status_admin" FromRole="session" ToRole="status" />
@@ -1064,6 +1070,18 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_sessions_schedules1">
+          <End Type="capstone2019Model.schedule" Role="schedule" Multiplicity="0..1" />
+          <End Type="capstone2019Model.session" Role="session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schedule">
+              <PropertyRef Name="schedule_id" />
+            </Principal>
+            <Dependent Role="session">
+              <PropertyRef Name="schedule_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__sessions__subjec__1BC821DD">
           <End Type="capstone2019Model.subject" Role="subject" Multiplicity="0..1" />
           <End Type="capstone2019Model.session" Role="session" Multiplicity="*" />
@@ -1190,15 +1208,6 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="capstone2019ModelStoreContainer" CdmEntityContainer="eTUITOREntities">
-          <EntitySetMapping Name="abouts">
-            <EntityTypeMapping TypeName="capstone2019Model.about">
-              <MappingFragment StoreEntitySet="about">
-                <ScalarProperty Name="content" ColumnName="content" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="about_id" ColumnName="about_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="admins">
             <EntityTypeMapping TypeName="capstone2019Model.admin">
               <MappingFragment StoreEntitySet="admin">
@@ -1319,6 +1328,7 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
           <EntitySetMapping Name="sessions">
             <EntityTypeMapping TypeName="capstone2019Model.session">
               <MappingFragment StoreEntitySet="sessions">
+                <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
                 <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
                 <ScalarProperty Name="subject_id" ColumnName="subject_id" />
                 <ScalarProperty Name="status_admin" ColumnName="status_admin" />

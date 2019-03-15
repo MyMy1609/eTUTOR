@@ -25,7 +25,6 @@ namespace eTUTOR.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<about> abouts { get; set; }
         public DbSet<admin> admins { get; set; }
         public DbSet<comment> comments { get; set; }
         public DbSet<common> commons { get; set; }
