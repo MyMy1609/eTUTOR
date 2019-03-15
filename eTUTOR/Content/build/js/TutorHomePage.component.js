@@ -1,3 +1,4 @@
+// duyet view infoOftutor
 function duyetstudent(id) {
     //alert('!!id ' + id)
     var request = new XMLHttpRequest();

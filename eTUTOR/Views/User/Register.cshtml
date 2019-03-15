@@ -23,33 +23,33 @@
     <div class="wrapper">
         <div class="inner">
             <div class="register-form flash hide">
-                <form action="/User/RegisterParent" method="post" onsubmit="return checkConfirmPassword()">
+                <form action="/User/RegisterParent" method="post" onsubmit="return validation()">
                     <img src="~/Content/img/register/registration-form-1.png" alt="" class="image-1" />
                     <h3>Đăng ký tài khoản</h3>
                     <div class="default">
                         <div class="form-holder">
                             <span class="lnr lnr-user"></span>
-                            <input type="text" class="form-control" name="fullname" placeholder="Họ và tên">
+                            <input id="fullname" type="text" class="form-control" name="fullname" placeholder="Họ và tên" autocomplete="off">
                         </div>
                         <div class="form-holder">
                             <span class="lnr lnr-users"></span>
-                            <input type="text" class="form-control" name="username" placeholder="Tên tài khoản">
+                            <input id="username" type="text" class="form-control" name="username" placeholder="Tên tài khoản" autocomplete="off">
                         </div>
                         <div class="form-holder">
                             <span class="lnr lnr-phone-handset"></span>
-                            <input type="text" class="form-control" placeholder="Số điện thoại">
+                            <input id="mobileNumber" type="text" class="form-control" name="mobileNumber" placeholder="Số điện thoại" autocomplete="off">
                         </div>
                         <div class="form-holder">
                             <span class="lnr lnr-envelope"></span>
-                            <input type="text" class="form-control" name="email" placeholder="Email">
+                            <input id="email" type="text" class="form-control" name="email" placeholder="Email" autocomplete="off">
                         </div>
                         <div class="form-holder">
                             <span class="lnr lnr-lock"></span>
-                            <input type="password" class="form-control" name="password" placeholder="Mật khẩu">
+                            <input id="password" type="password" class="form-control" name="password" placeholder="Mật khẩu" autocomplete="off">
                         </div>
                         <div class="form-holder">
                             <span class="lnr lnr-lock"></span>
-                            <input type="password" class="form-control" name="confirmpassword" placeholder="Nhập lại mật khẩu">
+                            <input id="confirmpassword" type="password" class="form-control" name="confirmpassword" placeholder="Nhập lại mật khẩu" autocomplete="off">
                             <div class="password-error" style="color:red;margin-top:10px;"></div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                             </label>
                         </div>
                     </div>
-                    <button  type="submit" id="btn-register"  disabled>
+                    <button class="btnSubmit"  type="submit" id="btn-register"  disabled>
                         <span >Đăng Ký</span>
                     </button>
                 </form>
@@ -105,30 +105,83 @@
                 }, duration);
             })
         })
-        function checkConfirmPassword() {
-            var check = true;
-            $(".password-error").empty();
-            var password = $("input[name='password']").val();
-            var rePassword = $("input[name='confirmpassword']").val();
-            if (password != rePassword) {
-                check = false;
-                $(".password-error").html('pssword is not match with confirm password');
+        //function checkConfirmPassword() {
+        //    var check = true;
+        //    $(".password-error").empty();
+        //    var password = $("input[name='password']").val();
+        //    var rePassword = $("input[name='confirmpassword']").val();
+        //    if (password != rePassword) {
+        //        check = false;
+        //        $(".password-error").html('pssword is not match with confirm password');
+        //    }
+        //    console.log(password);
+        //    return check;
+        //}
+        function validation() {
+
+            var fullname = document.getElementById('fullname').value;
+            var username = document.getElementById('username').value;
+            var phone = document.getElementById('phone').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var confirmpassword = document.getElementById('confirmpassword').value;
+            var address = document.getElementById('address').value;
+            var birthday = document.getElementById('birthday').value;
+            var specialized = document.getElementById('specialized').value;
+
+            if (fullname == "") {
+                document.getElementById('fullname').innerHTML = " ** Họ và tên không được rỗng";
+                return false;
             }
-            console.log(password);
-            return check;
+            if (username == "") {
+                document.getElementById('username').innerHTML = " ** Username không được rỗng";
+                return false;
+            }
+            if (phone == "") {
+                document.getElementById('phone').innerHTML = " ** Số điện thoại không được rỗng";
+                return false;
+            }
+            if (email == "") {
+                document.getElementById('email').innerHTML = " ** Email không rỗng và phải đúng định dạng: ex@abc.xyz";
+                return false;
+            }
+            if (password == "") {
+                document.getElementById('Password').innerHTML = " ** Password không được rỗng";
+                return false;
+            }
+            if (password != confirmpassword) {
+                document.getElementById('Passwords').innerHTML = " ** ConfirmPassword phải trùng với Password";
+                return false;
+            }
+            if (confirmpassword == "") {
+                document.getElementById('confirmpassword').innerHTML = " ** ConfirmPassword không được rỗng";
+                return false;
+            }
+            if (address == "") {
+                document.getElementById('address').innerHTML = " ** Địa chỉ không được rỗng";
+                return false;
+            }
+            if (birthday == "") {
+                document.getElementById('birthday').innerHTML = " ** Ngày sinh không được rỗng";
+                return false;
+            }
+            if (specialized == "") {
+                document.getElementById('specialized').innerHTML = " ** Chuyên ngành giảng dạy không được rỗng";
+                return false;
+            }
         }
         function renderSubForm(tab) {
             var teacherContent = `	<div class="form-holder">
                                             <span class="lnr lnr-user"></span>
-                                            <input type="text" class="form-control" name="address"  placeholder="Địa chỉ">
+                                            <input id="address" type="text" class="form-control" name="address"  placeholder="Địa chỉ" autocomplete="off">
                                         </div>
                                         <div class="form-holder">
                                             <span class="lnr lnr-phone-handset"></span>
-                                            <input type="text" class="form-control" name="birthday" placeholder="Ngày sinh">
+                                            <input id="birthday" type="text" class="form-control" name="birthday" placeholder="Ngày sinh" autocomplete="off">
                                         </div>
                                         <div class="form-holder">
                                             <span class="lnr lnr-envelope"></span>
-                                            <input type="text" class="form-control" name="specialized" placeholder="Chuyên ngành giảng dạy	">
+                                            <input id="specialized" type="text" class="form-control" name="specialized" placeholder="Chuyên ngành giảng dạy	" autocomplete="off">
                                         </div>
                                         <div class="form-holder">
                                             <span class="lnr lnr-envelope"></span>
@@ -150,11 +203,11 @@
             var studentContent = `
                                         <div class="form-holder">
                                             <span class="lnr lnr-lock"></span>
-                                            <input type="text" class="form-control" name="address" placeholder="Địa chỉ">
+                                            <input id="address" type="text" class="form-control" name="address" placeholder="Địa chỉ" autocomplete="off">
                                         </div>
                                         <div class="form-holder">
                                             <span class="lnr lnr-lock"></span>
-                                            <input type="text" class="form-control" name="birthday" placeholder="Ngày sinh">
+                                            <input id="birthday" type="text" class="form-control" name="birthday" placeholder="Ngày sinh" autocomplete="off">
                                         </div>
                                         <div class="form-holder">
                                             <span class="lnr lnr-phone-handset"></span>

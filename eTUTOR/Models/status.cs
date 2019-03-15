@@ -21,6 +21,7 @@ namespace eTUTOR.Models
             this.sessions = new HashSet<session>();
             this.sessions1 = new HashSet<session>();
             this.sessions2 = new HashSet<session>();
+            this.students = new HashSet<student>();
             this.tutors = new HashSet<tutor>();
             this.tutors1 = new HashSet<tutor>();
         }
@@ -33,6 +34,7 @@ namespace eTUTOR.Models
         public virtual ICollection<session> sessions { get; set; }
         public virtual ICollection<session> sessions1 { get; set; }
         public virtual ICollection<session> sessions2 { get; set; }
+        public virtual ICollection<student> students { get; set; }
         public virtual ICollection<tutor> tutors { get; set; }
         public virtual ICollection<tutor> tutors1 { get; set; }
     }

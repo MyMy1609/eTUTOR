@@ -156,12 +156,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ParentController.cs" />
     <Compile Include="Areas\Admin\Controllers\StudentController.cs" />
     <Compile Include="Areas\Admin\Controllers\TuTorController.cs" />
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
+    <Compile Include="Models\about.cs">
+      <DependentUpon>eTUITORModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\admin.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
@@ -215,6 +219,9 @@
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\subject.cs">
+      <DependentUpon>eTUITORModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\typeUser.cs">
@@ -804,6 +811,19 @@
     <Content Include="Content\vendor\lightbox2\package.json" />
     <Content Include="Content\vendor\lightbox2\README.md" />
     <Content Include="Content\vendor\lightbox2\ROADMAP.md" />
+    <Content Include="Areas\Admin\Views\Admin\Blockuser.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Contact.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Course.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Dashboard.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\DetailParent.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\DetailStudent.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\DetailTutor.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\KetQuaThongKe.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\ThongKe.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\User.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

@@ -25,6 +25,7 @@ namespace eTUTOR.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<about> abouts { get; set; }
         public DbSet<admin> admins { get; set; }
         public DbSet<comment> comments { get; set; }
         public DbSet<common> commons { get; set; }
@@ -39,6 +40,7 @@ namespace eTUTOR.Models
         public DbSet<student> students { get; set; }
         public DbSet<subject> subjects { get; set; }
         public DbSet<submenu> submenus { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<tutor> tutors { get; set; }
         public DbSet<typeUser> typeUsers { get; set; }
         public DbSet<User> Users { get; set; }
