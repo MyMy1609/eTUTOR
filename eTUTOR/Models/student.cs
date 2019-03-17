@@ -38,5 +38,6 @@ namespace eTUTOR.Models
         public virtual ICollection<history_lessons> history_lessons { get; set; }
         public virtual parent parent { get; set; }
         public virtual ICollection<session> sessions { get; set; }
+        public virtual status status1 { get; set; }
     }
 }

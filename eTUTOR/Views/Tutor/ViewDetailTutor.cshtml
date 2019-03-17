@@ -18,12 +18,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="pe-icon-7-stroke.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <link href="~/Content/vendor/bootstrap/css/listoftutor.component.css" rel="stylesheet" />
 }
-
-
-
-
 
 <div class='thetop'></div>
 <!-- body -->
@@ -129,36 +130,49 @@
                         <div class="clearfix">
                             <h4 class="line-bottom">Liên hệ nhanh</h4>
                         </div>
-                        <form id="contact-form" class="contact-form-transparent" action="/Tutor/Contact" method="post">
+                        <form id="contact-form" class="contact-form-transparent" action="/Tutor/Contact" method="post" onsubmit="return validation()">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Họ tên" id="contact_name"
-                                               name="name" required="" class="form-control">
+                                        <input type="text" placeholder="Họ tên" id="user"
+                                               name="user" class="form-control" autocomplete="off">
+                                        <span class="text-danger" id="username"></span>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                               
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder=" Email" id="contact_email"
-                                               name="email" class="form-control" required="">
+                                        <input type="text" placeholder="Số điện thoại" id="mobileNumber"
+                                               name="mobileNumber" class="form-control" autocomplete="off">
+                                        <span class="text-danger" id="mobileno"></span>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Chủ đề" id="contact_subject"
-                                               name="subject" class="form-control" required="">
+                                        <input type="email" placeholder=" Email" id="emails"
+                                               name="emails" class="form-control">
+                                        <span class="text-danger" id="emailids"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Chủ đề" id="subject"
+                                               name="subject" class="form-control">
+                                        <span class="text-danger" id="sub"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <textarea rows="5" placeholder="Lời nhắn..." id="contact_message"
-                                          name="message" required="" class="form-control"></textarea>
+                                <textarea rows="5" placeholder="Lời nhắn..." id="content"
+                                          name="content"  class="form-control"></textarea>
+                                <span class="text-danger" id="cont"></span>
                             </div>
                             <div class="form-group">
                                 <button data-loading-text="Please wait..."
                                         class="btn btn-flat btn-dark btn-theme-colored mt-5" type="submit">
-                                    Send your
-                                    message
+                                    Gửi liên hệ
                                 </button>
                             </div>
                         </form>
@@ -169,12 +183,10 @@
                 @*<div class="row mt-30">*@
                 @foreach (var item in Model.comments)
                 {
-
-
                     <div class="row" style="margin:10px">
                         <div class="col-sm-1">
                             <div class="thumbnail">
-                                <img class="img-responsive user-photo" src="~/Content/img/avatar/student/@item.student.avatar" >
+                                <img class="img-responsive user-photo" src="~/Content/img/avatar/student/@item.student.avatar">
                             </div><!-- /thumbnail -->
                         </div><!-- /col-sm-1 -->
                         <div class="col-sm-5">
@@ -190,8 +202,9 @@
 
                     </div>
                 }
-                    <!--End comment section-->
-                @*  *@</div>
+                <!--End comment section-->
+                @*  *@
+            </div>
         </div>
     </section>
 </div>
@@ -221,6 +234,60 @@
     </script>
     <script src="http://maps.google.com/maps/api/js"></script>
     <script src="google-map-init.js"></script>
+
+    <script type="text/javascript">
+        function validation() {
+            var user = document.getElementById('user').value;
+            var emails = document.getElementById('emails').value;
+            var mobileNumber = document.getElementById('mobileNumber').value;
+            var subject = document.getElementById('subject').value;
+            var content = document.getElementById('content').value;
+
+
+            if (user == "") {
+                document.getElementById('username').innerHTML = " ** Họ tên không rỗng";
+                return false;
+            }
+
+            if (mobileNumber == "") {
+                document.getElementById('mobileno').innerHTML = " ** Số điện thoại không rỗng";
+                return false;
+            }
+            if (isNaN(mobileNumber)) {
+                document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải là số";
+                return false;
+            }
+            if (mobileNumber.length != 10) {
+                document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải có 10 số trở lên";
+                return false;
+            }
+
+            if (emails == "") {
+                document.getElementById('emailids').innerHTML = " ** Email không rỗng";
+                return false;
+            }
+
+			if ((emails.charAt(emails.length - 4) != '.') && (emails.charAt(emails.length - 3) != '.')) {
+                document.getElementById('emailids').innerHTML = " ** Email không đúng định dạng";
+                return false;
+            }
+
+            if (subject == "") {
+                document.getElementById('sub').innerHTML = " ** Chủ đề không rỗng";
+                return false;
+            }
+            if (subject == "   ") {
+                document.getElementById('sub').innerHTML = " ** Chủ đề không hợp lệ";
+                return false;
+            }
+
+            if (content == "") {
+                document.getElementById('cont').innerHTML = " ** Nội dung không rỗng";
+                return false;
+            }
+
+        }
+    </script>
 }
 
 

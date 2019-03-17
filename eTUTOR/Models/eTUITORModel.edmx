@@ -151,6 +151,7 @@ warning 6002: The table/view 'capstone2019.dbo.notice' does not have a primary k
           <Property Name="status_admin" Type="int" />
           <Property Name="subject_id" Type="int" />
           <Property Name="dateCreate" Type="date" />
+          <Property Name="schedule_id" Type="int" />
         </EntityType>
         <EntityType Name="status">
           <Key>
@@ -248,6 +249,18 @@ warning 6002: The table/view 'capstone2019.dbo.notice' does not have a primary k
             </Principal>
             <Dependent Role="sessions">
               <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__students__status__31B762FC">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="students" Type="Self.students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="status_id" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -443,6 +456,18 @@ warning 6002: The table/view 'capstone2019.dbo.notice' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_sessions_schedules1">
+          <End Role="schedules" Type="Self.schedules" Multiplicity="0..1" />
+          <End Role="sessions" Type="Self.sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schedules">
+              <PropertyRef Name="schedule_id" />
+            </Principal>
+            <Dependent Role="sessions">
+              <PropertyRef Name="schedule_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_submenu_common">
           <End Role="common" Type="Self.common" Multiplicity="0..1" />
           <End Role="submenu" Type="Self.submenu" Multiplicity="*" />
@@ -511,6 +536,10 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
             <End Role="subject" EntitySet="subject" />
             <End Role="sessions" EntitySet="sessions" />
           </AssociationSet>
+          <AssociationSet Name="FK__students__status__31B762FC" Association="Self.FK__students__status__31B762FC">
+            <End Role="status" EntitySet="status" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
           <AssociationSet Name="FK__subject__tutor_i__19DFD96B" Association="Self.FK__subject__tutor_i__19DFD96B">
             <End Role="tutors" EntitySet="tutors" />
             <End Role="subject" EntitySet="subject" />
@@ -573,6 +602,10 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
           </AssociationSet>
           <AssociationSet Name="FK_session_tutor" Association="Self.FK_session_tutor">
             <End Role="tutors" EntitySet="tutors" />
+            <End Role="sessions" EntitySet="sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sessions_schedules1" Association="Self.FK_sessions_schedules1">
+            <End Role="schedules" EntitySet="schedules" />
             <End Role="sessions" EntitySet="sessions" />
           </AssociationSet>
           <AssociationSet Name="FK_submenu_common" Association="Self.FK_submenu_common">
@@ -653,6 +686,10 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
             <End Role="tutor" EntitySet="tutors" />
             <End Role="schedule" EntitySet="schedules" />
           </AssociationSet>
+          <AssociationSet Name="FK_sessions_schedules1" Association="capstone2019Model.FK_sessions_schedules1">
+            <End Role="schedule" EntitySet="schedules" />
+            <End Role="session" EntitySet="sessions" />
+          </AssociationSet>
           <AssociationSet Name="FK__sessions__subjec__1BC821DD" Association="capstone2019Model.FK__sessions__subjec__1BC821DD">
             <End Role="subject" EntitySet="subjects" />
             <End Role="session" EntitySet="sessions" />
@@ -676,6 +713,10 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
           <AssociationSet Name="FK_session_tutor" Association="capstone2019Model.FK_session_tutor">
             <End Role="tutor" EntitySet="tutors" />
             <End Role="session" EntitySet="sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__students__status__31B762FC" Association="capstone2019Model.FK__students__status__31B762FC">
+            <End Role="status" EntitySet="status" />
+            <End Role="student" EntitySet="students" />
           </AssociationSet>
           <AssociationSet Name="FK_tutor_status" Association="capstone2019Model.FK_tutor_status">
             <End Role="status" EntitySet="status" />
@@ -819,6 +860,7 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
           <Property Name="dateCreate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_schedule_status" FromRole="schedule" ToRole="status" />
           <NavigationProperty Name="tutor" Relationship="capstone2019Model.FK_schedule_tutor" FromRole="schedule" ToRole="tutor" />
+          <NavigationProperty Name="sessions" Relationship="capstone2019Model.FK_sessions_schedules1" FromRole="schedule" ToRole="session" />
         </EntityType>
         <EntityType Name="session">
           <Key>
@@ -837,6 +879,8 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
           <Property Name="status_admin" Type="Int32" />
           <Property Name="subject_id" Type="Int32" />
           <Property Name="dateCreate" Type="DateTime" Precision="0" />
+          <Property Name="schedule_id" Type="Int32" />
+          <NavigationProperty Name="schedule" Relationship="capstone2019Model.FK_sessions_schedules1" FromRole="session" ToRole="schedule" />
           <NavigationProperty Name="subject" Relationship="capstone2019Model.FK__sessions__subjec__1BC821DD" FromRole="session" ToRole="subject" />
           <NavigationProperty Name="status" Relationship="capstone2019Model.FK_session_status" FromRole="session" ToRole="status" />
           <NavigationProperty Name="status1" Relationship="capstone2019Model.FK_session_status_admin" FromRole="session" ToRole="status" />
@@ -855,6 +899,7 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
           <NavigationProperty Name="sessions" Relationship="capstone2019Model.FK_session_status" FromRole="status" ToRole="session" />
           <NavigationProperty Name="sessions1" Relationship="capstone2019Model.FK_session_status_admin" FromRole="status" ToRole="session" />
           <NavigationProperty Name="sessions2" Relationship="capstone2019Model.FK_session_status_tutor" FromRole="status" ToRole="session" />
+          <NavigationProperty Name="students" Relationship="capstone2019Model.FK__students__status__31B762FC" FromRole="status" ToRole="student" />
           <NavigationProperty Name="tutors" Relationship="capstone2019Model.FK_tutor_status" FromRole="status" ToRole="tutor" />
           <NavigationProperty Name="tutors1" Relationship="capstone2019Model.FK_tutor_status_register" FromRole="status" ToRole="tutor" />
         </EntityType>
@@ -878,6 +923,7 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
           <NavigationProperty Name="history_lessons" Relationship="capstone2019Model.FK_history_lessons_student" FromRole="student" ToRole="history_lessons" />
           <NavigationProperty Name="parent" Relationship="capstone2019Model.FK_parent_student" FromRole="student" ToRole="parent" />
           <NavigationProperty Name="sessions" Relationship="capstone2019Model.FK_session_student" FromRole="student" ToRole="session" />
+          <NavigationProperty Name="status1" Relationship="capstone2019Model.FK__students__status__31B762FC" FromRole="student" ToRole="status" />
         </EntityType>
         <EntityType Name="subject">
           <Key>
@@ -1086,6 +1132,18 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_sessions_schedules1">
+          <End Type="capstone2019Model.schedule" Role="schedule" Multiplicity="0..1" />
+          <End Type="capstone2019Model.session" Role="session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schedule">
+              <PropertyRef Name="schedule_id" />
+            </Principal>
+            <Dependent Role="session">
+              <PropertyRef Name="schedule_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__sessions__subjec__1BC821DD">
           <End Type="capstone2019Model.subject" Role="subject" Multiplicity="0..1" />
           <End Type="capstone2019Model.session" Role="session" Multiplicity="*" />
@@ -1155,6 +1213,18 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
             </Principal>
             <Dependent Role="session">
               <PropertyRef Name="tutor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__students__status__31B762FC">
+          <End Type="capstone2019Model.status" Role="status" Multiplicity="1" />
+          <End Type="capstone2019Model.student" Role="student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="status_id" />
+            </Principal>
+            <Dependent Role="student">
+              <PropertyRef Name="status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1341,6 +1411,7 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
           <EntitySetMapping Name="sessions">
             <EntityTypeMapping TypeName="capstone2019Model.session">
               <MappingFragment StoreEntitySet="sessions">
+                <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
                 <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
                 <ScalarProperty Name="subject_id" ColumnName="subject_id" />
                 <ScalarProperty Name="status_admin" ColumnName="status_admin" />

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "ThongKe";
+
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2></h2>
+<div class="container">
+    <div class="onTop">
+        <form action="~/Admin/ThongKe" method="get" class="form-control">
+            <div class="col-md-4">
+                <select name="kieuTK">
+                    <option value="slDangKy"> Thống kê số lượng người đăng ký</option>
+                    <option value="slDangKyGiaSu"> Thống kê số lượng đăng ký gia sư</option>
+                    <option value="slCacBuoiHocDienRa"> Số lượng các buổi học đã diễn ra</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label style="color:indianred">Ngày bắt đầu</label>
+                <input type="date" name="dateStart" value="@DateTime.Now" />
+
+                <label style="color:indianred">Ngày kết thúc</label>
+                <input type="date" name="dateEnd" value="" />
+            </div>
+            <input type="submit" value="Xem" />
+        </form>
+    </div>
+    <div class="underBottom">
+
+    </div>
+</div>
+

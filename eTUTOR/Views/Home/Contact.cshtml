@@ -22,6 +22,12 @@
       crossorigin="anonymous">
 <!-- ---------------------------- -->
 <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
 <!--===============================================================================================-->
 <link href="~/Content/vendor/bootstrap/css/contact.component.css" rel="stylesheet" />
 <!--===============================================================================================-->
@@ -67,33 +73,32 @@
             </div>
         </div>
         <div class="col-4 container m-0">
-            <form class="contact100-form validate-form" style="padding: 0; margin-left: 5%" action="/Home/Contact", method="post">
+            <form action="/Home/Contact" method="post" onsubmit="return validation()" class="contact100-form validate-form" style="padding: 0; margin-left: 5%">
                 <span class="contact100-form-title mb-4" style="padding-bottom: 0; padding-top: 10%">
                     Hãy liên hệ với chúng tôi
                 </span>
-                <div class="wrap-input100 validate-input" data-validate="Tên không rỗng" style="margin-top: 5%">
-                    <input id="name" class="input100 " type="text" name="fullname" placeholder="Họ tên">
-                    <span class="focus-input100"></span>
+                <div class="wrap-input100 validate-input form-group" data-validate="Tên không rỗng" style="margin-top: 5%">
+                    <input id="user" class="input100 " type="text" name="user" placeholder="Họ tên" autocomplete="off">
+                    <span class="text-danger focus-input100" id="username"></span>
                 </div>
-                <div class="wrap-input100 validate-input" data-validate="Số điện thoại không rỗng">
-                    <input id="soDT" class="input100" type="text" name="phone" placeholder="Số điện thoại">
-                    <span class="focus-input100"></span>
+                <div class="wrap-input100 validate-input form-group" data-validate="Số điện thoại không rỗng">
+                    <input id="mobileNumber" class="input100" type="text" name="mobileNumber" placeholder="Số điện thoại" autocomplete="off">
+                    <span class="text-danger focus-input100" id="mobileno"></span>
                 </div>
-                <div class="wrap-input100 validate-input" data-validate="Email không rỗng và phải đúng định dạng: ex@abc.xyz">
-                    <input id="email" class="input100" type="email" name="email" placeholder="Email">
-                    <span class="focus-input100"></span>
+                <div class="wrap-input100 validate-input form-group" data-validate="Email không rỗng và phải đúng định dạng: ex@abc.xyz">
+                    <input id="emails" class="input100" type="email" name="emails" placeholder="Email" autocomplete="off">
+                    <span class="text-danger focus-input100" id="emailids"></span>
                 </div>
-                <div class="wrap-input100 validate-input" data-validate="Chủ đề không được rỗng">
-                    <input id="chuDe" class="input100" type="text" name="title" placeholder="Chủ đề">
-                    <span class="focus-input100"></span>
+                <div class="wrap-input100 validate-input form-group" data-validate="Chủ đề không được rỗng">
+                    <input id="subject" class="input100" type="text" name="subject" placeholder="Chủ đề" autocomplete="off">
+                    <span class="text-danger focus-input100" id="sub" ></span>
                 </div>
-                <div class="wrap-input100 validate-input" data-validate="Message is required">
-                    <textarea id="message" class="input100" name="content" placeholder="Nội dung cần liên hệ với chúng tôi..."></textarea>
-                    <span class="focus-input100"></span>
+                <div class="wrap-input100 validate-input form-group" data-validate="Message is required">
+                    <textarea id="content" class="input100" name="content" placeholder="Nội dung cần liên hệ với chúng tôi..." ></textarea>
+                    <span class="text-danger focus-input100" id="cont"></span>
                 </div>
-
                 <div class="container-contact100-form-btn">
-                    <button class="contact100-form-btn mr-3" type="submit">
+                    <button class="contact100-form-btn mr-3" type="submit" class="btnSubmit">
                         Gửi ngay
                     </button>
                 </div>
@@ -103,6 +108,7 @@
 
     <!--===============================================================================================-->
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
     <!--===============================================================================================-->
     <script src="vendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
@@ -129,6 +135,7 @@
         });
 
     </script>
+
     <!--===============================================================================================-->
     <script src="vendor/daterangepicker/moment.min.js"></script>
     <script src="vendor/daterangepicker/daterangepicker.js"></script>
@@ -151,4 +158,60 @@
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function validation() {
+            var user = document.getElementById('user').value;
+            var mobileNumber = document.getElementById('mobileNumber').value;
+            var emails = document.getElementById('emails').value;
+            var subject = document.getElementById('subject').value;
+            var content = document.getElementById('content').value;
+   
+
+            if (user == "") {
+                document.getElementById('username').innerHTML = " ** Họ tên không rỗng";
+                return false;
+            }
+
+            if (mobileNumber == "") {
+                document.getElementById('mobileno').innerHTML = " ** Số điện thoại không rỗng";
+                return false;
+            }
+            if (isNaN(mobileNumber)) {
+                document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải là số";
+                return false;
+            }
+            if (mobileNumber.length != 10) {
+                document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải có 10 số trở lên";
+                return false;
+            }
+            
+			if(emails == ""){
+				document.getElementById('emailids').innerHTML =" ** Email không rỗng";
+				return false;
+			}
+			@*if(emails.indexOf('@') <= 0 ){
+				document.getElementById('emailids').innerHTML =" **Email không hợp lệ";
+				return false;
+			}*@
+
+			if((emails.charAt(emails.length-4)!='.') && (emails.charAt(emails.length-3)!='.')){
+				document.getElementById('emailids').innerHTML =" ** Email không đúng định dạng";
+				return false;
+            }
+
+            if (subject == "") {
+                document.getElementById('sub').innerHTML = " ** Chủ đề không rỗng";
+                return false;
+            }
+            if (subject == "   ") {
+                document.getElementById('sub').innerHTML = " ** Chủ đề không hợp lệ";
+                return false;
+            }
+
+            if (content == "") {
+                document.getElementById('cont').innerHTML = " ** Nội dung không rỗng";
+                return false;
+            }
+        }
+    </script>
 </body>

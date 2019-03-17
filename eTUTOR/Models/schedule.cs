@@ -14,6 +14,11 @@ namespace eTUTOR.Models
     
     public partial class schedule
     {
+        public schedule()
+        {
+            this.sessions = new HashSet<session>();
+        }
+    
         public int schedule_id { get; set; }
         public string day_otw { get; set; }
         public Nullable<System.TimeSpan> start_time { get; set; }
@@ -25,5 +30,6 @@ namespace eTUTOR.Models
     
         public virtual status status1 { get; set; }
         public virtual tutor tutor { get; set; }
+        public virtual ICollection<session> sessions { get; set; }
     }
 }

@@ -7,24 +7,24 @@
       <Diagram DiagramId="6f796b27a9b94329b2fd402d98898ee3" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="capstone2019Model.about" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="capstone2019Model.admin" Width="1.5" PointX="5.75" PointY="3.75" />
-        <EntityTypeShape EntityType="capstone2019Model.comment" Width="1.5" PointX="10.5" PointY="17.5" />
+        <EntityTypeShape EntityType="capstone2019Model.comment" Width="1.5" PointX="7.5" PointY="11.5" />
         <EntityTypeShape EntityType="capstone2019Model.common" Width="1.5" PointX="0.75" PointY="3.875" />
         <EntityTypeShape EntityType="capstone2019Model.contact_admin" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="capstone2019Model.contact_tutor" Width="1.5" PointX="5.25" PointY="7.875" />
+        <EntityTypeShape EntityType="capstone2019Model.contact_tutor" Width="1.5" PointX="5.25" PointY="16.625" />
         <EntityTypeShape EntityType="capstone2019Model.contact" Width="1.5" PointX="7.75" PointY="4.75" />
-        <EntityTypeShape EntityType="capstone2019Model.history_lessons" Width="1.5" PointX="10.5" PointY="13.125" />
-        <EntityTypeShape EntityType="capstone2019Model.parent" Width="1.5" PointX="3" PointY="18" />
-        <EntityTypeShape EntityType="capstone2019Model.schedule" Width="1.5" PointX="8.25" PointY="9.5" />
-        <EntityTypeShape EntityType="capstone2019Model.session" Width="1.5" PointX="7.5" PointY="13.375" />
-        <EntityTypeShape EntityType="capstone2019Model.status" Width="1.5" PointX="0.75" PointY="11.5" />
-        <EntityTypeShape EntityType="capstone2019Model.student" Width="1.5" PointX="5.25" PointY="17.75" />
-        <EntityTypeShape EntityType="capstone2019Model.subject" Width="1.5" PointX="5.25" PointY="11.125" />
+        <EntityTypeShape EntityType="capstone2019Model.history_lessons" Width="1.5" PointX="10.5" PointY="9" />
+        <EntityTypeShape EntityType="capstone2019Model.parent" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="capstone2019Model.schedule" Width="1.5" PointX="8.25" PointY="15.375" />
+        <EntityTypeShape EntityType="capstone2019Model.session" Width="1.5" PointX="10.5" PointY="13.125" />
+        <EntityTypeShape EntityType="capstone2019Model.status" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="capstone2019Model.student" Width="1.5" PointX="5.25" PointY="9.375" />
+        <EntityTypeShape EntityType="capstone2019Model.subject" Width="1.5" PointX="5.25" PointY="19.875" />
         <EntityTypeShape EntityType="capstone2019Model.submenu" Width="1.5" PointX="3" PointY="4" />
-        <EntityTypeShape EntityType="capstone2019Model.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="capstone2019Model.tutor" Width="1.5" PointX="3" PointY="7.625" />
+        <EntityTypeShape EntityType="capstone2019Model.sysdiagram" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="capstone2019Model.tutor" Width="1.5" PointX="3" PointY="16.375" />
         <EntityTypeShape EntityType="capstone2019Model.typeUser" Width="1.5" PointX="0.75" PointY="1.125" />
         <EntityTypeShape EntityType="capstone2019Model.User" Width="1.5" PointX="3" PointY="0.875" />
-        <EntityTypeShape EntityType="capstone2019Model.notice" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="capstone2019Model.notice" Width="1.5" PointX="9.75" PointY="0.75" />
         <AssociationConnector Association="capstone2019Model.FK_comment_student" />
         <AssociationConnector Association="capstone2019Model.FK_comment_tutor" />
         <AssociationConnector Association="capstone2019Model.FK_submenu_common" />
@@ -35,12 +35,14 @@
         <AssociationConnector Association="capstone2019Model.FK_parent_student" />
         <AssociationConnector Association="capstone2019Model.FK_schedule_status" />
         <AssociationConnector Association="capstone2019Model.FK_schedule_tutor" />
+        <AssociationConnector Association="capstone2019Model.FK_sessions_schedules1" />
         <AssociationConnector Association="capstone2019Model.FK__sessions__subjec__1BC821DD" />
         <AssociationConnector Association="capstone2019Model.FK_session_status" />
         <AssociationConnector Association="capstone2019Model.FK_session_status_admin" />
         <AssociationConnector Association="capstone2019Model.FK_session_status_tutor" />
         <AssociationConnector Association="capstone2019Model.FK_session_student" />
         <AssociationConnector Association="capstone2019Model.FK_session_tutor" />
+        <AssociationConnector Association="capstone2019Model.FK__students__status__31B762FC" />
         <AssociationConnector Association="capstone2019Model.FK_tutor_status" />
         <AssociationConnector Association="capstone2019Model.FK_tutor_status_register" />
         <AssociationConnector Association="capstone2019Model.FK__subject__tutor_i__19DFD96B" />
