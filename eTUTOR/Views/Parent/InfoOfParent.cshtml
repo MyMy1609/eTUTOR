@@ -4,6 +4,7 @@
     ViewBag.Title = "InfoOfParent";
     Layout = "~/Views/Shared/_Layout.cshtml";
     eTUITOREntities db = new eTUITOREntities();
+    var usernameC = db.students.ToList();
 }
 
 @section css{
@@ -108,7 +109,10 @@
                                                 </td>
                                                 <td class="tdr">
                                                     <input type="text" id="username" value="@Model.username">
+
                                                     <div id="username-error" class="error"></div>
+
+                                                   
                                                 </td>
                                             </tr>
                                             <tr>
@@ -145,7 +149,7 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" id="btn-profile-save">Lưu</button>
+                                        <button type="button" class="btn btn-primary" id="btn-profile-save" onclick="checkinput">Lưu</button>
                                     </div>
 
                                 </div>
@@ -270,6 +274,7 @@
                                                             <td class="tdr">
                                                                 <input type="text" id="username">
                                                                 <div id="username-error" class="error"></div>
+                                                               
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -504,6 +509,7 @@
                     class: $("#add-child-form #class").val(),
                     email: $("#add-child-form #email").val()
                 }
+                
                 let check = {
                     fullname: false,
                     username: false,
@@ -520,7 +526,7 @@
                     $("#add-child-form #fullname-error").html("");
                     check.fullname = true;
                 }
-                //username
+                
                 if (child.username == "") {
                     $("#add-child-form #username-error").html("Xin nhập username");
                     check.username = false;
@@ -666,6 +672,8 @@
                 }
             });
         }
+
+        
     </script>
 }
 <!--   Core JS Files   -->

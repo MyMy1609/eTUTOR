@@ -38,10 +38,11 @@ namespace eTUTOR.Controllers
         [HttpPost]
         public ActionResult CreateChildAccount(student student)
         {
-            student.parent_id = int.Parse(Session["UserID"].ToString());
-            db.students.Add(student);
-            db.SaveChanges();
-            return RedirectToAction("InfoOfParent","Parent", new { id = Session["UserID"] });
+           
+                student.parent_id = int.Parse(Session["UserID"].ToString());
+                db.students.Add(student);
+                db.SaveChanges();
+                return RedirectToAction("InfoOfParent", "Parent", new { id = Session["UserID"] });
         }
     }
 }

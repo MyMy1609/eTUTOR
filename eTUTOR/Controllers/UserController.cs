@@ -105,7 +105,7 @@ namespace eTUTOR.Controllers
                 CapNhatMatKhau(student.username, newPW, "std");
                 guiMail(student.username, newPW, email);
                 ViewBag.sc = "Đã đổi mật khẩu, bạn vui lòng vô mail để lấy mật khẩu nhé !";
-                return RedirectToAction("Login");
+                return View("Login");
 
             }
             if(parent != null)
@@ -116,10 +116,10 @@ namespace eTUTOR.Controllers
                     return View("ForgotPassword");
                 }
                 string newPW = CreateLostPassword(10);
-                CapNhatMatKhau(parent.username, newPW, "std");
+                CapNhatMatKhau(parent.username, newPW, "prt");
                 guiMail(parent.username, newPW, email);
                 ViewBag.sc = "Đã đổi mật khẩu, bạn vui lòng vô mail để lấy mật khẩu nhé !";
-                return RedirectToAction("Login");
+                return View("Login");
             }
             if (tutorr != null)
             {
@@ -129,15 +129,15 @@ namespace eTUTOR.Controllers
                     return View("ForgotPassword");
                 }
                 string newPW = CreateLostPassword(10);
-                CapNhatMatKhau(tutorr.username, newPW, "std");
+                CapNhatMatKhau(tutorr.username, newPW, "tutorr");
                 guiMail(tutorr.username, newPW, email);
                 ViewBag.sc = "Đã đổi mật khẩu, bạn vui lòng vô mail để lấy mật khẩu nhé !";
-                return RedirectToAction("Login");
+                return View("Login");
             }
             else
             {
                 ViewBag.Err = "Tên đăng nhập sai rồi !";
-                return RedirectToAction("ForgotPassword");
+                return View("ForgotPassword");
             }
 
             
@@ -165,6 +165,12 @@ namespace eTUTOR.Controllers
                     Session["Role"] = "tutor";
                     return RedirectToAction("InfoOfTutor", "Tutor");
                 }
+                else
+                {
+                    ViewBag.msg = "Mat khau sai roi nhe cung ahihi ^^";
+                    return View("Login");
+                }
+                
             }
             if (student != null)
             {
@@ -178,7 +184,14 @@ namespace eTUTOR.Controllers
                     Session["Role"] = "student";
                     return RedirectToAction("InfoOfStudent", "Student");
                 }
+                else
+                {
+                    ViewBag.msg = "Mat khau sai roi nhe cung ahihi ^^";
+                    return View("Login");
+                }
+                
             }
+
             if (parent != null)
             {
                 if (parent.password.Equals(password))
@@ -190,6 +203,12 @@ namespace eTUTOR.Controllers
                     Session["Role"] = "parent";
                     return RedirectToAction("InfoOfParent", "Parent");
                 }
+                else
+                {
+                    ViewBag.msg = "Mat khau sai roi nhe cung ahihi ^^";
+                    return View("Login");
+                }
+                
             }
             if (admin != null)
             {
@@ -201,11 +220,17 @@ namespace eTUTOR.Controllers
                     Session["Role"] = "admin";
                     return RedirectToAction("dashboard", "home", new { area = "admin" });
                 }
+                else
+                {
+                    ViewBag.msg = "Mat khau sai roi nhe cung ahihi ^^";
+                    return RedirectToAction("Login");
+                }
+                
             }
+                ViewBag.msg = "username không tồn tại";
+                return View("Login");
             
-            //error
-            ViewBag.mgs = "tài khoản không tồn tại";
-            return View();
+
         }
 
         public ActionResult Logout()
