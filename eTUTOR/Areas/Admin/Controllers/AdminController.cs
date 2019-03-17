@@ -60,22 +60,25 @@ namespace eTUTOR.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult DetailParent()
+        public ActionResult DetailParent(int id)
         {
-            ViewBag.Message = "Detail Parent.";
-            return View();
+            var parent = model.parents.Find(id);
+            if (parent == null) return HttpNotFound();
+            return View(parent);
         }
 
-        public ActionResult DetailStudent()
+        public ActionResult DetailStudent(int id)
         {
-            ViewBag.Message = "Detail Student.";
-            return View();
+            var student = model.students.Find(id);
+            if (student == null) return HttpNotFound();
+            return View(student);
         }
 
-        public ActionResult DetailTutor()
+        public ActionResult DetailTutor(int id)
         {
-            ViewBag.Message = "Detail Tutor.";
-            return View();
+            var tutor = model.tutors.Find(id);
+            if (tutor == null) return HttpNotFound();
+            return View(tutor);
         }
 
         public ActionResult Detail()

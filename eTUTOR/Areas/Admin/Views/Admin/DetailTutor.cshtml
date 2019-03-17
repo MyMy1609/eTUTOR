@@ -1,7 +1,9 @@
-﻿
+﻿@model eTUTOR.Models.tutor
+@using eTUTOR.Models
 @{
     ViewBag.Title = "DetailTutor";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    eTUITOREntities db = new eTUITOREntities();
 }
 
 <!DOCTYPE html>
@@ -115,12 +117,12 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="avatar">
-                                            <img src="~/Content/build/img/faces/avatar.jpg" />
+                                            <img src="~/Content/build/admin/img/faces/avatar.jpg" />
                                         </div>
                                     </div>
                                     <div class="col-md-9">
                                         <div class="name">
-                                            Nguyễn Đình Quốc An
+                                            @Model.fullname
                                         </div>
                                         <div class="infor-sub">
                                             <span>Tổng số buổi học:</span>
@@ -142,15 +144,15 @@
                                     <div class="col-md-5">
                                         <div class="infor-sub">
                                             <span>Email:</span>
-                                            annguyendinhquoc115@gmail.com
+                                            @Model.email
                                         </div>
                                         <div class="infor-sub">
                                             <span>Địa chỉ:</span>
-                                            103/4 Nguyễn Cư Trinh Q1,Phường Nguyễn Cư Trinh
+                                            @Model.address
                                         </div>
                                         <div class="infor-sub">
                                             <span>Ngày Sinh:</span>
-                                            20/9/1997
+                                            @Model.birthday
                                         </div>
                                         <div class="infor-sub">
                                             <span>Công việc hiện tại:</span>
@@ -164,7 +166,7 @@
                                     <div class="col-md-5 offset-md-2">
                                         <div class="infor-sub">
                                             <span>Chuyên ngành:</span>
-                                            Toán,Lý,Hóa
+                                            @Model.specialized
                                         </div>
                                         <div class="infor-sub">
                                             <span>Lớp:</span>
@@ -172,13 +174,12 @@
                                         </div>
                                         <div class="infor-sub">
                                             <span>Kinh nghiệm:</span>
-                                            Đã từng dạy kiềm cho 2 bé lớp 3 thuộc bộ môn toán và 1 bé lớp 6 môn
-                                            vật lý
+                                            @Model.experience
                                         </div>
                                         <div class="infor-sub">
                                             <span>Bằng cấp, chứng chỉ:</span>
                                             <a href="~/Content/img/bang-cap-3.jpg" data-lightbox="bang-cap" data-title="Bằng cấp của Nguyễn Đình Quốc An">
-                                                <img src="~/Content/build/img/bang-cap-3.jpg" />
+                                                <img src="~/Content/build/admin/admin/img/bang-cap-3.jpg" />
                                             </a>
                                         </div>
                                     </div>
