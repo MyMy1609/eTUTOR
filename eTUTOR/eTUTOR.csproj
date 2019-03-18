@@ -843,6 +843,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\peer.min.js" />
     <Content Include="Scripts\whiteboard.js" />
+    <Content Include="Scripts\whiteboard.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -878,11 +879,11 @@
     <Content Include="Views\Tutor\SessionOfTutor.cshtml" />
     <Content Include="Views\Student\SessionOfStudent.cshtml" />
     <Content Include="Views\Tutor\SearchTutor.cshtml" />
-    <Content Include="Scripts\jsmpg.min.js.map" />
     <Content Include="Views\API\SessionTutorList.cshtml" />
     <Content Include="Views\Home\Confirm.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\Tutor\Confirm.cshtml" />
+    <Content Include="Scripts\peerjs.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

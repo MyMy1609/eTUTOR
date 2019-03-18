@@ -41,20 +41,9 @@
                         <canvas id="whiteBoard" class="mr-5"></canvas>
                         <div id="status"></div>
                     </div>
-                    <div class="container-cam">
-                        <h3>
-                            Hình ảnh
-                            <span id="current_connect" class="circle__item"></span>
-                            <span id="current_connect_text"> (Offline) </span>
-                        </h3>
-                        <div class="mr-5">
-                            <canvas id="streamVideo"></canvas>
-                            <audio id="localAudio" autoplay></audio>
-                            <audio id="remoteAudio" autoplay></audio>
-                        </div>
-                        <input type="hidden" id="sessinId" value="@Session.SessionID" />
-                        <input type="hidden" id="groupName" value="@ViewData["GroupName"]" />
-                    </div>
+                    <div id="container-cam"></div>
+                    <input type="hidden" id="sessinId" value="@Session.SessionID" />
+                    <input type="hidden" id="groupName" value="@ViewData["GroupName"]" />
                 </div>
             </div>
         </div><br />
@@ -65,7 +54,7 @@
     <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
     <script type="text/javascript" src="~/signalr/hubs"></script>
-    <script type="text/javascript" src="~/Scripts/whiteboard.js"></script>
+    <script type="text/javascript" src="~/Scripts/whiteboard.min.js"></script>
     <script type="text/javascript" src="~/Scripts/peer.min.js"></script>
     <script type="text/javascript" src="~/Scripts/jsmpg.min.js"></script>
     <script type="text/javascript" src="~/Scripts/main_receive.js"></script>
