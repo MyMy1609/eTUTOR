@@ -14,15 +14,12 @@ namespace whiteboardEtutor.SignalRhub
     {
         public void JoinGroup(string groupName)
         {
-
             Groups.Add(Context.ConnectionId, groupName);
-
-
         }
 
-        public void SendDraw(string drawObject, string sessionId, string groupName/*, string name*/)
+        public void SendDraw(string drawObject, string sessionId, string groupName, int width, int height)
         {
-            Clients.Group(groupName).HandleDraw(drawObject, sessionId/*, name*/);
+            Clients.Group(groupName).HandleDraw(drawObject, sessionId, width, height);
         }
     }
 }

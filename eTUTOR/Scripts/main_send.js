@@ -1,12 +1,12 @@
 (function () {
-
-    var lastPeerId = null;
-    var peer = null;
-    var conn = null;
-    let player_send = null;
-    const canvas_send = document.getElementById("streamVideo");
+    "use strict";
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const canvas = document.getElementById("streamVideo");
     const stopStream = document.getElementById("stopStream");
     const ws_url = location.origin.replace(/^http/, 'ws');
+    let player = null;
+    let peer = null;
+    let call = null;
 
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;
@@ -18,10 +18,6 @@
     }
 
     const course_id = getParameterByName('p');
-
-    navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia ||
-        navigator.mediaDevices.webkitGetUserMedia ||
-        navigator.mediaDevices.mozGetUserMedia;
 
     function openAudio() {
         if (navigator.mediaDevices.getUserMedia) {
@@ -37,142 +33,119 @@
         audio.srcObject = stream;
         audio.play();
     }
-    
+
+    function randomToken() {
+        var res = '', i = 10, len = chars.length;
+        while (i--) { res += chars[Math.floor(Math.random() * len)]; } return res;
+    }
+
+    const getCam = (id) => {
+        const rtsp_URL = prompt("Please enter your url RTSP IP Camera", "");
+        if (rtsp_URL && id) {
+            // Caller
+            openAudio()
+                .then(oAudio => {
+                    playStream('localAudio', oAudio);
+                    call = peer.call(course_id, oAudio);
+                    call.on('stream', remoteAudio => {
+                        playStream('remoteAudio', remoteAudio);
+                        player = new JSMpeg.Player(`ws://www.bigprotech.vn:7000/stream?id=${id}&cam=${rtsp_URL}&course=${course_id}${id}&token=${randomToken()}`, { canvas: canvas });
+                    });
+                    call.on('close', () => {
+                        call.close();
+                        peer.destroy();
+                    });
+                })
+                .catch(err => console.log(err));
+        } else {
+            getCam(null);
+        }
+    }
+
     function initialize() {
         peer = new Peer(null, {
-            host: "localhost",
-            port: "9000",
+            host: "www.bigprotech.vn",
+            port: "7000",
             path: "/",
-            secure: false,
+            secure: false
         });
 
         peer.on('open', function (id) {
+            //start
             const whiteboard = document.getElementById("whiteBoard");
             const imageTemp = document.getElementById("imageTemp");
-            // Workaround for peer.reconnect deleting previous id
-            if (peer.id === null) {
-                console.log('Received null id from peer open');
-                peer.id = lastPeerId;
-            } else {
-                lastPeerId = peer.id;
-            }
             whiteboard.style.cursor = "not-allowed";
             imageTemp.style.cursor = "not-allowed";
             whiteboard.style.zIndex = "-1";
             imageTemp.style.zIndex = "-1";
-
-            console.log('ID: ' + peer.id);
+            console.log('ID: ' + id);
+            getCam(id);
         });
         peer.on('disconnected', function () {
-            // status.innerHTML = "Connection lost. Please reconnect";
+            call.close();
+            peer.destroy();
             console.log('Connection lost. Please reconnect');
-
-            // Workaround for peer.reconnect deleting previous id
-            peer.id = lastPeerId;
-            peer._lastServerId = lastPeerId;
             peer.reconnect();
         });
         peer.on('close', function () {
-            conn = null;
-            // status.innerHTML = "Connection destroyed. Please refresh";
+            call.close();
+            peer.destroy();
+            call = null;
             console.log('Connection destroyed');
         });
         peer.on('error', function (err) {
             console.log(err);
         });
-    };
-
-    /**
-     * Create the connection between the two Peers.
-     *
-     * Sets up callbacks that handle any events related to the
-     * connection and data received on it.
-     */
-    function join() {
-        // Close old connection
-        if (conn) {
-            conn.close();
-        }
-
-        // debugger
-        // Create connection to destination peer specified in the input field
-        conn = peer.connect(course_id, {
-            reliable: true
-        });
-
-        conn.on('open', function () {
-            // status.innerHTML = "Connected to: " + conn.peer;
-            console.log("Connected to: " + conn.peer);
-            startStream();
-            // Check URL params for comamnds that should be sent immediately
-            var command = getUrlParam("command");
-            if (command)
-                conn.send(command);
-        });
-        // Handle incoming data (messages only since this is the signal sender)
-        conn.on('data', function (data) {
-            console.log(data);
-        });
-        conn.on('close', function () {
-            // status.innerHTML = "Connection closed";
-        });
-    };
-
-    /**
-     * Get first "GET style" parameter from href.
-     * This enables delivering an initial command upon page load.
-     *
-     * Would have been easier to use location.hash.
-     */
-    function getUrlParam(name) {
-        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var regexS = "[\\?&]" + name + "=([^&#]*)";
-        var regex = new RegExp(regexS);
-        var results = regex.exec(window.location.href);
-        if (results == null)
-            return null;
-        else
-            return results[1];
-    };
-
-    function stopStreams() {
-        player_send.stop();
-        conn.close();
-        window.history.back();
-    };
-
-    // Send message
-    function startStream() {
-        if (conn.open) {
-            const client_send = new WebSocket(`ws://localhost:8081/live?cam=0&course=${course_id}`);
-            player_send = new jsmpeg(client_send, { canvas: canvas_send });
-            client_send.onmessage = (event) => {
-                conn.send(event.data);
-                player_send.receiveSocketMessage(event);
+        var heartbeat = makePeerHeartbeater(peer);
+        //aaa
+        function makePeerHeartbeater(peer) {
+            var timeoutId = 0;
+            function heartbeat() {
+                timeoutId = setTimeout(heartbeat, 20000);
+                if (peer.socket._wsOpen()) {
+                    peer.socket.send({ type: 'HEARTBEAT' });
+                }
             }
-            // Caller
-            openAudio()
-                .then(oAudio => {
-                    playStream('localAudio', oAudio);
-                    const call = peer.call(conn.peer, oAudio);
-                    call.on('stream', remoteAudio => playStream('remoteAudio', remoteAudio));
-                })
-                .catch(err => console.log(err));
+            heartbeat();
+            // return
+            return {
+                start: function () {
+                    if (timeoutId === 0) { heartbeat(); }
+                },
+                stop: function () {
+                    clearTimeout(timeoutId);
+                    timeoutId = 0;
+                }
+            };
         }
     };
-    // stop stream
-    stopStream.onclick = function () {
-        stopStreams();
-    };
 
+    //canvas.addEventListener('click', function () {
+    //    if (player.isPlaying) {
+    //        player.pause();
+    //    }
+    //    else {
+    //        player.play();
+    //    }
+    //});
+
+    //stopStream.addEventListener('click', function () {
+    //    player.stop();
+    //    player.destroy();
+    //});
 
     window.onunload = window.onbeforeunload = function (e) {
         if (!!peer && !peer.destroyed) {
+            call.close();
             peer.destroy();
+            player.stop();
+            player.destroy();
         }
+        call.close();
+        e.preventDefault();
     };
 
-    // Since all our callbacks are setup, start the process of obtaining an ID
+    // Strigger function
     initialize();
-    join();
+    //join();
 })();

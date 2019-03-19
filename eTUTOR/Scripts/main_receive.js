@@ -1,16 +1,11 @@
-
-(function () {
+﻿(function () {
     "use strict";
-
-    var lastPeerId = null;
-    var peer = null; 
-    var conn = null;
-    var client_receive = null;
-    var player_receive = null;
-    var current_connect_cam = document.getElementById("current_connect");
-    var current_connect_text = document.getElementById("current_connect_text");
-    const canvas_receive = document.getElementById("streamVideo");
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     const ws_url = location.origin.replace(/^http/, 'ws');
+    let player = null;
+    let peer = null;
+    let conn = null;
+    let curPeer = {};
 
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;
@@ -20,12 +15,6 @@
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
-
-    const course_id = getParameterByName('p');
-
-    navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia ||
-        navigator.mediaDevices.webkitGetUserMedia ||
-        navigator.mediaDevices.mozGetUserMedia;
 
     function openAudio() {
         if (navigator.mediaDevices.getUserMedia) {
@@ -42,113 +31,131 @@
         audio.play();
     }
 
-    function initialize() {
-        
-        peer = new Peer(course_id, {
-            host: "localhost",
-            port: "9000",
-            path: "/",
-            secure: false,
-        });
+    function randomToken() {
+        var res = '', i = 10, len = chars.length;
+        while (i--) { res += chars[Math.floor(Math.random() * len)]; } return res;
+    }
 
-        peer.on('open', function (id) {
-            
-            if (peer.id === null) {
-                console.log('Received null id from peer open');
-                peer.id = lastPeerId;
-            } else {
-                lastPeerId = peer.id;
+    function checkClose(data, call) {
+        //data
+        if (typeof data === ('object' || 'arraybuffer' || 'blob')) {
+            var decoded = String.fromCharCode.apply(null, new Uint8Array(data));
+            if (decoded.indexOf('"type":') !== -1) {
+                conn = call;
+                delete curPeer[`${conn.peer}`];
+                $(`#${call.peer}`).remove();
+                call.close();
             }
+        }
+    }
 
-            client_receive = new WebSocket(`ws://localhost:8081/live`);
-            player_receive = new jsmpeg(client_receive, { canvas: canvas_receive });
+    const course_id = getParameterByName('p');
 
-            console.log('ID: ' + peer.id);
-            // recvId.innerHTML = "ID: " + peer.id;
-            // status.innerHTML = "Awaiting connection...";
-        });
-        peer.on('connection', function (c) {
-            // Allow only a single connection
-            if (conn) {
-                c.on('open', function () {
-                    c.send("Already connected to another client");
-                    setTimeout(function () { c.close(); }, 500);
+    const initAjax = (call) => {
+        const canvas = document.getElementById(`streamVideo_${call.peer}`);
+        openAudio()
+            .then(oAudio => {
+                call.answer(oAudio);
+                playStream(`localAudio_${call.peer}`, oAudio);
+                call.on('stream', remoteAudio => {
+                    playStream(`remoteAudio_${call.peer}`, remoteAudio);
+                    player = new JSMpeg.Player(`ws://www.bigprotech.vn:7000/stream?id=${course_id}${call.customID}&course=${course_id}${call.peer}&token=${randomToken()}`, { canvas: canvas });
+                    setTimeout(function () {
+                        let socket = player.source.socket;
+                        let thisIs = player.source;
+                        socket.onmessage = function (evt) {
+                            var data = evt.data;
+                            var I = !thisIs.established;
+                            thisIs.established = !0,
+                                I && thisIs.onEstablishedCallback && thisIs.onEstablishedCallback(thisIs),
+                                thisIs.destination && thisIs.destination.write(data)
+                            checkClose(data, call);
+                        }
+                    }, 300);
                 });
-                return;
-            }
-
-            conn = c;
-            console.log("Connected to: " + conn.peer);
-            // status.innerHTML = "Connected"
-            ready();
-        });
-        peer.on('disconnected', function () {
-            // status.innerHTML = "Connection lost. Please reconnect";
-            console.log('Connection lost. Please reconnect');
-
-            // Workaround for peer.reconnect deleting previous id
-            peer.id = lastPeerId;
-            peer._lastServerId = lastPeerId;
-            peer.reconnect();
-        });
-        peer.on('close', function () {
-            conn = null;
-            // status.innerHTML = "Connection destroyed. Please refresh";
-            alert(conn.peer + ' has left the room');
-        });
-        peer.on('error', function (err) {
-            console.log(err);
-            alert('' + err);
-        });
+            })
+            .catch(err => console.log(err));
     };
 
-    /**
-     * Triggered once a connection has been achieved.
-     * Defines callbacks to handle incoming data and connection events.
-     */
-    function ready() {
-        current_connect_cam.classList.add("circle__green");
-        current_connect_text.innerText = " (Online) ";
-        conn.on('data', function (data) {
-            const obj = new Object();
-            obj.data = data;
-            player_receive.receiveSocketMessage(obj);
+    function initialize() {
+
+        peer = new Peer(course_id, {
+            host: "www.bigprotech.vn",
+            port: "7000",
+            path: "/",
+            secure: false
         });
+
+        peer.on('open', id => console.log('ID: ' + id));
 
         //Answer
         peer.on('call', call => {
-            openAudio()
-                .then(oAudio => {
-                    call.answer(oAudio);
-                    playStream('localAudio', oAudio);
-                    call.on('stream', remoteAudio => playStream('remoteAudio', remoteAudio));
-                })
-                .catch(err => console.log(err));
+            curPeer[call.peer] = call;
+            //create canvas
+            $(document).ready(function () {
+                //if (curPeerIdDOM.indexOf(c.random) === -1 && c.random) {
+                call.customID = randomToken();
+                const child = `<div id="${call.peer}"><h3>
+                                Hình ảnh
+                                <span id="current_connect" class="circle__item circle__green"></span>
+                                <span id="current_connect_text">  (Online) </span>
+                            </h3>
+                            <div class="mr-5">
+                                <canvas id="streamVideo_${call.peer}"></canvas>
+                                <audio id="localAudio_${call.peer}" autoplay></audio>
+                                <audio id="remoteAudio_${call.peer}" autoplay></audio>
+                            </div></div>`;
+                $("#container-cam").append(child);
+                initAjax(call);
+                //curPeerIdDOM.push(c.random);
+            });
+            call.on('close', () => {
+                $(`#${call.peer}`).remove();
+            });
+        });
+        peer.on('disconnected', function () {
+            console.log('Connection lost. Please reconnect');
+        });
+        peer.on('close', function () {
+            console.log(curPeer[`${conn.peer}`] + ' has left the room');
+            delete curPeer[`${conn.peer}`];
+        });
+        peer.on('error', function (err) {
+            console.log('Err ' + err);
         });
 
-        conn.on('close', function () {
-            current_connect_cam.classList.remove("circle__green");
-            current_connect_text.innerText = " (Offline) ";
-            //alert(conn.peer + ' has left the room');
-            conn = null;
-            ImgForClose();
-        });
-    }
-
-    function ImgForClose() {
-        //context = canvas1.getContext("2d");
-        //let img = new Image();
-        //img.src = "./Images/capture.png";
-        //img.onload = function () {
-        //    context.drawImage(img,0,0);
-        //}
-    }
+        var heartbeat = makePeerHeartbeater(peer);
+        //aaaa
+        function makePeerHeartbeater(peer) {
+            var timeoutId = 0;
+            function heartbeat() {
+                timeoutId = setTimeout(heartbeat, 20000);
+                if (peer.socket._wsOpen()) {
+                    peer.socket.send({ type: 'HEARTBEAT' });
+                }
+            }
+            heartbeat();
+            // return
+            return {
+                start: function () {
+                    if (timeoutId === 0) { heartbeat(); }
+                },
+                stop: function () {
+                    clearTimeout(timeoutId);
+                    timeoutId = 0;
+                }
+            };
+        }
+    };
 
     window.onunload = window.onbeforeunload = function (e) {
         if (!!peer && !peer.destroyed) {
             conn.close();
             peer.destroy();
+            player.stop();
+            player.destroy();
         }
+        e.preventDefault();
     };
 
     initialize();
