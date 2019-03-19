@@ -53,6 +53,11 @@ namespace eTUTOR.Areas.Admin.Controllers
             ViewData["sessionlist"] = sessionList;
             return View(info);
         }
+        public ActionResult Schedule()
+        {
+            var schedule = model.schedules.Where(x => x.status == 2).ToList();
+            return View(schedule);
+        }
 
         public ActionResult Dashboard()
         {
@@ -160,6 +165,16 @@ namespace eTUTOR.Areas.Admin.Controllers
             se.status_admin = 1;
             model.SaveChanges();
             return RedirectToAction("Duyetkhoahoc");
+        }
+
+        [HttpPost]
+        public ActionResult Duyetschedule(int id)
+        {
+            int asd = id;
+            var se = model.schedules.Find(id);
+            se.status = 1;
+            model.SaveChanges();
+            return RedirectToAction("Duyetschedule");
         }
 
         public ActionResult Contact()
