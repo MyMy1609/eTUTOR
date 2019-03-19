@@ -55,6 +55,7 @@ namespace eTUTOR.Areas.Admin.Controllers
         }
         public ActionResult Schedule()
         {
+            var tutor_id = int.Parse(Session["UserID"].ToString());
             var schedule = model.schedules.Where(x => x.status == 2).ToList();
             return View(schedule);
         }
