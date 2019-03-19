@@ -110,22 +110,34 @@ namespace eTUTOR.Controllers
             string message;
             var status = HttpStatusCode.OK;
             JObject child = JObject.Parse(data);
-            student st = new student();
-            //List<parent> pr = db.parents.Where(x => x.parent_id == parentId).ToList();
-            st.fullname = child["fullname"].ToString();
-            st.username = child["username"].ToString();
-            st.password = commonService.hash(child["password"].ToString());
-            st.parent_id = parentId;
-            //st.phone = pr.
-            st.email = child["email"].ToString();
-            st.@class = int.Parse(child["class"].ToString());
-            st.status = 1;
-            st.birthday = DateTime.Parse(child["birthday"].ToString());
-            db.students.Add(st);
-            db.SaveChanges();
-            message = "add student sucess";
-            var response = new { message = message, status = status };
-            return Json(response, JsonRequestBehavior.AllowGet);
+            var userName = child["username"].ToString();
+            var email = child["email"].ToString();
+            var studentUsername = db.students.Where(x => x.username == userName && x.email == email).FirstOrDefault();
+            if (studentUsername == null)
+            {
+                student st = new student();
+                //List<parent> pr = db.parents.Where(x => x.parent_id == parentId).ToList();
+                st.fullname = child["fullname"].ToString();
+                st.username = child["username"].ToString();
+                st.password = commonService.hash(child["password"].ToString());
+                st.parent_id = parentId;
+                //st.phone = pr.
+                st.email = child["email"].ToString();
+                st.@class = int.Parse(child["class"].ToString());
+                st.status = 1;
+                st.birthday = DateTime.Parse(child["birthday"].ToString());
+                db.students.Add(st);
+                db.SaveChanges();
+                message = "add student sucess";
+                var response = new { message= message, status = status};
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                message = "username hoặc email đã được sử dụng , vui lòng chọn username và email khác";
+                var response = new { message = message, status = status };
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
         }
         
         [HttpPost]
