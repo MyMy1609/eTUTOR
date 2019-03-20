@@ -89,7 +89,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in tutor.Where(x => x.status == 1 || x.status ==3))
+                                        @foreach (var item in tutor.Where(x => x.status == 1 || x.status == 3))
                                         {
 
 
@@ -99,7 +99,7 @@
                                                 <td>@item.phone</td>
                                                 <td>@item.status1.name</td>
                                                 <td>
-                                                    <a href="@Url.Action("detailtutor", "Admin")">
+                                                    <a href="@Url.Action("detail", "Tutor", new { id = item.tutor_id })">
                                                         <i class="material-icons">
                                                             remove_red_eye
                                                         </i>
@@ -166,7 +166,7 @@
                                                 <td>@item.phone</td>
                                                 <td>@item.status1.name</td>
                                                 <td>
-                                                    <a href="@Url.Action("detailparent","Admin")">
+                                                    <a href="@Url.Action("detail","Parent",new { id = item.parent_id })">
                                                         <i class="material-icons">
                                                             remove_red_eye
                                                         </i>
@@ -235,7 +235,7 @@
                                                 </td>
                                                 <td>@item.status</td>
                                                 <td>
-                                                    <a href="@Url.Action("detailstudent","Admin")">
+                                                    <a href="@Url.Action("detail","Student",new { id = item.student_id })">
                                                         <i class="material-icons">
                                                             remove_red_eye
                                                         </i>
