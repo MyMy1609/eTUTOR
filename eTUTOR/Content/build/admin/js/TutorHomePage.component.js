@@ -18,6 +18,15 @@ function duyetkhoahoc(id) {
     request.open(method, url);
     request.send();
 }
+// duyet view schedule
+function duyetschedule(id) {
+    //alert('!!id ' + id)
+    var request = new XMLHttpRequest();
+    var url = "/Admin/Admin/Duyetschedule/" + id;
+    var method = "POST";
+    request.open(method, url);
+    request.send();
+}
 // duyet view user bang tutor
 function duyettutor(id) {
     //alert('!!id ' + id)

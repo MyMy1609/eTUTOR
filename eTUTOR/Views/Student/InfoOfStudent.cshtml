@@ -437,7 +437,8 @@
                 data: {dotw : dotw, student_id : @int.Parse(Session["UserID"].ToString())},
                 dataType: "html",
                 success: function (response) {
-                    $('#sessionlist').html(response)
+                    $('#sessionlist').html(response);
+                    callStream();
                 }
             });
         }
@@ -451,6 +452,15 @@
                     alert(response.message);
                     window.location.reload();
                 }
+            });
+        }
+        function callStream() {
+            $(".student_sub").on("click", function () {
+                var url = `@Url.Action("SessionOfStudent", "Student")?p=${$(this).attr("data-subjectId")}`;
+                var strWindownFeatures = `toolbars=no,scrollbars=yes,status=no,resizable=no,location=no,width=${$(window).width()},height=${$(window).height()}`;
+                WindowObject = window.open(url, "StreamEtutor", strWindownFeatures);
+                WindowObject.document.close();
+                WindowObject.focus();
             });
         }
     </script>

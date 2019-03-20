@@ -274,7 +274,7 @@
                                                             <td class="tdr">
                                                                 <input type="text" id="username">
                                                                 <div id="username-error" class="error"></div>
-                                                               
+
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -327,7 +327,7 @@
                                                                 Email
                                                             </td>
                                                             <td class="tdr">
-                                                                <input type="text" id="email">
+                                                                <input type="text" id="email" />
                                                                 <div id="email-error" class="error"></div>
                                                             </td>
                                                         </tr>
@@ -343,7 +343,7 @@
                                     </div>
                                 </div>
 
-
+                             
                                 @foreach (var childAccount in Model.students.ToList().Where(x => x.parent_id == int.Parse(Session["UserID"].ToString())))
                                 {
                                     <div class="row pt-3">
@@ -484,7 +484,9 @@
 
     <script src="~/Content/vendor/jquery/jquery.validate.min.js"></script>
 
-    <script>
+    <script type="text/javascript">
+
+
         $(function () {
             getSessionList(-1);
 
@@ -509,7 +511,12 @@
                     class: $("#add-child-form #class").val(),
                     email: $("#add-child-form #email").val()
                 }
-                
+                //
+                var emailFormat  = /^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        var reg = new RegExp(emailFormat);
+                let flag;
+                var emailC = $("#add-child-form #email").val();
+        if(reg.test(emailC)){ flag = true;}else{ flag = false;}
                 let check = {
                     fullname: false,
                     username: false,
@@ -526,7 +533,7 @@
                     $("#add-child-form #fullname-error").html("");
                     check.fullname = true;
                 }
-                
+
                 if (child.username == "") {
                     $("#add-child-form #username-error").html("Xin nhập username");
                     check.username = false;
@@ -562,8 +569,8 @@
                 }
 
                 //email
-                if (child.email == "") {
-                    $("#add-child-form #email-error").html("Xin nhập email");
+                if (child.email=="" || flag == false) {
+                    $("#add-child-form #email-error").html("Xin nhập email hoặc email không đúng định dạng");
                     check.email = false;
                 } else {
                     $("#add-child-form #email-error").html("");
@@ -673,7 +680,7 @@
             });
         }
 
-        
+
     </script>
 }
 <!--   Core JS Files   -->

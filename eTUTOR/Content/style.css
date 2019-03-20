@@ -2,7 +2,13 @@ canvas#streamVideo {
     border: 2px solid pink;
     width: 100% !important;
     height: 25% !important;
-}.wb{width:100%!important;height:calc(50vh/2)!important;}
+}
+
+.wb {
+    width: 100% !important;
+    height: calc(50vh/2) !important;
+}
+
 .current_connect {
     width: 15px;
     height: 15px;
@@ -10,6 +16,7 @@ canvas#streamVideo {
     right: 2px;
     background-color: #ddd;
 }
+
 .circle__item {
     width: 15px;
     height: 15px;
@@ -17,13 +24,19 @@ canvas#streamVideo {
     border-radius: 100%;
     display: inline-block;
 }
+
 .circle__green {
     background-color: #18dc18;
 }
+
 body {
     font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
     background-color: white;
     min-width: 450px;
+}
+
+.d-none {
+    display: none !important;
 }
 
 h1 {
@@ -32,7 +45,7 @@ h1 {
 
 h2 {
     text-align: center;
-    font-size: 4em; 
+    font-size: 4em;
 }
 
 td {
@@ -40,11 +53,11 @@ td {
 }
 
 input {
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
-a:visited{ 
-	color: blue; 
+a:visited {
+    color: blue;
 }
 
 .display {
@@ -101,7 +114,6 @@ a:visited{
     font-weight: bold;
     margin-bottom: 10px;
     border-bottom: 2px solid black;
-    
 }
 
 .message {
@@ -134,13 +146,19 @@ a:visited{
     scrollbar-base-color: #ffeaff;
 }
 
-#whiteBoard {
+#blob_img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#whiteBoard,
+#whiteBoard_student {
     border: 2px dashed pink;
     border-style: dotted;
     border-width: 2px;
     background-color: #FFFFFF;
     vertical-align: top;
-    overflow:hidden;
+    overflow: hidden;
 }
 
 #imageTemp {
@@ -152,14 +170,10 @@ a:visited{
     margin: 5px;
 }
 
-#imageTempt {
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    bottom: 1px;
-    right: 1px;
-    margin: 5px;
-}
+/*#whiteBoard, #imageTemp {
+    width: 100% !important;
+    height: 100% !important;
+}*/
 
 .mr-5 {
     margin: 5px;

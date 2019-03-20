@@ -41,12 +41,12 @@
                         }
                         <div class="form-holder">
                             <span class="lnr lnr-user"></span>
-                            <input type="text" class="form-control" placeholder="Tên tài khoản" name="email"  id="user" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')">
+                            <input type="text" class="form-control" placeholder="Tên tài khoản" name="email"  id="user" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')" oninput="setCustomValidity('')" />
                             
                         </div>
                         <div class="form-holder">
                             <span class="lnr lnr-lock"></span>
-                            <input type="password" class="form-control" placeholder="Mật khẩu" name="password" id="pass" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')">
+                            <input type="password" class="form-control" placeholder="Mật khẩu" name="password" id="pass" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')" oninput="setCustomValidity('')"/>
 
                         </div>
                         <p style="padding-bottom: 10px">Nếu bạn chưa có tài khoản, nhấn chọn <a href="@Url.Action("register","User")">Đăng ký</a></p>
