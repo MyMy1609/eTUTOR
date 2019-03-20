@@ -1,7 +1,9 @@
 ﻿@{
+                /**/
 
-    ViewBag.Title = "Register";
-    Layout = null;
+
+                ViewBag.Title = "Register";
+                Layout = null;
 }
 
 <html>
@@ -23,40 +25,44 @@
     <div class="wrapper">
         <div class="inner">
             <div class="register-form flash hide validate-form">
-                <form action="/User/RegisterParent" method="post" onsubmit="return validation()">
+                <form action="/User/RegisterParent" method="post" onsubmit="return validation()" class="contact100-form validate-form">
                     <img src="~/Content/img/register/registration-form-1.png" alt="" class="image-1" />
                     <h3>Đăng ký tài khoản</h3>
                     <div class="default">
+                        @if (ViewBag.Er != null)
+                        {
+                            <div><span style="color:brown">@ViewBag.Er</span></div>
+                        }
                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Họ và tên không được rỗng">
                             <span class="lnr lnr-user"></span>
-                            <input id="fullname" type="text" class="form-control" name="fullname" placeholder="Họ và tên" autocomplete="off" required="" oninvalid="this.setCustomValidity('Họ và tên không được rỗng!')" oninput="setCustomValidity('')">
-                            <span class="text-danger focus-input100" id="fullname"></span>
+                            <input id="fullname" type="text" class="form-control input100" name="fullname" placeholder="Họ và tên" autocomplete="off" required="" oninvalid="this.setCustomValidity('Họ và tên không được rỗng!')" oninput="setCustomValidity('')">
+                            <span class="text-danger focus-input100" id="fullnames"></span>
                         </div>
                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Username không được rỗng">
                             <span class="lnr lnr-users"></span>
-                            <input id="username" type="text" class="form-control" name="username" placeholder="Tên tài khoản" autocomplete="off" required="" oninvalid="this.setCustomValidity('Username không được rỗng!')" oninput="setCustomValidity('')">
-                            <span class="text-danger focus-input100" id="username"></span>
+                            <input id="username" type="text" class="form-control input100" name="username" placeholder="Tên tài khoản" autocomplete="off" required="" oninvalid="this.setCustomValidity('Username không được rỗng!')" oninput="setCustomValidity('')">
+                            <span class="text-danger focus-input100" id="usernames"></span>
                         </div>
                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Số điện thoại không được rỗng">
                             <span class="lnr lnr-phone-handset"></span>
-                            <input id="phone" type="text" class="form-control" name="phone" placeholder="Số điện thoại" autocomplete="off" required="" oninvalid="this.setCustomValidity('Số điện thoại không được rỗng!')" oninput="setCustomValidity('')">
-                            <span class="text-danger focus-input100" id="phone"></span>
+                            <input id="phone" type="text" class="form-control input100" name="phone" placeholder="Số điện thoại" autocomplete="off" required="" oninvalid="this.setCustomValidity('Số điện thoại không được rỗng!')" oninput="setCustomValidity('')">
+                            <span class="text-danger focus-input100" id="phones"></span>
                         </div>
                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Email không được rỗng và phải đúng định dạng">
                             <span class="lnr lnr-envelope"></span>
-                            <input id="email" type="text" class="form-control" name="email" placeholder="Email" autocomplete="off" required="" oninvalid="this.setCustomValidity('Email không được rỗng và phải đúng định dạng!')" oninput="setCustomValidity('')">
-                            <span class="text-danger focus-input100" id="email"></span>
+                            <input id="email" type="email" class="form-control input100" name="email" placeholder="Email" autocomplete="off" required="" oninvalid="this.setCustomValidity('Email không được rỗng và phải đúng định dạng!')" oninput="setCustomValidity('')">
+                            <span class="text-danger focus-input100" id="emails"></span>
                         </div>
                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Mật khẩu không được rỗng">
                             <span class="lnr lnr-lock"></span>
-                            <input id="password" type="password" class="form-control" name="password" placeholder="Mật khẩu" autocomplete="off" required="" oninvalid="this.setCustomValidity('Mật khẩu không được rỗng!')" oninput="setCustomValidity('')">
-                            <span class="text-danger focus-input100" id="password"></span>
+                            <input id="password" type="password" class="form-control input100" name="password" placeholder="Mật khẩu" autocomplete="off" required="" oninvalid="this.setCustomValidity('Mật khẩu không được rỗng!')" oninput="setCustomValidity('')">
+                            <span class="text-danger focus-input100" id="passwords"></span>
                         </div>
-                        <div class="form-holder wrap-input100 validate-input form-group" data-validate="Nhập lại mật khẩu không được rỗng và phải trùng với mật khẩu">
+                        <div class="form-holder wrap-input100 validate-input form-group input100" data-validate="Nhập lại mật khẩu không được rỗng và phải trùng với mật khẩu">
                             <span class="lnr lnr-lock"></span>
                             <input id="confirmpassword" type="password" class="form-control" name="confirmpassword" placeholder="Nhập lại mật khẩu" autocomplete="off" required="" oninvalid="this.setCustomValidity('Nhập lại mật khẩu không được rỗng và phải trùng với mật khẩu!')" oninput="setCustomValidity('')">
                             <div class="password-error" style="color:red;margin-top:10px;"></div>
-                            <span class="text-danger focus-input100" id="confirmpassword"></span>
+                            <span class="text-danger focus-input100" id="confirmpasswords"></span>
                         </div>
                     </div>
                     <div class="sub">
@@ -124,7 +130,7 @@
             return check;
         }
         function validation() {
-
+            
             var fullname = document.getElementById('fullname').value;
             var username = document.getElementById('username').value;
             var phone = document.getElementById('phone').value;
@@ -136,61 +142,78 @@
             var specialized = document.getElementById('specialized').value;
 
             if (fullname == "") {
-                document.getElementById('fullname').innerHTML = " ** Họ và tên không được rỗng";
+                document.getElementById('fullnames').innerHTML = " ** Họ và tên không được rỗng";
                 return false;
             }
             if (username == "") {
-                document.getElementById('username').innerHTML = " ** Username không được rỗng";
+                document.getElementById('usernames').innerHTML = " ** Tên đăng nhập không được rỗng";
                 return false;
             }
             if (phone == "") {
-                document.getElementById('phone').innerHTML = " ** Số điện thoại không được rỗng";
+                document.getElementById('phones').innerHTML = " ** Số điện thoại không được rỗng";
+                return false;
+            }
+            if (isNaN(phone)) {
+                document.getElementById('phones').innerHTML = " ** Số điện thoại phải là số";
+                return false;
+            }
+            if (phone.length != 10) {
+                document.getElementById('phones').innerHTML = " ** Số điện thoại phải có 10 số trở lên";
                 return false;
             }
             if (email == "") {
-                document.getElementById('email').innerHTML = " ** Email không rỗng và phải đúng định dạng: ex@abc.xyz";
+                document.getElementById('emails').innerHTML = " ** Email không rỗng và phải đúng định dạng: ex@abc.xyz";
+                return false;
+            }
+            @*if (email.indexOf('@') <= 0) {
+                document.getElementById('emails').innerHTML = " **Email không hợp lệ";
+                return false;
+            }*@
+
+			if ((email.charAt(email.length - 4) != '.') && (email.charAt(email.length - 3) != '.')) {
+                document.getElementById('emails').innerHTML = " ** Email không đúng định dạng";
                 return false;
             }
             if (password == "") {
-                document.getElementById('Password').innerHTML = " ** Password không được rỗng";
+                document.getElementById('Passwords').innerHTML = " ** Mật khẩu không được rỗng";
                 return false;
             }
             if (password != confirmpassword) {
-                document.getElementById('Passwords').innerHTML = " ** ConfirmPassword phải trùng với Password";
+                document.getElementById('Passwords').innerHTML = " ** Xác nhận mật khẩu phải trùng với Mật khẩu";
                 return false;
             }
             if (confirmpassword == "") {
-                document.getElementById('confirmpassword').innerHTML = " ** ConfirmPassword không được rỗng";
+                document.getElementById('confirmpasswords').innerHTML = " ** Xác nhận mật khẩu không được rỗng";
                 return false;
             }
             if (address == "") {
-                document.getElementById('address').innerHTML = " ** Địa chỉ không được rỗng";
+                document.getElementById('addresss').innerHTML = " ** Địa chỉ không được rỗng";
                 return false;
             }
             if (birthday == "") {
-                document.getElementById('birthday').innerHTML = " ** Ngày sinh không được rỗng";
+                document.getElementById('birthdays').innerHTML = " ** Ngày sinh không được rỗng";
                 return false;
             }
             if (specialized == "") {
-                document.getElementById('specialized').innerHTML = " ** Chuyên ngành giảng dạy không được rỗng";
+                document.getElementById('specializeds').innerHTML = " ** Chuyên ngành giảng dạy không được rỗng";
                 return false;
             }
         }
         function renderSubForm(tab) {
             var teacherContent = `	<div class="form-holder wrap-input100 validate-input form-group" data-validate="Địa chỉ không được rỗng">
                                             <span class="lnr lnr-user"></span>
-                                            <input id="address" type="text" class="form-control" name="address"  placeholder="Địa chỉ" autocomplete="off" required="" oninvalid="this.setCustomValidity('Địa chỉ không được rỗng!')" oninput="setCustomValidity('')">
-                                            <span class="text-danger focus-input100" id="address"></span>
+                                            <input id="address" type="text" class="form-control input100" name="address"  placeholder="Địa chỉ" autocomplete="off" required="" oninvalid="this.setCustomValidity('Địa chỉ không được rỗng!')" oninput="setCustomValidity('')">
+                                            <span class="text-danger focus-input100" id="addresss"></span>
                                         </div>
                                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Ngày sinh không được rỗng">
                                             <span class="lnr lnr-phone-handset"></span>
-                                            <input id="birthday" type="text" class="form-control" name="birthday" placeholder="Ngày sinh" autocomplete="off" required="" oninvalid="this.setCustomValidity('Ngày sinh không được rỗng!')" oninput="setCustomValidity('')">
-                                            <span class="text-danger focus-input100" id="birthday"></span>
+                                            <input id="birthday" type="text" class="form-control input100" name="birthday" placeholder="Ngày sinh" autocomplete="off" required="" oninvalid="this.setCustomValidity('Ngày sinh không được rỗng!')" oninput="setCustomValidity('')">
+                                            <span class="text-danger focus-input100" id="birthdays"></span>
                                         </div>
                                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Chuyên ngành giảng dạy không được rỗng">
                                             <span class="lnr lnr-envelope"></span>
-                                            <input id="specialized" type="text" class="form-control" name="specialized" placeholder="Chuyên ngành giảng dạy	" autocomplete="off" required="" oninvalid="this.setCustomValidity('Chuyên ngành giảng dạy không được rỗng!')" oninput="setCustomValidity('')">
-                                            <span class="text-danger focus-input100" id="specialized"></span>
+                                            <input id="specialized" type="text" class="form-control input100" name="specialized" placeholder="Chuyên ngành giảng dạy	" autocomplete="off" required="" oninvalid="this.setCustomValidity('Chuyên ngành giảng dạy không được rỗng!')" oninput="setCustomValidity('')">
+                                            <span class="text-danger focus-input100" id="specializeds"></span>
                                         </div>
                                         <div class="form-holder">
                                             <span class="lnr lnr-envelope"></span>
@@ -212,13 +235,13 @@
             var studentContent = `
                                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Địa chỉ không được rỗng">
                                             <span class="lnr lnr-lock"></span>
-                                            <input id="address" type="text" class="form-control" name="address" placeholder="Địa chỉ" autocomplete="off" required="" oninvalid="this.setCustomValidity('Địa chỉ không được rỗng!')" oninput="setCustomValidity('')">
-                                            <span class="text-danger focus-input100" id="address"></span>
+                                            <input id="address" type="text" class="form-control input100" name="address" placeholder="Địa chỉ" autocomplete="off" required="" oninvalid="this.setCustomValidity('Địa chỉ không được rỗng!')" oninput="setCustomValidity('')">
+                                            <span class="text-danger focus-input100" id="addresss"></span>
                                         </div>
                                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Ngày sinh không được rỗng">
                                             <span class="lnr lnr-lock"></span>
-                                            <input id="birthday" type="text" class="form-control" name="birthday" placeholder="Ngày sinh" autocomplete="off" required="" oninvalid="this.setCustomValidity('Ngày sinh không được rỗng!')" oninput="setCustomValidity('')">
-                                            <span class="text-danger focus-input100" id="birthday"></span>
+                                            <input id="birthday" type="text" class="form-control input100" name="birthday" placeholder="Ngày sinh" autocomplete="off" required="" oninvalid="this.setCustomValidity('Ngày sinh không được rỗng!')" oninput="setCustomValidity('')">
+                                            <span class="text-danger focus-input100" id="birthdays"></span>
                                         </div>
                                         <div class="form-holder">
                                             <span class="lnr lnr-phone-handset"></span>
