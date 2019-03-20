@@ -1,0 +1,54 @@
+﻿
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class='thetop'></div>
+<div class="main-content" style="margin-top: 100px">
+    <div class="container">
+        @if(ViewBag.iff != null)
+        {
+            <span style="color:red">@ViewBag.iff</span>
+        }
+
+        <form method="post" action="~/User/ChangePW"  style="margin-bottom:40%;margin-top:10%">
+            <table class="table">
+                <tr>
+                    <td class="tdl" style="text-align:right">
+                        Mật khẩu hiện tại
+                    </td>
+                    <td class="tdr">
+                        <input type="password" name="currentPW" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdl" style="text-align:right">
+                        Mật khẩu mới
+                    </td>
+                    <td class="tdr">
+                        <input type="password"  name="newPW" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdl" style="text-align:right">
+                        Xác nhận mật khẩu mới
+                    </td>
+                    <td class="tdr" >
+                        <input type="password"  name="cfNewPW" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="">
+                    </td>
+                    <td style="text-align:center" class="tdr">
+                        <input type="submit" value="Xác nhận" class="form-control" />
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+
+
+
+    </div>
+</div>

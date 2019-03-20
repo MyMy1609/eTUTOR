@@ -16,7 +16,7 @@ using System.Net.Mail;
 namespace eTUTOR.Controllers
 {
 
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         //===================================================
         eTUITOREntities model = new eTUITOREntities();
@@ -104,7 +104,8 @@ namespace eTUTOR.Controllers
                 string newPW = CreateLostPassword(10);
                 CapNhatMatKhau(student.username, newPW, "std");
                 guiMail(student.username, newPW, email);
-                ViewBag.sc = "Đã đổi mật khẩu, bạn vui lòng vô mail để lấy mật khẩu nhé !";
+
+                setAlert("Đã đổi mật khẩu, bạn vui lòng vô mail để lấy mật khẩu nhé !", "success");
                 return View("Login");
 
             }
@@ -320,6 +321,106 @@ namespace eTUTOR.Controllers
                     MailClient.Send(emailMessage);
                 }
             }
+        }
+        public ActionResult ChangePW()
+        {
+            return View();
+        }
+        //Đổi mk
+        [HttpPost]
+        public ActionResult ChangePW(string currentPW, string newPW, string cfNewPW)
+        {
+            if (currentPW == string.Empty || newPW == string.Empty || cfNewPW == string.Empty)
+            {
+
+                ViewBag.iff = "Vui lòng điền đầy đủ thông tin để thay đổi mật khẩu";
+                return View("ChangePW");
+
+            }
+            else if (newPW == cfNewPW)
+            {
+                string s = Session["username"].ToString();
+                var tutor = model.tutors.FirstOrDefault(x => x.username == s);
+                var student = model.students.FirstOrDefault(x => x.username == s);
+                var parent = model.parents.FirstOrDefault(x => x.username == s);
+                if (tutor != null)
+                {
+                    string passCur = commonService.hash(currentPW);
+                    if (tutor.password != passCur)
+                    {
+                        ViewBag.iff = "Mật khẩu hiện tại không đúng";
+                        return View("ChangePW");
+                    }
+                    else
+                    {
+                        newPW = commonService.hash(newPW);
+                        tutor.password = newPW;
+                        model.SaveChanges();
+                        setAlert("Đổi mật khẩu thành công","success");
+                        return RedirectToAction("InfoOfTutor", "Tutor");
+                    }
+                }
+                if (student != null)
+                {
+
+                    string passCur = commonService.hash(currentPW);
+                    if (student.password != passCur)
+                    {
+                        ViewBag.iff = "Mật khẩu hiện tại không đúng";
+                        return View("ChangePW");
+                    }
+                    else
+                    {
+                        newPW = commonService.hash(newPW);
+                        student.password = newPW;
+                        model.SaveChanges();
+                        setAlert("Đổi mật khẩu thành công", "success");
+                        return RedirectToAction("InfoOfStudent", "Student");
+                    }
+
+                }
+
+                if (parent != null)
+                {
+
+                    string passCur = commonService.hash(currentPW);
+                    if (parent.password != passCur)
+                    {
+                        ViewBag.iff = "Mật khẩu hiện tại không đúng";
+                        return View("ChangePW");
+                    }
+                    else
+                    {
+                        newPW = commonService.hash(newPW);
+                        parent.password = newPW;
+                        model.SaveChanges();
+                        setAlert("Đổi mật khẩu thành công", "success");
+                        return View("InfoOfParent", "Parent");
+                    }
+
+                }
+                return View("ChangePW");
+            }
+            else
+            {
+                ViewBag.iff = "Xác nhận mật khẩu mới không trùng khớp";
+                return View("ChangePW");
+            }
+
+        }
+        [HttpPost]
+        public ActionResult danhgiatutor(string ttID, string message)
+        {
+            string s = Session["UserID"].ToString();
+            comment newcm = new comment();
+            newcm.content = message;
+            newcm.tutor_id = int.Parse(ttID);
+            newcm.student_id = int.Parse(s);
+            newcm.dateTimeCmt = DateTime.Now;
+            model.comments.Add(newcm);
+            model.SaveChanges();
+            setAlert("Cảm ơn bạn đã đóng góp ý kiến", "success");
+            return RedirectToAction("ViewDetailTutor", "Tutor", new { id = int.Parse(ttID) });
         }
 
 

@@ -6,6 +6,7 @@
     eTUITOREntities db = new eTUITOREntities();
     var sch = db.schedules.ToList().Where(x => x.tutor_id == Model.tutor_id);
     var sj = db.subjects.ToList().Where(x => x.tutor_id == Model.tutor_id);
+    
     //var student = db.students.ToString();
 
 }
@@ -105,7 +106,7 @@
                                         </div>
                                         <div class="media-body">
                                             <h5 class="mt-0 mb-0">Liên hệ:</h5>
-                                            <p>
+                                            <p id="email">
                                                 <span>Phone:</span> @Model.phone<br><span>Email:</span>
                                                 @Model.email
                                             </p>
@@ -139,7 +140,7 @@
                                         <span class="text-danger" id="username"></span>
                                     </div>
                                 </div>
-                               
+
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
@@ -166,7 +167,7 @@
                             </div>
                             <div class="form-group">
                                 <textarea rows="5" placeholder="Lời nhắn..." id="content"
-                                          name="content"  class="form-control"></textarea>
+                                          name="content" class="form-control"></textarea>
                                 <span class="text-danger" id="cont"></span>
                             </div>
                             <div class="form-group">
@@ -179,6 +180,23 @@
                     </div>
                 </div>
                 <!--Comment section-->
+                @if (Session["Role"].ToString() != "tutor")
+                {
+                    <!--method="post" action="~/User/danhgiatutor"-->
+                <form role="form" id="danhgiaa" method="post" action="~/User/danhgiatutor">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <input type="text" name="ttID" value="@Model.tutor_id" style="border:none;width:20px;text-align:center" hidden />
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="h4 ">Nội dung đánh giá</label>
+                        <textarea name="message" id="message" class="form-control" rows="5" placeholder="Nhập nội dung đánh giá" required></textarea>
+                    </div>
+                    <button type="submit" id="form-submit" class="btn btn-success ">Gửi</button>
+                </form>
+                }
                 <h4 class="line-bottom">Đánh giá:</h4>
                 @*<div class="row mt-30">*@
                 @foreach (var item in Model.comments)
@@ -186,17 +204,18 @@
                     <div class="row" style="margin:10px">
                         <div class="col-sm-1">
                             <div class="thumbnail">
-                                <img class="img-responsive user-photo" src="~/Content/img/avatar/student/@item.student.avatar">
+                                <img class="img-responsive user-photo" src="~/Content/img/avatar/student/@item.student.avatar" width="50px" height="50px">
                             </div><!-- /thumbnail -->
                         </div><!-- /col-sm-1 -->
                         <div class="col-sm-5">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <strong>@item.student.username</strong> <span class="text-muted">|</span>
+                                    <strong>@item.student.username</strong>
                                 </div>
                                 <div class="panel-body">
                                     @item.content
-                                </div><!-- /panel-body -->
+                                </div>
+                                <span class="text-muted" style="font-size:12px">@item.dateTimeCmt</span><!-- /panel-body -->
                             </div><!-- /panel panel-default -->
                         </div><!-- /col-sm-5 -->
 
@@ -287,6 +306,7 @@
             }
 
         }
+        
     </script>
 }
 

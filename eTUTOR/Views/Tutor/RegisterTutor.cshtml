@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     eTUITOREntities db = new eTUITOREntities();
-    var sch = db.schedules.ToList().Where(x => x.tutor_id == Model.tutor_id);
+    var sch = db.schedules.ToList().Where(x => x.tutor_id == Model.tutor_id && x.status == 1);
     var sj = db.subjects.ToList().Where(x => x.tutor_id == Model.tutor_id);
 
 }
@@ -24,7 +24,7 @@
 }
 
 <div class='thetop'></div>
-<div class="main-content" style="margin-top: 1  00px">
+<div class="main-content" style="margin-top: 100px">
     <div class="container">
 
         <!-- <div class="wizard-heading pt-1 pb-2">Đăng kí gia sư</div> -->
@@ -63,33 +63,20 @@
 
                     <tr>
                         <th></th>
+                        <th>Thứ</th>
                         <th>Thời gian học</th>
-                        <th>Sáng</th>
-                        <th>Chiều</th>
                     </tr>
                 </thead>
-                @foreach (var item in sch)
+                @if (sch != null)
                 {
-                    <tr>
-
-                        @if (item.start_time.Value.Hours < 12)
-
-                        {
+                    foreach (var item in sch)
+                    {
+                        <tr>
                             <th><input type="checkbox" name="idschedule" value="@item.schedule_id" /></th>
                             <th scope="row">@item.day_otw</th>
                             <th>@item.start_time.Value.Hours h - @item.end_time.Value.Hours h</th>
-                            <th>Không</th>
-                        }
-                        else
-                        {
-                            <th scope="row">@item.day_otw</th>
-                            <th></th>
-
-                            <th>@item.start_time.Value.Hours h - @item.end_time.Value.Hours h</th>
-                        }
-
-
-                    </tr>
+                        </tr>
+                    }
                 }
             </table>
             @if (Session["UserID"] != null)

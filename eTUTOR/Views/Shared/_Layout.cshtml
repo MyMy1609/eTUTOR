@@ -31,6 +31,12 @@
 <body>
     @Html.Partial("~/Views/Shared/Common/_Header.cshtml")
     <div class="main-content">
+        @if (TempData["AMess"] != null)
+        {
+            <div id="noticeAlert" class="alert @TempData["AType"] hide" style="margin-top:30px">
+                @TempData["AMess"]
+            </div>
+        }
         @RenderBody()
         <!-- footer -->
         @Html.Partial("~/Views/Shared/Common/_Footer.cshtml")

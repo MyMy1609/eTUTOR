@@ -1,3 +1,14 @@
+//tat nhan day kem
+function duyetkhoahocre(id) {
+    var request = new XMLHttpRequest();
+    var url = "~/Tutor/registScheduleManager/" + id;
+    var method = "POST";
+    request.open(method, url);
+    request.send();
+    alert('id= ' + id);
+}
+
+
 // duyet view course
 function duyetkhoahoc(id) {
     //alert('!!id ' + id)

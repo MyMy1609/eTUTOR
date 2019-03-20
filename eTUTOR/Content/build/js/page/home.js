@@ -1,3 +1,8 @@
+$(function () {
+    $('#noticeAlert').removeClass('hide');
+    $('#noticeAlert').delay(3000).slideUp(500);
+});
+
 var THEMEMASCOT = {};
 
 (function($) {

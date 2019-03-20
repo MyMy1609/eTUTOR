@@ -6,23 +6,25 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using eTUTOR.Models;
+using eTUTOR.Service;
 using Newtonsoft.Json.Linq;
 
 
 namespace eTUTOR.Controllers
 {
-    public class TutorController : Controller
+    public class TutorController : BaseController
     {
         eTUITOREntities db = new eTUITOREntities();
+        CommonService commonService = new CommonService();
         // GET: Tutor
         public ActionResult ListOfTutors()
         {
 
-            var listTT = db.tutors.ToList();
+            var listTT = db.tutors.ToList().Where(x => x.status_register == 1);
             return View(listTT);
         }
         [HttpGet]
-        public ActionResult ViewDetailTutor(int id)
+        public ActionResult ViewDetailTutor(int? id)
         {
             var tatu = db.tutors.FirstOrDefault(x => x.tutor_id == id);
             if (tatu == null)
@@ -38,7 +40,7 @@ namespace eTUTOR.Controllers
         {
             var tutor_id = int.Parse(Session["UserID"].ToString());
             var info = db.tutors.FirstOrDefault(x => x.tutor_id == tutor_id);
-            List<session> sessionList = db.sessions.Where(x => x.tutor_id == tutor_id && x.status_admin == 2 ).ToList();
+            List<session> sessionList = db.sessions.Where(x => x.tutor_id == tutor_id && x.status_admin == 2).ToList();
             ViewData["sessionlist"] = sessionList;
             List<schedule> scheduleList = db.schedules.Where(x => x.tutor_id == tutor_id).ToList();
             ViewData["scheduleList"] = scheduleList;
@@ -48,7 +50,7 @@ namespace eTUTOR.Controllers
         public ActionResult RegisterTutor(int? id)
         {
             var tatu = db.tutors.FirstOrDefault(x => x.tutor_id == id);
-            if(tatu == null)
+            if (tatu == null)
             {
                 ViewBag.mes = "Vui lòng chọn Tutor";
                 RedirectToAction("ListOfTutors", "Tutor");
@@ -57,15 +59,17 @@ namespace eTUTOR.Controllers
         }
         [HttpPost]
         public ActionResult ConfirmScheduleTutor(int idgiasu, int idmonhoc, int[] idschedule)
-        {   
+        {
             string idst = Session["UserID"].ToString();
             int idStudent = int.Parse(idst);
             string id = Session["username"].ToString();
             var std = db.students.FirstOrDefault(x => x.username == id);
             var prt = db.parents.FirstOrDefault(x => x.username == id);
-            if (std != null) {
-                foreach(var item in idschedule) {
-                    var schh = db.schedules.FirstOrDefault( x=> x.schedule_id == item);
+            if (std != null)
+            {
+                foreach (var item in idschedule)
+                {
+                    var schh = db.schedules.FirstOrDefault(x => x.schedule_id == item);
                     session newss = new session();
                     newss.day_otw = schh.day_otw;
                     newss.start_time = schh.start_time;
@@ -81,7 +85,7 @@ namespace eTUTOR.Controllers
                     db.sessions.Add(newss);
                     db.SaveChanges();
                 }
-               
+
                 return RedirectToAction("listRegistCourse", "Student");
             }
             if (prt != null)
@@ -154,7 +158,7 @@ namespace eTUTOR.Controllers
             return View();
         }
 
-        
+
         public ActionResult CreateSchedule(schedule schedule)
         {
             schedule.status = 2;
@@ -163,8 +167,8 @@ namespace eTUTOR.Controllers
             db.SaveChanges();
             return RedirectToAction("InfoOfTutor", "Tutor", new { id = Session["UserID"] });
         }
-       
-        
+
+
         public ActionResult DeleteSchedule(int id)
         {
             schedule sch = db.schedules.Single(x => x.schedule_id == id);
@@ -197,7 +201,7 @@ namespace eTUTOR.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var senderemail = new MailAddress("ppcrentalteam04@gmail.com","tutor"); // mail tutor 
+                    var senderemail = new MailAddress("ppcrentalteam04@gmail.com", "tutor"); // mail tutor 
                     var receiveremail = new MailAddress("hoak21t@gmail.com", "Cong ty"); //mail cong ty
 
                     var password = "K21t1team04";// mật khẩu địa chỉ mail 
@@ -241,5 +245,26 @@ namespace eTUTOR.Controllers
         {
             return View();
         }
+        
+        public ActionResult registScheduleManager(int types)
+        {
+            string s = types.ToString();
+            int n = int.Parse(s);
+            var tutor = db.tutors.FirstOrDefault(x => x.tutor_id == n);
+            if (tutor.status_register == 1)
+            {
+                tutor.status_register = 2;
+                db.SaveChanges();
+            }else if(tutor.status_register == 2)
+            {
+                tutor.status_register = 1;
+                db.SaveChanges();
+            }
+            setAlert("Bạn đã thay đổi thành công","success");
+            return RedirectToAction("InfoOfTutor");
+        }
+
+        
+        
     }
 }

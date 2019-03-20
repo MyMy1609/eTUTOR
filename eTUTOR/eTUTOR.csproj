@@ -163,6 +163,7 @@
     <Compile Include="Areas\Admin\Controllers\StudentController.cs" />
     <Compile Include="Areas\Admin\Controllers\TuTorController.cs" />
     <Compile Include="Controllers\APIController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
     <Compile Include="Models\about.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
@@ -883,6 +884,7 @@
     <Content Include="Views\Home\Confirm.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\Tutor\Confirm.cshtml" />
+    <Content Include="Views\User\ChangePW.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -933,6 +935,7 @@
     <Folder Include="Content\build\img\teacher\" />
     <Folder Include="Content\build\img\testimonials\" />
     <Folder Include="Content\img\certificates\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

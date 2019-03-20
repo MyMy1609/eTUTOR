@@ -4,9 +4,10 @@
     ViewBag.Title = "InfoOfStudent";
     Layout = "~/Views/Shared/_Layout.cshtml";
     eTUITOREntities db = new eTUITOREntities();
+
+    var ses = db.sessions.ToList().Where(x => x.student_id == Model.student_id && x.status.status_id != 1);
     DateTime birthday = Model.birthday.GetValueOrDefault();
     string birthdayformat = birthday.ToString("dd/MM/yyyy");
-    var ses = db.sessions.ToList().Where(x => x.student_id == Model.student_id && x.status.status_id != 1);
     int studentClass = Model.@class;
 }
 @section css{
