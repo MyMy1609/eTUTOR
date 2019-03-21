@@ -26,9 +26,8 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="~/Content/build/admin/css/demo.css" rel="stylesheet" />
     <!-- Google Tag Manager -->
-    <link href="~/Content/build/admin/css/switch.css" rel="stylesheet" />
+    <link href="~/Content/build/admin/css/switchBlock.css" rel="stylesheet" />
     <link href="~/Content/vendor/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
-    <link href="~/Content/build/admin/css/TutorHomePage.component.css" rel="stylesheet" />
     <script>
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -99,7 +98,7 @@
                                                 <td>@item.phone</td>
                                                 <td>@item.status1.name</td>
                                                 <td>
-                                                    <a href="@Url.Action("detail", "Tutor", new { id = item.tutor_id })">
+                                                    <a href="@Url.Action("Detail", "TuTor", new { id = item.tutor_id })">
                                                         <i class="material-icons">
                                                             remove_red_eye
                                                         </i>
@@ -108,7 +107,7 @@
                                                 </td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" name="check" id="slider-khoa" onchange="khoatutor(@item.tutor_id)">
+                                                        <input type="checkbox" name="check" class="box" onchange="khoatutor(@item.tutor_id)">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </td>
@@ -166,7 +165,7 @@
                                                 <td>@item.phone</td>
                                                 <td>@item.status1.name</td>
                                                 <td>
-                                                    <a href="@Url.Action("detail","Parent",new { id = item.parent_id })">
+                                                    <a href="@Url.Action("Detail","Parent",new { id = item.parent_id })">
                                                         <i class="material-icons">
                                                             remove_red_eye
                                                         </i>
@@ -175,7 +174,7 @@
                                                 </td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" name="check" onchange="khoaparent(@item.parent_id)">
+                                                        <input type="checkbox" name="check" class="box" onchange="khoaparent(@item.parent_id)">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </td>
@@ -235,7 +234,7 @@
                                                 </td>
                                                 <td>@item.status</td>
                                                 <td>
-                                                    <a href="@Url.Action("detail","Student",new { id = item.student_id })">
+                                                    <a href="@Url.Action("Detail","Student",new { id = item.student_id })">
                                                         <i class="material-icons">
                                                             remove_red_eye
                                                         </i>
@@ -244,7 +243,7 @@
                                                 </td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" name="check" onchange="khoastudent(@item.student_id)">
+                                                        <input type="checkbox" name="check" class="box" onchange="khoastudent(@item.student_id)">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </td>
@@ -442,7 +441,7 @@
                     }
 
                 }
-
+                
                 $('.fixed-plugin a').click(function (event) {
                     // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
                     if ($(this).hasClass('switch-trigger')) {
@@ -818,6 +817,24 @@
 
 
         });
+    </script>
+    <script>
+        function onClickBox() {
+            var arr = $('.box').map(function () {
+                return this.checked;
+            }).get();
+            localStorage.setItem("checked", JSON.stringify(arr));
+        }
+
+        $(document).ready(function () {
+            var arr = JSON.parse(localStorage.getItem('checked')) || [];
+            arr.forEach(function (checked, i) {
+                $('.box').eq(i).prop('checked', checked);
+            });
+
+            $(".box").click(onClickBox);
+        });
+
     </script>
 </body>
 

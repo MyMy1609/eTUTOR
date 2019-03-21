@@ -263,6 +263,7 @@
     <Content Include="Content\build\admin\css\material-dashboard.css" />
     <Content Include="Content\build\admin\css\style.css" />
     <Content Include="Content\build\admin\css\switch.css" />
+    <Content Include="Content\build\admin\css\switchBlock.css" />
     <Content Include="Content\build\admin\css\TutorHomePage.component.css" />
     <Content Include="Content\build\admin\img\apple-icon.png" />
     <Content Include="Content\build\admin\img\bang-cap-3.jpg" />
