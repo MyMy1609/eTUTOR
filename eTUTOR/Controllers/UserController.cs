@@ -422,7 +422,28 @@ namespace eTUTOR.Controllers
             setAlert("Cảm ơn bạn đã đóng góp ý kiến", "success");
             return RedirectToAction("ViewDetailTutor", "Tutor", new { id = int.Parse(ttID) });
         }
-
+        public ActionResult checkre(string username, string email)
+        {
+            var student = model.students.FirstOrDefault(x => x.username == username);
+            var parent = model.parents.FirstOrDefault(x => x.username == username);
+            var tutor = model.tutors.FirstOrDefault(x => x.username == username);
+            if(student.email != email)
+            {
+                ViewBag.Er = "Email đã tồn tại vui lòng nhập lại email khác !";
+                return View("Register");
+            }
+            if(parent.email != email)
+            {
+                ViewBag.Er = "Email đã tồn tại vui lòng nhập lại email khác !";
+                return View("Register");
+            }
+            if(tutor.email != email)
+            {
+                ViewBag.Er = "Email đã tồn tại vui lòng nhập lại email khác !";
+                return View("Register");
+            }
+            return View();
+        }
 
     }
 
