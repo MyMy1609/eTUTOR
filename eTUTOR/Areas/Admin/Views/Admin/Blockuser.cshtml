@@ -96,7 +96,7 @@
                                                 <td>@item.fullname</td>
                                                 <td>@item.email</td>
                                                 <td>@item.phone</td>
-                                                <td>@item.status1.name</td>
+                                                <td class="status">@item.status1.name</td>
                                                 <td>
                                                     <a href="@Url.Action("Detail", "TuTor", new { id = item.tutor_id })">
                                                         <i class="material-icons">
@@ -107,7 +107,7 @@
                                                 </td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" name="check" class="box" onchange="khoatutor(@item.tutor_id)">
+                                                        <input type="checkbox" @(item.status1.status_id==3?"checked=\"checked\"" : "" ) name="check" class="box" onchange="khoatutor(@item.tutor_id)">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </td>
@@ -163,7 +163,7 @@
                                                 <td>@item.fullname</td>
                                                 <td>@item.email</td>
                                                 <td>@item.phone</td>
-                                                <td>@item.status1.name</td>
+                                                <td class="status">@item.status1.name</td>
                                                 <td>
                                                     <a href="@Url.Action("Detail","Parent",new { id = item.parent_id })">
                                                         <i class="material-icons">
@@ -174,7 +174,7 @@
                                                 </td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" name="check" class="box" onchange="khoaparent(@item.parent_id)">
+                                                        <input type="checkbox" @(item.status1.status_id==3?"checked=\"checked\"" : "" ) name="check" class="box" onchange="khoaparent(@item.parent_id)">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </td>
@@ -243,7 +243,7 @@
                                                 </td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" name="check" class="box" onchange="khoastudent(@item.student_id)">
+                                                        <input type="checkbox" @(item.status1.status_id==3?"checked=\"checked\"" : "" ) name="check" class="box" onchange="khoastudent(@item.student_id)">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </td>
@@ -818,24 +818,7 @@
 
         });
     </script>
-    <script>
-        function onClickBox() {
-            var arr = $('.box').map(function () {
-                return this.checked;
-            }).get();
-            localStorage.setItem("checked", JSON.stringify(arr));
-        }
-
-        $(document).ready(function () {
-            var arr = JSON.parse(localStorage.getItem('checked')) || [];
-            arr.forEach(function (checked, i) {
-                $('.box').eq(i).prop('checked', checked);
-            });
-
-            $(".box").click(onClickBox);
-        });
-
-    </script>
+   
 </body>
 
 </html>
