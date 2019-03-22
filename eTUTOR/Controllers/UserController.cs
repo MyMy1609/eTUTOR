@@ -168,7 +168,7 @@ namespace eTUTOR.Controllers
                 }
                 else
                 {
-                    ViewBag.msg = "Mat khau sai roi nhe cung ahihi ^^";
+                    ViewBag.msg = "Mật khẩu sai rồi vui lòng nhập lại mật khẩu !";
                     return View("Login");
                 }
                 
