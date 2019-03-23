@@ -1,9 +1,9 @@
 ﻿@{
-                /**/
+    /**/
 
 
-                ViewBag.Title = "Register";
-                Layout = null;
+    ViewBag.Title = "Register";
+    Layout = null;
 }
 
 <html>
@@ -98,7 +98,6 @@
     <script src="register.component.js"></script>
     <script>
         $(document).ready(function () {
-            //role chưa trong biến này
             var valRole;
             $('input[type="radio"][name="role"]').on('change', function () {
                 valRole = $(this).val();
@@ -122,7 +121,23 @@
                     }, 1000);
                 }, duration);
             })
+
         })
+        function validation() {
+            var role = $('input[type="radio"][name="role"]:checked').val();
+            switch (role) {
+                case "0":
+                    return validateForTuTor();
+                case "1":
+                    return validateForParent();
+                case "2":
+                    return validateForStudent();
+                default:
+                    return false;
+                    break;
+            }
+
+        }
         function checkConfirmPassword() {
             var check = true;
             $(".password-error").empty();
@@ -135,7 +150,7 @@
             console.log(password);
             return check;
         }
-        
+
         function renderSubForm(tab) {
             var teacherContent = `	<div class="form-holder wrap-input100 validate-input form-group" data-validate="Địa chỉ không được rỗng">
                                             <span class="lnr lnr-user"></span>
@@ -205,22 +220,7 @@
             sub.empty();
             sub.html(subContentArr[tab]);
         }
-    </script>
-    <script type="text/javascript">
-        function validation() {
-            switch (valRole) {
-                case 0:
-                    return validateForTuTor();
-                case 1:
-                    return validateForParent();
-                case 2:
-                    return valiateForStudent()
-                default:
-                    //báo lõi chưa chọn role
-                break;
-            }
-           
-        }
+
         function validateForTuTor() {
             var fullname = document.getElementById('fullname').value;
             var username = document.getElementById('username').value;
@@ -253,7 +253,7 @@
                 return false;
             }
             if (email == "") {
-                document.getElementById('emails').innerHTML = " ** Email không rỗng và phải đúng định dạng: ex@abc.xyz";
+                document.getElementById('emails').innerHTML = " ** Email không được rỗng";
                 return false;
             }
             @*if (email.indexOf('@') <= 0) {
@@ -262,7 +262,7 @@
             }*@
 
 			if ((email.charAt(email.length - 4) != '.') && (email.charAt(email.length - 3) != '.')) {
-                document.getElementById('emails').innerHTML = " ** Email không đúng định dạng";
+                document.getElementById('emails').innerHTML = " ** Email phải đúng định dạng: ex@abc.xyz";
                 return false;
             }
             if (password == "") {
@@ -270,7 +270,7 @@
                 return false;
             }
             if (password != confirmpassword) {
-                document.getElementById('Passwords').innerHTML = " ** Xác nhận mật khẩu phải trùng với Mật khẩu";
+                document.getElementById('confirmpasswords').innerHTML = " ** Xác nhận mật khẩu phải trùng với Mật khẩu";
                 return false;
             }
             if (confirmpassword == "") {
@@ -336,7 +336,7 @@
                 return false;
             }
             if (password != confirmpassword) {
-                document.getElementById('Passwords').innerHTML = " ** Xác nhận mật khẩu phải trùng với Mật khẩu";
+                document.getElementById('confirmpasswords').innerHTML = " ** Xác nhận mật khẩu phải trùng với Mật khẩu";
                 return false;
             }
             if (confirmpassword == "") {
@@ -392,7 +392,7 @@
                 return false;
             }
             if (password != confirmpassword) {
-                document.getElementById('Passwords').innerHTML = " ** Xác nhận mật khẩu phải trùng với Mật khẩu";
+                document.getElementById('confirmpasswords').innerHTML = " ** Xác nhận mật khẩu phải trùng với Mật khẩu";
                 return false;
             }
             if (confirmpassword == "") {
