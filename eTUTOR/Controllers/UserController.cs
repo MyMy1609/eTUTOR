@@ -106,11 +106,11 @@ namespace eTUTOR.Controllers
                 CapNhatMatKhau(student.username, newPW, "std");
                 guiMail(student.username, newPW, email);
 
-                setAlert("Đã đổi mật khẩu, bạn vui lòng vô mail để lấy mật khẩu nhé !", "success");
+                setAlert("Mật khẩu đã được thay đổi vui lòng kiểm tra emil !", "success");
                 return View("Login");
 
             }
-            if(parent != null)
+            if (parent != null)
             {
                 if (parent.email != email)
                 {
@@ -120,7 +120,7 @@ namespace eTUTOR.Controllers
                 string newPW = CreateLostPassword(10);
                 CapNhatMatKhau(parent.username, newPW, "prt");
                 guiMail(parent.username, newPW, email);
-                ViewBag.sc = "Đã đổi mật khẩu, bạn vui lòng vô mail để lấy mật khẩu nhé !";
+                ViewBag.sc = "Mật khẩu đã được thay đổi vui lòng kiểm tra email !";
                 return View("Login");
             }
             if (tutorr != null)
@@ -133,7 +133,7 @@ namespace eTUTOR.Controllers
                 string newPW = CreateLostPassword(10);
                 CapNhatMatKhau(tutorr.username, newPW, "tutorr");
                 guiMail(tutorr.username, newPW, email);
-                ViewBag.sc = "Đã đổi mật khẩu, bạn vui lòng vô mail để lấy mật khẩu nhé !";
+                ViewBag.sc = "Mật khẩu đã được thay đổi vui lòng kiểm tra email !";
                 return View("Login");
             }
             else
@@ -142,7 +142,7 @@ namespace eTUTOR.Controllers
                 return View("ForgotPassword");
             }
 
-            
+
         }
         public ActionResult ConfirmEmail()
         {
@@ -169,10 +169,10 @@ namespace eTUTOR.Controllers
                 }
                 else
                 {
-                    ViewBag.msg = "Mat khau sai roi nhe cung ahihi ^^";
+                    ViewBag.msg = "Mật khẩu sai rồi vui lòng nhập lại mật khẩu !";
                     return View("Login");
                 }
-                
+
             }
             if (student != null)
             {
@@ -188,10 +188,10 @@ namespace eTUTOR.Controllers
                 }
                 else
                 {
-                    ViewBag.msg = "Mat khau sai roi nhe cung ahihi ^^";
+                    ViewBag.msg = "Mật khẩu sai rồi vui lòng nhập lại mật khẩu !";
                     return View("Login");
                 }
-                
+
             }
 
             if (parent != null)
@@ -207,10 +207,10 @@ namespace eTUTOR.Controllers
                 }
                 else
                 {
-                    ViewBag.msg = "Mat khau sai roi nhe cung ahihi ^^";
+                    ViewBag.msg = "Mật khẩu sai rồi vui lòng nhập lại mật khẩu !";
                     return View("Login");
                 }
-                
+
             }
             if (admin != null)
             {
@@ -224,14 +224,14 @@ namespace eTUTOR.Controllers
                 }
                 else
                 {
-                    ViewBag.msg = "Mat khau sai roi nhe cung ahihi ^^";
+                    ViewBag.msg = "Mật khẩu sai rồi vui lòng nhập lại mật khẩu !";
                     return RedirectToAction("Login");
                 }
-                
+
             }
-                ViewBag.msg = "username không tồn tại";
-                return View("Login");
-            
+            ViewBag.msg = "username không tồn tại";
+            return View("Login");
+
 
         }
 
@@ -258,7 +258,7 @@ namespace eTUTOR.Controllers
             if (typeUser == "std")
             {
                 var stdd = model.students.FirstOrDefault(x => x.username == TenDangNhap);
-                stdd.password = commonService.hash(MatKhau) ;
+                stdd.password = commonService.hash(MatKhau);
                 model.SaveChanges();
 
             }
@@ -357,7 +357,7 @@ namespace eTUTOR.Controllers
                         newPW = commonService.hash(newPW);
                         tutor.password = newPW;
                         model.SaveChanges();
-                        setAlert("Đổi mật khẩu thành công","success");
+                        setAlert("Đổi mật khẩu thành công", "success");
                         return RedirectToAction("InfoOfTutor", "Tutor");
                     }
                 }
@@ -428,19 +428,19 @@ namespace eTUTOR.Controllers
             var student = model.students.FirstOrDefault(x => x.username == username);
             var parent = model.parents.FirstOrDefault(x => x.username == username);
             var tutor = model.tutors.FirstOrDefault(x => x.username == username);
-            if(student.email != email)
+            if (student.email != email)
             {
-                ViewBag.Er = "Email đã tồn tại vui lòng nhập lại email khác !";
+                ViewBag.Er = "Email đã tồn tại !";
                 return View("Register");
             }
-            if(parent.email != email)
+            if (parent.email != email)
             {
-                ViewBag.Er = "Email đã tồn tại vui lòng nhập lại email khác !";
+                ViewBag.Er = "Email đã tồn tại !";
                 return View("Register");
             }
-            if(tutor.email != email)
+            if (tutor.email != email)
             {
-                ViewBag.Er = "Email đã tồn tại vui lòng nhập lại email khác !";
+                ViewBag.Er = "Email đã tồn tại !";
                 return View("Register");
             }
             return View();
@@ -449,3 +449,4 @@ namespace eTUTOR.Controllers
     }
 
 }
+

@@ -366,7 +366,7 @@ namespace eTUTOR.Areas.Admin.Controllers
                 se.status = 1;
                 model.SaveChanges();
             }
-            return RedirectToAction("Khoatutor");
+            return RedirectToAction("Blockuser");
         }
 
         [HttpPost]
@@ -384,7 +384,7 @@ namespace eTUTOR.Areas.Admin.Controllers
                 se.status = 1;
                 model.SaveChanges();
             }
-            return RedirectToAction("Khoaparent");
+            return RedirectToAction("Blockuser");
         }
 
         [HttpPost]
@@ -402,7 +402,7 @@ namespace eTUTOR.Areas.Admin.Controllers
                 se.status = 1;
                 model.SaveChanges();
             }
-            return RedirectToAction("Khoastudent");
+            return RedirectToAction("Blockuser");
         }
     }
 }
