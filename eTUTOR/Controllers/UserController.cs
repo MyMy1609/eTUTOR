@@ -41,7 +41,7 @@ namespace eTUTOR.Controllers
 
 
             tutor.password = commonService.hash(tutor.password);
-
+            tutor.dateCreate = DateTime.Now;
             model.tutors.Add(tutor);
             model.SaveChanges();
 
@@ -66,7 +66,7 @@ namespace eTUTOR.Controllers
             student.status = 2;
 
             student.password = commonService.hash(student.password);
-
+            student.dateCreate = DateTime.Now;
             model.students.Add(student);
             model.SaveChanges();
             return RedirectToAction("ConfirmEmail", "User");
@@ -77,6 +77,7 @@ namespace eTUTOR.Controllers
             parent.status = 2;
 
             parent.password = commonService.hash(parent.password);
+            parent.dateRegist = DateTime.Now;
             model.parents.Add(parent);
             model.SaveChanges();
             return RedirectToAction("ConfirmEmail", "User");
