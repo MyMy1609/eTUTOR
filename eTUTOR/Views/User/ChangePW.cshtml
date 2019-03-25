@@ -11,14 +11,15 @@
             <span style="color:red">@ViewBag.iff</span>
         }
 
-        <form method="post" action="~/User/ChangePW"  style="margin-bottom:40%;margin-top:10%">
+        <form method="post" action="~/User/ChangePW"  style="margin-bottom:40%;margin-top:10%" onsubmit="return validation()">
             <table class="table">
                 <tr>
                     <td class="tdl" style="text-align:right">
                         Mật khẩu hiện tại
                     </td>
                     <td class="tdr">
-                        <input type="password" name="currentPW" class="form-control">
+                        <input type="password" name="currentPW" class="form-control" id="currentPW">
+                        <span class="text-danger" id="passHT1"></span>
                     </td>
                 </tr>
                 <tr>
@@ -26,15 +27,17 @@
                         Mật khẩu mới
                     </td>
                     <td class="tdr">
-                        <input type="password"  name="newPW" class="form-control">
+                        <input type="password" name="newPW" class="form-control" id="newPW">
+                        <span class="text-danger" id="newPW1"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="tdl" style="text-align:right">
                         Xác nhận mật khẩu mới
                     </td>
-                    <td class="tdr" >
-                        <input type="password"  name="cfNewPW" class="form-control">
+                    <td class="tdr">
+                        <input type="password" name="cfNewPW" class="form-control" id="cfNewPW">
+                        <span class="text-danger" id="cfNewPW1"></span>
                     </td>
                 </tr>
                 <tr>
@@ -52,3 +55,37 @@
 
     </div>
 </div>
+<script type="text/javascript">
+    function validation() {
+        var currentPW = document.getElementById('currentPW').value;
+        var newPW = document.getElementById('newPW').value;
+        var cfNewPW = document.getElementById('cfNewPW').value;
+        
+        if (currentPW == "") {
+            document.getElementById('passHTs').innerHTML = " ** Mật khẩu không rỗng";
+            return false;
+        }
+        if (newPW == "") {
+            document.getElementById('newPW1').innerHTML = " ** Mật khẩu mới không rỗng";
+            return false;
+        }   
+        if (newPW.length != 6) {
+            document.getElementById('newPW1').innerHTML = " ** Mật khẩu phải lớn hơn 6 kí tự";
+            return false;
+        }
+        if (cfNewPW == "") {
+            document.getElementById('cfNewPW1').innerHTML = " ** Xác nhận mật khẩu không rỗng";
+            return false;
+        }
+        if (cfNewPW.length != 6) {
+            document.getElementById('cfNewPW1').innerHTML = " ** Mật khẩu phải lớn hơn 6 kí tự";
+            return false;
+        }
+        if (newPW.length != cfNewPW.length) {
+            document.getElementById('cfNewPW1').innerHTML = "** Mật khẩu mới và xác nhận mật khẩu khác nhau";
+            return false;
+        }       
+
+
+    }
+</script>
