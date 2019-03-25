@@ -239,6 +239,7 @@ warning 6002: The table/view 'capstone2019.dbo.notice' does not have a primary k
           <Property Name="us_usname" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="us_pw" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="us_type" Type="int" Nullable="false" />
+          <Property Name="dateCreate" Type="date" />
         </EntityType>
         <Association Name="FK__sessions__subjec__1BC821DD">
           <End Role="subject" Type="Self.subject" Multiplicity="0..1" />
@@ -1000,6 +1001,7 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
           <Property Name="us_pw" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="us_type" Type="Int32" Nullable="false" />
           <NavigationProperty Name="typeUser" Relationship="capstone2019Model.FK__Users__us_type__208CD6FA" FromRole="User" ToRole="typeUser" />
+          <Property Name="dateCreate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="notice">
           <Key>
@@ -1516,6 +1518,7 @@ FROM [dbo].[notice] AS [notice]</DefiningQuery>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="capstone2019Model.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
                 <ScalarProperty Name="us_type" ColumnName="us_type" />
                 <ScalarProperty Name="us_pw" ColumnName="us_pw" />
                 <ScalarProperty Name="us_usname" ColumnName="us_usname" />

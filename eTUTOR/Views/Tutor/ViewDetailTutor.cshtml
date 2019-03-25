@@ -6,7 +6,7 @@
     eTUITOREntities db = new eTUITOREntities();
     var sch = db.schedules.ToList().Where(x => x.tutor_id == Model.tutor_id);
     var sj = db.subjects.ToList().Where(x => x.tutor_id == Model.tutor_id);
-    
+    var _trueHaveIdOfTutor = db.history_lessons.FirstOrDefault(x => x.tutor_id == Model.tutor_id);
     //var student = db.students.ToString();
 
 }
@@ -180,7 +180,7 @@
                     </div>
                 </div>
                 <!--Comment section-->
-                @if (Session["Role"].ToString() != "tutor")
+                @if (Session["Role"].ToString() == "student" &&  _trueHaveIdOfTutor != null)
                 {
                     <!--method="post" action="~/User/danhgiatutor"-->
                 <form role="form" id="danhgiaa" method="post" action="~/User/danhgiatutor">

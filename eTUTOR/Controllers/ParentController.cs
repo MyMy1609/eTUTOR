@@ -35,6 +35,10 @@ namespace eTUTOR.Controllers
             var listCourse = db.sessions.ToList().Where(x => x.status_tutor == 2 && x.student_id == prt.parent_id);
             return View(listCourse);
         }
+        public ActionResult SessionOfChilds()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult CreateChildAccount(student student)
         {

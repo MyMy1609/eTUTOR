@@ -114,26 +114,7 @@ namespace eTUTOR.Controllers
             return RedirectToAction("Login", "User");
 
         }
-        public ActionResult ddd()
-        {
-            var schh = db.schedules.FirstOrDefault(x => x.schedule_id == 3);
-            session newss = new session();
-            newss.day_otw = schh.day_otw;
-            newss.start_time = schh.start_time;
-            newss.end_time = schh.end_time;
-            newss.@class = "10";
-            newss.student_id = 12;
-            newss.tutor_id = 4;
-            newss.total_sessions = 10;
-            newss.subject_id = 5;
-            newss.status_admin = 2;
-            newss.status_tutor = 2;
-            newss.status_id = 2;
-            db.sessions.Add(newss);
-            db.SaveChanges();
-            return RedirectToAction("Index", "Home");
-
-        }
+      
         public ActionResult SessionOfTutor(string p)
         {
             ViewData["IsNewGroup"] = false;
@@ -162,6 +143,7 @@ namespace eTUTOR.Controllers
         public ActionResult CreateSchedule(schedule schedule)
         {
             schedule.status = 2;
+            schedule.dateCreate = DateTime.Now;
             schedule.tutor_id = int.Parse(Session["UserID"].ToString());
             db.schedules.Add(schedule);
             db.SaveChanges();

@@ -36,165 +36,166 @@
             <img src="~/Content/img/avatar/student/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height:"250px" width:"250px onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'" />
                  alt="avatar" style="border-radius: 20%;margin-top: 0px;">
             <a href="#" style="display: inline-block"></a>
-                <!-- <img src="https://cdn3.iconfinder.com/data/icons/block/32/box_edit-512.png" width="30px" height="30px"></a> -->
+            <!-- <img src="https://cdn3.iconfinder.com/data/icons/block/32/box_edit-512.png" width="30px" height="30px"></a> -->
 
-                <div class="namepro ml-4" style="text-align: center;">@Html.DisplayFor(model => model.fullname)</div>
-                <table class="table">
+            <div class="namepro ml-4" style="text-align: center;">@Html.DisplayFor(model => model.fullname)</div>
+            <table class="table">
 
-                    <tr>
-                        <td class="tdl">
-                            Tên đăng nhập
-                        </td>
-                        <td class="tdr">
-                            @Html.DisplayFor(model => model.username)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tdl">
-                            Địa chỉ
-                        </td>
-                        <td class="tdr">
+                <tr>
+                    <td class="tdl">
+                        Tên đăng nhập
+                    </td>
+                    <td class="tdr">
+                        @Html.DisplayFor(model => model.username)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdl">
+                        Địa chỉ
+                    </td>
+                     <td class="tdr">
                             @Html.DisplayFor(model => model.parent.address)
                         </td>
-                    </tr>
-                    <tr>
-                        <td class="tdl">
-                            Ngày sinh
-                        </td>
-                        <td class="tdr">
-                            @Html.DisplayFor(model => model.birthday)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tdl">
-                            Số điện thoại
-                        </td>
-                        <td class="tdr">
-                            @Html.DisplayFor(model => model.phone)
-                        </td>
-                    </tr>
+                    
+                </tr>
+                <tr>
+                    <td class="tdl">
+                        Ngày sinh
+                    </td>
+                    <td class="tdr">
+                        @Html.DisplayFor(model => model.birthday)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdl">
+                        Số điện thoại
+                    </td>
+                    <td class="tdr">
+                        @Html.DisplayFor(model => model.phone)
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="tdl" style="padding-top: 19px;">
-                            Lớp
-                        </td>
-                        <td class="tdr">
-                            @Html.DisplayFor(model => model.@class)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tdl">
-                            Phụ huynh
-                        </td>
+                <tr>
+                    <td class="tdl" style="padding-top: 19px;">
+                        Lớp
+                    </td>
+                    <td class="tdr">
+                        @Html.DisplayFor(model => model.@class)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdl">
+                        Phụ huynh
+                    </td>
                         <td class="tdr">
                             @Html.DisplayFor(model => model.parent.fullname)
                         </td>
-                    </tr>
-                    <tr>
-                        <td class="tdl"></td>
-                        <td>
-                            <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#myModal"
-                                    style="margin-left: 65%">
-                                Chỉnh sửa
-                            </button>
-                            <div class="modal" id="myModal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
+                </tr>
+                <tr>
+                    <td class="tdl"></td>
+                    <td>
+                        <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#myModal"
+                                style="margin-left: 65%">
+                            Chỉnh sửa
+                        </button>
+                        <div class="modal" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
 
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" style="margin-left: 30%">Chỉnh sửa Tiểu sử</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <div class="modal-body">
-                                            <table class="table">
-                                                <tr>
-                                                    <td class="tdl">
-                                                        Họ và tên
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <input type="text" id="fullname" value="@Model.fullname">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="tdl">
-                                                        Tên đăng nhập
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <input type="text" id="username" value="@Model.username">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="tdl">
-                                                        Địa chỉ
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <input type="text" id="address" value="@Model.parent.address">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="tdl">
-                                                        Ngày sinh
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <input type="datetime" id="birthday" value="@birthdayformat">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="tdl">
-                                                        Số điện thoại
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <input type="text" id="phone" value="@Model.phone">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="tdl">
-                                                        Email
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <input type="email" id="email" value="@Model.email" >
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="tdl" style="padding-top: 19px;">
-                                                        Lớp
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <div class="form-wrapper">
-                                                            <select name="class" id="class" class="form-control" style="width: 300px">
-                                                                <option value="1">Lớp 1</option>
-                                                                <option value="2">Lớp 2</option>
-                                                                <option value="3">Lớp 3</option>
-                                                                <option value="4">Lớp 4</option>
-                                                                <option value="5">Lớp 5</option>
-                                                                <option value="6">Lớp 6</option>
-                                                                <option value="7">Lớp 7</option>
-                                                                <option value="8">Lớp 8</option>
-                                                                <option value="9">Lớp 9</option>
-                                                                <option value="10">Lớp 10</option>
-                                                                <option value="11">Lớp 11</option>
-                                                                <option value="12">Lớp 12</option>
-                                                            </select>
-                                                            <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                
-
-                                            </table>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" id="btn-profile-save">Lưu</button>
-                                        </div>
-
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" style="margin-left: 30%">Chỉnh sửa Tiểu sử</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
+
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <tr>
+                                                <td class="tdl">
+                                                    Họ và tên
+                                                </td>
+                                                <td class="tdr">
+                                                    <input type="text" id="fullname" value="@Model.fullname">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdl">
+                                                    Tên đăng nhập
+                                                </td>
+                                                <td class="tdr">
+                                                    <input type="text" id="username" value="@Model.username">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdl">
+                                                    Địa chỉ
+                                                </td>
+                                                <td class="tdr">
+                                                    <input type="text" id="address" value="@Model.parent.address">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdl">
+                                                    Ngày sinh
+                                                </td>
+                                                <td class="tdr">
+                                                    <input type="datetime" id="birthday" value="@birthdayformat">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdl">
+                                                    Số điện thoại
+                                                </td>
+                                                <td class="tdr">
+                                                    <input type="text" id="phone" value="@Model.phone">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdl">
+                                                    Email
+                                                </td>
+                                                <td class="tdr">
+                                                    <input type="email" id="email" value="@Model.email">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdl" style="padding-top: 19px;">
+                                                    Lớp
+                                                </td>
+                                                <td class="tdr">
+                                                    <div class="form-wrapper">
+                                                        <select name="class" id="class" class="form-control" style="width: 300px">
+                                                            <option value="1">Lớp 1</option>
+                                                            <option value="2">Lớp 2</option>
+                                                            <option value="3">Lớp 3</option>
+                                                            <option value="4">Lớp 4</option>
+                                                            <option value="5">Lớp 5</option>
+                                                            <option value="6">Lớp 6</option>
+                                                            <option value="7">Lớp 7</option>
+                                                            <option value="8">Lớp 8</option>
+                                                            <option value="9">Lớp 9</option>
+                                                            <option value="10">Lớp 10</option>
+                                                            <option value="11">Lớp 11</option>
+                                                            <option value="12">Lớp 12</option>
+                                                        </select>
+                                                        <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" id="btn-profile-save">Lưu</button>
+                                    </div>
+
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
         </div>
         <div class="right col-6">

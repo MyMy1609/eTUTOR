@@ -10,13 +10,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://www.bigprotech.vn:7000/ data: gap: ws: wss: www.bigprotech.vn:7000 ;">
     <title>Etutor</title>
     <!-- Latest compiled and minified CSS -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
     <base href="/">
 </head>
-<body>
+<body oncontextmenu="return false" onselect="return false" onselectstart="return false" ondragstart="return false">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -36,12 +37,12 @@
                         <img id="imgSave" style="border: 0; border-style: dashed; width: 32px; height: 32px"
                              src="/images/save.png" onclick="SaveDrawings(); return false;" />
                     </div>
-                    @*<a href="@ViewData["url"]" target="_blank">@ViewData["url"]</a>*@
                     <div id="container">
                         <canvas id="whiteBoard" class="mr-5"></canvas>
                         <div id="status"></div>
                     </div>
                     <div id="container-cam"></div>
+                    <div id="container-audio"></div>
                     <input type="hidden" id="sessinId" value="@Session.SessionID" />
                     <input type="hidden" id="groupName" value="@ViewData["GroupName"]" />
                 </div>

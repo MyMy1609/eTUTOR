@@ -5,29 +5,72 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2></h2>
 <div class="container">
-    <div class="onTop">
-        <form action="~/Admin/ThongKe" method="get" class="form-control">
-            <div class="col-md-4">
-                <select name="kieuTK">
-                    <option value="slDangKy"> Thống kê số lượng người đăng ký</option>
-                    <option value="slDangKyGiaSu"> Thống kê số lượng đăng ký gia sư</option>
-                    <option value="slCacBuoiHocDienRa"> Số lượng các buổi học đã diễn ra</option>
+    <div class="onTop" style="background-color:white; height:200px">
+        <form action="~/Admin/Admin/ThongKe" method="get" class="" style="padding:30px" name="thongke">
+            <div class="pull-left" style="width:400px">
+                <label style="color:indianred">Chọn kiểu thống kê</label>
+                <select name="kieuTK" class="form-control" id="kieuTK">
+                    <option value="slDangKy" onclick="tkdangky()"> Thống kê số lượng người đăng ký</option>
+                    <option value="slDangKyGiaSu" onclick="tkdangkyhoc()"> Thống kê số lượng đăng ký gia sư</option>
+                    <option value="slCacBuoiHocDienRa" onclick="tkdayhoc()"> Số lượng các buổi học đã diễn ra</option>
                 </select>
             </div>
-            <div class="col-md-4">
+
+            @*<div class="pull-right" style="width:400px;">
                 <label style="color:indianred">Ngày bắt đầu</label>
-                <input type="date" name="dateStart" value="@DateTime.Now" />
+                <input type="date" name="dateStart" value="" class="form-control" />
 
                 <label style="color:indianred">Ngày kết thúc</label>
-                <input type="date" name="dateEnd" value="" />
-            </div>
-            <input type="submit" value="Xem" />
+                <input type="date" name="dateEnd" value="" class="form-control" />
+            </div>*@
+
         </form>
-    </div>
-    <div class="underBottom">
+        <div style="margin-top:15%;display:block" id="dangky">
+            <img src="@Url.Action("tkDangky")" alt="Chart" />
+        </div>
+        <div style="margin-top:15%;display:block" id="dayhoc">
+            <img src="@Url.Action("tkDayhoc")" alt="Chart" />
+        </div>
+        <div style="margin-top:15%;display:block" id="dangkyhoc">
+            <img src="@Url.Action("tkDangkyhoc")" alt="Chart" />
+        </div>
+
+
+
 
     </div>
 </div>
 
+<script type="text/javascript">
+    var x = document.getElementById("dayhoc");
+    x.style.display = "none";
+    var x = document.getElementById("dangkyhoc");
+    x.style.display = "none";
+    var x = document.getElementById("dangky");
+    x.style.display = "none";
+    function tkdangky() {
+        var x = document.getElementById("dayhoc");
+        x.style.display = "none";
+        var x = document.getElementById("dangkyhoc");
+        x.style.display = "none";
+        var x = document.getElementById("dangky");
+        x.style.display = "block";
+    }
+    function tkdangkyhoc() {
+        var x = document.getElementById("dayhoc");
+        x.style.display = "none";
+        var x = document.getElementById("dangkyhoc");
+        x.style.display = "block";
+        var x = document.getElementById("dangky");
+        x.style.display = "none";
+    }
+    function tkdayhoc() {
+        var x = document.getElementById("dayhoc");
+        x.style.display = "block";
+        var x = document.getElementById("dangkyhoc");
+        x.style.display = "none";
+        var x = document.getElementById("dangky");
+        x.style.display = "none";
+    }
+</script>

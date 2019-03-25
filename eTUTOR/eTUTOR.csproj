@@ -821,13 +821,14 @@
     <Content Include="Areas\Admin\Views\Admin\DetailParent.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\DetailStudent.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\DetailTutor.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\KetQuaThongKe.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\ThongKe.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\User.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Schedule.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\KetQuaThongKe.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\parent_receive.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -887,6 +888,7 @@
     <Content Include="Views\Tutor\Confirm.cshtml" />
     <Content Include="Views\User\ChangePW.cshtml" />
     <Content Include="Scripts\peerjs.min.map" />
+    <Content Include="Views\Parent\SessionOfChilds.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

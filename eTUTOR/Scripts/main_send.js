@@ -1,12 +1,13 @@
-(function () {
+﻿(function () {
     "use strict";
-    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    const canvas = document.getElementById("streamVideo");
-    const stopStream = document.getElementById("stopStream");
-    const ws_url = location.origin.replace(/^http/, 'ws');
-    let player = null;
-    let peer = null;
-    let call = null;
+    var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var canvas = document.getElementById("streamVideo");
+    var stopStream = document.getElementById("stopStream");
+    var ws_url = location.origin.replace(/^http/, 'ws');
+    var stt = $("#stt").attr("data-id");
+    var player = null;
+    var peer = null;
+    var call = null;
 
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;
@@ -18,6 +19,8 @@
     }
 
     const course_id = getParameterByName('p');
+
+    //function disableF5(e) { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
 
     function openAudio() {
         if (navigator.mediaDevices.getUserMedia) {
@@ -39,31 +42,95 @@
         while (i--) { res += chars[Math.floor(Math.random() * len)]; } return res;
     }
 
+    function makePeerHeartbeater(peer) {
+        var timeoutId = 0;
+        function heartbeat() {
+            timeoutId = setTimeout(heartbeat, 20000);
+            if (peer.socket._wsOpen()) {
+                peer.socket.send({ type: 'HEARTBEAT' });
+            }
+        }
+        // return
+        return {
+            start: function () {
+                if (timeoutId === 0) { heartbeat(); }
+            },
+            stop: function () {
+                clearTimeout(timeoutId);
+                timeoutId = 0;
+            }
+        };
+    }
+
+    function status(data, call) {
+        if (typeof data === 'string') {
+            var decoded = JSON.parse(data);
+            switch (decoded.type) {
+                case "OPEN":
+                    console.log("OPEN");
+                    break;
+                case "DUPLICATES":
+                    alert(decoded.payload.msg);
+                    call.close();
+                    window.close();
+                    break;
+                case "ERROR":
+                    alert(decoded.payload.msg);
+                    call.close();
+                    break;
+                default: break;
+            }
+        }
+    }
+
+    function disableDom() {
+        var whiteboard = document.getElementById("whiteBoard");
+        var imageTemp = document.getElementById("imageTemp");
+        whiteboard.style.cursor = "not-allowed";
+        imageTemp.style.cursor = "not-allowed";
+        whiteboard.style.zIndex = "-1";
+        imageTemp.style.zIndex = "-1";
+    }
+
     const getCam = (id) => {
-        const rtsp_URL = prompt("Please enter your url RTSP IP Camera", "");
-        if (rtsp_URL && id) {
+        //const rtsp_URL = prompt("Please enter your url RTSP IP Camera", "");
+        if (id) {
             // Caller
             openAudio()
                 .then(oAudio => {
                     playStream('localAudio', oAudio);
                     call = peer.call(course_id, oAudio);
                     call.on('stream', remoteAudio => {
+                        disableDom();
+                        makePeerHeartbeater(peer).start();
                         playStream('remoteAudio', remoteAudio);
-                        player = new JSMpeg.Player(`ws://www.bigprotech.vn:7000/stream?id=${id}&cam=${rtsp_URL}&course=${course_id}${id}&token=${randomToken()}`, { canvas: canvas });
+                        player = new JSMpeg.Player(`ws://www.bigprotech.vn:7000/stream?id=${id}&course=${course_id}${id}&type=student&token=${peer.options.token}`, { canvas: canvas });
+                        setTimeout(function () {
+                            var thisIs = player.source;
+                            thisIs.socket.onmessage = function (evt) {
+                                var data = evt.data;
+                                var I = !thisIs.established;
+                                thisIs.established = !0,
+                                    I && thisIs.onEstablishedCallback && thisIs.onEstablishedCallback(thisIs),
+                                    thisIs.destination && thisIs.destination.write(data)
+                                status(data, call);
+                            }
+                        }, 300);
+
                     });
                     call.on('close', () => {
-                        call.close();
-                        peer.destroy();
+                        makePeerHeartbeater(peer).stop();
                     });
                 })
                 .catch(err => console.log(err));
+            // End
         } else {
             getCam(null);
         }
     }
 
     function initialize() {
-        peer = new Peer(null, {
+        peer = new Peer(stt, {
             host: "www.bigprotech.vn",
             port: "7000",
             path: "/",
@@ -72,52 +139,23 @@
 
         peer.on('open', function (id) {
             //start
-            const whiteboard = document.getElementById("whiteBoard");
-            const imageTemp = document.getElementById("imageTemp");
-            whiteboard.style.cursor = "not-allowed";
-            imageTemp.style.cursor = "not-allowed";
-            whiteboard.style.zIndex = "-1";
-            imageTemp.style.zIndex = "-1";
             console.log('ID: ' + id);
             getCam(id);
         });
         peer.on('disconnected', function () {
             call.close();
-            peer.destroy();
             console.log('Connection lost. Please reconnect');
             peer.reconnect();
         });
         peer.on('close', function () {
             call.close();
-            peer.destroy();
             call = null;
             console.log('Connection destroyed');
         });
         peer.on('error', function (err) {
-            console.log(err);
+            alert("Chưa tới giờ học");
+            window.close();
         });
-        var heartbeat = makePeerHeartbeater(peer);
-        //aaa
-        function makePeerHeartbeater(peer) {
-            var timeoutId = 0;
-            function heartbeat() {
-                timeoutId = setTimeout(heartbeat, 20000);
-                if (peer.socket._wsOpen()) {
-                    peer.socket.send({ type: 'HEARTBEAT' });
-                }
-            }
-            heartbeat();
-            // return
-            return {
-                start: function () {
-                    if (timeoutId === 0) { heartbeat(); }
-                },
-                stop: function () {
-                    clearTimeout(timeoutId);
-                    timeoutId = 0;
-                }
-            };
-        }
     };
 
     //canvas.addEventListener('click', function () {
@@ -134,18 +172,21 @@
     //    player.destroy();
     //});
 
+    //$(document).ready(function () {
+    //    $(document).on("keydown", disableF5);
+    //});
+
     window.onunload = window.onbeforeunload = function (e) {
         if (!!peer && !peer.destroyed) {
             call.close();
             peer.destroy();
             player.stop();
-            player.destroy();
         }
         call.close();
         e.preventDefault();
+        return "Reload ?"
     };
 
     // Strigger function
     initialize();
-    //join();
 })();

@@ -10,22 +10,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Etutor</title>
+    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://www.bigprotech.vn:7000/ data: gap: ws: wss: www.bigprotech.vn:7000 ;">
+    <title>Student</title>
     <!-- Latest compiled and minified CSS -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
     <base href="/">
 </head>
-<body>
+<body oncontextmenu="return false" onselect="return false" onselectstart="return false" ondragstart="return false">
     <div class="container-fluid">
         <div class="row">
             <div class="wb">
-                <div class="text-center">WHITE BOARD</div>
-                @*<a href="@ViewData["url"]" target="_blank">@ViewData["url"]</a>*@
+                <div class="text-center">WHITE BOARD @Session["UserID"]</div>
                 <div id="container">
                     <canvas id="whiteBoard" class="mr-5"></canvas>
                     <div id="status"></div>
                 </div>
+                <div id="stt" data-id="@Session["UserID"]"></div>
                 <div class="container-cam d-none">
                     <h3>Hình ảnh</h3>
                     <div class="mr-5">

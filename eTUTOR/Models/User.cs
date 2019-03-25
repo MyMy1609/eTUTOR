@@ -18,6 +18,7 @@ namespace eTUTOR.Models
         public string us_usname { get; set; }
         public string us_pw { get; set; }
         public int us_type { get; set; }
+        public Nullable<System.DateTime> dateCreate { get; set; }
     
         public virtual typeUser typeUser { get; set; }
     }
