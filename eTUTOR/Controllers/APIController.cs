@@ -60,6 +60,49 @@ namespace eTUTOR.Controllers
             return PartialView("SessionList");
 
         }
+        public PartialViewResult getSessionListChilds(int dotw, int student_id)
+        {
+            string day;
+            switch (dotw)
+            {
+                case 2:
+                    day = "Thứ 2";
+                    break;
+                case 3:
+                    day = "Thứ 3";
+                    break;
+                case 4:
+                    day = "Thứ 4";
+                    break;
+                case 5:
+                    day = "Thứ 5";
+                    break;
+                case 6:
+                    day = "Thứ 6";
+                    break;
+                case 7:
+                    day = "Thứ 7";
+                    break;
+                case 8:
+                    day = "Chủ nhật";
+                    break;
+                default:
+                    day = "all";
+                    break;
+            }
+            List<session> sessionList;
+            if (day == "all")
+            {
+                sessionList = db.sessions.Where(m => m.student_id == student_id).ToList();
+            }
+            else
+            {
+                sessionList = db.sessions.Where(m => m.day_otw == day && m.student_id == student_id).ToList();
+            }
+            ViewData["sessionlist"] = sessionList;
+            return PartialView("SessionTutorList");
+
+        }
         public PartialViewResult getSessionApproved(int dotw, int tutor_id)
         {
             string day;
