@@ -171,13 +171,13 @@ namespace eTUTOR.Controllers
                 st.birthday = DateTime.Parse(child["birthday"].ToString());
                 db.students.Add(st);
                 db.SaveChanges();
-                message = "add student sucess";
+                message = "Thêm học sinh thành công";
                 var response = new { message= message, status = status};
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                message = "username hoặc email đã được sử dụng , vui lòng chọn username và email khác";
+                message = "username hoặc email bị trùng , vui lòng chọn username và email khác";
                 var response = new { message = message, status = status };
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
