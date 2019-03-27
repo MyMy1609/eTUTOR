@@ -3,7 +3,18 @@
 @{
     ViewBag.Title = "ViewDetailTutor";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    //get role
+    string s = Session["UserID"].ToString();
+    int iddd = int.Parse(s);
     eTUITOREntities db = new eTUITOREntities();
+    var par = db.parents.FirstOrDefault(x => x.parent_id == iddd);
+    var stu = db.students.FirstOrDefault(x => x.student_id == iddd);
+    var tut = db.tutors.FirstOrDefault(x => x.tutor_id == iddd);
+    string TypeUser = "";
+    if (par != null) { TypeUser = "parent"; };
+    if (stu != null) { TypeUser = "student"; };
+    if (tut != null) { TypeUser = "tutor"; };
+
     var sch = db.schedules.ToList().Where(x => x.tutor_id == Model.tutor_id);
     var sj = db.subjects.ToList().Where(x => x.tutor_id == Model.tutor_id);
     var _trueHaveIdOfTutor = db.history_lessons.FirstOrDefault(x => x.tutor_id == Model.tutor_id);
@@ -66,7 +77,7 @@
                             <li><a href="#"><i class="fab fa-skype"></i></a></li>
                             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                         </ul>
-                        @Html.ActionLink("Đăng kí gia sư", "RegisterTutor", new { id = Model.tutor_id }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Đăng kí gia sư", "RegisterTutor", new { id = Model.tutor_id, type = TypeUser }, new { @class = "btn btn-success" })
 
                     </div>
                 </div>

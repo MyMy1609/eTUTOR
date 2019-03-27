@@ -280,9 +280,9 @@ namespace eTUTOR.Controllers
         {
             string NoiDung = "";
             NoiDung = "Đây là Mail gửi đến từ website của ETUTOR. ";
-            NoiDung += "Mật khẩu mới của bạn là: " + PW;
-            NoiDung += ". Sau khi đăng nhập bạn nhớ đổi lại mật khẩu để tiện cho việc đăng nhập lần tiếp theo";
-            NoiDung += "Vui lòng không trả lời Mail này!";
+            NoiDung += "Mật khẩu mới của bạn là:  " + PW;
+            NoiDung += "  . Sau khi đăng nhập bạn nhớ đổi lại mật khẩu để tiện cho việc đăng nhập lần tiếp theo";
+            NoiDung += ". Vui lòng không trả lời Mail này!";
             return NoiDung;
         }
         public void guiMail(string TenDangNhap, string PW, string mail)

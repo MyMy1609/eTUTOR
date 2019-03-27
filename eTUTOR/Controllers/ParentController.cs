@@ -7,6 +7,7 @@ using eTUTOR.Models;
 
 namespace eTUTOR.Controllers
 {
+
     public class ParentController : Controller
     {
         eTUITOREntities db = new eTUITOREntities();
@@ -44,6 +45,7 @@ namespace eTUTOR.Controllers
         {
            
                 student.parent_id = int.Parse(Session["UserID"].ToString());
+            student.dateCreate = DateTime.Now;
                 db.students.Add(student);
                 db.SaveChanges();
                 return RedirectToAction("InfoOfParent", "Parent", new { id = Session["UserID"] });

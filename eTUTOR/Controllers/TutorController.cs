@@ -12,6 +12,8 @@ using Newtonsoft.Json.Linq;
 
 namespace eTUTOR.Controllers
 {
+
+
     public class TutorController : BaseController
     {
         eTUITOREntities db = new eTUITOREntities();
@@ -47,15 +49,37 @@ namespace eTUTOR.Controllers
             return View(info);
         }
         [HttpGet]
-        public ActionResult RegisterTutor(int? id)
+        public ActionResult RegisterTutor(int? id, string type)
         {
             var tatu = db.tutors.FirstOrDefault(x => x.tutor_id == id);
             if (tatu == null)
             {
-                ViewBag.mes = "Vui lòng chọn Tutor";
+                setAlert("Vui lòng chọn Tutor", "warning");
                 RedirectToAction("ListOfTutors", "Tutor");
             }
+            else if(type == "student" || type == "tutor")
+            {
+                return View(tatu);
+            }
+            if(type == "parent")
+            {
+                return RedirectToAction("RegisterTutorParent", new { idd = id });
+
+            }
             return View(tatu);
+        }
+        [HttpGet]
+        public ActionResult RegisterTutorParent(int? idd)
+        {
+            var tatu = db.tutors.FirstOrDefault(x => x.tutor_id == idd);
+            if (tatu == null)
+            {
+                setAlert("Vui lòng chọn Tutor", "warning");
+                RedirectToAction("ListOfTutors", "Tutor");
+            }
+           
+                return View(tatu);
+
         }
         [HttpPost]
         public ActionResult ConfirmScheduleTutor(int idgiasu, int idmonhoc, int[] idschedule)
@@ -64,7 +88,6 @@ namespace eTUTOR.Controllers
             int idStudent = int.Parse(idst);
             string id = Session["username"].ToString();
             var std = db.students.FirstOrDefault(x => x.username == id);
-            var prt = db.parents.FirstOrDefault(x => x.username == id);
             if (std != null)
             {
                 foreach (var item in idschedule)
@@ -82,13 +105,24 @@ namespace eTUTOR.Controllers
                     newss.status_admin = 2;
                     newss.status_tutor = 2;
                     newss.status_id = 2;
+                    newss.dateCreate = DateTime.Now;
                     db.sessions.Add(newss);
                     db.SaveChanges();
                 }
 
                 return RedirectToAction("listRegistCourse", "Student");
             }
-            if (prt != null)
+            return RedirectToAction("Login", "User");
+
+        }
+        [HttpPost]
+        public ActionResult ConfirmScheduleTutorParent(int idgiasu, int idmonhoc, int[] idschedule, int idSon)
+        {
+            
+            int idStudent = idSon;
+            string id = Session["username"].ToString();
+            var std = db.students.FirstOrDefault(x => x.student_id == idStudent);
+            if (std != null)
             {
                 foreach (var item in idschedule)
                 {
@@ -97,7 +131,7 @@ namespace eTUTOR.Controllers
                     newss.day_otw = schh.day_otw;
                     newss.start_time = schh.start_time;
                     newss.end_time = schh.end_time;
-                    newss.@class = "10";
+                    newss.@class = std.@class.ToString();
                     newss.student_id = idStudent;
                     newss.tutor_id = idgiasu;
                     newss.total_sessions = 10;
@@ -105,16 +139,18 @@ namespace eTUTOR.Controllers
                     newss.status_admin = 2;
                     newss.status_tutor = 2;
                     newss.status_id = 2;
-
+                    newss.dateCreate = DateTime.Now;
                     db.sessions.Add(newss);
                     db.SaveChanges();
                 }
-                return RedirectToAction("listRegistCourse", "Parent");
+
+                return RedirectToAction("InfoOfParent", "Parent");
+            
             }
             return RedirectToAction("Login", "User");
 
         }
-      
+
         public ActionResult SessionOfTutor(string p)
         {
             ViewData["IsNewGroup"] = false;
@@ -161,7 +197,7 @@ namespace eTUTOR.Controllers
 
         public ActionResult SearchTutor(string search)
         {
-            var tutor = db.tutors.ToList().Where(x => x.fullname.Contains(search) || x.specialized.Contains(search));
+            var tutor = db.tutors.ToList().Where(x => x.fullname.Equals(search) || x.specialized.Equals(search));
             return View(tutor);
         }
 
