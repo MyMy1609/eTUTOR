@@ -36,7 +36,7 @@
 
     <div class="container row">
         <div class="left col-4">
-            <img src="~/Content/img/avatar/parent/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height:"250px" width:"250px onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'" />
+            <img src="~/Content/img/avatar/parent/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height:"250px" width:"250px onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'"
                  alt="avatar" style="border-radius: 20%;margin-top: 0px;">
             <a href="#" style="display: inline-block"></a>
             <!-- <img src="https://cdn3.iconfinder.com/data/icons/block/32/box_edit-512.png" width="30px" height="30px"></a> -->
@@ -348,7 +348,7 @@
                                 {
                                     <div class="row pt-3">
                                         <div class="col-4">
-                                            <img src="~/Content/img/avatar/student/@childAccount.avatar" class="pb-2" style="height: 150px; width: 150px; margin-left: 40%" alt="" />
+                                            <img src="~/Content/img/avatar/student/@childAccount.avatar" class="pb-2" style="height: 150px; width: 150px; margin-left: 40%" alt="" onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'" />
                                         </div>
                                         <div class="col-8">
                                             <table class="table">
@@ -527,7 +527,7 @@
                 }
 
                 if (child.fullname == "") {
-                    $("#add-child-form #fullname-error").html("Xin nhập fullname");
+                    $("#add-child-form #fullname-error").html("Xin nhập họ và tên");
                     check.fullname = false;
                 } else {
                     $("#add-child-form #fullname-error").html("");
@@ -535,7 +535,7 @@
                 }
 
                 if (child.username == "") {
-                    $("#add-child-form #username-error").html("Xin nhập username");
+                    $("#add-child-form #username-error").html("Xin nhập tên đăng nhập");
                     check.username = false;
                 } else {
                     $("#add-child-form #username-error").html("");
@@ -543,7 +543,7 @@
                 }
                 //password
                 if (child.password == "") {
-                    $("#add-child-form #password-error").html("Xin nhập password");
+                    $("#add-child-form #password-error").html("Xin nhập mật khẩu");
                     check.password = false;
                 } else {
                     $("#add-child-form #password-error").html("");
@@ -552,7 +552,7 @@
 
                 //birthday
                 if (child.birthday == "") {
-                    $("#add-child-form #birthday-error").html("Xin nhập birthday");
+                    $("#add-child-form #birthday-error").html("Xin nhập ngày sinh");
                     check.birthday = false;
                 } else {
                     $("#add-child-form #birthday-error").html("");
@@ -561,7 +561,7 @@
 
                 //class
                 if (child.class == null) {
-                    $("#add-child-form #class-error").html("Xin chọn class");
+                    $("#add-child-form #class-error").html("Xin chọn trình độ");
                     check.class = false;
                 } else {
                     $("#add-child-form #class-error").html("");
