@@ -157,16 +157,32 @@ namespace eTUTOR.Controllers
             var student = model.students.FirstOrDefault(x => x.username == email);
             var parent = model.parents.FirstOrDefault(x => x.email == email);
             var admin = model.admins.FirstOrDefault(x => x.email == email);
+           
             password = commonService.hash(password);
             if (tutor != null)
             {
                 if (tutor.password.Equals(password))
                 {
-                    Session["FullName"] = tutor.fullname;
-                    Session["UserID"] = tutor.tutor_id;
-                    Session["username"] = tutor.username;
-                    Session["Role"] = "tutor";
-                    return RedirectToAction("InfoOfTutor", "Tutor");
+                    
+                    //check status of account
+                    if (tutor.status == 1)
+                    {
+                        Session["FullName"] = tutor.fullname;
+                        Session["UserID"] = tutor.tutor_id;
+                        Session["username"] = tutor.username;
+                        Session["Role"] = "tutor";
+                        return RedirectToAction("InfoOfTutor", "Tutor");
+                    }
+                    if (tutor.status == 2)
+                    {
+                        ViewBag.msg = "Tài khoản của bạn chưa được kích hoạt";
+                        return View("Login");
+                    }
+                    if (tutor.status == 3)
+                    {
+                        ViewBag.msg = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
+                        return View("Login");
+                    }
                 }
                 else
                 {
@@ -179,13 +195,26 @@ namespace eTUTOR.Controllers
             {
                 if (student.password.Equals(password))
                 {
-                    Session["FullName"] = student.fullname;
+                    if (student.status == 1)
+                    {
+                        Session["FullName"] = student.fullname;
 
-                    Session["username"] = student.username;
-                    Session["UserID"] = student.student_id;
-                    Session["username"] = student.username;
-                    Session["Role"] = "student";
-                    return RedirectToAction("InfoOfStudent", "Student");
+                        Session["username"] = student.username;
+                        Session["UserID"] = student.student_id;
+                        Session["username"] = student.username;
+                        Session["Role"] = "student";
+                        return RedirectToAction("InfoOfStudent", "Student");
+                    }
+                    if (student.status ==2)
+                    {
+                        ViewBag.msg = "Tài khoản của bạn chưa được kích hoạt";
+                        return View("Login");
+                    }
+                    if (student.status == 3)
+                    {
+                        ViewBag.msg = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
+                        return View("Login");
+                    }
                 }
                 else
                 {
@@ -199,12 +228,26 @@ namespace eTUTOR.Controllers
             {
                 if (parent.password.Equals(password))
                 {
-                    Session["FullName"] = parent.fullname;
-                    Session["username"] = parent.username;
-                    Session["UserID"] = parent.parent_id;
-                    Session["username"] = parent.username;
-                    Session["Role"] = "parent";
-                    return RedirectToAction("InfoOfParent", "Parent");
+                    if (parent.status==1)
+                    {
+                        Session["FullName"] = parent.fullname;
+                        Session["username"] = parent.username;
+                        Session["UserID"] = parent.parent_id;
+                        Session["username"] = parent.username;
+                        Session["Role"] = "parent";
+                        return RedirectToAction("InfoOfParent", "Parent");
+                    }
+                    if (parent.status==2)
+                    {
+                        ViewBag.msg = "Tài khoản của bạn chưa được kích hoạt";
+                        return View("Login");
+                    }
+                    if (parent.status==3)
+                    {
+                        ViewBag.msg = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
+                        return View("Login");
+                    }
+                   
                 }
                 else
                 {
@@ -213,23 +256,23 @@ namespace eTUTOR.Controllers
                 }
 
             }
-            if (admin != null)
-            {
-                if (admin.password.Equals(password))
-                {
-                    Session["FullName"] = admin.fullname;
-                    Session["UserID"] = admin.admin_id;
-                    Session["username"] = admin.username;
-                    Session["Role"] = "admin";
-                    return RedirectToAction("dashboard", "home", new { area = "admin" });
-                }
-                else
-                {
-                    ViewBag.msg = "Mật khẩu sai rồi vui lòng nhập lại mật khẩu !";
-                    return RedirectToAction("Login");
-                }
+            //if (admin != null)
+            //{
+            //    if (admin.password.Equals(password))
+            //    {
+            //        Session["FullName"] = admin.fullname;
+            //        Session["UserID"] = admin.admin_id;
+            //        Session["username"] = admin.username;
+            //        Session["Role"] = "admin";
+            //        return RedirectToAction("dashboard", "home", new { area = "admin" });
+            //    }
+            //    else
+            //    {
+            //        ViewBag.msg = "Mật khẩu sai rồi vui lòng nhập lại mật khẩu !";
+            //        return RedirectToAction("Login");
+            //    }
 
-            }
+            //}
             ViewBag.msg = "username không tồn tại";
             return View("Login");
 
