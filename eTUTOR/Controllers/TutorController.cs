@@ -197,7 +197,8 @@ namespace eTUTOR.Controllers
 
         public ActionResult SearchTutor(string search)
         {
-            var tutor = db.tutors.ToList().Where(x => x.fullname.Equals(search) || x.specialized.Equals(search));
+            string searchM = search.ToUpper();
+            var tutor = db.tutors.ToList().Where(x => x.fullname.Contains(searchM) || x.specialized.Contains(searchM));
             return View(tutor);
         }
 

@@ -38,7 +38,8 @@ namespace eTUTOR.Controllers
             {
                 tutor.certificate = certificate.FileName;
             }
-
+            tutor.specialized = tutor.specialized.ToUpper();
+            tutor.fullname = tutor.fullname.ToUpper();
 
             tutor.password = commonService.hash(tutor.password);
             tutor.dateCreate = DateTime.Now;
