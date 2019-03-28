@@ -30,58 +30,88 @@ namespace eTUTOR.Controllers
             return View(user);
         }
         [HttpPost]
-        public ActionResult RegisterTuTor(tutor tutor, HttpPostedFileBase certificate, string password)
+        public ActionResult RegisterTuTor(tutor tutor, HttpPostedFileBase certificate, string password, string email)
         {
-            //add new tutor
-            tutor.status = 2;
-            if (certificate != null && certificate.ContentLength > 0)
+            var tutorEmail = model.tutors.FirstOrDefault(x => x.email == tutor.email);
+
+            if (tutorEmail == null)
             {
-                tutor.certificate = certificate.FileName;
+
+                //add new tutor
+                tutor.status = 2;
+                if (certificate != null && certificate.ContentLength > 0)
+                {
+                    tutor.certificate = certificate.FileName;
+                }
+                tutor.specialized = tutor.specialized.ToUpper();
+                tutor.fullname = tutor.fullname.ToUpper();
+
+                tutor.password = commonService.hash(tutor.password);
+                tutor.dateCreate = DateTime.Now;
+                model.tutors.Add(tutor);
+                model.SaveChanges();
+
+                //save certificate
+
+                //create directory
+                string AppPath = AppDomain.CurrentDomain.BaseDirectory;
+                string filePath = AppPath + String.Format("Content\\img\\certificates\\{0}", tutor.tutor_id);
+                DirectoryInfo direc = Directory.CreateDirectory(filePath);
+
+                //save certificate
+                if (certificate != null && certificate.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(certificate.FileName);
+                    string path = String.Format("{0}\\{1}", filePath, fileName);
+                    certificate.SaveAs(path);
+                }
+                return RedirectToAction("ConfirmEmail", "User");
+
             }
-            tutor.specialized = tutor.specialized.ToUpper();
-            tutor.fullname = tutor.fullname.ToUpper();
-
-            tutor.password = commonService.hash(tutor.password);
-            tutor.dateCreate = DateTime.Now;
-            model.tutors.Add(tutor);
-            model.SaveChanges();
-
-            //save certificate
-
-            //create directory
-            string AppPath = AppDomain.CurrentDomain.BaseDirectory;
-            string filePath = AppPath + String.Format("Content\\img\\certificates\\{0}", tutor.tutor_id);
-            DirectoryInfo direc = Directory.CreateDirectory(filePath);
-
-            //save certificate
-            if (certificate != null && certificate.ContentLength > 0)
+            else
             {
-                string fileName = Path.GetFileName(certificate.FileName);
-                string path = String.Format("{0}\\{1}", filePath, fileName);
-                certificate.SaveAs(path);
+                ViewBag.Er = "Email đã tồn tại !";
+                return View("Register");
             }
-            return RedirectToAction("ConfirmEmail", "User");
+
         }
         public ActionResult RegisterStudent(student student, string password)
         {
-            student.status = 2;
+            var studentEmail = model.tutors.FirstOrDefault(x => x.email == student.email);
+            if (studentEmail == null)
+            {
+                student.status = 2;
+                student.password = commonService.hash(student.password);
+                student.dateCreate = DateTime.Now;
+                model.students.Add(student);
+                model.SaveChanges();
+                return RedirectToAction("ConfirmEmail", "User");
+            }
+            else
+            {
+                ViewBag.Er = "Email đã tồn tại !";
+                return View("Register");
+            }
 
-            student.password = commonService.hash(student.password);
-            student.dateCreate = DateTime.Now;
-            model.students.Add(student);
-            model.SaveChanges();
-            return RedirectToAction("ConfirmEmail", "User");
         }
         public ActionResult RegisterParent(parent parent, string password)
         {
+            var parentEmail = model.tutors.FirstOrDefault(x => x.email == parent.email);
+            if (parentEmail == null)
+            {
 
-            parent.status = 2;
-
-            parent.password = commonService.hash(parent.password);
-            parent.dateRegist = DateTime.Now;
-            model.parents.Add(parent);
-            model.SaveChanges();
-            return RedirectToAction("ConfirmEmail", "User");
+                parent.status = 2;
+                parent.password = commonService.hash(parent.password);
+                parent.dateRegist = DateTime.Now;
+                model.parents.Add(parent);
+                model.SaveChanges();
+                return RedirectToAction("ConfirmEmail", "User");
+            }
+            else
+            {
+                ViewBag.Er = "Email đã tồn tại !";
+                return View("Register");
+            }
         }
         public ActionResult Login()
         {
