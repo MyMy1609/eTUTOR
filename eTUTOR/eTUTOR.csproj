@@ -468,6 +468,7 @@
     <Content Include="Content\img\contact\icons\favicon.ico" />
     <Content Include="Content\img\contact\img-1.jpg" />
     <Content Include="Content\img\default-avatar.png" />
+    <Content Include="Content\img\edit.png" />
     <Content Include="Content\img\event\1.jpg" />
     <Content Include="Content\img\event\2.jpg" />
     <Content Include="Content\img\event\3.jpg" />

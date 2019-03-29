@@ -85,5 +85,64 @@ namespace eTUTOR.Controllers
             return View("InfoOfParent");
 
         }
+        //Update Avatar
+        [Filter.Authorize]
+        [HttpPost]
+        public ActionResult changeAvatar(HttpPostedFileBase files)
+        {
+
+
+            if (files == null)
+            {
+
+                setAlert("Vui lòng chọn file !", "error");
+                return RedirectToAction("InfoOfParent");
+            }
+            else if (files.ContentLength > 0)
+            {
+                int MaxContentLength = 1024 * 1024 * 3; //3 MB
+                string[] AllowedFileExtensions = new string[] { ".jpg", ".png", ".pdf" };
+
+                if (!AllowedFileExtensions.Contains(files.FileName.Substring(files.FileName.LastIndexOf('.'))))
+                {
+                    setAlert("Vui lòng chọn file có đuôi : .JPG .PNG", "error");
+                    return RedirectToAction("InfoOfParent");
+                }
+
+                else if (files.ContentLength > MaxContentLength)
+                {
+                    setAlert("File bạn tải lên quá lớn, tối đa :" + MaxContentLength + "MB", "error");
+                    return RedirectToAction("InfoOfParent");
+                }
+                else
+                {
+                    //TO:DO
+
+                    var fileName = Path.GetFileName(files.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/img/avatar/parent"), fileName);
+                    files.SaveAs(path);
+                    string s = Session["UserID"].ToString();
+                    int idUser = int.Parse(s);
+                    //get parent
+                    var parentt = db.parents.SingleOrDefault(x => x.parent_id == idUser);
+                    //xóa file ảnh cũ
+                    var photoName = parentt.avatar;
+                    var fullPath = Path.Combine(Server.MapPath("~/Content/img/avatar/parent"), photoName);
+
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        System.IO.File.Delete(fullPath);
+                    }
+                    parentt.avatar = fileName;
+                    db.SaveChanges();
+                    setAlert("Tải ảnh đại diện thành công", "success");
+                    ModelState.Clear();
+                    return RedirectToAction("InfoOfParent");
+                }
+            }
+
+            setAlert("Vui lòng chọn file", "error");
+            return RedirectToAction("InfoOfParent");
+        }
     }
 }

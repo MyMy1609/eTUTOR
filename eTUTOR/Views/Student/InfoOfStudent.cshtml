@@ -33,8 +33,38 @@
 
     <div class="container row">
         <div class="left col-4">
-            <img src="~/Content/img/avatar/student/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height:"250px" width:"250px onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'" />
-                 alt="avatar" style="border-radius: 20%;margin-top: 0px;">
+            <img src="~/Content/img/avatar/student/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height="200px" width="200px onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'"
+            alt="avatar" style="border-radius: 10%;margin-top: 0px;">
+            <a class="btn btn-primary p-2" data-toggle="modal" data-target="#avatar"
+               style="margin-left: 5%">
+                <img src="/Content/img/edit.png" width="20px" height="20px" />
+            </a>
+            <div class="modal" id="avatar">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h4 class="modal-title" style="margin-left: 30%">Tải ảnh đại diện lên</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        @using (Html.BeginForm("changeAvatar",
+                        "Student",
+                        FormMethod.Post,
+                        new { enctype = "multipart/form-data" }))
+                        {
+
+                            <div class="modal-body">
+
+                                <input type="file" name="files" id="files" class="form-control" /><br><br>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" value="Tải ảnh" class="btn-outline-success" style="border:5%" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
             <a href="#" style="display: inline-block"></a>
             <!-- <img src="https://cdn3.iconfinder.com/data/icons/block/32/box_edit-512.png" width="30px" height="30px"></a> -->
 
@@ -53,10 +83,10 @@
                     <td class="tdl">
                         Địa chỉ
                     </td>
-                     <td class="tdr">
-                            @Html.DisplayFor(model => model.parent.address)
-                        </td>
-                    
+                    <td class="tdr">
+                        @Html.DisplayFor(model => model.parent.address)
+                    </td>
+
                 </tr>
                 <tr>
                     <td class="tdl">
@@ -87,9 +117,9 @@
                     <td class="tdl">
                         Phụ huynh
                     </td>
-                        <td class="tdr">
-                            @Html.DisplayFor(model => model.parent.fullname)
-                        </td>
+                    <td class="tdr">
+                        @Html.DisplayFor(model => model.parent.fullname)
+                    </td>
                 </tr>
                 <tr>
                     <td class="tdl"></td>
@@ -150,13 +180,13 @@
                                                 </td>
                                             </tr>
                                             @*<tr>
-                                                <td class="tdl">
-                                                    Email
-                                                </td>
-                                                <td class="tdr">
-                                                    <input type="email" id="email" value="@Model.email">
-                                                </td>
-                                            </tr>*@
+                                            <td class="tdl">
+                                                Email
+                                            </td>
+                                            <td class="tdr">
+                                                <input type="email" id="email" value="@Model.email">
+                                            </td>
+                                        </tr>*@
                                             <tr>
                                                 <td class="tdl" style="padding-top: 19px;">
                                                     Lớp

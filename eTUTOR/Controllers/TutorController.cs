@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -59,6 +60,7 @@ namespace eTUTOR.Controllers
         [Filter.Authorize]
         public ActionResult checkSession(int iddd, string types)
         {
+            //kiểm tra khi returnUrl tránh bị lỗi session ở action RegisterTutor và RegisterTutorParent
             if (types == "student" || types == "tutor")
             {
 
@@ -316,6 +318,66 @@ namespace eTUTOR.Controllers
             return RedirectToAction("InfoOfTutor");
         }
 
+        //Update Avatar
+        [Filter.Authorize]
+        [HttpPost]
+        public ActionResult changeAvatar(HttpPostedFileBase files)
+        {
+            
+           
+                if (files == null)
+                {
+
+                setAlert("Vui lòng chọn file !", "error");
+                return RedirectToAction("InfoOfTutor");
+            }
+                else if (files.ContentLength > 0)
+                {
+                    int MaxContentLength = 1024 * 1024 * 3; //3 MB
+                    string[] AllowedFileExtensions = new string[] { ".jpg", ".png", ".pdf" };
+
+                    if (!AllowedFileExtensions.Contains(files.FileName.Substring(files.FileName.LastIndexOf('.'))))
+                    {
+
+                    setAlert("Vui lòng chọn file có đuôi : .JPG .PNG", "error");
+                    return RedirectToAction("InfoOfTutor");
+                }
+
+                    else if (files.ContentLength > MaxContentLength)
+                    {
+                    setAlert("File bạn tải lên quá lớn, tối đa :" + MaxContentLength + "MB", "error");
+                    return RedirectToAction("InfoOfTutor");
+                }
+                    else
+                    {
+                        //TO:DO
+
+                        var fileName = Path.GetFileName(files.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/img/avatar/tutor"), fileName);
+                        files.SaveAs(path);
+                        string s = Session["UserID"].ToString();
+                        int idUser = int.Parse(s);
+                    //get tutor
+                        var tutor = db.tutors.SingleOrDefault(x => x.tutor_id == idUser);
+                    //xóa file ảnh cũ
+                    var photoName = tutor.avatar;
+                    var fullPath = Path.Combine(Server.MapPath("~/Content/img/avatar/tutor"), photoName);
+
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        System.IO.File.Delete(fullPath);
+                    }
+                    tutor.avatar = fileName;
+                        db.SaveChanges();
+                    setAlert("Tải ảnh đại diện thành công", "success");
+                        ModelState.Clear();
+                        return RedirectToAction("InfoOfTutor");
+                    }
+                }
+           
+            setAlert("Vui lòng chọn file", "error");
+            return RedirectToAction("InfoOfTutor");
+        }
 
 
     }
