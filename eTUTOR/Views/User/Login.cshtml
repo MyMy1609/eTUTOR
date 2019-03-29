@@ -33,20 +33,24 @@
                         {
                             <div><span style="color:green">@ViewBag.sc</span></div>
                         }
-                        
+
                         @if (ViewBag.msg != null)
                         {
                             <div><span style="color:red">@ViewBag.msg</span></div>
 
                         }
+                        @if (ViewBag.msg1 != null)
+                        {
+                            <div><span style="color:red">@ViewBag.msg1  </span><a href="~/Home/Contact">tại đây</a></div>
+                        }
                         <div class="form-holder">
                             <span class="lnr lnr-user"></span>
-                            <input type="text" class="form-control" placeholder="Tên tài khoản" name="email"  id="user" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')" oninput="setCustomValidity('')" />
-                            
+                            <input type="text" class="form-control" placeholder="Tên tài khoản" name="email" id="user" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')" oninput="setCustomValidity('')" />
+
                         </div>
                         <div class="form-holder">
                             <span class="lnr lnr-lock"></span>
-                            <input type="password" class="form-control" placeholder="Mật khẩu" name="password" id="pass" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')" oninput="setCustomValidity('')"/>
+                            <input type="password" class="form-control" placeholder="Mật khẩu" name="password" id="pass" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')" oninput="setCustomValidity('')" />
 
                         </div>
                         <p style="padding-bottom: 10px">Nếu bạn chưa có tài khoản, nhấn chọn <a href="@Url.Action("register","User")">Đăng ký</a></p>

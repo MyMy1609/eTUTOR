@@ -210,7 +210,7 @@ namespace eTUTOR.Controllers
                     }
                     if (tutor.status == 3)
                     {
-                        ViewBag.msg = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
+                        ViewBag.msg1 = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
                         return View("Login");
                     }
                 }
@@ -242,7 +242,7 @@ namespace eTUTOR.Controllers
                     }
                     if (student.status == 3)
                     {
-                        ViewBag.msg = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
+                        ViewBag.msg1 = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
                         return View("Login");
                     }
                 }
@@ -274,7 +274,7 @@ namespace eTUTOR.Controllers
                     }
                     if (parent.status==3)
                     {
-                        ViewBag.msg = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
+                        ViewBag.msg1 = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
                         return View("Login");
                     }
                    
