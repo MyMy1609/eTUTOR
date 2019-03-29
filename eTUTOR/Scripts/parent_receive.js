@@ -26,7 +26,7 @@
 
     function getToken() {
         var http = new XMLHttpRequest();
-        var url = 'http://www.bigprotech.vn:7000/peerjs/id';
+        var url = 'https://peerjsserver7.herokuapp.com/peerjs/id';
         var queryString = "?ts=" + new Date().getTime() + "-" + course_id + "-" + Math.random();
         url += queryString;
         // If there's no ID we need to wait for one before trying to init socket.

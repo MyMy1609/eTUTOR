@@ -2,9 +2,9 @@
     "use strict";
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     const ws_url = location.origin.replace(/^http/, 'ws');
-    var player = null;
-    var peer = null;
-    var conn = null;
+    var player;
+    var peer;
+    var conn;
     var curPeer = 0;
 
     function getParameterByName(name, url) {
@@ -16,7 +16,15 @@
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
-    //function disableF5(e) { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
+    function disableF5(e) { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
+
+    function detectDevices(callback) {
+        let md = navigator.mediaDevices;
+        if (!md || !md.enumerateDevices) return callback(false);
+        md.enumerateDevices().then(devices => {
+            callback(devices.some(device => 'audioinput' === device.kind));
+        })
+    }
 
     function openAudio() {
         if (navigator.mediaDevices.getUserMedia) {
@@ -28,9 +36,21 @@
     }
 
     function playStream(idAudioTag, stream) {
-        const audio = document.getElementById(idAudioTag);
-        audio.srcObject = stream;
-        audio.play();
+        var localStream = document.getElementById(idAudioTag);
+        localStream.srcObject = stream;
+        localStream.play();
+    }
+
+    function removeAttr(dom) {
+        var DOM = document.getElementById(dom);
+        DOM.removeAttribute("hidden");
+
+    }
+
+    function addAttr(dom) {
+        var DOM = document.getElementById(dom);
+        DOM.setAttribute("hidden", true);
+
     }
 
     function randomToken() {
@@ -38,53 +58,64 @@
         while (i--) { res += chars[Math.floor(Math.random() * len)]; } return res;
     }
 
-    function status(data, call) {
+    function status(data, call, remoteAudio) {
         if (typeof data === 'string') {
             var decoded = JSON.parse(data);
             switch (decoded.type) {
                 case "OPEN":
                     conn = call;
+                    console.log("OPEN");
                     console.log(decoded.payload.msg);
+                    break;
+                case "NOTFOUND":
+                    console.log(decoded.payload.msg);
+                    addAttr(`streamVideo_${call.peer}`);
+                    if (decoded.payload.flag) {
+                        removeAttr(`remoteAudio_${call.peer}`);
+                        playStream(`remoteAudio_${call.peer}`, remoteAudio);
+                    } else {
+                        alert("WB run");
+                    }
                     break;
                 case "ERROR":
                     conn = call;
-                    call.close(decoded.payload.msg);
+                    console.log(decoded.payload.msg);
+                    call.close();
                     break;
                 default: break;
             }
         }
     }
 
-    const course_id = getParameterByName('p');
+    var course_id = getParameterByName('p');
 
     function makePeerHeartbeater(peer) {
-            var timeoutId = 0;
-            function heartbeat() {
-                timeoutId = setTimeout(heartbeat, 20000);
-                if (peer.socket._wsOpen()) {
-                    peer.socket.send({ type: 'HEARTBEAT' });
-                }
+        var timeoutId = 0;
+        function heartbeat() {
+            timeoutId = setTimeout(heartbeat, 20000);
+            if (peer.socket._wsOpen()) {
+                peer.socket.send({ type: 'HEARTBEAT' });
             }
-            // return
-            return {
-                start: function () {
-                    if (timeoutId === 0) { heartbeat(); }
-                },
-                stop: function () {
-                    clearTimeout(timeoutId);
-                    timeoutId = 0;
-                }
-            };
         }
+        // return
+        return {
+            start: function () {
+                if (timeoutId === 0) { heartbeat(); }
+            },
+            stop: function () {
+                clearTimeout(timeoutId);
+                timeoutId = 0;
+            }
+        };
+    }
 
     const initAjax = (call) => {
-        const canvas = document.getElementById(`streamVideo_${call.peer}`);
+        var canvas = document.getElementById(`streamVideo_${call.peer}`);
         openAudio()
             .then(oAudio => {
                 call.answer(oAudio);
                 playStream(`localAudio_${call.peer}`, oAudio);
-                call.on('stream', remoteAudio => {
-                    playStream(`remoteAudio_${call.peer}`, remoteAudio);
+                call.on('stream', async remoteAudio => {
                     player = new JSMpeg.Player(`ws://www.bigprotech.vn:7000/stream?id=${course_id}${randomToken()}&course=${course_id}${call.peer}&type=tutor&token=${peer.options.token}`, { canvas: canvas });
                     setTimeout(function () {
                         var thisIs = player.source;
@@ -94,9 +125,9 @@
                             thisIs.established = !0,
                                 I && thisIs.onEstablishedCallback && thisIs.onEstablishedCallback(thisIs),
                                 thisIs.destination && thisIs.destination.write(data)
-                            status(data, call);
+                            status(data, call, remoteAudio);
                         }
-                    }, 300);
+                    }, 500);
                 });
             })
             .catch(err => console.log(err));
@@ -109,10 +140,10 @@
     function initialize() {
 
         peer = new Peer(course_id, {
-            host: "www.bigprotech.vn",
-            port: "7000",
+            host: "peerjsserver7.herokuapp.com",
+            port: "443",
             path: "/",
-            secure: false
+            secure: true
         });
 
         peer.on('open', id => makePeerHeartbeater(peer).start());
@@ -124,7 +155,7 @@
             console.log(peer);
             //create canvas
             $(document).ready(function () {
-                const child_HD = `<div id="cam_${call.peer}" data-id="${curPeer}"><h3>
+                var child_HD = `<div id="cam_${call.peer}" data-id="${curPeer}"><h3>
                                 Hình ảnh
                                 <span id="current_connect" class="circle__item circle__green"></span>
                                 <span id="current_connect_text">  (Online) </span>
@@ -132,8 +163,8 @@
                             <div class="stream_zoom mr-5">
                                 <canvas id="streamVideo_${call.peer}"></canvas>
                             </div></div>`;
-                const child_Audio = `<div id="audio_${call.peer}" data-id="${curPeer}"><audio id="localAudio_${call.peer}" autoplay></audio>
-                 <audio id="remoteAudio_${call.peer}" autoplay></audio></div>`;
+                var child_Audio = `<div id="audio_${call.peer}" data-id="${curPeer}"><audio id="localAudio_${call.peer}" autoplay></audio>
+                 <video id="remoteAudio_${call.peer}" hidden autoplay></video></div>`;
                 $("#container-cam").append(child_HD);
                 $("#container-audio").append(child_Audio);
                 initAjax(call);
@@ -161,9 +192,9 @@
         }
     };
 
-    //$(document).ready(function () {
-    //    $(document).on("keydown", disableF5);
-    //});
+    $(document).ready(function () {
+        $(document).on("keydown", disablef5);
+    });
 
     window.onunload = window.onbeforeunload = function (e) {
         if (!!peer && !peer.destroyed) {
@@ -175,5 +206,11 @@
         return "Reload ?"
     };
 
-    initialize();
+    detectDevices(function (hasAudio) {
+        if (hasAudio) {
+            initialize();
+        } else {
+            alert("Vui lòng cắm headphone.");
+        }
+    });
 })();

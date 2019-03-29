@@ -5,9 +5,11 @@
     var stopStream = document.getElementById("stopStream");
     var ws_url = location.origin.replace(/^http/, 'ws');
     var stt = $("#stt").attr("data-id");
-    var player = null;
-    var peer = null;
-    var call = null;
+    var player;
+    var peer;
+    var call;
+    var remoteStream;
+    var course_id = getParameterByName('p');
 
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;
@@ -18,13 +20,19 @@
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
-    const course_id = getParameterByName('p');
+    function disableF5(e) { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
 
-    //function disableF5(e) { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
+    function detectDevices(callback) {
+        let md = navigator.mediaDevices;
+        if (!md || !md.enumerateDevices) return callback(false, false);
+        md.enumerateDevices().then(devices => {
+            callback(devices.some(device => 'videoinput' === device.kind), devices.some(device => 'audioinput' === device.kind));
+        })
+    }
 
     function openAudio() {
         if (navigator.mediaDevices.getUserMedia) {
-            const config = { audio: true, video: false };
+            var config = { audio: true, video: true };
             return navigator.mediaDevices.getUserMedia(config);
         } else {
             alert("Browser not support");
@@ -32,9 +40,10 @@
     }
 
     function playStream(idAudioTag, stream) {
-        const audio = document.getElementById(idAudioTag);
-        audio.srcObject = stream;
-        audio.play();
+        var localStream = document.getElementById(idAudioTag);
+        localStream.srcObject = stream;
+        localStream.play();
+        remoteStream = stream;
     }
 
     function randomToken() {
@@ -68,13 +77,22 @@
             switch (decoded.type) {
                 case "OPEN":
                     console.log("OPEN");
+                    for (var track of remoteStream.getTracks())
+                        if (track.kind === "video") track.stop();
                     break;
                 case "DUPLICATES":
                     alert(decoded.payload.msg);
                     call.close();
                     window.close();
                     break;
+                case "NOTFOUND":
+                    console.log(decoded.payload.msg);
+                    if (!decoded.payload.flag) {
+                        alert("WB run");
+                    }
+                    break;
                 case "ERROR":
+                    console.log(decoded.payload.msg);
                     alert(decoded.payload.msg);
                     call.close();
                     break;
@@ -92,19 +110,18 @@
         imageTemp.style.zIndex = "-1";
     }
 
-    const getCam = (id) => {
-        //const rtsp_URL = prompt("Please enter your url RTSP IP Camera", "");
-        if (id) {
+    var getCam = (id, hasWebcam) => {
+        const rtsp_URL = prompt("Please enter your url RTSP IP Camera", "");
+        if (rtsp_URL && id) {
             // Caller
             openAudio()
                 .then(oAudio => {
-                    playStream('localAudio', oAudio);
                     call = peer.call(course_id, oAudio);
+                    playStream('localAudio', oAudio);
                     call.on('stream', remoteAudio => {
                         disableDom();
                         makePeerHeartbeater(peer).start();
-                        playStream('remoteAudio', remoteAudio);
-                        player = new JSMpeg.Player(`ws://www.bigprotech.vn:7000/stream?id=${id}&course=${course_id}${id}&type=student&token=${peer.options.token}`, { canvas: canvas });
+                        player = new JSMpeg.Player(`ws://www.bigprotech.vn:7000/stream?id=${id}&flag=${false}&cam=${rtsp_URL}&course=${course_id}${id}&type=student&token=${peer.options.token}`, { canvas: canvas });
                         setTimeout(function () {
                             var thisIs = player.source;
                             thisIs.socket.onmessage = function (evt) {
@@ -115,8 +132,7 @@
                                     thisIs.destination && thisIs.destination.write(data)
                                 status(data, call);
                             }
-                        }, 300);
-
+                        }, 500);
                     });
                     call.on('close', () => {
                         makePeerHeartbeater(peer).stop();
@@ -129,18 +145,18 @@
         }
     }
 
-    function initialize() {
+    function initialize(hasWebcam) {
         peer = new Peer(stt, {
-            host: "www.bigprotech.vn",
-            port: "7000",
+            host: "peerjsserver7.herokuapp.com",
+            port: "443",
             path: "/",
-            secure: false
+            secure: true
         });
 
         peer.on('open', function (id) {
             //start
             console.log('ID: ' + id);
-            getCam(id);
+            getCam(id, hasWebcam);
         });
         peer.on('disconnected', function () {
             call.close();
@@ -172,9 +188,9 @@
     //    player.destroy();
     //});
 
-    //$(document).ready(function () {
-    //    $(document).on("keydown", disableF5);
-    //});
+    $(document).ready(function () {
+        $(document).on("keydown", disableF5);
+    });
 
     window.onunload = window.onbeforeunload = function (e) {
         if (!!peer && !peer.destroyed) {
@@ -182,11 +198,16 @@
             peer.destroy();
             player.stop();
         }
-        call.close();
         e.preventDefault();
         return "Reload ?"
     };
 
     // Strigger function
-    initialize();
+    detectDevices(function (hasWebcam, hasAudio) {
+        if (hasAudio) {
+            initialize(hasWebcam);
+        } else {
+            alert("Vui lòng cắm headphone.");
+        }
+    });
 })();
