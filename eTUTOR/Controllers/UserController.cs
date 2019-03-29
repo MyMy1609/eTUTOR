@@ -78,7 +78,7 @@ namespace eTUTOR.Controllers
         }
         public ActionResult RegisterStudent(student student, string password)
         {
-            var studentEmail = model.tutors.FirstOrDefault(x => x.email == student.email);
+            var studentEmail = model.students.FirstOrDefault(x => x.email == student.email);
             if (studentEmail == null)
             {
                 student.status = 2;
@@ -97,7 +97,7 @@ namespace eTUTOR.Controllers
         }
         public ActionResult RegisterParent(parent parent, string password)
         {
-            var parentEmail = model.tutors.FirstOrDefault(x => x.email == parent.email);
+            var parentEmail = model.parents.FirstOrDefault(x => x.email == parent.email);
             if (parentEmail == null)
             {
 
@@ -222,7 +222,7 @@ namespace eTUTOR.Controllers
                     }
                     if (tutor.status == 3)
                     {
-                        ViewBag.msg = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
+                        ViewBag.msg1 = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
                         return View("Login");
                     }
                 }
@@ -262,7 +262,7 @@ namespace eTUTOR.Controllers
                     }
                     if (student.status == 3)
                     {
-                        ViewBag.msg = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
+                        ViewBag.msg1 = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
                         return View("Login");
                     }
                 }
@@ -302,7 +302,7 @@ namespace eTUTOR.Controllers
                     }
                     if (parent.status == 3)
                     {
-                        ViewBag.msg = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
+                        ViewBag.msg1 = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
                         return View("Login");
                     }
 
@@ -524,28 +524,6 @@ namespace eTUTOR.Controllers
             model.SaveChanges();
             setAlert("Cảm ơn bạn đã đóng góp ý kiến", "success");
             return RedirectToAction("ViewDetailTutor", "Tutor", new { id = int.Parse(ttID) });
-        }
-        public ActionResult checkre(string username, string email)
-        {
-            var student = model.students.FirstOrDefault(x => x.username == username);
-            var parent = model.parents.FirstOrDefault(x => x.username == username);
-            var tutor = model.tutors.FirstOrDefault(x => x.username == username);
-            if (student.email != email)
-            {
-                ViewBag.Er = "Email đã tồn tại !";
-                return View("Register");
-            }
-            if (parent.email != email)
-            {
-                ViewBag.Er = "Email đã tồn tại !";
-                return View("Register");
-            }
-            if (tutor.email != email)
-            {
-                ViewBag.Er = "Email đã tồn tại !";
-                return View("Register");
-            }
-            return View();
         }
 
     }
