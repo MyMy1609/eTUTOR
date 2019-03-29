@@ -165,6 +165,7 @@
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
+    <Compile Include="Filter\Authorize.cs" />
     <Compile Include="Models\about.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
