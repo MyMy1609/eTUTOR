@@ -24,7 +24,7 @@ namespace eTUTOR.Controllers
         public ActionResult ListOfTutors()
         {
 
-            var listTT = db.tutors.ToList().Where(x => x.status_register == 1);
+            var listTT = db.tutors.ToList().Where(x => x.status == 1);
             return View(listTT);
         }
 
@@ -207,7 +207,7 @@ namespace eTUTOR.Controllers
         public ActionResult SearchTutor(string search)
         {
             string searchM = search.ToUpper();
-            var tutor = db.tutors.ToList().Where(x => x.fullname.Contains(searchM) || x.specialized.Contains(searchM));
+            var tutor = db.tutors.ToList().Where(x => x.status==1 &&( x.fullname.Contains(searchM) || x.specialized.Contains(searchM) ) );
             return View(tutor);
         }
 
