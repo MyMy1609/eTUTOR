@@ -114,10 +114,7 @@ namespace eTUTOR.Controllers
                 return View("Register");
             }
         }
-        public ActionResult Login()
-        {
-            return View();
-        }
+        
         public ActionResult ForgotPassword()
         {
             return View();
@@ -180,7 +177,15 @@ namespace eTUTOR.Controllers
         {
             return View();
         }
-
+        [HttpGet]
+        public ActionResult Login(string returnUrl)
+        {
+            if (!string.IsNullOrWhiteSpace(returnUrl))
+            {
+                TempData["returnUrl"] = returnUrl;
+            }
+            return View();
+        }
         [HttpPost]
         public ActionResult Login(string email, string password, string returnUrl)
         {
@@ -201,10 +206,9 @@ namespace eTUTOR.Controllers
                         Session["UserID"] = tutor.tutor_id;
                         Session["username"] = tutor.username;
                         Session["Role"] = "tutor";
-                        if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                 && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                        if (TempData["returnUrl"] != null && !string.IsNullOrWhiteSpace(TempData["returnUrl"].ToString()))
                         {
-                            return Redirect(returnUrl);
+                            return Redirect(TempData["returnUrl"].ToString());
                         }
                         else
                         {
@@ -241,10 +245,9 @@ namespace eTUTOR.Controllers
                         Session["UserID"] = student.student_id;
                         Session["username"] = student.username;
                         Session["Role"] = "student";
-                        if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                 && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                        if (TempData["returnUrl"] != null && !string.IsNullOrWhiteSpace(TempData["returnUrl"].ToString()))
                         {
-                            return Redirect(returnUrl);
+                            return Redirect(TempData["returnUrl"].ToString());
                         }
                         else
                         {
@@ -282,10 +285,9 @@ namespace eTUTOR.Controllers
                         Session["UserID"] = parent.parent_id;
                         Session["username"] = parent.username;
                         Session["Role"] = "parent";
-                        if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                 && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                        if (TempData["returnUrl"] != null && !string.IsNullOrWhiteSpace(TempData["returnUrl"].ToString()))
                         {
-                            return Redirect(returnUrl);
+                            return Redirect(TempData["returnUrl"].ToString());
                         }
                         else
                         {

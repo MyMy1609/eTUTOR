@@ -13,7 +13,7 @@ using Newtonsoft.Json.Linq;
 namespace eTUTOR.Controllers
 {
 
-    
+
 
     public class TutorController : BaseController
     {
@@ -28,10 +28,13 @@ namespace eTUTOR.Controllers
             return View(listTT);
         }
 
-        [Filter.Authorize]
         [HttpGet]
         public ActionResult ViewDetailTutor(int? id)
         {
+            if (Session["Role"] != null)
+            {
+                ViewBag.typeUser = Session["Role"].ToString();
+            }
             var tatu = db.tutors.FirstOrDefault(x => x.tutor_id == id);
             if (tatu == null)
             {
@@ -54,38 +57,58 @@ namespace eTUTOR.Controllers
             return View(info);
         }
         [Filter.Authorize]
+        public ActionResult checkSession(int iddd, string types)
+        {
+            if (types == "student" || types == "tutor")
+            {
+
+                return RedirectToAction("RegisterTutor", new { id = iddd , type = types });
+            }
+            else { 
+            
+                return RedirectToAction("RegisterTutorParent", new { idd = iddd });
+            }
+        }
+        [Filter.Authorize]
         [HttpGet]
         public ActionResult RegisterTutor(int? id, string type)
         {
+
+            if (Session["Role"].ToString() == "parent")
+            {
+                return RedirectToAction("RegisterTutorParent", new { idd = id });
+
+            }
             var tatu = db.tutors.FirstOrDefault(x => x.tutor_id == id);
             if (tatu == null)
             {
                 setAlert("Vui lòng chọn Tutor", "warning");
                 RedirectToAction("ListOfTutors", "Tutor");
             }
-            else if(type == "student" || type == "tutor")
+            else if (type == "student" || type == "tutor")
             {
                 return View(tatu);
             }
-            if(type == "parent")
-            {
-                return RedirectToAction("RegisterTutorParent", new { idd = id });
-
-            }
+            
             return View(tatu);
         }
         [Filter.Authorize]
         [HttpGet]
         public ActionResult RegisterTutorParent(int? idd)
         {
+            if (Session["Role"].ToString() != "parent")
+            {
+                return RedirectToAction("RegisterTutor", new { id = idd });
+
+            }
             var tatu = db.tutors.FirstOrDefault(x => x.tutor_id == idd);
             if (tatu == null)
             {
                 setAlert("Vui lòng chọn Tutor", "warning");
                 RedirectToAction("ListOfTutors", "Tutor");
             }
-           
-                return View(tatu);
+
+            return View(tatu);
 
         }
         [Filter.Authorize]
@@ -127,7 +150,7 @@ namespace eTUTOR.Controllers
         [HttpPost]
         public ActionResult ConfirmScheduleTutorParent(int idgiasu, int idmonhoc, int[] idschedule, int idSon)
         {
-            
+
             int idStudent = idSon;
             string id = Session["username"].ToString();
             var std = db.students.FirstOrDefault(x => x.student_id == idStudent);
@@ -154,7 +177,7 @@ namespace eTUTOR.Controllers
                 }
 
                 return RedirectToAction("InfoOfParent", "Parent");
-            
+
             }
             return RedirectToAction("Login", "User");
 
@@ -283,16 +306,17 @@ namespace eTUTOR.Controllers
             {
                 tutor.status_register = 2;
                 db.SaveChanges();
-            }else if(tutor.status_register == 2)
+            }
+            else if (tutor.status_register == 2)
             {
                 tutor.status_register = 1;
                 db.SaveChanges();
             }
-            setAlert("Bạn đã thay đổi thành công","success");
+            setAlert("Bạn đã thay đổi thành công", "success");
             return RedirectToAction("InfoOfTutor");
         }
 
-        
-        
+
+
     }
 }
