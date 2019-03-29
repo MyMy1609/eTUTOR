@@ -191,45 +191,56 @@
                     </div>
                 </div>
                 <!--Comment section-->
-                @if (Session["Role"] != null && Session["Role"].ToString() == "student" &&  _trueHaveIdOfTutor != null)
+                @if (Session["Role"] != null && Session["Role"].ToString() == "student" && _trueHaveIdOfTutor != null)
                 {
                     <!--method="post" action="~/User/danhgiatutor"-->
-                <form role="form" id="danhgiaa" method="post" action="~/User/danhgiatutor">
-                    <div class="row">
-                        <div class="form-group col-sm-6">
-                            <input type="text" name="ttID" value="@Model.tutor_id" style="border:none;width:20px;text-align:center" hidden />
-                        </div>
+                    <form role="form" id="danhgiaa" method="post" action="~/User/danhgiatutor">
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <input type="text" name="ttID" value="@Model.tutor_id" style="border:none;width:20px;text-align:center" hidden />
+                            </div>
 
-                    </div>
-                    <div class="form-group">
-                        <label for="message" class="h4 ">Nội dung đánh giá</label>
-                        <textarea name="message" id="message" class="form-control" rows="5" placeholder="Nhập nội dung đánh giá" required></textarea>
-                    </div>
-                    <button type="submit" id="form-submit" class="btn btn-success ">Gửi</button>
-                </form>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="h4 ">Nội dung đánh giá</label>
+                            <textarea name="message" id="message" class="form-control" rows="5" placeholder="Nhập nội dung đánh giá" required></textarea>
+                        </div>
+                        <button type="submit" id="form-submit" class="btn btn-success ">Gửi</button>
+                    </form>
                 }
                 <h4 class="line-bottom">Đánh giá:</h4>
                 @*<div class="row mt-30">*@
-                @foreach (var item in Model.comments)
+                @if (Model.comments.Count > 0)
+                {
+                    foreach (var item in Model.comments)
+                    {
+
+                        <div class="row" style="margin:10px">
+                            <div class="col-sm-1">
+                                <div class="thumbnail">
+                                    <img class="img-responsive user-photo" src="~/Content/img/avatar/student/@item.student.avatar" width="50px" height="50px" onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'" />
+                                </div><!-- /thumbnail -->
+                            </div><!-- /col-sm-1 -->
+                            <div class="col-sm-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>@item.student.username</strong>
+                                    </div>
+                                    <div class="panel-body">
+                                        @item.content
+                                    </div>
+                                    <span class="text-muted" style="font-size:12px">@item.dateTimeCmt</span><!-- /panel-body -->
+                                </div><!-- /panel panel-default -->
+                            </div><!-- /col-sm-5 -->
+
+                        </div>
+                    }
+
+                }
+                else
                 {
                     <div class="row" style="margin:10px">
-                        <div class="col-sm-1">
-                            <div class="thumbnail">
-                                <img class="img-responsive user-photo" src="~/Content/img/avatar/student/@item.student.avatar" width="50px" height="50px" onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'" />
-                            </div><!-- /thumbnail -->
-                        </div><!-- /col-sm-1 -->
-                        <div class="col-sm-5">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong>@item.student.username</strong>
-                                </div>
-                                <div class="panel-body">
-                                    @item.content
-                                </div>
-                                <span class="text-muted" style="font-size:12px">@item.dateTimeCmt</span><!-- /panel-body -->
-                            </div><!-- /panel panel-default -->
-                        </div><!-- /col-sm-5 -->
-
+                        Chưa có đánh giá
                     </div>
                 }
                 <!--End comment section-->
@@ -297,7 +308,7 @@
                 return false;
             }
 
-			if ((emails.charAt(emails.length - 4) != '.') && (emails.charAt(emails.length - 3) != '.')) {
+            if ((emails.charAt(emails.length - 4) != '.') && (emails.charAt(emails.length - 3) != '.')) {
                 document.getElementById('emailids').innerHTML = " ** Email không đúng định dạng";
                 return false;
             }
@@ -317,7 +328,7 @@
             }
 
         }
-        
+
     </script>
 }
 

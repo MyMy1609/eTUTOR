@@ -25,7 +25,7 @@ namespace eTUTOR.Controllers
         public ActionResult ListOfTutors()
         {
 
-            var listTT = db.tutors.ToList().Where(x => x.status == 1);
+            var listTT = db.tutors.ToList().Where(x => x.status_register == 1 && x.status == 1);
             return View(listTT);
         }
 

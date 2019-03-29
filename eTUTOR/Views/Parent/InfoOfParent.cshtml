@@ -1,13 +1,17 @@
 ﻿@model eTUTOR.Models.parent
 @using eTUTOR.Models;
 @{
-    ViewBag.Title = "InfoOfParent";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    eTUITOREntities db = new eTUITOREntities();
-    var usernameC = db.students.ToList();
-}
+                ViewBag.Title = "InfoOfParent";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 
-@section css{
+                string s = Session["UserID"].ToString();
+                int id = int.Parse(s);
+                eTUITOREntities db = new eTUITOREntities();
+                var usernameC = db.students.ToList().Where(x=> x.parent_id == id);
+                var hisStudent = db.history_lessons.ToList().Where(x => x.student_id == id);
+            }
+
+            @section css{
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -25,9 +29,9 @@
     <link href="~/Content/vendor/bootstrap/css/avatar.css" rel="stylesheet" />
     <style>
         .error {
-            color: red;
-            text-align: left;
-        }
+                color: red;
+                    text-align: left;
+                }
     </style>
 }
 
@@ -373,9 +377,10 @@
                                     </div>
                                 </div>
 
-                             
-                                @foreach (var childAccount in Model.students.ToList().Where(x => x.parent_id == int.Parse(Session["UserID"].ToString())))
-                                {
+                             @if (usernameC.Count() > 0)
+                             {
+                                 foreach (var childAccount in Model.students.ToList().Where(x => x.parent_id == int.Parse(Session["UserID"].ToString())))
+                                 {
                                     <div class="row pt-3">
                                         <div class="col-4">
                                             <img src="~/Content/img/avatar/student/@childAccount.avatar" class="pb-2" style="height: 150px; width: 150px; margin-left: 40%" alt="" onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'" />
@@ -417,8 +422,9 @@
                                             </table>
                                         </div>
                                     </div>
-                                }
-
+                                 }
+                             }
+                             else { <div>Chưa có thông tin của con</div> }
                             </div>
                         </div>
                     </div>
@@ -435,30 +441,33 @@
                         <div id="collapse-pane-6" class="collapse" role="tabpanel" aria-labelledby="accord6"
                              data-parent="#demo-accordion-collapse">
                             <div class="card-body">
-                                <table class="table" style="text-align: center;">
-                                    <tr>
-                                        <th>
-                                            Tên người học
-                                        </th>
-                                        <th>
-                                            Thứ
-                                        </th>
-                                        <th>
-                                            Thời gian học
-                                        </th>
+                                @if (hisStudent.Count() > 0)
+                                {
+                                    <table class="table" style="text-align: center;">
+                                        <tr>
+                                            <th>
+                                                Tên người học
+                                            </th>
+                                            <th>
+                                                Thứ
+                                            </th>
+                                            <th>
+                                                Thời gian học
+                                            </th>
 
-                                        <th>
-                                            Ngày đã học
-                                        </th>
-                                        <th>
-                                            Gia sư
-                                        </th>
-                                        <th>
-                                            Số buổi đã học
-                                        </th>
-                                    </tr>
-                                    @foreach (var hl in db.history_lessons.ToList().Where(x => x.student_id == int.Parse(Session["UserID"].ToString())))
-                                    {
+                                            <th>
+                                                Ngày đã học
+                                            </th>
+                                            <th>
+                                                Gia sư
+                                            </th>
+                                            <th>
+                                                Số buổi đã học
+                                            </th>
+                                        </tr>
+
+                                        @foreach (var hl in db.history_lessons.ToList().Where(x => x.student_id == int.Parse(Session["UserID"].ToString())))
+                                        {
                                         <tr>
                                             <td>
                                                 @hl.student.fullname
@@ -479,10 +488,14 @@
                                                 @hl.total_sessions
                                             </td>
                                         </tr>
-                                    }
+                                        }
 
 
-                                </table>
+                                    </table>
+                                }
+                                else
+                                {
+                                    <div>Chưa có lịch sử học</div>}
                             </div>
                         </div>
                     </div>
