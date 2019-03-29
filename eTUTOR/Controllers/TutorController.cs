@@ -13,18 +13,22 @@ using Newtonsoft.Json.Linq;
 namespace eTUTOR.Controllers
 {
 
+    
 
     public class TutorController : BaseController
     {
         eTUITOREntities db = new eTUITOREntities();
         CommonService commonService = new CommonService();
         // GET: Tutor
+        [AllowAnonymous]
         public ActionResult ListOfTutors()
         {
 
             var listTT = db.tutors.ToList().Where(x => x.status_register == 1);
             return View(listTT);
         }
+
+        [Filter.Authorize]
         [HttpGet]
         public ActionResult ViewDetailTutor(int? id)
         {
@@ -38,6 +42,7 @@ namespace eTUTOR.Controllers
                 return View(tatu);
             }
         }
+        [Filter.Authorize]
         public ActionResult InfoOfTutor()
         {
             var tutor_id = int.Parse(Session["UserID"].ToString());
@@ -48,6 +53,7 @@ namespace eTUTOR.Controllers
             ViewData["scheduleList"] = scheduleList;
             return View(info);
         }
+        [Filter.Authorize]
         [HttpGet]
         public ActionResult RegisterTutor(int? id, string type)
         {
@@ -68,6 +74,7 @@ namespace eTUTOR.Controllers
             }
             return View(tatu);
         }
+        [Filter.Authorize]
         [HttpGet]
         public ActionResult RegisterTutorParent(int? idd)
         {
@@ -81,6 +88,7 @@ namespace eTUTOR.Controllers
                 return View(tatu);
 
         }
+        [Filter.Authorize]
         [HttpPost]
         public ActionResult ConfirmScheduleTutor(int idgiasu, int idmonhoc, int[] idschedule)
         {
@@ -115,6 +123,7 @@ namespace eTUTOR.Controllers
             return RedirectToAction("Login", "User");
 
         }
+        [Filter.Authorize]
         [HttpPost]
         public ActionResult ConfirmScheduleTutorParent(int idgiasu, int idmonhoc, int[] idschedule, int idSon)
         {
@@ -150,7 +159,7 @@ namespace eTUTOR.Controllers
             return RedirectToAction("Login", "User");
 
         }
-
+        [Filter.Authorize]
         public ActionResult SessionOfTutor(string p)
         {
             ViewData["IsNewGroup"] = false;
@@ -174,8 +183,7 @@ namespace eTUTOR.Controllers
 
             return View();
         }
-
-
+        [Filter.Authorize]
         public ActionResult CreateSchedule(schedule schedule)
         {
             schedule.status = 2;
@@ -186,6 +194,7 @@ namespace eTUTOR.Controllers
             return RedirectToAction("InfoOfTutor", "Tutor", new { id = Session["UserID"] });
         }
 
+        [Filter.Authorize]
 
         public ActionResult DeleteSchedule(int id)
         {
@@ -202,7 +211,7 @@ namespace eTUTOR.Controllers
             return View(tutor);
         }
 
-
+        [Filter.Authorize]
         [HttpPost]
         public ActionResult Duyetkhoahoc(int id)
         {
@@ -264,7 +273,7 @@ namespace eTUTOR.Controllers
         {
             return View();
         }
-        
+        [Filter.Authorize]
         public ActionResult registScheduleManager(int types)
         {
             string s = types.ToString();

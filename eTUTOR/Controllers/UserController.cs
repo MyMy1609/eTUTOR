@@ -12,6 +12,7 @@ using System.Text;
 using System.Web.Mail;
 using System.Web.UI;
 using System.Net.Mail;
+using System.Web.Security;
 
 namespace eTUTOR.Controllers
 {
@@ -181,19 +182,18 @@ namespace eTUTOR.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string email, string password)
+        public ActionResult Login(string email, string password, string returnUrl)
         {
             var tutor = model.tutors.FirstOrDefault(x => x.email == email);
             var student = model.students.FirstOrDefault(x => x.username == email);
             var parent = model.parents.FirstOrDefault(x => x.email == email);
             var admin = model.admins.FirstOrDefault(x => x.email == email);
-           
+
             password = commonService.hash(password);
             if (tutor != null)
             {
                 if (tutor.password.Equals(password))
                 {
-                    
                     //check status of account
                     if (tutor.status == 1)
                     {
@@ -201,7 +201,15 @@ namespace eTUTOR.Controllers
                         Session["UserID"] = tutor.tutor_id;
                         Session["username"] = tutor.username;
                         Session["Role"] = "tutor";
-                        return RedirectToAction("InfoOfTutor", "Tutor");
+                        if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                 && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                        {
+                            return Redirect(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("InfoOfTutor", "Tutor");
+                        }
                     }
                     if (tutor.status == 2)
                     {
@@ -210,7 +218,7 @@ namespace eTUTOR.Controllers
                     }
                     if (tutor.status == 3)
                     {
-                        ViewBag.msg = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
+                        ViewBag.msg1 = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
                         return View("Login");
                     }
                 }
@@ -233,16 +241,25 @@ namespace eTUTOR.Controllers
                         Session["UserID"] = student.student_id;
                         Session["username"] = student.username;
                         Session["Role"] = "student";
-                        return RedirectToAction("InfoOfStudent", "Student");
+                        if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                 && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                        {
+                            return Redirect(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("InfoOfStudent", "Student");
+                        }
+                        
                     }
-                    if (student.status ==2)
+                    if (student.status == 2)
                     {
                         ViewBag.msg = "Tài khoản của bạn chưa được kích hoạt";
                         return View("Login");
                     }
                     if (student.status == 3)
                     {
-                        ViewBag.msg = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
+                        ViewBag.msg1 = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
                         return View("Login");
                     }
                 }
@@ -258,26 +275,35 @@ namespace eTUTOR.Controllers
             {
                 if (parent.password.Equals(password))
                 {
-                    if (parent.status==1)
+                    if (parent.status == 1)
                     {
                         Session["FullName"] = parent.fullname;
                         Session["username"] = parent.username;
                         Session["UserID"] = parent.parent_id;
                         Session["username"] = parent.username;
                         Session["Role"] = "parent";
-                        return RedirectToAction("InfoOfParent", "Parent");
+                        if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                 && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                        {
+                            return Redirect(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("InfoOfParent", "Parent");
+                        }
+                        
                     }
-                    if (parent.status==2)
+                    if (parent.status == 2)
                     {
                         ViewBag.msg = "Tài khoản của bạn chưa được kích hoạt";
                         return View("Login");
                     }
-                    if (parent.status==3)
+                    if (parent.status == 3)
                     {
-                        ViewBag.msg = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
+                        ViewBag.msg1 = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
                         return View("Login");
                     }
-                   
+
                 }
                 else
                 {
@@ -317,7 +343,7 @@ namespace eTUTOR.Controllers
         //tạo pass mới ngẫu nhiên
         public string CreateLostPassword(int PasswordLength)
         {
-            string _allowedChars = "abcdefghijk0123456789mnopqrstuvwxyz";
+            string _allowedChars = "abcdefghijk0123456789mnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
             Random randNum = new Random(); char[] chars = new char[PasswordLength];
             int allowedCharCount = _allowedChars.Length;
             for (int i = 0; i < PasswordLength; i++)

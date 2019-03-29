@@ -7,10 +7,12 @@ using eTUTOR.Models;
 
 namespace eTUTOR.Controllers
 {
+    [Filter.Authorize]
     public class StudentController : Controller
     {
         eTUITOREntities db = new eTUITOREntities();
         // GETA : Student
+        [Filter.Authorize]
         public ActionResult InfoOfStudent()
         {
             var student_id = int.Parse(Session["UserID"].ToString());
@@ -31,6 +33,7 @@ namespace eTUTOR.Controllers
             db.SaveChanges();
             return RedirectToAction("listRegistCourse");
         }
+
         public ActionResult SessionOfStudent(string p)
         {
             ViewData["IsNewGroup"] = false;

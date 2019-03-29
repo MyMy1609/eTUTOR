@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -7,8 +8,8 @@ using eTUTOR.Models;
 
 namespace eTUTOR.Controllers
 {
-
-    public class ParentController : Controller
+    [Filter.Authorize]
+    public class ParentController : BaseController
     {
         eTUITOREntities db = new eTUITOREntities();
         // GET: Parent
@@ -41,14 +42,48 @@ namespace eTUTOR.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateChildAccount(student student)
+        public ActionResult CreateChildAccount(student student, HttpPostedFileBase avatarSon)
         {
-           
-                student.parent_id = int.Parse(Session["UserID"].ToString());
-            student.dateCreate = DateTime.Now;
-                db.students.Add(student);
-                db.SaveChanges();
-                return RedirectToAction("InfoOfParent", "Parent", new { id = Session["UserID"] });
+            
+            if (ModelState.IsValid)
+            {
+                if (avatarSon == null)
+                {
+                    ModelState.AddModelError("File", "Please Upload Your file");
+                }
+                else if (avatarSon.ContentLength > 0)
+                {
+                    int MaxContentLength = 1024 * 1024 * 3; //3 MB
+                    string[] AllowedFileExtensions = new string[] { ".jpg", ".png", ".pdf" };
+
+                    if (!AllowedFileExtensions.Contains(avatarSon.FileName.Substring(avatarSon.FileName.LastIndexOf('.'))))
+                    {
+                        ModelState.AddModelError("File", "Please file of type: " + string.Join(", ", AllowedFileExtensions));
+                    }
+
+                    else if (avatarSon.ContentLength > MaxContentLength)
+                    {
+                        ModelState.AddModelError("File", "Your file is too large, maximum allowed size is: " + MaxContentLength + " MB");
+                    }
+                    else
+                    {
+                        //TO:DO
+                        var fileName = Path.GetFileName(avatarSon.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/Upload"), fileName);
+                        avatarSon.SaveAs(path);
+                        ModelState.Clear();
+                        student.parent_id = int.Parse(Session["UserID"].ToString());
+                        student.dateCreate = DateTime.Now;
+                        student.avatar = path;
+                        db.students.Add(student);
+                        db.SaveChanges();
+                        return RedirectToAction("InfoOfParent", "Parent", new { id = Session["UserID"] });
+                    }
+                }
+            }
+            setAlert("Vui lòng tải ảnh đại diện cho con của bạn", "danger");
+            return View("InfoOfParent");
+
         }
     }
 }

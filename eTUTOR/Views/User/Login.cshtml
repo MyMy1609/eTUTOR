@@ -1,5 +1,6 @@
 ﻿
 @{
+    string returnUrl = Request.QueryString["ReturnUrl"];
     Layout = null;
 }
 
@@ -24,7 +25,7 @@
     <div class="wrapper">
         <div class="inner">
             <div class="register-form flash hide">
-                <form action="/User/Login" method="post" >
+                <form action="/User/Login" method="post">
                     <img src="~/Content/img/register/registration-form-1.png" alt="" class="image-1">
                     <h3>Đăng nhập</h3>
 
@@ -33,26 +34,33 @@
                         {
                             <div><span style="color:green">@ViewBag.sc</span></div>
                         }
-                        
                         @if (ViewBag.msg != null)
                         {
                             <div><span style="color:red">@ViewBag.msg</span></div>
-
+                        }
+                        @if (ViewBag.msg1 != null)
+                        {
+                            <div><span style="color:red">@ViewBag.msg1  </span><a href="~/Home/Contact">tại đây</a></div>
                         }
                         <div class="form-holder">
                             <span class="lnr lnr-user"></span>
-                            <input type="text" class="form-control" placeholder="Tên tài khoản" name="email"  id="user" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')" oninput="setCustomValidity('')" />
-                            
+                            <input type="text" class="form-control" placeholder="Tên tài khoản" name="email" id="user" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')" oninput="setCustomValidity('')" />
+
                         </div>
                         <div class="form-holder">
                             <span class="lnr lnr-lock"></span>
-                            <input type="password" class="form-control" placeholder="Mật khẩu" name="password" id="pass" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')" oninput="setCustomValidity('')"/>
+                            <input type="password" class="form-control" placeholder="Mật khẩu" name="password" id="pass" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')" oninput="setCustomValidity('')" />
+
+                        </div>
+                        <div class="form-holder" hidden>
+                            <span class="lnr lnr-lock"></span>
+                            <input type="text" class="form-control"name="returnUrl" value="@Request.QueryString["ReturnUrl"]" />
 
                         </div>
                         <p style="padding-bottom: 10px">Nếu bạn chưa có tài khoản, nhấn chọn <a href="@Url.Action("register","User")">Đăng ký</a></p>
                         <a href="~/User/ForgotPassword" style="margin-left: 35%; margin-bottom: 20px">Quên mật khẩu ?</a>
                     </div>
-                    <button type="submit" >
+                    <button type="submit">
                         <span>Đăng nhập</span>
                     </button>
                 </form>
@@ -63,7 +71,12 @@
 
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>
     <script src="register.component.js"></script>
-    
+    <script>
+        var url = Request.Url.ToString();
+        alert(url);
+
+        alert('1');
+    </script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
 </html>
