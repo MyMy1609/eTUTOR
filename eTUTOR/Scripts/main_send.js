@@ -119,9 +119,8 @@
                     call = peer.call(course_id, oAudio);
                     playStream('localAudio', oAudio);
                     call.on('stream', remoteAudio => {
-                        disableDom();
                         makePeerHeartbeater(peer).start();
-                        player = new JSMpeg.Player(`ws://www.bigprotech.vn:7000/stream?id=${id}&flag=${false}&cam=${rtsp_URL}&course=${course_id}${id}&type=student&token=${peer.options.token}`, { canvas: canvas });
+                        player = new JSMpeg.Player(`ws://www.bigprotech.vn:7000/stream?id=${id}&flag=${hasWebcam}&cam=${rtsp_URL}&course=${course_id}${id}&type=student&token=${peer.options.token}`, { canvas: canvas });
                         setTimeout(function () {
                             var thisIs = player.source;
                             thisIs.socket.onmessage = function (evt) {
@@ -155,6 +154,7 @@
 
         peer.on('open', function (id) {
             //start
+            disableDom();
             console.log('ID: ' + id);
             getCam(id, hasWebcam);
         });
