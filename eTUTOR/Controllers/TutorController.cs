@@ -228,11 +228,11 @@ namespace eTUTOR.Controllers
             db.SaveChanges();
             return RedirectToAction("InfoOfTutor", "Tutor", new { id = Session["UserID"] });
         }
-
+      
         public ActionResult SearchTutor(string search)
         {
             string searchM = search.ToUpper();
-            var tutor = db.tutors.ToList().Where(x => x.status==1 &&( x.fullname.Contains(searchM) || x.specialized.Contains(searchM) ) );
+            var tutor = db.tutors.ToList().Where(x => x.status==1 &&( x.fullname.ToUpper().Contains(searchM) || x.specialized.ToUpper().Contains(searchM) ) );
             return View(tutor);
         }
 

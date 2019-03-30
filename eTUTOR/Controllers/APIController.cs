@@ -177,7 +177,7 @@ namespace eTUTOR.Controllers
             }
             else
             {
-                message = "username hoặc email bị trùng , vui lòng chọn username và email khác";
+                message = "tên đăng nhập hoặc email đã được sử dụng , vui lòng chọn tên đăng nhập và email khác";
                 var response = new { message = message, status = status };
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
@@ -200,7 +200,7 @@ namespace eTUTOR.Controllers
             pr.email = parent["email"].ToString();
             
             db.SaveChanges();
-            message = "update profile sucess";
+            message = "Cập nhật thông tin thành công ";
             var response = new { message = message, status = status };
             return Json(response, JsonRequestBehavior.AllowGet);
         }
@@ -224,7 +224,7 @@ namespace eTUTOR.Controllers
             tt.experience = tutor["experience"].ToString();
 
             db.SaveChanges();
-            message = "update profile sucess";
+            message = "Cập nhật thông tin thành công";
             var response = new { message = message, status = status };
             return Json(response, JsonRequestBehavior.AllowGet);
         }
@@ -246,7 +246,7 @@ namespace eTUTOR.Controllers
             st.@class = int.Parse(student["class"].ToString());
 
             db.SaveChanges();
-            message = "update profile sucess";
+            message = "Cập nhật thông tin thành công";
             var response = new { message = message, status = status };
             return Json(response, JsonRequestBehavior.AllowGet);
         }
