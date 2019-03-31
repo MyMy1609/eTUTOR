@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "SessionOfStudent";
     Layout = null;
 }
@@ -10,7 +9,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://www.bigprotech.vn:7000/ data: gap: ws: wss: www.bigprotech.vn:7000 ;">
+    @*
+    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://www.bigprotech.vn:7000/ data: gap: ws: wss: www.bigprotech.vn:7000 ;">*@
     <title>Student</title>
     <!-- Latest compiled and minified CSS -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -26,7 +26,7 @@
                     <canvas id="whiteBoard" class="mr-5"></canvas>
                     <div id="status"></div>
                 </div>
-                <div id="stt" data-id="@Session["UserID"]"></div>
+                <div id="stt" data-id="@Session[" UserID"]"></div>
                 <div class="container-cam d-none">
                     <h3>Hình ảnh</h3>
                     <div class="mr-5">
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <input type="hidden" id="sessinId" value="@Session.SessionID" />
-                <input type="hidden" id="groupName" value="@ViewData["GroupName"]" />
+                <input type="hidden" id="groupName" value="@ViewData[" GroupName"]" />
             </div>
         </div><br />
     </div>

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "SessionOfTutor";
     Layout = null;
 }
@@ -10,7 +9,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://www.bigprotech.vn:7000/ data: gap: ws: wss: www.bigprotech.vn:7000 ;">
+    @*
+    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://www.bigprotech.vn:7000/ data: gap: ws: wss: www.bigprotech.vn:7000 ;">*@
     <title>Etutor</title>
     <!-- Latest compiled and minified CSS -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -44,7 +44,7 @@
                     <div id="container-cam"></div>
                     <div id="container-audio"></div>
                     <input type="hidden" id="sessinId" value="@Session.SessionID" />
-                    <input type="hidden" id="groupName" value="@ViewData["GroupName"]" />
+                    <input type="hidden" id="groupName" value="@ViewData[" GroupName"]" />
                 </div>
             </div>
         </div><br />

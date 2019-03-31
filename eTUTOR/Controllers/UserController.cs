@@ -134,7 +134,7 @@ namespace eTUTOR.Controllers
                 CapNhatMatKhau(student.username, newPW, "std");
                 guiMail(student.username, newPW, email);
 
-                setAlert("Mật khẩu đã được thay đổi vui lòng kiểm tra emil !", "success");
+                setAlert("Mật khẩu đã được thay đổi !", "success");
                 return View("Login");
 
             }
@@ -148,7 +148,7 @@ namespace eTUTOR.Controllers
                 string newPW = CreateLostPassword(10);
                 CapNhatMatKhau(parent.username, newPW, "prt");
                 guiMail(parent.username, newPW, email);
-                ViewBag.sc = "Mật khẩu đã được thay đổi vui lòng kiểm tra email !";
+                ViewBag.sc = "Mật khẩu đã được thay đổi !";
                 return View("Login");
             }
             if (tutorr != null)
@@ -161,7 +161,7 @@ namespace eTUTOR.Controllers
                 string newPW = CreateLostPassword(10);
                 CapNhatMatKhau(tutorr.username, newPW, "tutorr");
                 guiMail(tutorr.username, newPW, email);
-                ViewBag.sc = "Mật khẩu đã được thay đổi vui lòng kiểm tra email !";
+                ViewBag.sc = "Mật khẩu đã được thay đổi !";
                 return View("Login");
             }
             else
@@ -227,7 +227,7 @@ namespace eTUTOR.Controllers
                 }
                 else
                 {
-                    ViewBag.msg = "Mật khẩu sai rồi vui lòng nhập lại mật khẩu !";
+                    ViewBag.msg = "Mật khẩu sai rồi !";
                     return View("Login");
                 }
 
@@ -267,7 +267,7 @@ namespace eTUTOR.Controllers
                 }
                 else
                 {
-                    ViewBag.msg = "Mật khẩu sai rồi vui lòng nhập lại mật khẩu !";
+                    ViewBag.msg = "Mật khẩu sai rồi !";
                     return View("Login");
                 }
 
@@ -308,7 +308,7 @@ namespace eTUTOR.Controllers
                 }
                 else
                 {
-                    ViewBag.msg = "Mật khẩu sai rồi vui lòng nhập lại mật khẩu !";
+                    ViewBag.msg = "Mật khẩu sai rồi !";
                     return View("Login");
                 }
 
@@ -435,7 +435,7 @@ namespace eTUTOR.Controllers
             if (currentPW == string.Empty || newPW == string.Empty || cfNewPW == string.Empty)
             {
 
-                ViewBag.iff = "Vui lòng điền đầy đủ thông tin để thay đổi mật khẩu";
+                ViewBag.iff = "Vui lòng điền đầy đủ thông tin";
                 return View("ChangePW");
 
             }

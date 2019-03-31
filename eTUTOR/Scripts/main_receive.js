@@ -193,7 +193,7 @@
     };
 
     $(document).ready(function () {
-        $(document).on("keydown", disablef5);
+        $(document).on("keydown", disableF5);
     });
 
     window.onunload = window.onbeforeunload = function (e) {
