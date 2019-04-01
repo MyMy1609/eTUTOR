@@ -390,25 +390,30 @@
                                     </tr>
                                     @foreach (var session in sessionlist)
                                     {
-                                        <tr>
-                                            <td>
-                                                @session.day_otw
-                                            </td>
-                                            <td>
-                                                @session.start_time - @session.end_time
-                                            </td>
-                                            <td>
-                                                <a href="#">@session.student.fullname</a>
-                                            </td>
-                                            <td>
-                                                @session.total_sessions
-                                            </td>
-                                            <td>
-                                                @session.status1.name
-                                            </td>
+                                    <tr>
+                                        <td>
+                                            @session.day_otw
+                                        </td>
+                                        <td>
+                                            @session.start_time - @session.end_time
+                                        </td>
+                                        <td>
+                                            <a href="#">@session.student.fullname</a>
+                                        </td>
+                                        <td>
+                                            @session.total_sessions
+                                        </td>
+                                        <td>
+                                            @session.status1.name
+                                        </td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" name="check" id="slider-duyet" onchange="duyetstudent(@session.session_id)">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </td>
 
-
-                                        </tr>
+                                    </tr>
 
                                     }
 
@@ -432,7 +437,7 @@
                                 <form action="/Tutor/CreateSchedule" method="post" onsubmit="return validation()">
                                     <div class="row" style="margin-top:30px">
                                         <div class="form-wrapper col-3">
-                                            <select name="day_otw" class="form-control" style=" width: 225px; border-radius:6px">
+                                            <select id="day" name="day_otw" class="form-control" style=" width: 225px; border-radius:6px">
                                                 <option value="" disabled selected>Thứ</option>
                                                 <option value="Thứ 2">Thứ 2</option>
                                                 <option value="Thứ 3">Thứ 3</option>
@@ -442,6 +447,7 @@
                                                 <option value="Thứ 7">Thứ 7</option>
                                                 <option value="Chủ nhật">Chủ nhật</option>
                                             </select>
+                                            <span id="days"></span>
                                             <br>
                                             <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
                                         </div>
@@ -746,14 +752,20 @@
             });
         }
         function validation() {
+            var day = document.getElementById('day').value;
             var star = document.getElementById('star').value;
             var end = document.getElementById('end').value;
             var note = document.getElementById('note').value;
 
+            if (day == "") {
+                document.getElementById('days').innerHTML = " ** Bạn phải chọn thứ";
+                return false;
+            }
             if (star == "") {
                 document.getElementById('stars').innerHTML = " ** Giờ bắt đầu không được rỗng";
                 return false;
-            } if (end == "") {
+            }
+            if (end == "") {
                 document.getElementById('ends').innerHTML = " ** Giờ kết thúc không được rỗng";
                 return false;
             }
