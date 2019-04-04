@@ -142,7 +142,7 @@
                         <div class="clearfix">
                             <h4 class="line-bottom">Liên hệ nhanh</h4>
                         </div>
-                        <form id="contact-form" class="contact-form-transparent" action="/Tutor/Contact" method="post" onsubmit="return validation()">
+                        <form id="contact-form" class="contact-form-transparent" action="/Tutor/Contact" method="post" @*onsubmit="return validation()"*@>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -263,6 +263,7 @@
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
     <script src="../app/Component/HomeComponent/home.component.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function (e) {
             $(window).bind("scroll", function () {
@@ -277,57 +278,89 @@
     <script src="google-map-init.js"></script>
 
     <script type="text/javascript">
-        function validation() {
-            var user = document.getElementById('user').value;
-            var emails = document.getElementById('emails').value;
-            var mobileNumber = document.getElementById('mobileNumber').value;
-            var subject = document.getElementById('subject').value;
-            var content = document.getElementById('content').value;
+        //function validation() {
+        //    var user = document.getElementById('user').value;
+        //    var emails = document.getElementById('emails').value;
+        //    var mobileNumber = document.getElementById('mobileNumber').value;
+        //    var subject = document.getElementById('subject').value;
+        //    var content = document.getElementById('content').value;
 
 
-            if (user == "") {
-                document.getElementById('username').innerHTML = " ** Họ tên không rỗng";
-                return false;
+        //    if (user == "") {
+        //        document.getElementById('username').innerHTML = " ** Họ tên không rỗng";
+        //        return false;
+        //    }
+
+        //    if (mobileNumber == "") {
+        //        document.getElementById('mobileno').innerHTML = " ** Số điện thoại không rỗng";
+        //        return false;
+        //    }
+        //    if (isNaN(mobileNumber)) {
+        //        document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải là số";
+        //        return false;
+        //    }
+        //    if (mobileNumber.length != 10) {
+        //        document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải có 10 số trở lên";
+        //        return false;
+        //    }
+
+        //    if (emails == "") {
+        //        document.getElementById('emailids').innerHTML = " ** Email không rỗng";
+        //        return false;
+        //    }
+
+        //    if ((emails.charAt(emails.length - 4) != '.') && (emails.charAt(emails.length - 3) != '.')) {
+        //        document.getElementById('emailids').innerHTML = " ** Email không đúng định dạng";
+        //        return false;
+        //    }
+
+        //    if (subject == "") {
+        //        document.getElementById('sub').innerHTML = " ** Chủ đề không rỗng";
+        //        return false;
+        //    }
+        //    if (subject == "   ") {
+        //        document.getElementById('sub').innerHTML = " ** Chủ đề không hợp lệ";
+        //        return false;
+        //    }
+
+        //    if (content == "") {
+        //        document.getElementById('cont').innerHTML = " ** Nội dung không rỗng";
+        //        return false;
+        //    }
+
+        //}
+
+        $("#contact-form").validate({
+            rules: {
+                user: "required",
+                mobileNumber: {
+                    required: true,
+                    minlength: 10
+                },
+                emails: {
+                    required: true,
+                    email: true
+                },
+                subject: "required",
+                content: "required",
+            },
+
+            messages: {
+                user: "Vui lòng nhập họ và tên",
+                mobileNumber: {
+                    required: "Vui lòng nhập số điện thoại",
+                    minlength: "Số điện thoại phải là số",
+                },
+                emails: {
+                    required: "Vui lòng nhập Email",
+                    minlength: "Email không đúng định dạng",
+                },
+                subject: "Vui lòng nhập chủ đề",
+                content: "Vui lòng nhập lời nhắn",
             }
 
-            if (mobileNumber == "") {
-                document.getElementById('mobileno').innerHTML = " ** Số điện thoại không rỗng";
-                return false;
-            }
-            if (isNaN(mobileNumber)) {
-                document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải là số";
-                return false;
-            }
-            if (mobileNumber.length != 10) {
-                document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải có 10 số trở lên";
-                return false;
-            }
+        });
 
-            if (emails == "") {
-                document.getElementById('emailids').innerHTML = " ** Email không rỗng";
-                return false;
-            }
-
-            if ((emails.charAt(emails.length - 4) != '.') && (emails.charAt(emails.length - 3) != '.')) {
-                document.getElementById('emailids').innerHTML = " ** Email không đúng định dạng";
-                return false;
-            }
-
-            if (subject == "") {
-                document.getElementById('sub').innerHTML = " ** Chủ đề không rỗng";
-                return false;
-            }
-            if (subject == "   ") {
-                document.getElementById('sub').innerHTML = " ** Chủ đề không hợp lệ";
-                return false;
-            }
-
-            if (content == "") {
-                document.getElementById('cont').innerHTML = " ** Nội dung không rỗng";
-                return false;
-            }
-
-        }
 
     </script>
 }
