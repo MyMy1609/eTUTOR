@@ -10,6 +10,7 @@ using System.Web.Helpers;
 
 namespace eTUTOR.Areas.Admin.Controllers
 {
+    
     public class AdminController : Controller
     {
         eTUITOREntities model = new eTUITOREntities();
@@ -21,6 +22,7 @@ namespace eTUTOR.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        [Filter.AuthorizeAdmin]
         public ActionResult Login(string email, string password)
         {
             ;
@@ -33,6 +35,8 @@ namespace eTUTOR.Areas.Admin.Controllers
                 {
                     Session["FullName"] = admin.fullname;
                     Session["UserID"] = admin.admin_id;
+
+                    Session["isAdmin"] = "Admin";
                     return RedirectToAction("Dashboard", "Admin");
                 }
             }
@@ -42,58 +46,64 @@ namespace eTUTOR.Areas.Admin.Controllers
             }
             return View();
         }
-        public ActionResult Logout(int id)
+        [Filter.AuthorizeAdmin]
+        public ActionResult Logout()
         {
             Session.Clear();
+            Session.RemoveAll();
             return RedirectToAction("Login");
         }
+        [Filter.AuthorizeAdmin]
         public ActionResult Course()
         {
+            if(Session["UserID"] == null) { return RedirectToAction("Login"); }
             var tutor_id = int.Parse(Session["UserID"].ToString());
             var info = model.tutors.FirstOrDefault();
             List<session> sessionList = model.sessions.Where(x => x.status_tutor == 1 && x.status_admin == 2).ToList();
             ViewData["sessionlist"] = sessionList;
             return View(info);
         }
+        [Filter.AuthorizeAdmin]
         public ActionResult Schedule()
         {
             var tutor_id = int.Parse(Session["UserID"].ToString());
             var schedule = model.schedules.Where(x => x.status == 2).ToList();
             return View(schedule);
         }
-
+        [Filter.AuthorizeAdmin]
         public ActionResult Dashboard()
         {
             ViewBag.Message = "Dashboard.";
             return View();
         }
-
+        [Filter.AuthorizeAdmin]
         public ActionResult DetailParent(int id)
         {
             var parent = model.parents.Find(id);
             if (parent == null) return HttpNotFound();
             return View(parent);
         }
-
+        [Filter.AuthorizeAdmin]
         public ActionResult DetailStudent(int id)
         {
             var student = model.students.Find(id);
             if (student == null) return HttpNotFound();
             return View(student);
         }
-
+        [Filter.AuthorizeAdmin]
         public ActionResult DetailTutor(int id)
         {
             var tutor = model.tutors.Find(id);
             if (tutor == null) return HttpNotFound();
             return View(tutor);
         }
-
+        [Filter.AuthorizeAdmin]
         public ActionResult Detail()
         {
             ViewBag.Message = "Detail.";
             return View();
         }
+        [Filter.AuthorizeAdmin]
         public ActionResult ThongKe()
         {
             return View();
@@ -154,6 +164,7 @@ namespace eTUTOR.Areas.Admin.Controllers
         //    return View();
         //}
         [HttpGet]
+        [Filter.AuthorizeAdmin]
         public ActionResult ThongKee(string kieuTK, DateTime dateStart, DateTime dateEnd)
         {
             if (kieuTK == "slDangKy")
@@ -182,6 +193,7 @@ namespace eTUTOR.Areas.Admin.Controllers
             }
             return View();
         }
+        [Filter.AuthorizeAdmin]
         public ActionResult tkDangky()
         {
             ArrayList xValue = new ArrayList();
@@ -215,6 +227,7 @@ namespace eTUTOR.Areas.Admin.Controllers
                 .Write("png");
             return null;
         }
+        [Filter.AuthorizeAdmin]
         public ActionResult tkDayhoc()
         {
             ArrayList xValue = new ArrayList();
@@ -248,6 +261,7 @@ namespace eTUTOR.Areas.Admin.Controllers
                 .Write("png");
             return null;
         }
+        [Filter.AuthorizeAdmin]
         public ActionResult tkDangkyhoc()
         {
             ArrayList xValue = new ArrayList();
@@ -281,6 +295,7 @@ namespace eTUTOR.Areas.Admin.Controllers
                 .Write("png");
             return null;
         }
+        [Filter.AuthorizeAdmin]
         public ActionResult User()
         {
             return View();
@@ -289,6 +304,7 @@ namespace eTUTOR.Areas.Admin.Controllers
 
 
         [HttpPost]
+        [Filter.AuthorizeAdmin]
         public ActionResult Duyetkhoahoc(int id)
         {
             int asd = id;
@@ -299,6 +315,7 @@ namespace eTUTOR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Filter.AuthorizeAdmin]
         public ActionResult Duyetschedule(int id)
         {
             int asd = id;
@@ -307,13 +324,13 @@ namespace eTUTOR.Areas.Admin.Controllers
             model.SaveChanges();
             return RedirectToAction("Duyetschedule");
         }
-
+        [Filter.AuthorizeAdmin]
         public ActionResult Contact()
         {
             var contact = model.contact_admin.ToList();
             return View(contact);
         }
-
+        [Filter.AuthorizeAdmin]
         public ActionResult Blockuser()
         {
 
@@ -321,6 +338,7 @@ namespace eTUTOR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Filter.AuthorizeAdmin]
         public ActionResult Duyettutor(int id)
         {
             int asd = id;
@@ -331,6 +349,7 @@ namespace eTUTOR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Filter.AuthorizeAdmin]
         public ActionResult Duyetparent(int id)
         {
             int asd = id;
@@ -341,6 +360,7 @@ namespace eTUTOR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Filter.AuthorizeAdmin]
         public ActionResult Duyetstudent(int id)
         {
             int asd = id;
@@ -352,6 +372,7 @@ namespace eTUTOR.Areas.Admin.Controllers
 
         //khoa
         [HttpPost]
+        [Filter.AuthorizeAdmin]
         public ActionResult Khoatutor(int id)
         {
             int asd = id;
@@ -370,6 +391,7 @@ namespace eTUTOR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Filter.AuthorizeAdmin]
         public ActionResult Khoaparent(int id)
         {
             int asd = id;
@@ -388,6 +410,7 @@ namespace eTUTOR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Filter.AuthorizeAdmin]
         public ActionResult Khoastudent(int id)
         {
             int asd = id;

@@ -48,8 +48,17 @@
     }
     <div class="container row mt-3">
         <div class="left col-4">
-            <img src="~/Content/img/avatar/tutor/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height="200px" width="200px" onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'"
-                 alt="avatar" style="border-radius: 10%;margin-top: 0px;" />
+            @if (Model.status_register == 1)
+            {
+                <img src="~/Content/img/avatar/tutor/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height="200px" width="200px" onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'"
+                     alt="avatar" style="border-radius: 10%;margin-top: 0px;" />
+            }
+            else
+            {
+                <img src="~/Content/img/avatar/tutor/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height="200px" width="200px" onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'"
+                     alt="avatar" style="border-radius: 10%;border:2px solid red;margin-top: 0px;" />
+
+            }
             <a class="btn btn-primary p-2" data-toggle="modal" data-target="#avatar"
                style="margin-left: 5%">
                 <img src="~/Content/img/edit.png" width="20px" height="20px" />
@@ -68,13 +77,13 @@
                         FormMethod.Post,
                         new { enctype = "multipart/form-data" }))
                         {
-                           
+
                             <div class="modal-body">
 
-                                <input type="file" name="files" id="files" class="form-control"/><br><br>
+                                <input type="file" name="files" id="files" class="form-control" /><br><br>
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" value="Tải ảnh" class="btn-outline-success" style="border:5%"/>
+                                <input type="submit" value="Tải ảnh" class="btn-outline-success" style="border:5%" />
                             </div>
                         }
                     </div>
@@ -117,13 +126,13 @@
                     </td>
                 </tr>
                 <tr>
-                        <td class="tdl">
-                            Email
-                        </td>
-                        <td class="tdr">
-                            @Html.DisplayFor(model => model.email)
-                        </td>
-                    </tr>
+                    <td class="tdl">
+                        Email
+                    </td>
+                    <td class="tdr">
+                        @Html.DisplayFor(model => model.email)
+                    </td>
+                </tr>
                 <tr>
                     <td class="tdl">
                         Chuyên ngành giảng dạy
@@ -157,30 +166,7 @@
                     </td>
                 </tr>
                 <tr>
-                    @if (Model.status_register == 1)
-                    {
-                        <td>
 
-                            <label class="switch">
-                                @Html.ActionLink("Đóng", "registScheduleManager", new { types = Model.tutor_id }, new { @class = "btn btn-success" })
-                            </label>
-                        </td>
-                        <td>
-                            <span class="" style="font-size:12px;color:green">Bạn đang sẵn sàng nhận dạy kèm</span>
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-
-                            <label class="switch">
-                                @Html.ActionLink("Mở", "registScheduleManager", new { types = Model.tutor_id }, new { @class = "btn btn-danger" })
-                            </label>
-                        </td>
-                        <td>
-                            <span class="" style="font-size:12px; color:red">Bạn đã tắt nhận đăng ký dạy kèm</span>
-                        </td>
-                    }
                     @*Chỉnh sửa*@
                     <td>
                         <button type="button" class="btn btn-primary p-2" data-toggle="modal" data-target="#myModal"
@@ -240,13 +226,13 @@
                                                 </td>
                                             </tr>
                                             @*<tr>
-                                                <td class="tdl">
-                                                    Email
-                                                </td>
-                                                <td class="tdr">
-                                                    <input type="email" id="email" value="@Model.email" disabled>
-                                                </td>
-                                            </tr>*@
+                                            <td class="tdl">
+                                                Email
+                                            </td>
+                                            <td class="tdr">
+                                                <input type="email" id="email" value="@Model.email" disabled>
+                                            </td>
+                                        </tr>*@
                                             <tr>
                                                 <td class="tdl">
                                                     Chuyên ngành dạy
@@ -316,7 +302,29 @@
         </div>
         <div class="right col-8" style="padding-bottom:30px">
             <div>
-                <h3 style="border: 2px solid pink; border-radius: 10px; width: 900px;" class="p-3 pl-3">KÊNH GIA SƯ</h3>
+                @if (Model.status_register == 1)
+                {
+                    <h3 style="border: 2px solid green; border-radius: 10px; width: 900px;" class="p-3 pl-3">
+                        KÊNH GIA SƯ
+
+                        <span class="pull-right" style="font-size:12px;color:green">
+                            @Html.ActionLink("Đóng", "registScheduleManager", new { types = Model.tutor_id }, new { @class = "btn btn-success" })
+                            Bạn đang sẵn sàng nhận dạy kèm
+                        </span>
+                    </h3>
+                }
+                else
+                {
+                    <h3 style="border: 2px solid red; border-radius: 10px; width: 900px;" class="p-3 pl-3">
+                        KÊNH GIA SƯ
+                        <span class="pull-right" style="font-size:12px; color:red;text-transform:uppercase;text-decoration-style:double">
+                            @Html.ActionLink("Mở", "registScheduleManager", new { types = Model.tutor_id }, new { @class = "btn btn-danger" })
+                            Bạn đã tắt nhận đăng ký dạy kèm
+                        </span>
+                    </h3>
+                }
+
+
                 <div id="demo-accordion-collapse" role="tablist">
                     @*Danh sách buổi học*@
                     <div class="card" style="width: 900px">
@@ -390,30 +398,30 @@
                                     </tr>
                                     @foreach (var session in sessionlist)
                                     {
-                                    <tr>
-                                        <td>
-                                            @session.day_otw
-                                        </td>
-                                        <td>
-                                            @session.start_time - @session.end_time
-                                        </td>
-                                        <td>
-                                            <a href="#">@session.student.fullname</a>
-                                        </td>
-                                        <td>
-                                            @session.total_sessions
-                                        </td>
-                                        <td>
-                                            @session.status1.name
-                                        </td>
-                                        <td>
-                                            <label class="switch">
-                                                <input type="checkbox" name="check" id="slider-duyet" onchange="duyetstudent(@session.session_id)">
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </td>
+                                        <tr>
+                                            <td>
+                                                @session.day_otw
+                                            </td>
+                                            <td>
+                                                @session.start_time - @session.end_time
+                                            </td>
+                                            <td>
+                                                <a href="#">@session.student.fullname</a>
+                                            </td>
+                                            <td>
+                                                @session.total_sessions
+                                            </td>
+                                            <td>
+                                                @session.status1.name
+                                            </td>
+                                            <td>
+                                                <label class="switch">
+                                                    <input type="checkbox" name="check" id="slider-duyet" onchange="duyetstudent(@session.session_id)">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </td>
 
-                                    </tr>
+                                        </tr>
 
                                     }
 
@@ -462,10 +470,10 @@
                                                    placeholder="Giờ kết thúc">
                                             <span id="ends"></span>
                                         </div> <br />
-                                               <div>
-                                                   <textarea id="note" rows="4" cols="93" name="note" form="usrform" style="border-radius: 5px; margin-left: 15px " placeholder="Chú thích"></textarea>
-                                                   <span id="notes"></span>
-                                               </div>
+                                        <div>
+                                            <textarea id="note" rows="4" cols="93" name="note" form="usrform" style="border-radius: 5px; margin-left: 15px " placeholder="Chú thích"></textarea>
+                                            <span id="notes"></span>
+                                        </div>
                                         <div class="form-wrapper col-3">
                                             <div class="col-1">
                                                 <button type="submit" id="btn-create-schedule" class="btn btn-primary" style="background-color:crimson;margin-top:30px; font-size:17px; color:white; border-radius: 100%">+</button>
