@@ -33,51 +33,18 @@
 <!--===============================================================================================-->
 <body style="background-size: cover">
     <div class="row container">
-        <div class="col-7 pt-5 pl-5 pr-1 pb-1 contact_img">
-            <div class="row pl-5 p-3 hinhAnh" style="background-image: url('../../Content/img/banner/s-1.jpg'); background-repeat: no-repeat; ">
-                <div class="contact-address mt-30">
-                    <ul>
-                        <li>
-                            <div class="singel-address">
-                                <div class="icon">
-                                    <i class="fa fa-home text-light"></i>
-                                    <p style="display: inline; font-size: 20px; color: white" class="ml-3">123 Hoàng Diệu, quận 4, Tp. Hồ Chí Minh</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="singel-address">
-                                <div class="icon pt-3" style="margin-top: 1%">
-                                    <i class="fa fa-phone text-light"></i>
-                                    <p style="display: inline; font-size: 20px; color: white" class="ml-3">+3 123 456 789</p> </br>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="singel-address">
-                                <div class="icon pt-3" style="margin-top: 1%">
-                                    <div class="icon">
-                                        <i class="fa fa-envelope-o text-light"></i>
-                                        <p style="display: inline; font-size: 20px;color: white" class="ml-3">123 Hoàng Diệu, quận 4, Tp. Hồ Chí Minh</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-            <div class="row" style="margin-top: 1%">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6644447242497!2d106.69690491480065!3d10.760323392332438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f133765f339%3A0x99f29a2fa8faa1c!2zSDMgQnVpbGRpbmcsIDM4NCBIb8OgbmcgRGnhu4d1LCBQaMaw4budbmcgNiwgUXXhuq1uIDQsIEjhu5MgQ2jDrSBNaW5o!5e0!3m2!1sen!2s!4v1548321438732"
-                        width="630" height="300" frameborder="0" allowfullscreen style="margin-top: 5%; border:0" class="mb-2"></iframe>
-            </div>
+        <div class=" pt-5 pl-5 pr-1 pb-1 contact_img col-sm-7 col-md-7 col-sm-12">
+            @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6644447242497!2d106.69690491480065!3d10.760323392332438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f133765f339%3A0x99f29a2fa8faa1c!2zSDMgQnVpbGRpbmcsIDM4NCBIb8OgbmcgRGnhu4d1LCBQaMaw4budbmcgNiwgUXXhuq1uIDQsIEjhu5MgQ2jDrSBNaW5o!5e0!3m2!1sen!2s!4v1548321438732"
+                    width="630" height="300" frameborder="0" allowfullscreen style="margin-top: 7%; border:0" class="mb-2"></iframe>*@
+            <img src="~/Content/build/img/contact/map.PNG" width="635" height="455" style="margin-top: 2%; border:0" class="mb-2"/>
         </div>
-        <div class="col-4 container m-0">
-            <form action="/Home/Contact" method="post" onsubmit="return validation()" class="contact100-form validate-form" style="padding: 0; margin-left: 5%">
-                <span class="contact100-form-title mb-4" style="padding-bottom: 0; padding-top: 10%">
+        <div class="container m-0 col-sm-4 col-md-4 col-sm-12">
+            <form action="/Home/Contact" method="post" onsubmit="return validation()" class="contact100-form validate-form" 
+                  style="padding: 0; margin-left: 5%; padding-top:40px">
+                @*<span class="contact100-form-title mb-4" style="padding-bottom: 0; padding-top: 40px">
                     Hãy liên hệ với chúng tôi
-                </span>
-                <div class="wrap-input100 validate-input form-group" data-validate="Tên không rỗng" style="margin-top: 5%">
+                </span>*@
+                <div class="wrap-input100 validate-input form-group" data-validate="Tên không rỗng" style="margin-top: 5%; " >
                     <input id="user" class="input100 " type="text" name="user" placeholder="Họ tên" autocomplete="off">
                     <span class="text-danger focus-input100" id="username"></span>
                 </div>
@@ -91,14 +58,14 @@
                 </div>
                 <div class="wrap-input100 validate-input form-group" data-validate="Chủ đề không được rỗng">
                     <input id="subject" class="input100" type="text" name="subject" placeholder="Chủ đề" autocomplete="off">
-                    <span class="text-danger focus-input100" id="sub" ></span>
+                    <span class="text-danger focus-input100" id="sub"></span>
                 </div>
                 <div class="wrap-input100 validate-input form-group" data-validate="Message is required">
-                    <textarea id="content" class="input100" name="content" placeholder="Nội dung cần liên hệ với chúng tôi..." ></textarea>
+                    <textarea id="content" class="input100" name="content" placeholder="Nội dung cần liên hệ với chúng tôi..."></textarea>
                     <span class="text-danger focus-input100" id="cont"></span>
                 </div>
                 <div class="container-contact100-form-btn">
-                    <button class="contact100-form-btn mr-3" type="submit" class="btnSubmit">
+                    <button class="contact100-form-btn mr-3" type="submit" class="btnSubmit" style="width:100%;">
                         Gửi ngay
                     </button>
                 </div>

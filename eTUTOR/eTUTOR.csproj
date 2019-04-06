@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -344,6 +343,7 @@
     <Content Include="Content\build\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\build\fonts\Linearicons-Free.svg" />
     <Content Include="Content\build\fonts\Pe-icon-7-strokebb1d.svg" />
+    <Content Include="Content\build\img\contact\map.PNG" />
     <Content Include="Content\build\js\page\home.js" />
     <Content Include="Content\build\js\TutorHomePage.component.js" />
     <Content Include="Content\img\02.jpg" />
@@ -423,6 +423,12 @@
     <Content Include="Content\img\admin\avatar-3.jpg" />
     <Content Include="Content\img\apple-icon.png" />
     <Content Include="Content\img\avatar\1.jpg" />
+    <Content Include="Content\img\avatar\member\du.jpg" />
+    <Content Include="Content\img\avatar\member\hoa.jpg" />
+    <Content Include="Content\img\avatar\member\my.jpg" />
+    <Content Include="Content\img\avatar\member\nam.jpg" />
+    <Content Include="Content\img\avatar\member\thy.jpg" />
+    <Content Include="Content\img\avatar\member\vinh.jpg" />
     <Content Include="Content\img\avatar\parent\baby_3.jpg" />
     <Content Include="Content\img\avatar\student\boyaas.jpg" />
     <Content Include="Content\img\avatar\student\children-kids-photo-png-32604.png" />
@@ -461,6 +467,7 @@
     <Content Include="Content\img\chung_chi\cc_2.jpg" />
     <Content Include="Content\img\chung_chi\cc_3.jpg" />
     <Content Include="Content\img\chung_chi\cc_4.jpg" />
+    <Content Include="Content\img\chung_chi\whiteboard.jpg" />
     <Content Include="Content\img\clint-mckoy.jpg" />
     <Content Include="Content\img\contact\bg-01.jpg" />
     <Content Include="Content\img\contact\contact-background.png" />
@@ -505,7 +512,26 @@
     <Content Include="Content\img\flaticon-png\small\graduates.png" />
     <Content Include="Content\img\flaticon-png\small\lecture.png" />
     <Content Include="Content\img\flaticon-png\small\library.png" />
+    <Content Include="Content\img\footer\1.jpg" />
+    <Content Include="Content\img\footer\10.jpg" />
+    <Content Include="Content\img\footer\11.jpg" />
+    <Content Include="Content\img\footer\12.jpg" />
+    <Content Include="Content\img\footer\2.jpg" />
+    <Content Include="Content\img\footer\3.jpg" />
+    <Content Include="Content\img\footer\4.jpg" />
+    <Content Include="Content\img\footer\5.jpg" />
+    <Content Include="Content\img\footer\6.jpg" />
+    <Content Include="Content\img\footer\7.jpg" />
+    <Content Include="Content\img\footer\8.jpg" />
+    <Content Include="Content\img\footer\9.jpg" />
     <Content Include="Content\img\homepage-devices.jpg" />
+    <Content Include="Content\img\homeStep\camera.jpg" />
+    <Content Include="Content\img\homeStep\cer.png" />
+    <Content Include="Content\img\homeStep\parent.png" />
+    <Content Include="Content\img\homeStep\student.jpg" />
+    <Content Include="Content\img\homeStep\studenta.jpg" />
+    <Content Include="Content\img\homeStep\tutor.jpg" />
+    <Content Include="Content\img\homeStep\tutora.gif" />
     <Content Include="Content\img\icon\DE.png" />
     <Content Include="Content\img\icon\FR.png" />
     <Content Include="Content\img\icon\GB.png" />
@@ -600,6 +626,7 @@
     <Content Include="Content\vendor\bootstrap\css\contact.component.css" />
     <Content Include="Content\vendor\bootstrap\css\demo.css" />
     <Content Include="Content\vendor\bootstrap\css\gsdk-bootstrap-wizard.css" />
+    <Content Include="Content\vendor\bootstrap\css\infoOfStudent.css" />
     <Content Include="Content\vendor\bootstrap\css\jquery-ui.min.css" />
     <Content Include="Content\vendor\bootstrap\css\listoftutor.component.css" />
     <Content Include="Content\vendor\bootstrap\css\opensans-font.css" />
@@ -990,7 +1017,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

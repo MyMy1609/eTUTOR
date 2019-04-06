@@ -1,5 +1,5 @@
 .nav-item a{
-    font-size: 20px;
+    font-size: 14px;
 }
 .navbar1 {
     margin-left: 25%;
@@ -23,7 +23,7 @@ section{
     top: 50px;
 }
 .section_item1a img{
-    height: 325px;
+    height: 350px;
     width: 100%;
 }
 .section_item1b{
@@ -34,7 +34,7 @@ section{
     margin-left: -30px;
 }
 .section_item2b{
-    height: 350px;
+    height: 320px;
     width: 103.5%;
 }
 #section3{

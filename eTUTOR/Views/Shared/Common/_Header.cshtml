@@ -1,4 +1,15 @@
-﻿@{ 
+﻿<style>
+    .navbar.fix {
+        left: 0;
+        max-width: 100%;
+        overflow: visible;
+        position: fixed !important;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+</style>
+@{ 
     var userRole = Session["Role"] != null ? Session["Role"].ToString() : "";
     var InfoHref="";
     var userId = Session["UserID"] != null ? Session["UserID"].ToString() : "";
@@ -17,7 +28,7 @@
 }
 
 <header class="menu" once="menu">
-    <nav class="navbar navbar-expand-md  navbar-dropdown align-items-center navbar-dark nav--dark">
+    <nav class="navbar navbar-expand-md fix navbar-dropdown align-items-center navbar-dark nav--dark" style="height:70px">
         <div class="menu-logo">
             <div class="navbar-brand">
                 <span class="navbar-logo">
@@ -47,6 +58,7 @@
                 <li class="nav-item  p-2">
                     <a class="nav-link link text-white " href="@Url.Action("about","Home")">
                         Giới thiệu
+                    </a>
                     </a>
                 </li>
                 <li class="nav-item dropdown  p-2">
@@ -93,3 +105,25 @@
         </div>
     </nav>
 </header>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        var $filter = $('.navbar');
+        var $filterSpacer = $('<div />', {
+            "class": "vnkings-spacer",
+            "height": $filter.outerHeight()
+        });
+        if ($filter.size()) {
+            $(window).scroll(function () {
+                if (!$filter.hasClass('fix') && $(window).scrollTop() > $filter.offset().top) {
+                    $filter.before($filterSpacer);
+                    $filter.addClass("fix");
+                }
+                else if ($filter.hasClass('fix') && $(window).scrollTop() < $filterSpacer.offset().top) {
+                    $filter.removeClass("fix");
+                    $filterSpacer.remove();
+                }
+            });
+        }
+
+    });
+</script>

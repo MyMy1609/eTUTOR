@@ -1,16 +1,17 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "About";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous">
-<link rel="stylesheet" href="about.component.scss">
 <link href="~/Content/vendor/bootstrap/css/about.component.css" rel="stylesheet" />
 <body>
     <!-- --------------------navbar about us ----------------------- -->
-    <nav class="navbar1 navbar-expand-sm text-dark pt-4" style="font-weight: bold; ">
+    <nav class="navbar1 navbar-expand-sm text-dark pt-4" style="font-weight: bold; margin-top:20px">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link mr-3" href="#section1" style="font-size: 20px">VỀ CHÚNG TÔI</a>
@@ -31,51 +32,44 @@
     <section class="item container-fluid ">
         <!-- ---------------------------item 1: về chúng tôi---------------------------- -->
         <div class="row pt-4 p-5" id="section1" style="margin-bottom: -24px;">
-            <div class="col-6 section1a">
+            <div class="col-sm-6 col-md-6 col-sm-12 section1a">
                 <img src="~/Content/img/aboutus/ourStory.jpg" alt="" style="position: relative;height: 100%; width: 100%;margin-top:-25px; " />
             </div>
 
-            <div class="col-6 section1b">
+            <div class="col-sm-6 col-md-6 col-sm-12 section1b">
                 <h2 class="ml-3 pt-5 title"><strong>VỀ CHÚNG TÔI</strong></h2>
                 <p class="circle pl-3 p-3">
-                    <span class="circle__item text-muted subtitle">It is a long established fact that a reade.</span>
+                    <span class="circle__item text-muted subtitle">Công ty được thành lập 1 năm</span>
                 </p>
                 <p class="text-muted pl-3 pb-4 mr-5 content" style="text-align: justify">
-                    Sed ut perspiciatis unde omnis
-                    iste
-                    natus error sit voluptatem accusantium
-                    laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis,et quasi architecto
-                    beatae
-                    vitae dicta sunt explicabo. Nemo enim ipsam,voluptatem quia voluptas sit aspernatur aut odit aut
-                    fugit,
-                    sed quia,consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.,Neque porro quisquam
-                    est,
-                    qui dolorem ipsum quia dolor sit amet, adipisci velit, sed quia non numquam eius modi tempora
+                    ETuitor tự hào trở thành đơn vị đào tạo học trực tuyến đạt tiêu chuẩn chất lượng tốt nhất được công nhận bởi người dùng,
+                    tổ chức độc lập quản lý chất lượng các trung tâm giảng dạy học tập trực tuyến hiệu quả nhất.
+                    Trong suốt thời gian qua, chúng tôi đã nhận được rất nhiều phản hồi tốt từ phía người dùng và hi vọng trong tương lai sẽ phát triển hơn nữa
+
                 </p>
             </div>
         </div>
         <!-- ---------------------------item 1: về chúng tôi---------------------------- -->
         <!-- ---------------------------item 2: giá trị mang lại---------------------------- -->
         <div class="row pt-4 p-5" id="section2" style="margin-bottom: -24px;">
-            <div class="col-6 section2a">
+            <div class="col-sm-6 col-md-6 col-sm-12 section2a">
                 <h2 class="ml-3 pt-5 title"><strong>GIÁ TRỊ MANG LẠI</strong></h2>
                 <p class="circle pl-3 p-3">
-                    <span class="circle__item text-muted subtitle">It is a long established fact that a reade.</span>
+                    <span class="circle__item text-muted subtitle">Giá trị ETuitor mang đến người dùng.</span>
                 </p>
                 <p class="text-muted pl-3 pb-4 mr-5 content" style="text-align: justify">
-                    Sed ut perspiciatis unde omnis
-                    iste
-                    natus error sit voluptatem accusantium
-                    laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis,et quasi architecto
-                    beatae
-                    vitae dicta sunt explicabo. Nemo enim ipsam,voluptatem quia voluptas sit aspernatur aut odit aut
-                    fugit,
-                    sed quia,consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.,Neque porro quisquam
-                    est,
-                    qui dolorem ipsum quia dolor sit amet, adipisci velit, sed quia non numquam eius modi tempora
+                    Trung tâm ETuitor mang đến cho người dùng các tiêu chí học tập tốt nhất:
+                    <br />
+                    - Chất lượng giảng dạy cao
+                    <br />
+                    - Khoá học đáp ứng nhu cầu học sinh
+                    <br />
+                    - Công nghệ giảng dạy tiên tiến
+                    <br />
+                    - Môi trường học tập an toàn và hữu ích
                 </p>
             </div>
-            <div class="col-6 section2b pt-4">
+            <div class="col-sm-6 col-md-6 col-sm-12 section2b pt-4">
                 <img src="~/Content/img/aboutUs/ourValue.jpg" alt="" style="position: relative;height: 96%; width: 100%;margin-top:-25px; margin-left: -10px">
             </div>
 
@@ -83,25 +77,21 @@
         <!-- ---------------------------item 2: giá trị mang lại---------------------------- -->
         <!-- ---------------------------item 3: giáo dục toàn diện---------------------------- -->
         <div class="row p-5" id="section3" style="margin-bottom: -24px;">
-            <div class="col-6 pt-4 section3a">
+            <div class="col-sm-6 col-md-6 col-sm-12 pt-4 section3a">
                 <img src="~/Content/img/aboutUs/ourEducation.jpg" alt="" style="position: relative;height: 105%; width: 100%;margin-top:-25px; margin-left: 0">
             </div>
-            <div class="col-6 pt-3 section3b">
+            <div class="col-sm-6 col-md-6 col-sm-12 pt-3 section3b">
                 <h2 class="ml-3 pt-5 title"><strong>GIÁO DỤC TOÀN DIỆN</strong></h2>
                 <p class="circle pl-3 p-3">
-                    <span class="circle__item text-muted subtitle">It is a long established fact that a reade.</span>
+                    <span class="circle__item text-muted subtitle">Giáo dục đi đôi với công nghệ</span>
                 </p>
                 <p class="text-muted pl-3 pb-4 mr-5 content" style="text-align: justify">
-                    Sed ut perspiciatis unde omnis
-                    iste
-                    natus error sit voluptatem accusantium
-                    laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis,et quasi architecto
-                    beatae
-                    vitae dicta sunt explicabo. Nemo enim ipsam,voluptatem quia voluptas sit aspernatur aut odit aut
-                    fugit,
-                    sed quia,consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.,Neque porro quisquam
-                    est,
-                    qui dolorem ipsum quia dolor sit amet, adipisci velit, sed quia non numquam eius modi tempora
+                    Công nghệ thông tin là ngành ứng dụng công nghệ quản lý và xử lý thông tin.
+                    Với tốc độ phát triển liên tục của công nghệ như ngày nay làm cho việc
+                    luân chuyển thông tin trở nên cực kỳ nhanh chóng à vai trò của thông tin ngày càng trở nên quan trọng.
+                    Những khả năng mới mẻ và ưu việt này của công nghệ đã nhanh chóng là thay đổi cách sống, cách làm việc,
+                    cách học tập và cách tư duy và quan trọng hơn cả là cachs ra quyết định của con người.
+                    Chính vì thế mà nó có tác động to lớn và toàn diện đến xã hội, đặc biệt là giáo dục
                 </p>
             </div>
         </div>
@@ -116,25 +106,21 @@
                     <h2 class="text-center title"> ĐỘI NGŨ NHÂN VIÊN</h2>
                 </div>
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-sm-4 col-md-4 col-sm-12">
                         <div class="item">
                             <div class="member">
                                 <div class="member-info">
-                                    <img src="~/Content/img/aboutUs/t-1.jpg" alt="">
+                                    <img src="~/Content/img/avatar/member/thy.jpg" />
                                     <div class="member-info-intro">
-                                        <h5>Martin Smith</h5>
-                                        <span>Founder & Ceo</span>
+                                        <h5>Anh Thy</h5>
+                                        <span>Nhân viên</span>
                                     </div>
                                 </div>
                                 <div class="member-hover">
                                     <div class="member-hover-intro pt-4">
-                                        <h4 class="pt-4"> I love my Studio</h4>
                                         <p class="p-0">
-                                            We are a team of multi-skilled and curious digital specialists
-                                            who are
-                                            always up for a challenge
-                                            and
-                                            learning as fast as digital is changing.
+                                            Người ta thường nói gộp chung khoa học và kiến thức. Đây là một ý kiến sai lệch.
+                                            Khoa học không chỉ là kiến thức mà còn là ý thức, cũng chính là bản lĩnh vận dụng kiến thức.
                                         </p>
 
                                     </div>
@@ -153,25 +139,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-sm-4 col-md-4 col-sm-12">
                         <div class="item">
                             <div class="member">
                                 <div class="member-info">
-                                    <img src="~/Content/img/aboutUs/t-2.jpg" alt="">
+                                    <img src="~/Content/img/avatar/member/my.jpg" width="100%" height="295px" />
                                     <div class="member-info-intro">
-                                        <h5>Martin Smith</h5>
-                                        <span>Founder & Ceo</span>
+                                        <h5> Tiểu My</h5>
+                                        <span>Nhân viên</span>
                                     </div>
                                 </div>
                                 <div class="member-hover">
                                     <div class="member-hover-intro pt-4">
-                                        <h4 class="pt-5"> I love my Studio</h4>
+
                                         <p class="pb-4">
-                                            We are a team of multi-skilled and curious digital specialists
-                                            who are
-                                            always up for a challenge
-                                            and
-                                            learning as fast as digital is changing.
+                                            Hiện thực là bờ bên này; lý tưởng là bờ bên kia, ở giữa là dòng sông cuồn cuộn chảy,
+                                            hành động là chiếc cầu bắc ngang sông.
                                         </p>
 
                                     </div>
@@ -190,25 +173,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-sm-4 col-md-4 col-sm-12">
                         <div class="item">
                             <div class="member">
                                 <div class="member-info">
-                                    <img src="~/Content/img/aboutUs/t-3.jpg" alt="">
+                                    <img src="~/Content/img/avatar/member/hoa.jpg" />
                                     <div class="member-info-intro">
-                                        <h5>Martin Smith</h5>
-                                        <span>Founder & Ceo</span>
+                                        <h5> Phú Hòa</h5>
+                                        <span>Nhân viên</span>
                                     </div>
                                 </div>
                                 <div class="member-hover">
                                     <div class="member-hover-intro pt-4">
-                                        <h4 class="pt-5"> I love my Studio</h4>
                                         <p class="pb-4">
-                                            We are a team of multi-skilled and curious digital specialists
-                                            who are
-                                            always up for a challenge
-                                            and
-                                            learning as fast as digital is changing.
+                                            Ngủ dậy muộn thì phí mất cả ngày, ở tuổi thanh niên mà
+                                            không học tập thì phí mất cả cuộc đời .
                                         </p>
 
                                     </div>
@@ -229,25 +208,22 @@
                     </div>
                 </div>
                 <div class="row pt-5">
-                    <div class="col-4">
+                    <div class="col-sm-4 col-md-4 col-sm-12">
                         <div class="item">
                             <div class="member">
                                 <div class="member-info">
-                                    <img src="~/Content/img/aboutUs/t-3.jpg" alt="">
+                                    <img src="~/Content/img/avatar/member/nam.jpg" height="295px" />
                                     <div class="member-info-intro">
-                                        <h5>Martin Smith</h5>
-                                        <span>Founder & Ceo</span>
+                                        <h5>Phúc Nam</h5>
+                                        <span>Nhân viên</span>
                                     </div>
                                 </div>
                                 <div class="member-hover">
                                     <div class="member-hover-intro pt-4">
-                                        <h4 class="pt-5"> I love my Studio</h4>
+
                                         <p class="pb-4">
-                                            We are a team of multi-skilled and curious digital specialists
-                                            who are
-                                            always up for a challenge
-                                            and
-                                            learning as fast as digital is changing.
+                                            Không bỏ ra một công phu nhất định thì không có khả năng
+                                            khám phá sự thật và ai sợ mất công sức thì không có khả năng lĩnh hội được chân lý.
                                         </p>
 
                                     </div>
@@ -266,25 +242,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-sm-4 col-md-4 col-sm-12">
                         <div class="item">
                             <div class="member">
                                 <div class="member-info">
-                                    <img src="~/Content/img/aboutUs/t-2.jpg" alt="">
+                                    <img src="~/Content/img/avatar/member/vinh.jpg" height="295px" />
                                     <div class="member-info-intro">
-                                        <h5>Martin Smith</h5>
-                                        <span>Founder & Ceo</span>
+                                        <h5> Kim Vinh</h5>
+                                        <span>Nhân viên</span>
                                     </div>
                                 </div>
                                 <div class="member-hover">
                                     <div class="member-hover-intro pt-4">
-                                        <h4 class="pt-5"> I love my Studio</h4>
+
                                         <p class="pb-4">
-                                            We are a team of multi-skilled and curious digital specialists
-                                            who are
-                                            always up for a challenge
-                                            and
-                                            learning as fast as digital is changing.
+                                            Giáo dục là vũ khí mạnh nhất mà người ta có thể sử dụng để thay đổi cả thế giới.
                                         </p>
 
                                     </div>
@@ -303,27 +275,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-sm-4 col-md-4 col-sm-12">
                         <div class="item">
                             <div class="member">
                                 <div class="member-info">
-                                    <img src="~/Content/img/aboutUs/t-1.jpg" alt="">
+                                    <img src="~/Content/img/avatar/member/du.jpg" height="295px" />
                                     <div class="member-info-intro">
-                                        <h5>Martin Smith</h5>
-                                        <span>Founder & Ceo</span>
+                                        <h5>Công Dũ</h5>
+                                        <span>Nhân viên</span>
                                     </div>
                                 </div>
                                 <div class="member-hover">
                                     <div class="member-hover-intro pt-4">
-                                        <h4 class="pt-5"> I love my Studio</h4>
-                                        <p class="pb-4">
-                                            We are a team of multi-skilled and curious digital specialists
-                                            who are
-                                            always up for a challenge
-                                            and
-                                            learning as fast as digital is changing.
-                                        </p>
 
+                                        <p class="pb-4">
+                                            Có học vấn không có đạo đức như một kẻ xấu;
+                                            có đạo đức không có học vấn như một người thô bỉ.
+                                        </p>
                                     </div>
                                     <div class="member-hover-link">
                                         <a href="#">
@@ -353,9 +321,15 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>*@
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>*@
+    <script src="jquery.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
+    <script src="http://maps.google.com/maps/api/js"></script>
+    <script src="google-map-init.js"></script>
 </body>
