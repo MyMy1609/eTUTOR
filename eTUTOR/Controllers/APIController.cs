@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using eTUTOR.Models;
 using Newtonsoft.Json.Linq;
 using eTUTOR.Service;
+using Microsoft.Ajax.Utilities;
 
 namespace eTUTOR.Controllers
 {
@@ -136,14 +137,17 @@ namespace eTUTOR.Controllers
             List<session> sessionApproved;
             if (day == "all")
             {
-                sessionApproved = db.sessions.Where(m => m.tutor_id == tutor_id && m.status_admin == 1).ToList();
+                sessionApproved = db.sessions.Where(m => m.tutor_id == tutor_id 
+                && m.status_admin == 1).DistinctBy(x => x.start_time).ToList();
             }
             else
             {
-                sessionApproved = db.sessions.Where(m => m.day_otw == day && m.tutor_id == tutor_id && m.status_admin == 1).ToList();
+                sessionApproved = db.sessions.Where(m => m.day_otw == day
+                && m.tutor_id == tutor_id
+                && m.status_admin == 1).DistinctBy( x=> x.start_time).ToList();
             }
             ViewData["sessionapproved"] = sessionApproved;
-            return PartialView("SessionApproved");
+            return PartialView("sessionApproved");
 
         }
         [HttpPost]

@@ -7,7 +7,7 @@
 
 <div class="container">
     <div class="onTop" style="background-color:white; height:200px">
-        <form action="~/Admin/Admin/ThongKe" method="get" class="" style="padding:30px" name="thongke">
+        <form action="~/Admin/Admin/ThongKe" method="get" class="" style="padding:10px" name="thongke">
             <div class="pull-left" style="width:400px">
                 <label style="color:indianred">Chọn kiểu thống kê</label>
                 <select name="kieuTK" class="form-control" id="kieuTK">
@@ -26,14 +26,14 @@
             </div>*@
 
         </form>
-        <div style="margin-top:15%;display:block" id="dangky">
-            <img src="@Url.Action("tkDangky")" alt="Chart" />
+        <div style="margin-top:5%;text-align:center;" id="dangky">
+            <img src="@Url.Action("tkDangky")" alt="Chart" width="800px" height="400px"/>
         </div>
-        <div style="margin-top:15%;display:block" id="dayhoc">
-            <img src="@Url.Action("tkDayhoc")" alt="Chart" />
+        <div style="margin-top:5%;display:block" id="dayhoc">
+            <img src="@Url.Action("tkDayhoc")" alt="Chart" width="800px" height="400px" />
         </div>
-        <div style="margin-top:15%;display:block" id="dangkyhoc">
-            <img src="@Url.Action("tkDangkyhoc")" alt="Chart" />
+        <div style="margin-top:5%;display:block" id="dangkyhoc">
+            <img src="@Url.Action("tkDangkyhoc")" alt="Chart" width="800px" height="400px"/>
         </div>
 
 
