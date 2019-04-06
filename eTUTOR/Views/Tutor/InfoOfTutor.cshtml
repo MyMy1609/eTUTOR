@@ -225,13 +225,13 @@
                                                 </td>
                                             </tr>
                                             @*<tr>
-                                            <td class="tdl">
-                                                Email
-                                            </td>
-                                            <td class="tdr">
-                                                <input type="email" id="email" value="@Model.email" disabled>
-                                            </td>
-                                        </tr>*@
+                                                    <td class="tdl">
+                                                        Email
+                                                    </td>
+                                                    <td class="tdr">
+                                                        <input type="email" id="email" value="@Model.email" disabled>
+                                                    </td>
+                                                </tr>*@
                                             <tr>
                                                 <td class="tdl">
                                                     Chuyên ngành dạy
@@ -441,7 +441,7 @@
                              data-parent="#demo-accordion-collapse">
                             <div class="card-body row">
                                 <h6 class="ml-3"> <strong>Thêm buổi học</strong> </h6>
-                                <form action="/Tutor/CreateSchedule" method="post" onsubmit="return validation()">
+                                <form id="schedule" action="/Tutor/CreateSchedule" method="post" onsubmit="return validation()">
                                     <div class="row" style="margin-top:30px">
                                         <div class="form-wrapper col-3">
                                             <select id="day" name="day_otw" class="form-control" style=" width: 225px; border-radius:6px">
@@ -475,9 +475,10 @@
                                         </div>
                                         <div class="form-wrapper col-3">
                                             <div class="col-1">
-                                                <button type="submit" id="btn-create-schedule" class="btn btn-primary" style="background-color:crimson;margin-top:30px; font-size:17px; color:white; border-radius: 100%">+</button>
+                                                <button type="submit" id="btn-create-schedule" class="btn btn-primary btn btn-success" style="background-color:crimson;margin-top:30px; font-size:17px; color:white; border-radius: 100%">+</button>
                                             </div>
                                         </div>
+                                    </div>
                                 </form>
                                 <table class="table" style="text-align: center;">
                                     <tr>
@@ -679,9 +680,11 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
     <script src="~/Content/vendor/jquery/jquery-2.2.4.min.js"></script>
     <script src="~/Content/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/Content/vendor/jquery/jquery.bootstrap.wizard.js"></script>
+
 
     <!--  Plugin for the Wizard -->
     <script src="~/Content/vendor/jquery/gsdk-bootstrap-wizard.js"></script>
@@ -767,20 +770,37 @@
             if (day == "") {
                 document.getElementById('days').innerHTML = " ** Bạn phải chọn thứ";
                 return false;
-            }
+            } 
             if (star == "") {
-                document.getElementById('stars').innerHTML = " ** Giờ bắt đầu không được rỗng";
+                document.getElementById('stars').innerHTML = " ** Bạn phải nhập giờ bắt đầu";
                 return false;
             }
             if (end == "") {
-                document.getElementById('ends').innerHTML = " ** Giờ kết thúc không được rỗng";
+                document.getElementById('ends').innerHTML = " ** Bạn phải nhập giờ kết thúc";
                 return false;
             }
             if (note == "") {
-                document.getElementById('notes').innerHTML = " ** Ghi chú không được rỗng";
+                document.getElementById('notes').innerHTML = " ** Bạn phải nhập ghi chú";
                 return false;
             }
         }
+
+        //$("#schedule").validate({
+        //    rules: {
+        //        day_otw: {
+        //            required: true,
+        //        },
+        //        start_time: {
+        //            required: true,
+        //        },
+        //        end_time: {
+        //            required: true,
+        //        },
+        //        note: {
+        //            required: true,
+        //        }
+        //    }
+        //})
     </script>
 }
 <!--   var request = new XMLHttpRequest();
