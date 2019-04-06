@@ -23,7 +23,8 @@
 <!-- ---------------------------- -->
 <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
 <!-- jQuery library -->
-@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
 
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -33,39 +34,90 @@
 <!--===============================================================================================-->
 <body style="background-size: cover">
     <div class="row container">
-        <div class=" pt-5 pl-5 pr-1 pb-1 contact_img col-sm-7 col-md-7 col-sm-12">
-            @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6644447242497!2d106.69690491480065!3d10.760323392332438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f133765f339%3A0x99f29a2fa8faa1c!2zSDMgQnVpbGRpbmcsIDM4NCBIb8OgbmcgRGnhu4d1LCBQaMaw4budbmcgNiwgUXXhuq1uIDQsIEjhu5MgQ2jDrSBNaW5o!5e0!3m2!1sen!2s!4v1548321438732"
-                    width="630" height="300" frameborder="0" allowfullscreen style="margin-top: 7%; border:0" class="mb-2"></iframe>*@
-            <img src="~/Content/build/img/contact/map.PNG" width="635" height="455" style="margin-top: 2%; border:0" class="mb-2"/>
+        <div class="col-7 pt-5 pl-5 pr-1 pb-1 contact_img">
+            <div class="row pl-5 p-3 hinhAnh" style="background-image: url('../../Content/img/banner/s-1.jpg'); background-repeat: no-repeat; ">
+                <div class="contact-address mt-30">
+                    <ul>
+                        <li>
+                            <div class="singel-address">
+                                <div class="icon">
+                                    <i class="fa fa-home text-light"></i>
+                                    <p style="display: inline; font-size: 20px; color: white" class="ml-3">123 Hoàng Diệu, quận 4, Tp. Hồ Chí Minh</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="singel-address">
+                                <div class="icon pt-3" style="margin-top: 1%">
+                                    <i class="fa fa-phone text-light"></i>
+                                    <p style="display: inline; font-size: 20px; color: white" class="ml-3">+3 123 456 789</p> </br>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="singel-address">
+                                <div class="icon pt-3" style="margin-top: 1%">
+                                    <div class="icon">
+                                        <i class="fa fa-envelope-o text-light"></i>
+                                        <p style="display: inline; font-size: 20px;color: white" class="ml-3">123 Hoàng Diệu, quận 4, Tp. Hồ Chí Minh</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="row" style="margin-top: 1%">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6644447242497!2d106.69690491480065!3d10.760323392332438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f133765f339%3A0x99f29a2fa8faa1c!2zSDMgQnVpbGRpbmcsIDM4NCBIb8OgbmcgRGnhu4d1LCBQaMaw4budbmcgNiwgUXXhuq1uIDQsIEjhu5MgQ2jDrSBNaW5o!5e0!3m2!1sen!2s!4v1548321438732"
+                        width="630" height="300" frameborder="0" allowfullscreen style="margin-top: 5%; border:0" class="mb-2"></iframe>
+            </div>
         </div>
-        <div class="container m-0 col-sm-4 col-md-4 col-sm-12">
-            <form action="/Home/Contact" method="post" onsubmit="return validation()" class="contact100-form validate-form" 
-                  style="padding: 0; margin-left: 5%; padding-top:40px">
-                @*<span class="contact100-form-title mb-4" style="padding-bottom: 0; padding-top: 40px">
+        <div class="col-4 container m-0">
+            <form id="contact-form" action="/Home/Contact" method="post" @*onsubmit="return validation()"*@ class="contact100-form contact-form-transparent" style="padding: 0; margin-left: 5%">
+                <span class="contact100-form-title mb-4" style="padding-bottom: 0; padding-top: 7%">
                     Hãy liên hệ với chúng tôi
-                </span>*@
-                <div class="wrap-input100 validate-input form-group" data-validate="Tên không rỗng" style="margin-top: 5%; " >
-                    <input id="user" class="input100 " type="text" name="user" placeholder="Họ tên" autocomplete="off">
-                    <span class="text-danger focus-input100" id="username"></span>
+                </span>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <input type="text" placeholder="Họ tên" id="user"
+                                   name="user" class="form-control" autocomplete="off">
+                            <span class="text-danger" id="username"></span>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="wrap-input100 validate-input form-group" data-validate="Số điện thoại không rỗng">
-                    <input id="mobileNumber" class="input100" type="text" name="mobileNumber" placeholder="Số điện thoại" autocomplete="off">
-                    <span class="text-danger focus-input100" id="mobileno"></span>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <input type="text" placeholder="Số điện thoại" id="mobileNumber"
+                                   name="mobileNumber" class="form-control" autocomplete="off">
+                            <span class="text-danger" id="mobileno"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <input type="email" placeholder=" Email" id="emails"
+                                   name="emails" class="form-control">
+                            <span class="text-danger" id="emailids"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <input type="text" placeholder="Chủ đề" id="subject"
+                                   name="subject" class="form-control">
+                            <span class="text-danger" id="sub"></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="wrap-input100 validate-input form-group" data-validate="Email không rỗng và phải đúng định dạng: ex@abc.xyz">
-                    <input id="emails" class="input100" type="email" name="emails" placeholder="Email" autocomplete="off">
-                    <span class="text-danger focus-input100" id="emailids"></span>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Lời nhắn..." id="content"
+                              name="content" class="form-control"></textarea>
+                    <span class="text-danger" id="cont"></span>
                 </div>
-                <div class="wrap-input100 validate-input form-group" data-validate="Chủ đề không được rỗng">
-                    <input id="subject" class="input100" type="text" name="subject" placeholder="Chủ đề" autocomplete="off">
-                    <span class="text-danger focus-input100" id="sub"></span>
-                </div>
-                <div class="wrap-input100 validate-input form-group" data-validate="Message is required">
-                    <textarea id="content" class="input100" name="content" placeholder="Nội dung cần liên hệ với chúng tôi..."></textarea>
-                    <span class="text-danger focus-input100" id="cont"></span>
-                </div>
-                <div class="container-contact100-form-btn">
-                    <button class="contact100-form-btn mr-3" type="submit" class="btnSubmit" style="width:100%;">
+                <div class="form-group">
+                    <button class="contact100-form-btn mr-3" type="submit" class="btnSubmit">
                         Gửi ngay
                     </button>
                 </div>
@@ -74,8 +126,6 @@
     </div>
 
     <!--===============================================================================================-->
-    @*<script src="vendor/jquery/jquery-3.2.1.min.js"></script>*@
-    @*<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>*@
     <!--===============================================================================================-->
     <script src="vendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
@@ -83,6 +133,28 @@
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
     <script src="vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <!-- boosttrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+    <script src="../app/Component/HomeComponent/home.component.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
     <script>
         $(".js-select2").each(function () {
             $(this).select2({
@@ -103,15 +175,7 @@
 
     </script>
 
-    <!--===============================================================================================-->
-    <script src="vendor/daterangepicker/moment.min.js"></script>
-    <script src="vendor/daterangepicker/daterangepicker.js"></script>
-    <!--===============================================================================================-->
-    <script src="vendor/countdowntime/countdowntime.js"></script>
-    <!--===============================================================================================-->
-    <script src="js/main.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -119,66 +183,87 @@
 
         gtag('config', 'UA-23581568-13');
     </script>
-    @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>*@
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
+
+
     <script type="text/javascript">
-        function validation() {
-            var user = document.getElementById('user').value;
-            var mobileNumber = document.getElementById('mobileNumber').value;
-            var emails = document.getElementById('emails').value;
-            var subject = document.getElementById('subject').value;
-            var content = document.getElementById('content').value;
-   
+        //function validation() {
+        //    var user = document.getElementById('user').value;
+        //    var mobileNumber = document.getElementById('mobileNumber').value;
+        //    var emails = document.getElementById('emails').value;
+        //    var subject = document.getElementById('subject').value;
+        //    var content = document.getElementById('content').value;
 
-            if (user == "") {
-                document.getElementById('username').innerHTML = " ** Họ tên không rỗng";
-                return false;
-            }
 
-            if (mobileNumber == "") {
-                document.getElementById('mobileno').innerHTML = " ** Số điện thoại không rỗng";
-                return false;
-            }
-            if (isNaN(mobileNumber)) {
-                document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải là số";
-                return false;
-            }
-            if (mobileNumber.length != 10) {
-                document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải có 10 số trở lên";
-                return false;
-            }
-            
-			if(emails == ""){
-				document.getElementById('emailids').innerHTML =" ** Email không rỗng";
-				return false;
-			}
-			@*if(emails.indexOf('@') <= 0 ){
-				document.getElementById('emailids').innerHTML =" **Email không hợp lệ";
-				return false;
-			}*@
+        //    if (user == "") {
+        //        document.getElementById('username').innerHTML = " ** Họ tên không rỗng";
+        //        return false;
+        //    }
 
-			if((emails.charAt(emails.length-4)!='.') && (emails.charAt(emails.length-3)!='.')){
-				document.getElementById('emailids').innerHTML =" ** Email không đúng định dạng";
-				return false;
-            }
+        //    if (mobileNumber == "") {
+        //        document.getElementById('mobileno').innerHTML = " ** Số điện thoại không rỗng";
+        //        return false;
+        //    }
+        //    if (isNaN(mobileNumber)) {
+        //        document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải là số";
+        //        return false;
+        //    }
+        //    if (mobileNumber.length != 10) {
+        //        document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải có 10 số trở lên";
+        //        return false;
+        //    }
 
-            if (subject == "") {
-                document.getElementById('sub').innerHTML = " ** Chủ đề không rỗng";
-                return false;
-            }
-            if (subject == "   ") {
-                document.getElementById('sub').innerHTML = " ** Chủ đề không hợp lệ";
-                return false;
-            }
+        //    if (emails == "") {
+        //        document.getElementById('emailids').innerHTML = " ** Email không rỗng";
+        //        return false;
+        //    }
 
-            if (content == "") {
-                document.getElementById('cont').innerHTML = " ** Nội dung không rỗng";
-                return false;
+        //    if ((emails.charAt(emails.length - 4) != '.') && (emails.charAt(emails.length - 3) != '.')) {
+        //        document.getElementById('emailids').innerHTML = " ** Email không đúng định dạng";
+        //        return false;
+        //    }
+
+        //    if (subject == "") {
+        //        document.getElementById('sub').innerHTML = " ** Chủ đề không rỗng";
+        //        return false;
+        //    }
+        //    if (subject == "   ") {
+        //        document.getElementById('sub').innerHTML = " ** Chủ đề không hợp lệ";
+        //        return false;
+        //    }
+
+        //    if (content == "") {
+        //        document.getElementById('cont').innerHTML = " ** Nội dung không rỗng";
+        //        return false;
+        //    }
+        //}
+        $("#contact-form").validate({
+            rules: {
+                user: "required",
+                mobileNumber: {
+                    required: true,
+                    minlength: 10
+                },
+                emails: {
+                    required: true,
+                    email: true
+                },
+                subject: "required",
+                content: "required",
+            },
+
+            messages: {
+                user: "Vui lòng nhập họ và tên",
+                mobileNumber: {
+                    required: "Vui lòng nhập số điện thoại",
+                    minlength: "Số điện thoại phải là số",
+                },
+                emails: {
+                    required: "Vui lòng nhập Email",
+                    minlength: "Email không đúng định dạng",
+                },
+                subject: "Vui lòng nhập chủ đề",
+                content: "Vui lòng nhập lời nhắn",
             }
-        }
+        });
     </script>
 </body>
