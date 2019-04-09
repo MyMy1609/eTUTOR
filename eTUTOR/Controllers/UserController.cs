@@ -437,6 +437,7 @@ namespace eTUTOR.Controllers
             {
 
                 ViewBag.iff = "Vui lòng điền đầy đủ thông tin";
+                setAlert(ViewBag.iff, "warning");
                 return View("ChangePW");
 
             }
@@ -452,6 +453,7 @@ namespace eTUTOR.Controllers
                     if (tutor.password != passCur)
                     {
                         ViewBag.iff = "Mật khẩu hiện tại không đúng";
+                        setAlert(ViewBag.iff, "warning");
                         return View("ChangePW");
                     }
                     else
@@ -470,6 +472,7 @@ namespace eTUTOR.Controllers
                     if (student.password != passCur)
                     {
                         ViewBag.iff = "Mật khẩu hiện tại không đúng";
+                        setAlert(ViewBag.iff, "warning");
                         return View("ChangePW");
                     }
                     else
@@ -490,6 +493,8 @@ namespace eTUTOR.Controllers
                     if (parent.password != passCur)
                     {
                         ViewBag.iff = "Mật khẩu hiện tại không đúng";
+
+                        setAlert(ViewBag.iff, "warning");
                         return View("ChangePW");
                     }
                     else
@@ -507,6 +512,7 @@ namespace eTUTOR.Controllers
             else
             {
                 ViewBag.iff = "Xác nhận mật khẩu mới không trùng khớp";
+                setAlert(ViewBag.iff, "warning");
                 return View("ChangePW");
             }
 
