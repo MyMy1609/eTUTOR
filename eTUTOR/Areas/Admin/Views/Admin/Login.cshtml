@@ -55,7 +55,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-                        <form class="form" action="~/Admin/Admin/Login" method="post">
+                        <form id="login" class="form" action="~/Admin/Admin/Login" method="post">
                             <div class="card card-login card-hidden">
                                 <div class="card-header card-header-info text-center" style="background: linear-gradient(60deg,#111212,#595a5a);">
                                     <h4 class="card-title">Đăng nhập</h4>
@@ -84,23 +84,24 @@
                                             </div>
                                         </span>*@
                                     <span class="bmd-form-group">
-                                        <div class="input-group">
+                                        <div class="form-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="material-icons">email</i>
                                                 </span>
                                             </div>
-                                            <input type="email" class="form-control" placeholder="Email..." name="email" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống và nhập đúng định dạng !')" oninput="setCustomValidity('')"/>
+                                            <input type="email" class="form-control" placeholder="Email..." name="email" @*required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống và nhập đúng định dạng !')" oninput="setCustomValidity('')"*@ />
                                         </div>
                                     </span>
                                     <span class="bmd-form-group">
-                                        <div class="input-group">
+                                    <span class="form-group">
+                                        <div class="form-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="material-icons">lock_outline</i>
                                                 </span>
                                             </div>
-                                            <input type="password" class="form-control" placeholder="Password..." name="password" required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')" oninput="setCustomValidity('')"/>
+                                            <input type="password" class="form-control" placeholder="Password..." name="password" @*required="" oninvalid="this.setCustomValidity('vui lòng không bỏ trống!')" oninput="setCustomValidity('')"*@ />
                                         </div>
                                     </span>
                                 </div>
@@ -138,6 +139,8 @@
     <script src="demo/demo.js"></script>
     <script src="~/Content/build/admin/js/demo.js"></script>
     <script src="~/Content/build/admin/js/login.component.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $().ready(function () {
@@ -419,6 +422,34 @@
                 // after 1000 ms we add the class animated to the login/register card
                 $('.card').removeClass('card-hidden');
             }, 700);
+        });
+    </script>
+    <script type="text/javascript">
+        $("#login").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+
+            },
+
+            messages: {
+                email: {
+                    required: "Vui lòng nhập email",
+                    minlength: "Email phải đúng định dạng"
+                },
+                password: {
+                    required: "Vui lòng nhập mật khẩu",
+                    minlength: "Mật khẩu phải có ít nhất 6 ký tự"
+                },
+
+            }
         });
     </script>
 </body>

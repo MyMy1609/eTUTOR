@@ -142,7 +142,7 @@
                         <div class="clearfix">
                             <h4 class="line-bottom">Liên hệ nhanh</h4>
                         </div>
-                        <form id="contact-form" class="contact-form-transparent" action="/Tutor/Contact" method="post" @*onsubmit="return validation()"*@>
+                        <form id="contact-form" class="contact-form-transparent" action="/Tutor/Contact" method="post" >
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -278,57 +278,6 @@
     <script src="google-map-init.js"></script>
 
     <script type="text/javascript">
-        //function validation() {
-        //    var user = document.getElementById('user').value;
-        //    var emails = document.getElementById('emails').value;
-        //    var mobileNumber = document.getElementById('mobileNumber').value;
-        //    var subject = document.getElementById('subject').value;
-        //    var content = document.getElementById('content').value;
-
-
-        //    if (user == "") {
-        //        document.getElementById('username').innerHTML = " ** Họ tên không rỗng";
-        //        return false;
-        //    }
-
-        //    if (mobileNumber == "") {
-        //        document.getElementById('mobileno').innerHTML = " ** Số điện thoại không rỗng";
-        //        return false;
-        //    }
-        //    if (isNaN(mobileNumber)) {
-        //        document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải là số";
-        //        return false;
-        //    }
-        //    if (mobileNumber.length != 10) {
-        //        document.getElementById('mobileno').innerHTML = " ** Số điện thoại phải có 10 số trở lên";
-        //        return false;
-        //    }
-
-        //    if (emails == "") {
-        //        document.getElementById('emailids').innerHTML = " ** Email không rỗng";
-        //        return false;
-        //    }
-
-        //    if ((emails.charAt(emails.length - 4) != '.') && (emails.charAt(emails.length - 3) != '.')) {
-        //        document.getElementById('emailids').innerHTML = " ** Email không đúng định dạng";
-        //        return false;
-        //    }
-
-        //    if (subject == "") {
-        //        document.getElementById('sub').innerHTML = " ** Chủ đề không rỗng";
-        //        return false;
-        //    }
-        //    if (subject == "   ") {
-        //        document.getElementById('sub').innerHTML = " ** Chủ đề không hợp lệ";
-        //        return false;
-        //    }
-
-        //    if (content == "") {
-        //        document.getElementById('cont').innerHTML = " ** Nội dung không rỗng";
-        //        return false;
-        //    }
-
-        //}
 
         $("#contact-form").validate({
             rules: {

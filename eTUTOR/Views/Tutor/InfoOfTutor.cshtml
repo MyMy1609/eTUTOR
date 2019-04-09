@@ -441,7 +441,7 @@
                              data-parent="#demo-accordion-collapse">
                             <div class="card-body row">
                                 <h6 class="ml-3"> <strong>Thêm buổi học</strong> </h6>
-                                <form id="schedule" action="/Tutor/CreateSchedule" method="post" onsubmit="return validation()">
+                                <form id="schedule" action="/Tutor/CreateSchedule" method="post" >
                                     <div class="row" style="margin-top:30px">
                                         <div class="form-wrapper col-3">
                                             <select id="day" name="day_otw" class="form-control" style=" width: 225px; border-radius:6px">
@@ -468,11 +468,8 @@
                                                    style="border-radius: 5px; height: 65%; width: 220px"
                                                    placeholder="Giờ kết thúc">
                                             <span id="ends"></span>
-                                        </div> <br />
-                                        <div>
-                                            <textarea id="note" rows="4" cols="93" name="note" form="usrform" style="border-radius: 5px; margin-left: 15px " placeholder="Chú thích"></textarea>
-                                            <span id="notes"></span>
                                         </div>
+
                                         <div class="form-wrapper col-3">
                                             <div class="col-1">
                                                 <button type="submit" id="btn-create-schedule" class="btn btn-primary btn btn-success" style="background-color:crimson;margin-top:30px; font-size:17px; color:white; border-radius: 100%">+</button>
@@ -480,6 +477,7 @@
                                         </div>
                                     </div>
                                 </form>
+                                </br>
                                 <table class="table" style="text-align: center;">
                                     <tr>
                                         <th>
@@ -680,7 +678,6 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
     <script src="~/Content/vendor/jquery/jquery-2.2.4.min.js"></script>
     <script src="~/Content/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/Content/vendor/jquery/jquery.bootstrap.wizard.js"></script>
@@ -693,6 +690,7 @@
     <script src="~/Content/vendor/lightbox2/dist/js/lightbox.min.js"></script>
     <script src="~/Content/build/js/TutorHomePage.component.js"></script>
     <script src="~/Content/build/admin/js/TutorHomePage.component.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
     <script>
         $(function () {
             getSessionApproved(-1);
@@ -761,46 +759,20 @@
                 WindowObject.focus();
             });
         }
-        function validation() {
-            var day = document.getElementById('day').value;
-            var star = document.getElementById('star').value;
-            var end = document.getElementById('end').value;
-            var note = document.getElementById('note').value;
+        
 
-            if (day == "") {
-                document.getElementById('days').innerHTML = " ** Bạn phải chọn thứ";
-                return false;
-            } 
-            if (star == "") {
-                document.getElementById('stars').innerHTML = " ** Bạn phải nhập giờ bắt đầu";
-                return false;
+        $("#schedule").validate({
+            rules: {
+                day_otw: "required",
+                start_time: "required",
+                end_time: "required",
+            },
+            messages: {
+                day_otw: "Bạn phải chọn thứ",
+                start_time: "Bạn phải nhập giờ bắt đầu",
+                end_time: "Bạn phải nhập giờ kết thúc"
             }
-            if (end == "") {
-                document.getElementById('ends').innerHTML = " ** Bạn phải nhập giờ kết thúc";
-                return false;
-            }
-            if (note == "") {
-                document.getElementById('notes').innerHTML = " ** Bạn phải nhập ghi chú";
-                return false;
-            }
-        }
-
-        //$("#schedule").validate({
-        //    rules: {
-        //        day_otw: {
-        //            required: true,
-        //        },
-        //        start_time: {
-        //            required: true,
-        //        },
-        //        end_time: {
-        //            required: true,
-        //        },
-        //        note: {
-        //            required: true,
-        //        }
-        //    }
-        //})
+        })
     </script>
 }
 <!--   var request = new XMLHttpRequest();
