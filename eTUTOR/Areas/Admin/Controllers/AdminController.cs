@@ -429,10 +429,3 @@ namespace eTUTOR.Areas.Admin.Controllers
         }
     }
 }
-
-namespace eTUTOR.Filter
-{
-    class AuthorizeAdminAttribute : Attribute
-    {
-    }
-}

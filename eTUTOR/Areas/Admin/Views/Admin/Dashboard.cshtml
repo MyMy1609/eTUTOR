@@ -1,7 +1,12 @@
-﻿
+﻿@using eTUTOR.Models
 @{
     ViewBag.Title = "Dashboard";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    eTUITOREntities db = new eTUITOREntities();
+    var _UserChoDuyet = db.tutors.Count(x => x.status == 2);
+    var _CourseChoDuyet = db.sessions.Count(x => x.status_admin == 2 && x.status_tutor == 1);
+    var _UserIsBlock = (db.tutors.Count(x => x.status == 3)) + (db.students.Count(x => x.status == 3)) + (db.parents.Count(x => x.status == 3));
+    var _ScheduleChoDuyet = db.schedules.Count(x => x.status == 2);
 }
 
 <!DOCTYPE html>
@@ -66,7 +71,15 @@
                                     @Html.ActionLink("Quản lý", "user", "Admin", new { @class = "btn btn-info" })
                                 </div>
                                 <h4 class="card-title">Quản lý người dùng</h4>
-                                <p class="card-category"><span style="color:red"><b>25</b> <i>user</i></span> chờ duyệt</p>
+                                @if (_UserChoDuyet > 0)
+                                {
+                                    <p class="card-category"><span style="color:red"><b>@_UserChoDuyet</b> <i>user</i></span> chờ duyệt</p>
+                                }
+                                else
+                                {
+                                    <p class="card-category"><span style="color:green">Không có user chờ duyệt</p>
+
+                                }
                             </div>
                             @*<div class="card-footer">
                                     <div class="stats">
@@ -85,7 +98,15 @@
                                     @Html.ActionLink("Quản lý", "Course", "Admin", new { @class = "btn btn-info" })
                                 </div>
                                 <h4 class="card-title">Quản lý khóa học</h4>
-                                <p class="card-category"><span style="color:red"><b>45</b> <i>khóa học </i></span> chờ duyệt</p>
+                                @if (_CourseChoDuyet > 0)
+                                {
+                                    <p class="card-category"><span style="color:red"><b>@_CourseChoDuyet</b> <i>khóa học </i></span> chờ duyệt</p>
+                                }
+                                else
+                                {
+                                    <p class="card-category"><span style="color:green">Không có buổi học nào đang chờ cần duyệt</p>
+
+                                }
                             </div>
                             @*<div class="card-footer">
                                     <div class="stats">
@@ -121,13 +142,13 @@
                                 <div class="card-icon">
                                     <i class="material-icons">weekend</i>
                                 </div>
-                                <p class="card-category">Bookings</p>
-                                <h3 class="card-title">184</h3>
+                                <p class="card-category">Các User đang bị khóa</p>
+                                <h3 class="card-title">@_UserIsBlock</h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
                                     <i class="material-icons text-danger">warning</i>
-                                    <a href="#pablo">Get More Space...</a>
+                                    <a href="/Admin/Admin/blockuser">Xem danh sách</a>
                                 </div>
                             </div>
                         </div>
@@ -138,12 +159,13 @@
                                 <div class="card-icon">
                                     <i class="material-icons">equalizer</i>
                                 </div>
-                                <p class="card-category">Website Visits</p>
-                                <h3 class="card-title">75.521</h3>
+                                <p class="card-category">Lịch biểu chờ duyệt</p>
+                                <h3 class="card-title">@_ScheduleChoDuyet</h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
-                                    <i class="material-icons">local_offer</i> Tracked from Google Analytics
+                                    <i class="material-icons text-danger">warning</i>
+                                    <a href="/Admin/Admin/schedule">Xem danh sách</a>
                                 </div>
                             </div>
                         </div>

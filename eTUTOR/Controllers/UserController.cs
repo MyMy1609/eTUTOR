@@ -48,6 +48,7 @@ namespace eTUTOR.Controllers
 
                 tutor.password = commonService.hash(tutor.password);
                 tutor.dateCreate = DateTime.Now;
+                tutor.status_register = 1;
                 model.tutors.Add(tutor);
                 model.SaveChanges();
 
