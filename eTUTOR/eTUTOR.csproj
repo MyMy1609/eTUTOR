@@ -388,6 +388,7 @@
     <Compile Include="Models\contact_tutor.cs">
       <DependentUpon>eTUITORModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DatabaseDbContext.cs" />
     <Compile Include="Models\eTUITORModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

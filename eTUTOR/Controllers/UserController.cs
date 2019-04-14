@@ -76,8 +76,9 @@ namespace eTUTOR.Controllers
             }
 
         }
-        public ActionResult RegisterStudent(student student, string password)
+        public ActionResult RegisterStudent(student student/*, string password*/)
         {
+            string password = "";
             var studentEmail = model.students.FirstOrDefault(x => x.email == student.email);
             if (studentEmail == null)
             {
@@ -95,8 +96,9 @@ namespace eTUTOR.Controllers
             }
 
         }
-        public ActionResult RegisterParent(parent parent, string password)
+        public ActionResult RegisterParent(parent parent)
         {
+            string password = "";
             var parentEmail = model.parents.FirstOrDefault(x => x.email == parent.email);
             if (parentEmail == null)
             {
@@ -114,7 +116,7 @@ namespace eTUTOR.Controllers
                 return View("Register");
             }
         }
-        
+
         public ActionResult ForgotPassword()
         {
             return View();
@@ -253,7 +255,7 @@ namespace eTUTOR.Controllers
                         {
                             return RedirectToAction("InfoOfStudent", "Student");
                         }
-                        
+
                     }
                     if (student.status == 2)
                     {
@@ -293,7 +295,7 @@ namespace eTUTOR.Controllers
                         {
                             return RedirectToAction("InfoOfParent", "Parent");
                         }
-                        
+
                     }
                     if (parent.status == 2)
                     {
