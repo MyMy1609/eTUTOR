@@ -16,6 +16,8 @@ namespace eTUTOR.Tests.Support
             using(var db = new DatabaseDbContext())
             {
                 //db.students.RemoveRange(db.students);
+                //db.parents.RemoveRange(db.parents);
+                //db.tutors.RemoveRange(db.tutors);
                 db.SaveChanges();
             }
         }

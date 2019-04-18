@@ -9,12 +9,12 @@ namespace eTUTOR.Models
     public class DatabaseDbContext: DbContext
     {
         public DatabaseDbContext()
-            : base(@"data source= ten database trong sql ; initial catalog = eTUITORModel; Integrated Security = True ")
+            : base(@"data source= capstone2019; initial catalog = eTUITORModel; Integrated Security = True ")
         {
 
         }
 
-        public DbSet<student> students { get; set; }
+        public DbSet<student> tutors { get; set; }
         public DbSet<parent> parents { get; set; }
     }
 }
