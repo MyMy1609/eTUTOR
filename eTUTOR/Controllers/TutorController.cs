@@ -240,7 +240,6 @@ namespace eTUTOR.Controllers
         [HttpPost]
         public ActionResult Duyetkhoahoc(int id)
         {
-            int asd = id;
             var se = db.sessions.Find(id);
             se.status_tutor = 1;
             db.SaveChanges();
