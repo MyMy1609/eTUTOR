@@ -25,7 +25,6 @@ namespace eTUTOR.Areas.Admin.Controllers
         [Filter.AuthorizeAdmin]
         public ActionResult Login(string email, string password)
         {
-            ;
             var admin = model.admins.FirstOrDefault(x => x.email == email);
             
             if (admin != null)
