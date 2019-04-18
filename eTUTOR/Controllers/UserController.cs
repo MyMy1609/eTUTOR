@@ -31,8 +31,10 @@ namespace eTUTOR.Controllers
             return View(user);
         }
         [HttpPost]
-        public ActionResult RegisterTuTor(tutor tutor, HttpPostedFileBase certificate, string password, string email)
+        public ActionResult RegisterTuTor(tutor tutor /*HttpPostedFileBase certificate, string password,*/ /*string email*/)
         {
+            string email = "";
+            string password = "";
             var tutorEmail = model.tutors.FirstOrDefault(x => x.email == tutor.email);
 
             if (tutorEmail == null)
@@ -40,11 +42,11 @@ namespace eTUTOR.Controllers
 
                 //add new tutor
                 tutor.status = 2;
-                if (certificate != null && certificate.ContentLength > 0)
-                {
-                    tutor.certificate = certificate.FileName;
-                }
-                tutor.specialized = tutor.specialized.ToUpper();
+                //if (certificate != null && certificate.ContentLength > 0)
+                //{
+                //    tutor.certificate = certificate.FileName;
+                //}
+                //tutor.specialized = tutor.specialized.ToUpper();
 
                 tutor.password = commonService.hash(tutor.password);
                 tutor.dateCreate = DateTime.Now;
@@ -60,12 +62,12 @@ namespace eTUTOR.Controllers
                 DirectoryInfo direc = Directory.CreateDirectory(filePath);
 
                 //save certificate
-                if (certificate != null && certificate.ContentLength > 0)
-                {
-                    string fileName = Path.GetFileName(certificate.FileName);
-                    string path = String.Format("{0}\\{1}", filePath, fileName);
-                    certificate.SaveAs(path);
-                }
+                //if (certificate != null && certificate.ContentLength > 0)
+                //{
+                //    string fileName = Path.GetFileName(certificate.FileName);
+                //    string path = String.Format("{0}\\{1}", filePath, fileName);
+                //    certificate.SaveAs(path);
+                //}
                 return RedirectToAction("ConfirmEmail", "User");
 
             }
@@ -76,8 +78,9 @@ namespace eTUTOR.Controllers
             }
 
         }
-        public ActionResult RegisterStudent(student student, string password)
+        public ActionResult RegisterStudent(student student/*, string password*/)
         {
+            string password = "";
             var studentEmail = model.students.FirstOrDefault(x => x.email == student.email);
             if (studentEmail == null)
             {
@@ -95,8 +98,9 @@ namespace eTUTOR.Controllers
             }
 
         }
-        public ActionResult RegisterParent(parent parent, string password)
+        public ActionResult RegisterParent(parent parent)
         {
+            string password = "";
             var parentEmail = model.parents.FirstOrDefault(x => x.email == parent.email);
             if (parentEmail == null)
             {
@@ -114,7 +118,7 @@ namespace eTUTOR.Controllers
                 return View("Register");
             }
         }
-        
+
         public ActionResult ForgotPassword()
         {
             return View();
@@ -254,7 +258,7 @@ namespace eTUTOR.Controllers
                         {
                             return RedirectToAction("InfoOfStudent", "Student");
                         }
-                        
+
                     }
                     if (student.status == 2)
                     {
@@ -294,7 +298,7 @@ namespace eTUTOR.Controllers
                         {
                             return RedirectToAction("InfoOfParent", "Parent");
                         }
-                        
+
                     }
                     if (parent.status == 2)
                     {

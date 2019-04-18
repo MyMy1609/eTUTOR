@@ -38,35 +38,29 @@
                             <div><span style="color:brown">@ViewBag.Er</span></div>
                         }
                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Họ và tên không được rỗng">
-                            <span class="lnr lnr-user"></span>
                             <input id="fullname" type="text" class="form-control input100" name="fullname" placeholder="Họ và tên" autocomplete="off">
-                            <span class="text-danger focus-input100" id="fullnames"></span>
+                            <div class="text-danger focus-input100" id="fullnames"></div>
                         </div>
                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Username không được rỗng">
-                            <span class="lnr lnr-users"></span>
                             <input id="username" type="text" class="form-control input100" name="username" placeholder="Tên tài khoản" autocomplete="off">
-                            <span class="text-danger focus-input100" id="usernames"></span>
+                            <div class="text-danger focus-input100" id="usernames"></div>
                         </div>
                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Số điện thoại không được rỗng">
-                            <span class="lnr lnr-phone-handset"></span>
                             <input id="phone" type="text" class="form-control input100" name="phone" placeholder="Số điện thoại" autocomplete="off">
-                            <span class="text-danger focus-input100" id="phones"></span>
+                            <div class="text-danger focus-input100" id="phones"></div>
                         </div>
                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Email không được rỗng và phải đúng định dạng">
-                            <span class="lnr lnr-envelope"></span>
                             <input id="email" type="email" class="form-control input100" name="email" placeholder="Email" autocomplete="off">
-                            <span class="text-danger focus-input100" id="emails"></span>
+                            <div class="text-danger focus-input100" id="emails"></div>
                         </div>
                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Mật khẩu không được rỗng">
-                            <span class="lnr lnr-lock"></span>
                             <input id="password" type="password" class="form-control input100" name="password" placeholder="Mật khẩu" autocomplete="off">
-                            <span class="text-danger focus-input100" id="passwords"></span>
+                            <div class="text-danger focus-input100" id="passwords"></div>
                         </div>
                         <div class="form-holder wrap-input100 validate-input form-group input100" data-validate="Nhập lại mật khẩu không được rỗng và phải trùng với mật khẩu">
-                            <span class="lnr lnr-lock"></span>
                             <input id="confirmpassword" type="password" class="form-control" name="confirmpassword" placeholder="Nhập lại mật khẩu" autocomplete="off">
                             <div class="password-error" style="color:red;margin-top:10px;"></div>
-                            <span class="text-danger focus-input100" id="confirmpasswords"></span>
+                            <div class="text-danger focus-input100" id="confirmpasswords"></div>
                         </div>
                     </div>
                     <div class="sub">
@@ -125,17 +119,21 @@
         })
         function validation() {
             var role = $('input[type="radio"][name="role"]:checked').val();
+            var check = false;
             switch (role) {
                 case "0":
-                    return validateForTuTor();
-                case "1":
-                    return validateForParent();
-                case "2":
-                    return validateForStudent();
-                default:
-                    return false;
+                    check = validateForTuTor();
                     break;
+                case "1":
+                    check = validateForParent();
+                    break;
+                case "2":
+                    check = validateForStudent();
+                    break;
+                default:
+                    check = false;
             }
+            return check;
 
         }
         function checkConfirmPassword() {
@@ -153,51 +151,42 @@
 
         function renderSubForm(tab) {
             var teacherContent = `	<div class="form-holder wrap-input100 validate-input form-group" data-validate="Địa chỉ không được rỗng">
-                                            <span class="lnr lnr-user"></span>
                                             <input id="address" type="text" class="form-control input100" name="address"  placeholder="Địa chỉ" autocomplete="off">
-                                            <span class="text-danger focus-input100" id="addresss"></span>
+                                            <div class="text-danger focus-input100" id="addresss"></div>
                                         </div>
                                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Ngày sinh không được rỗng">
-                                            <span class="lnr lnr-phone-handset"></span>
                                             <input id="birthday" type="text" class="form-control input100" name="birthday" placeholder="Ngày sinh" autocomplete="off">
-                                            <span class="text-danger focus-input100" id="birthdays"></span>
+                                            <div class="text-danger focus-input100" id="birthdays"></div>
                                         </div>
                                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Chuyên ngành giảng dạy không được rỗng">
-                                            <span class="lnr lnr-envelope"></span>
                                             <input id="specialized" type="text" class="form-control input100" name="specialized" placeholder="Chuyên ngành giảng dạy	" autocomplete="off">
-                                            <span class="text-danger focus-input100" id="specializeds"></span>
+                                            <div class="text-danger focus-input100" id="specializeds"></div>
                                         </div>
                                         <div class="form-holder">
-                                            <span class="lnr lnr-envelope"></span>
-                                            <select name="experience" id="" class="form-control" style="border: none">
-                                            <option value="" disabled selected>Năm kinh nghiệm</option>
-                                            <option value="1">Không kinh nghiệm</option>
-                                            <option value="2">+1</option>
-                                            <option value="3">+3</option>
-                                            <option value="4">+5</option>
-                                        </select>
+                                            <select name="experience" id="experience" class="form-control" style="border: none">
+                                                <option value="" disabled selected>Năm kinh nghiệm</option>
+                                                <option value="1">Không kinh nghiệm</option>
+                                                <option value="2">+1</option>
+                                                <option value="3">+3</option>
+                                                <option value="4">+5</option>
+                                            </select>
                                             <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+                                            <div class="text-danger focus-input100" id="experiences"></div>
                                         </div>
-                                        <div class="form-holder">
-                                            <span class="lnr lnr-lock"></span>
-                                            <input type="file" class="form-control" name="certificate" placeholder="Bằng cấp">
-                                        </div>`;
+                                        `;
             var parentContent = `
                                         `;
             var studentContent = `
                                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Địa chỉ không được rỗng">
-                                            <span class="lnr lnr-lock"></span>
                                             <input id="address" type="text" class="form-control input100" name="address" placeholder="Địa chỉ" autocomplete="off">
-                                            <span class="text-danger focus-input100" id="addresss"></span>
+                                            <div class="text-danger focus-input100" id="addresss"></div>
                                         </div>
                                         <div class="form-holder wrap-input100 validate-input form-group" data-validate="Ngày sinh không được rỗng">
-                                            <span class="lnr lnr-lock"></span>
                                             <input id="birthday" type="text" class="form-control input100" name="birthday" placeholder="Ngày sinh" autocomplete="off">
-                                            <span class="text-danger focus-input100" id="birthdays"></span>
+                                            <div class="text-danger focus-input100" id="birthdays"></div>
                                         </div>
                                         <div class="form-holder">
-                                            <span class="lnr lnr-phone-handset"></span>
-                                            <select name="Class" id="" class="form-control" style="border: none">
+                                            <select name="Class" id="class" class="form-control" style="border: none">
                                                 <option value="" disabled selected>Lớp</option>
                                                 <option value="1">Lớp 1</option>
                                                 <option value="2">Lớp 2</option>
@@ -213,6 +202,7 @@
                                                 <option value="12">Lớp 12</option>
                                             </select>
                                             <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+                                            <div class="text-danger focus-input100" id="classs"></div>
                                         </div>
                                         `;
             var subContentArr = [teacherContent, parentContent, studentContent];
@@ -231,30 +221,31 @@
             var address = document.getElementById('address').value;
             var birthday = document.getElementById('birthday').value;
             var specialized = document.getElementById('specialized').value;
-
+            var experience = document.getElementById('experience').value;
+            var notError = true;
             if (fullname == "") {
-                document.getElementById('fullnames').innerHTML = " ** Họ và tên không được rỗng";
-                return false;
+                document.getElementById('fullnames').innerHTML = "** Họ và tên không được rỗng";
+                notError = false;
             }
             if (username == "") {
                 document.getElementById('usernames').innerHTML = " ** Tên đăng nhập không được rỗng";
-                return false;
+                notError = false;
             }
             if (phone == "") {
                 document.getElementById('phones').innerHTML = " ** Số điện thoại không được rỗng";
-                return false;
+                notError = false;
             }
             if (isNaN(phone)) {
                 document.getElementById('phones').innerHTML = " ** Số điện thoại phải là số";
-                return false;
+                notError = false;
             }
             if (phone.length != 10) {
                 document.getElementById('phones').innerHTML = " ** Số điện thoại phải có 10 số trở lên";
-                return false;
+                notError = false;
             }
             if (email == "") {
                 document.getElementById('emails').innerHTML = " ** Email không được rỗng";
-                return false;
+                notError = false;
             }
             @*if (email.indexOf('@') <= 0) {
                 document.getElementById('emails').innerHTML = " **Email không hợp lệ";
@@ -263,32 +254,37 @@
 
 			if ((email.charAt(email.length - 4) != '.') && (email.charAt(email.length - 3) != '.')) {
                 document.getElementById('emails').innerHTML = " ** Email phải đúng định dạng: ex@abc.xyz";
-                return false;
+                notError = false;
             }
             if (password == "") {
-                document.getElementById('Passwords').innerHTML = " ** Mật khẩu không được rỗng";
-                return false;
+                document.getElementById('passwords').innerHTML = " ** Mật khẩu không được rỗng";
+                notError = false;
             }
             if (password != confirmpassword) {
                 document.getElementById('confirmpasswords').innerHTML = " ** Xác nhận mật khẩu phải trùng với Mật khẩu";
-                return false;
+                notError = false;
             }
             if (confirmpassword == "") {
                 document.getElementById('confirmpasswords').innerHTML = " ** Xác nhận mật khẩu không được rỗng";
-                return false;
+                notError = false;
             }
             if (address == "") {
                 document.getElementById('addresss').innerHTML = " ** Địa chỉ không được rỗng";
-                return false;
+                notError = false;
             }
             if (birthday == "") {
                 document.getElementById('birthdays').innerHTML = " ** Ngày sinh không được rỗng";
-                return false;
+                notError = false;
             }
             if (specialized == "") {
                 document.getElementById('specializeds').innerHTML = " ** Chuyên ngành giảng dạy không được rỗng";
-                return false;
+                notError = false;
             }
+            if (experience == "") {
+                document.getElementById('experiences').innerHTML = " ** Năm kinh nghiệm không được rỗng";
+                notError = false;
+            }
+            return false;
         }
         function validateForParent() {
             var fullname = document.getElementById('fullname').value;
@@ -297,30 +293,30 @@
             var email = document.getElementById('email').value;
             var password = document.getElementById('password').value;
             var confirmpassword = document.getElementById('confirmpassword').value;
-
+            var notError = true;
             if (fullname == "") {
                 document.getElementById('fullnames').innerHTML = " ** Họ và tên không được rỗng";
-                return false;
+                notError = false;
             }
             if (username == "") {
                 document.getElementById('usernames').innerHTML = " ** Tên đăng nhập không được rỗng";
-                return false;
+                notError = false;
             }
             if (phone == "") {
                 document.getElementById('phones').innerHTML = " ** Số điện thoại không được rỗng";
-                return false;
+                notError = false;
             }
             if (isNaN(phone)) {
                 document.getElementById('phones').innerHTML = " ** Số điện thoại phải là số";
-                return false;
+                notError = false;
             }
             if (phone.length != 10) {
                 document.getElementById('phones').innerHTML = " ** Số điện thoại phải có 10 số trở lên";
-                return false;
+                notError = false;
             }
             if (email == "") {
                 document.getElementById('emails').innerHTML = " ** Email không rỗng và phải đúng định dạng: ex@abc.xyz";
-                return false;
+                notError = false;
             }
             @*if (email.indexOf('@') <= 0) {
                 document.getElementById('emails').innerHTML = " **Email không hợp lệ";
@@ -329,20 +325,21 @@
 
 			if ((email.charAt(email.length - 4) != '.') && (email.charAt(email.length - 3) != '.')) {
                 document.getElementById('emails').innerHTML = " ** Email không đúng định dạng";
-                return false;
+                notError = false;
             }
             if (password == "") {
-                document.getElementById('Passwords').innerHTML = " ** Mật khẩu không được rỗng";
-                return false;
+                document.getElementById('passwords').innerHTML = " ** Mật khẩu không được rỗng";
+                notError = false;
             }
             if (password != confirmpassword) {
                 document.getElementById('confirmpasswords').innerHTML = " ** Xác nhận mật khẩu phải trùng với Mật khẩu";
-                return false;
+                notError = false;
             }
             if (confirmpassword == "") {
                 document.getElementById('confirmpasswords').innerHTML = " ** Xác nhận mật khẩu không được rỗng";
-                return false;
+                notError = false;
             }
+            return notError;
         }
         function validateForStudent() {
             var fullname = document.getElementById('fullname').value;
@@ -353,30 +350,30 @@
             var confirmpassword = document.getElementById('confirmpassword').value;
             var address = document.getElementById('address').value;
             var birthday = document.getElementById('birthday').value;
-
+            var classs = document.getElementById('class').value;
             if (fullname == "") {
                 document.getElementById('fullnames').innerHTML = " ** Họ và tên không được rỗng";
-                return false;
+                notError = false;
             }
             if (username == "") {
                 document.getElementById('usernames').innerHTML = " ** Tên đăng nhập không được rỗng";
-                return false;
+                notError = false;
             }
             if (phone == "") {
                 document.getElementById('phones').innerHTML = " ** Số điện thoại không được rỗng";
-                return false;
+                notError = false;
             }
             if (isNaN(phone)) {
                 document.getElementById('phones').innerHTML = " ** Số điện thoại phải là số";
-                return false;
+                notError = false;
             }
             if (phone.length != 10) {
                 document.getElementById('phones').innerHTML = " ** Số điện thoại phải có 10 số trở lên";
-                return false;
+                notError = false;
             }
             if (email == "") {
                 document.getElementById('emails').innerHTML = " ** Email không rỗng và phải đúng định dạng: ex@abc.xyz";
-                return false;
+                notError = false;
             }
             @*if (email.indexOf('@') <= 0) {
                 document.getElementById('emails').innerHTML = " **Email không hợp lệ";
@@ -385,28 +382,33 @@
 
 			if ((email.charAt(email.length - 4) != '.') && (email.charAt(email.length - 3) != '.')) {
                 document.getElementById('emails').innerHTML = " ** Email không đúng định dạng";
-                return false;
+                notError = false;
             }
             if (password == "") {
-                document.getElementById('Passwords').innerHTML = " ** Mật khẩu không được rỗng";
-                return false;
+                document.getElementById('passwords').innerHTML = " ** Mật khẩu không được rỗng";
+                notError = false;
             }
             if (password != confirmpassword) {
                 document.getElementById('confirmpasswords').innerHTML = " ** Xác nhận mật khẩu phải trùng với Mật khẩu";
-                return false;
+                notError = false;
             }
             if (confirmpassword == "") {
                 document.getElementById('confirmpasswords').innerHTML = " ** Xác nhận mật khẩu không được rỗng";
-                return false;
+                notError = false;
             }
             if (address == "") {
                 document.getElementById('addresss').innerHTML = " ** Địa chỉ không được rỗng";
-                return false;
+                notError = false;
             }
             if (birthday == "") {
                 document.getElementById('birthdays').innerHTML = " ** Ngày sinh không được rỗng";
-                return false;
+                notError = false;
             }
+            if (classs == "") {
+                document.getElementById('classs').innerHTML = " ** Lớp không được rỗng";
+                notError = false;
+            }
+            return notError;
         }
     </script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
