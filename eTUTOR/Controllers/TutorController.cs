@@ -115,7 +115,7 @@ namespace eTUTOR.Controllers
         }
         [Filter.Authorize]
         [HttpPost]
-        public ActionResult ConfirmScheduleTutor(int idgiasu, int idmonhoc, int[] idschedule)
+        public ActionResult ConfirmScheduleTutor(int idgiasu, int idmonhoc, int[] idschedule, int soBuoi)
         {
             string idst = Session["UserID"].ToString();
             int idStudent = int.Parse(idst);
@@ -130,10 +130,10 @@ namespace eTUTOR.Controllers
                     newss.day_otw = schh.day_otw;
                     newss.start_time = schh.start_time;
                     newss.end_time = schh.end_time;
-                    newss.@class = "10";
+                    newss.@class = std.@class.ToString();
                     newss.student_id = idStudent;
                     newss.tutor_id = idgiasu;
-                    newss.total_sessions = 10;
+                    newss.total_sessions = soBuoi;
                     newss.subject_id = idmonhoc;
                     newss.status_admin = 2;
                     newss.status_tutor = 2;
@@ -150,7 +150,7 @@ namespace eTUTOR.Controllers
         }
         [Filter.Authorize]
         [HttpPost]
-        public ActionResult ConfirmScheduleTutorParent(int idgiasu, int idmonhoc, int[] idschedule, int idSon)
+        public ActionResult ConfirmScheduleTutorParent(int idgiasu, int idmonhoc, int[] idschedule, int idSon, int soBuoi)
         {
 
             int idStudent = idSon;
@@ -168,7 +168,7 @@ namespace eTUTOR.Controllers
                     newss.@class = std.@class.ToString();
                     newss.student_id = idStudent;
                     newss.tutor_id = idgiasu;
-                    newss.total_sessions = 10;
+                    newss.total_sessions = soBuoi;
                     newss.subject_id = idmonhoc;
                     newss.status_admin = 2;
                     newss.status_tutor = 2;
