@@ -31,7 +31,7 @@ namespace eTUTOR.Controllers
             return View(user);
         }
         [HttpPost]
-        public ActionResult RegisterTuTor(tutor tutor /*HttpPostedFileBase certificate, string password,*/ /*string email*/)
+        public ActionResult RegisterTuTor(tutor tutor/*, HttpPostedFileBase certificate, string password, string email*/)
         {
             string email = "";
             string password = "";
@@ -42,11 +42,7 @@ namespace eTUTOR.Controllers
 
                 //add new tutor
                 tutor.status = 2;
-                //if (certificate != null && certificate.ContentLength > 0)
-                //{
-                //    tutor.certificate = certificate.FileName;
-                //}
-                //tutor.specialized = tutor.specialized.ToUpper();
+                tutor.specialized = tutor.specialized.ToUpper();
 
                 tutor.password = commonService.hash(tutor.password);
                 tutor.dateCreate = DateTime.Now;
@@ -80,7 +76,6 @@ namespace eTUTOR.Controllers
         }
         public ActionResult RegisterStudent(student student/*, string password*/)
         {
-            string password = "";
             var studentEmail = model.students.FirstOrDefault(x => x.email == student.email);
             if (studentEmail == null)
             {
@@ -193,10 +188,10 @@ namespace eTUTOR.Controllers
         [HttpPost]
         public ActionResult Login(string email, string password, string returnUrl)
         {
-            var tutor = model.tutors.FirstOrDefault(x => x.email == email);
-            var student = model.students.FirstOrDefault(x => x.username == email);
-            var parent = model.parents.FirstOrDefault(x => x.email == email);
-            var admin = model.admins.FirstOrDefault(x => x.email == email);
+            var tutor = model.tutors.FirstOrDefault(x => x.email == email || x.username == email);
+            var student = model.students.FirstOrDefault(x => x.username == email || x.email == email);
+            var parent = model.parents.FirstOrDefault(x => x.email == email || x.username == email);
+            var admin = model.admins.FirstOrDefault(x => x.email == email || x.username == email);
 
             password = commonService.hash(password);
             if (tutor != null)
@@ -336,11 +331,11 @@ namespace eTUTOR.Controllers
             //    }
 
             //}
-            ViewBag.msg = "username không tồn tại";
+            ViewBag.msg = "username hoặc email không tồn tại";
             return View("Login");
 
 
-        }
+        } 
 
         public ActionResult Logout()
         {
