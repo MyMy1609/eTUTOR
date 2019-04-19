@@ -73,7 +73,7 @@ namespace eTUTOR.Tests.Controllers
 
             //Assert
             Assert.IsNotNull(redirectRoute);
-            Assert.AreEqual("username không tồn tại", redirectRoute.ViewBag.msg);
+            Assert.AreEqual("username hoặc email không tồn tại", redirectRoute.ViewBag.msg);
             Assert.AreEqual("Login", redirectRoute.ViewName);
         }
         //Test case : tutor login with Valid email and Invalid password
@@ -220,7 +220,7 @@ namespace eTUTOR.Tests.Controllers
 
             //Assert
             Assert.IsNotNull(redirectRoute);
-            Assert.AreEqual("username không tồn tại", redirectRoute.ViewBag.msg);
+            Assert.AreEqual("username hoặc email không tồn tại", redirectRoute.ViewBag.msg);
             Assert.AreEqual("Login", redirectRoute.ViewName);
         }
         //Test case : student login with valid username and invalid password
@@ -369,7 +369,7 @@ namespace eTUTOR.Tests.Controllers
 
             //Assert
             Assert.IsNotNull(redirectRoute);
-            Assert.AreEqual("username không tồn tại", redirectRoute.ViewBag.msg);
+            Assert.AreEqual("username hoặc email không tồn tại", redirectRoute.ViewBag.msg);
             Assert.AreEqual("Login", redirectRoute.ViewName);
         }
         //Test case : parent login with valid email and invalid password
