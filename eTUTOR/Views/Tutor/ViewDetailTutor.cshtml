@@ -78,7 +78,7 @@
                             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                         </ul>
                         @Html.ActionLink("Đăng kí gia sư", "checkSession", new { iddd = Model.tutor_id, types = ViewBag.typeUser }, new { @class = "btn btn-success" })
-                        @ViewBag.typeUser
+                        
                     </div>
                 </div>
                 <div class="row mt-30">
@@ -298,7 +298,7 @@
                 user: "Vui lòng nhập họ và tên",
                 mobileNumber: {
                     required: "Vui lòng nhập số điện thoại",
-                    minlength: "Số điện thoại phải là số",
+                    minlength: "Số điện thoại phải là số và đủ 10 kí tự",
                 },
                 emails: {
                     required: "Vui lòng nhập Email",

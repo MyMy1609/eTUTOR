@@ -219,15 +219,16 @@ namespace eTUTOR.Controllers
                             return RedirectToAction("InfoOfTutor", "Tutor");
                         }
                     }
-                    if (tutor.status == 2)
-                    {
-                        ViewBag.msg = "Tài khoản của bạn chưa được kích hoạt";
-                        return View("Login");
-                    }
+                    
                     if (tutor.status == 3)
                     {
                         ViewBag.msg1 = "Tài khoản của bạn đã bị khóa , vui lòng liên hệ ban quản trị hệ thống";
                         return View("Login");
+                    }
+                    else
+                    {
+                            ViewBag.msg = "Tài khoản của bạn chưa được kích hoạt";
+                            return View("Login");
                     }
                 }
                 else
