@@ -28,11 +28,11 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="~/Content/vendor/bootstrap/css/demo.css" rel="stylesheet" />
-    <link href="~/Content/vendor/bootstrap/css/parent.css" rel="stylesheet" />
+    <link href="~/Content/vendor/bootstrap/css/tutor.css" rel="stylesheet" />
     <link href="~/Content/vendor/bootstrap/css/avatar.css" rel="stylesheet" />
-    @*<link href="~/Content/build/css/page/infoOfTutor.css" rel="stylesheet" />*@
     <link href="~/Content/vendor/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
     <link href="~/Content/build/css/TutorHomePage.component.css" rel="stylesheet" />
+    <link href="~/Content/vendor/bootstrap/responsive/tutor.css" rel="stylesheet" />
 }
 
 
@@ -45,8 +45,8 @@
     {
         <span class="success">@ViewBag.sc</span>
     }
-    <div class="container row mt-3">
-        <div class="left col-4">
+    <div class="container row mt-3" style="margin-top:5%">
+        <div class="left col-sm-5 col-md-5 col-sm-12">
             @if (Model.status_register == 1)
             {
                 <img src="~/Content/img/avatar/tutor/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height="200px" width="200px" onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'"
@@ -224,14 +224,6 @@
                                                     <input type="number" id="phone" value="@Model.phone">
                                                 </td>
                                             </tr>
-                                            @*<tr>
-                                                    <td class="tdl">
-                                                        Email
-                                                    </td>
-                                                    <td class="tdr">
-                                                        <input type="email" id="email" value="@Model.email" disabled>
-                                                    </td>
-                                                </tr>*@
                                             <tr>
                                                 <td class="tdl">
                                                     Chuyên ngành dạy
@@ -299,11 +291,11 @@
             </table>
 
         </div>
-        <div class="right col-8" style="padding-bottom:30px">
+        <div class="right col-sm-7 col-md-7 col-sm-12" style="padding-bottom:30px">
             <div>
                 @if (Model.status_register == 1)
                 {
-                    <h3 style="border: 2px solid green; border-radius: 10px; width: 900px;" class="p-3 pl-3">
+                    <h3 class="p-3 pl-3 titleTutor" style="margin-top:10%">
                         KÊNH GIA SƯ
 
                         <span class="pull-right" style="font-size:12px;color:green">
@@ -314,7 +306,7 @@
                 }
                 else
                 {
-                    <h3 style="border: 2px solid red; border-radius: 10px; width: 900px;" class="p-3 pl-3">
+                    <h3 class="p-3 pl-3 titleTutor">
                         KÊNH GIA SƯ
                         <span class="pull-right" style="font-size:12px; color:red;text-transform:uppercase;text-decoration-style:double">
                             @Html.ActionLink("Mở", "registScheduleManager", new { types = Model.tutor_id }, new { @class = "btn btn-danger" })
@@ -326,7 +318,7 @@
 
                 <div id="demo-accordion-collapse" role="tablist">
                     @*Danh sách buổi học*@
-                    <div class="card" style="width: 900px">
+                    <div class="card">
                         <div class="card-header" role="tab" id="accord2" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 0px">
                             <h5 class="mb-0">
                                 <a class="collapsed" data-toggle="collapse" href="#collapse-pane-2" role="button" aria-expanded="false" aria-controls="collapse-pane-2" style="font-size:20px">
@@ -359,7 +351,7 @@
                         </div>
                     </div>
                     @*Duyệt học sinh đăng ký học*@
-                    <div class="card" style="width: 900px">
+                    <div class="card" >
                         <div class="card-header" role="tab" id="accord3" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 13px; margin-top:10px">
                             <h5 class="mb-0">
                                 <a class="collapsed" data-toggle="collapse" href="#collapse-pane-3" role="button" aria-expanded="false" aria-controls="collapse-pane-3" style="font-size:20px">
@@ -429,7 +421,7 @@
                         </div>
                     </div>
                     @*Quản lý lịch biểu*@
-                    <div class="card" style="width: 900px">
+                    <div class="card" >
                         <div class="card-header" role="tab" id="accord4" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 13px; margin-top:10px">
                             <h5 class="mb-0">
                                 <a class="collapsed" data-toggle="collapse" href="#collapse-pane-4" role="button" aria-expanded="false" aria-controls="collapse-pane-4" style="font-size:20px">
@@ -442,9 +434,9 @@
                             <div class="card-body row">
                                 <h6 class="ml-3"> <strong>Thêm buổi học</strong> </h6>
                                 <form id="schedule" action="/Tutor/CreateSchedule" method="post" >
-                                    <div class="row" style="margin-top:30px">
-                                        <div class="form-wrapper col-3">
-                                            <select id="day" name="day_otw" class="form-control" style=" width: 225px; border-radius:6px">
+                                    <div class="row" style="margin-top:20px">
+                                        <div class="form-wrapper col-xs-6 col-sm-6 col-md-6 col-lg-12">
+                                            <select id="day" name="day_otw" class="form-control" style=" width:125px; border-radius:6px">
                                                 <option value="" disabled selected>Thứ</option>
                                                 <option value="Thứ 2">Thứ 2</option>
                                                 <option value="Thứ 3">Thứ 3</option>
@@ -458,22 +450,22 @@
                                             <br>
                                             <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
                                         </div>
-                                        <div class="col-3">
-                                            <input id="star" type="time" name="start_time" style="border-radius: 5px;  height: 65%; width: 220px"
+                                        <div class="form-wrapper col-xs-3 col-sm-6 col-md-6 col-lg-12">
+                                            <input id="star" type="time" name="start_time" style="border-radius: 5px;  height:40px; width: 112px"
                                                    placeholder="Giờ bắt đầu" autocomplete="off">
                                             <span id="stars"></span>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="form-wrapper col-xs-3 col-sm-6 col-md-6 col-lg-12">
                                             <input id="end" type="time" name="end_time"
-                                                   style="border-radius: 5px; height: 65%; width: 220px"
+                                                   style="border-radius: 5px; height:40px; width: 112px"
                                                    placeholder="Giờ kết thúc">
                                             <span id="ends"></span>
                                         </div>
-
-                                        <div class="form-wrapper col-3">
-                                            <div class="col-1">
-                                                <button type="submit" id="btn-create-schedule" class="btn btn-primary btn btn-success" style="background-color:crimson;margin-top:30px; font-size:17px; color:white; border-radius: 100%">+</button>
-                                            </div>
+                                        <div class="form-wrapper col-xs-3 col-sm-6 col-md-6 col-lg-12">
+                                                <button type="submit" id="btn-create-schedule" class="btn btn-primary btn btn-success" 
+                                                        style="background-color:crimson;margin-top:30px; 
+                                                                font-size:17px; color:white;
+                                                                 border-radius: 100%">+</button>
                                         </div>
                                     </div>
                                 </form>
@@ -583,7 +575,7 @@
                         </div>
                     </div>
                     @*lịch sử dạy học*@
-                    <div class="card" style="width: 900px">
+                    <div class="card" >
                         <div class="card-header mt-2" role="tab" id="accord6" style="border-radius: 10px; background-color: indianred; font-size: 20px; padding-left: 10px; padding-bottom: 15px">
                             <h5 class="mb-0">
                                 <a class="collapsed" data-toggle="collapse" href="#collapse-pane-6" role="button" aria-expanded="false"

@@ -3,6 +3,7 @@
   overflow: auto;
  
 }
+
 #left {
   width: 350px;
   padding: 1em;
@@ -23,6 +24,7 @@
   background-color: white; 
   border-radius: 4%;
 }
+
 /* profile*/
 .avatar {
   display: block;
@@ -30,6 +32,11 @@
   width: 300px;
   height: 300px;
   border-radius: 5%;
+}
+.titleParent {
+    border: 2px solid pink;
+    border-radius: 10px;
+    width: 765px;
 }
 .namepro {
   text-align: center;

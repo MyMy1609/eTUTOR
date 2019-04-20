@@ -24,21 +24,21 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="~/Content/vendor/bootstrap/css/demo.css" rel="stylesheet" />
-    <link href="~/Content/vendor/bootstrap/css/parent.css" rel="stylesheet" />
     <link href="~/Content/vendor/bootstrap/css/avatar.css" rel="stylesheet" />
-    <link href="~/Content/vendor/bootstrap/css/infoOfStudent.css" rel="stylesheet" />
+    <link href="~/Content/vendor/bootstrap/css/student.css" rel="stylesheet" />
+    <link href="~/Content/vendor/bootstrap/responsive/student.css" rel="stylesheet" />
 }
 @*col-sm-7 col-md-7 col-sm-12*@
 
 <div class="image-container set-full-height">
 
-    <div class="container row">
-        <div class="left col-sm-4 col-md-4 col-sm-12">
+    <div class="container row" style="margin-top:5%">
+        <div class="left col-sm-5 col-md-5 col-sm-12">
             <img src="~/Content/img/avatar/student/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" height="200px" width="200px onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'"
                  alt="avatar" style="border-radius: 10%;margin-top: 0px;">
             <a class="btn btn-primary p-2" data-toggle="modal" data-target="#avatar"
                style="margin-left: 5%">
-                <img src="/Content/img/edit.png" width="20px" height="20px"  />
+                <img src="/Content/img/edit.png" width="20px" height="20px" />
             </a>
             <div class="modal" id="avatar">
                 <div class="modal-dialog">
@@ -236,13 +236,15 @@
             </table>
 
         </div>
-        <div class="right col-sm-8 col-md-8 col-sm-12">
+        <div class="right col-sm-7 col-md-7 col-sm-12">
             <div>
-                <h3 style="border: 2px solid pink; border-radius: 10px; width: 948px;" class="p-3 pl-3">KÊNH HỌC SINH</h3>
+                <h3 class="p-3 pl-3 titleStudent">KÊNH HỌC SINH</h3>
                 <div id="demo-accordion-collapse" role="tablist">
                     @*Danh sách buổi học*@
-                    <div class="card" style="width: 900px">
-                        <div class="card-header" role="tab" id="accord2" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 0px">
+                    <div class="card" >
+                        <div class="card-header" role="tab" id="accord2" style="border-radius: 10px; background-color:indianred; 
+                                                                                font-size: 8px; padding-left: 10px;
+                                                                                padding-bottom: 15px; padding-top: 0px">
                             <h5 class="mb-0">
                                 <a class="collapsed" data-toggle="collapse" href="#collapse-pane-2" role="button" aria-expanded="false" aria-controls="collapse-pane-2" style="font-size:20px">
                                     Danh sách buổi học
@@ -277,7 +279,7 @@
                         </div>
                     </div>
                     @*Xem lịch sử học tập*@
-                    <div class="card" style="width: 900px">
+                    <div class="card">
                         <div class="card-header" role="tab" id="accord6" style="border-radius: 10px; background-color: indianred; font-size: 20px; padding-left: 10px; padding-bottom: 15px; margin-top:10px">
                             <h5 class="mb-0">
                                 <a class="collapsed" data-toggle="collapse" href="#collapse-pane-6" role="button" aria-expanded="false"
@@ -338,7 +340,7 @@
                         </div>
 
                     </div>
-                    <div class="card" style="width: 900px">
+                    <div class="card" >
                         <div class="card-header" role="tab" id="accord6" style="border-radius: 10px; background-color: indianred; font-size: 20px; padding-left: 10px; padding-bottom: 15px; margin-top:10px">
                             <h5 class="mb-0">
                                 <a class="collapsed" data-toggle="collapse" href="#collapse-pane-7" role="button" aria-expanded="false"

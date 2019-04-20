@@ -25,8 +25,9 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="~/Content/vendor/bootstrap/css/demo.css" rel="stylesheet" />
-    <link href="~/Content/vendor/bootstrap/css/parent.css" rel="stylesheet" />
     <link href="~/Content/vendor/bootstrap/css/avatar.css" rel="stylesheet" />
+    <link href="~/Content/vendor/bootstrap/css/parent.css" rel="stylesheet" />
+    <link href="~/Content/vendor/bootstrap/responsive/parent.css" rel="stylesheet" />
     <style>
         .error {
             color: red;
@@ -38,8 +39,8 @@
 
 <div class="image-container set-full-height">
 
-    <div class="container row">
-        <div class="left col-4">
+    <div class="container row" style="margin-top:3%">
+        <div class="left col-sm-5 col-md-5 col-sm-12">
             <img src="~/Content/img/avatar/parent/@Html.DisplayFor(model => model.avatar)" class="ml-4 mt-4" onerror="this.onerror = null; this.src='https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'"
                  alt="avatar" style="border-radius: 20%;margin-top: 0px;  height:250px; width:250px;">
             <a class="btn btn-primary p-2" data-toggle="modal" data-target="#avatar"
@@ -194,12 +195,12 @@
             </table>
 
         </div>
-<div class="right col-6">
+<div class="right col-sm-7 col-md-7 col-sm-12">
     <div>
-        <h3 style="border: 2px solid pink; border-radius: 10px; width: 948px;" class="p-3 pl-3">KÊNH PHỤ HUYNH</h3>
+        <h3 class="p-3 pl-3 titleParent" style="border: 2px solid pink; border-radius: 10px;">KÊNH PHỤ HUYNH</h3>
         <div id="demo-accordion-collapse" role="tablist">
 
-            <div class="card" style="width: 900px">
+            <div class="card">
                 <div class="card-header" role="tab" id="accord2" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 0px">
                     <h5 class="mb-0">
                         <a class="collapsed" data-toggle="collapse" href="#collapse-pane-2" role="button" aria-expanded="false" aria-controls="collapse-pane-2" style="font-size:20px" style="font-size:20px">
@@ -235,7 +236,7 @@
                 </div>
             </div>
 
-            <div class="card" style="width: 900px">
+            <div class="card">
                 <div class="card-header" role="tab" id="accord4" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 13px; margin-top:10px">
                     <h5 class="mb-0">
                         <a class="collapsed" data-toggle="collapse" href="#collapse-pane-4" role="button" aria-expanded="false" aria-controls="collapse-pane-4" style="font-size:20px">
@@ -256,7 +257,7 @@
                 </div>
             </div>
 
-            <div class="card" style="width: 900px">
+            <div class="card">
                 <div class="card-header" role="tab" id="accord5" style="border-radius: 10px; background-color:indianred; font-size: 8px; padding-left: 10px; padding-bottom: 15px; padding-top: 13px; margin-top:10px">
                     <h5 class="mb-0">
                         <a class="collapsed" data-toggle="collapse" href="#collapse-pane-5" role="button" aria-expanded="false" aria-controls="collapse-pane-5" style="font-size:20px">
@@ -404,10 +405,10 @@ new { enctype = "multipart/form-data" }))
                                                             <table class="table">
                                                                 <tr>
                                                                     <td>
-                                                                        Tên học sinh <input type="text" name="idStudent" class="form-control" value="@childAccount.student_id" required hidden/>
+                                                                        Tên học sinh <input type="text" name="idStudent" class="form-control" value="@childAccount.student_id" required hidden />
                                                                     </td>
                                                                     <td>
-                                                                        <input type="text" name="fullname" class="form-control" value="@childAccount.fullname" required/>
+                                                                        <input type="text" name="fullname" class="form-control" value="@childAccount.fullname" required />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -415,7 +416,7 @@ new { enctype = "multipart/form-data" }))
                                                                         Tên tài khoản
                                                                     </td>
                                                                     <td>
-                                                                        <input type="text" name="username" class="form-control" value="@childAccount.username"  required/>
+                                                                        <input type="text" name="username" class="form-control" value="@childAccount.username" required />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -431,7 +432,7 @@ new { enctype = "multipart/form-data" }))
                                                                         Email
                                                                     </td>
                                                                     <td>
-                                                                        <input type="text" name="email" class="form-control" value="@childAccount.email" required/>
+                                                                        <input type="text" name="email" class="form-control" value="@childAccount.email" required />
                                                                     </td>
                                                                 </tr>
 
@@ -496,7 +497,7 @@ new { enctype = "multipart/form-data" }))
                 </div>
             </div>
 
-            <div class="card" style="width: 900px">
+            <div class="card">
                 <div class="card-header" role="tab" id="accord6" style="border-radius: 10px; background-color: indianred; font-size: 20px; padding-left: 10px; padding-bottom: 15px; margin-top:10px">
                     <h5 class="mb-0">
                         <a class="collapsed" data-toggle="collapse" href="#collapse-pane-6" role="button" aria-expanded="false"
@@ -596,7 +597,7 @@ new { enctype = "multipart/form-data" }))
 
     <script type="text/javascript">
 
-        
+
         $(function () {
             getSessionList(-1);
 

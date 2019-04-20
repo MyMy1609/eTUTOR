@@ -12,7 +12,7 @@ namespace eTUTOR.Controllers
         eTUITOREntities model = new eTUITOREntities();
         public ActionResult Index()
         {
-            var listTT = model.tutors.ToList().Where(x => x.status_register == 1);
+            var listTT = model.tutors.ToList().Where(x => x.status_register == 1).Take(6);
             return View(listTT);
         }
 
