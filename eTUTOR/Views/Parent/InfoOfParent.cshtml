@@ -795,7 +795,7 @@ new { enctype = "multipart/form-data" }))
             $(".student_sub").on("click", function () {
                 var id = $(this).attr("data-subjectId");
                 var name = window.btoa(unescape(encodeURIComponent($(this).attr("data-name"))));
-                var url = 'https://etuitor.herokuapp.com/live/parent' + `?p=${id.replace(/Thứ /gi, '')}&n=${name}&token=@Session.SessionID`;
+                var url = 'https://etuitor.herokuapp.com/live/parent' + `?p=${id.replace(/Thứ /gi, '').replace(/Chủ nhật/gi, '8')}&n=${name}&token=@Session.SessionID`;
                 var strWindownFeatures = `toolbars=no,scrollbars=yes,status=no,resizable=no,location=no,width=${$(window).width()},height=${$(window).height()}`;
                 WindowObject = window.open(url, "StreamEtutor", strWindownFeatures);
                 WindowObject.document.close();
