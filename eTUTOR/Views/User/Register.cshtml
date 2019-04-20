@@ -86,7 +86,6 @@
     </div>
 
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>
-    <script src="register.component.js"></script>
     <script>
         $(document).ready(function () {
             var valRole;
@@ -281,7 +280,7 @@
                 document.getElementById('experiences').innerHTML = " ** Năm kinh nghiệm không được rỗng";
                 notError = false;
             }
-            return false;
+            return notError;
         }
         function validateForParent() {
             var fullname = document.getElementById('fullname').value;

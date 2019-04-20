@@ -48,7 +48,7 @@ namespace eTUTOR.Tests
             var redirectRoute = controller.RegisterStudent(student) as RedirectToRouteResult;
 
             //Assert
-            Assert.IsNotNull(redirectRoute);
+            Assert.IsNotNull(redirectRoute );
             Assert.AreEqual("ConfirmEmail", redirectRoute.RouteValues["action"]);
             Assert.AreEqual("User", redirectRoute.RouteValues["controller"]);
             Assert.AreEqual(0, validationResults.Count);
