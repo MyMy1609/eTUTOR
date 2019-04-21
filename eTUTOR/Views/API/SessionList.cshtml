@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     var sessionlist = ViewData["sessionlist"] as List<eTUTOR.Models.session>;
 }
 <table class="table" style="text-align: center;">
@@ -11,13 +11,13 @@
         </th>
 
         <th>
-           Gia sư
+            Học sinh
         </th>
         <th>
             Số buổi đã học
         </th>
         <th>
-           Vào học
+            Vào học
         </th>
     </tr>
     @if (!sessionlist.Any())
@@ -46,7 +46,7 @@
                     @session.total_sessions
                 </td>
                 <td>
-                    <a href="javascript:void(0);" class="student_sub" data-name="@Session["FullName"]" data-subjectId="@session.tutor_id@session.subject_id@session.day_otw">
+                    <a href="javascript:void(0);" class="student_sub" data-name="@session.tutor.fullname" data-subjectId="@session.tutor_id@session.subject_id@session.day_otw">
                         <i class="fa fa-video-camera" aria-hidden="true" style="font-size:30px;"></i>
                     </a>
                 </td>
