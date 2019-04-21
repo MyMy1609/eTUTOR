@@ -42,6 +42,10 @@ namespace eTUTOR.Controllers
 
                 //add new tutor
                 tutor.status = 2;
+                //if (certificate != null && certificate.ContentLength > 0)
+                //{
+                //    tutor.certificate = certificate.FileName;
+                //}
                 tutor.specialized = tutor.specialized.ToUpper();
 
                 tutor.password = commonService.hash(tutor.password);

@@ -38,7 +38,7 @@ namespace eTUTOR.Tests
                 fullname = "Trần Phú Hòa",
                 username = "Hòa Trần",
                 phone = "090 123 7654",
-                email = "hoatran1309@gmail.com",
+                email = "hoatran130995@gmail.com",
                 password = "12345678"
             };
             controller.ControllerContext = new ControllerContext(moqContext.Object, new RouteData(), controller);
@@ -76,7 +76,7 @@ namespace eTUTOR.Tests
                 fullname = "Trần Phú Hòa",
                 username = "Hòa Trần",
                 phone = "090 123 7654",
-                email = "hoatran1309@gmail.com",
+                email = "hoatran130995@gmail.com",
                 password = "12345678"
             };
             controller.ControllerContext = new ControllerContext(moqContext.Object, new RouteData(), controller);
@@ -115,7 +115,7 @@ namespace eTUTOR.Tests
                 fullname = "Trần Phú Hòa",
                 username = "Hòa Trần",
                 phone = "090 123 7654",
-                email = "hoatran1309@gmail.com",
+                email = "hoatran130995@gmail.com",
                 password = "12345678"
             };
             controller.ControllerContext = new ControllerContext(moqContext.Object, new RouteData(), controller);
