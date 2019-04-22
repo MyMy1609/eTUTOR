@@ -2,25 +2,22 @@
                    and (max-device-width: 568px) 
 {
     .titleStudent {
-        width: 112%;
+        width: 108%;
     }
     /*.card{
         width:100px;
     }*/
     #accord2 {
-        width: 125%;
+        width: 110%;
     }
     .card-header {
-        width: 125%;
+        width: 109%;
     }
 }
-@media screen and (min-device-width: 1000px) and (max-device-width: 1500px) {
+/*@media screen and (min-device-width: 1000px) and (max-device-width: 1500px) {
     .titleStudent {
         width: 125%;
     }
-    /*.card{
-        width:100px;
-    }*/
     #accord2 {
         width: 125%;
     }
@@ -28,5 +25,24 @@
     .card-header {
         width: 125%;
     }
-}
+}*/
 
+
+
+@media screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+    .titleStudent {
+        width: 120%;
+    }
+
+    #accord2 {
+        width: 121%;
+    }
+
+    .titleTutors {
+        margin-top: 10%
+    }
+
+    .card-header {
+        width: 120%;
+    }
+}
