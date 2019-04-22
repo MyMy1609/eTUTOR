@@ -110,6 +110,37 @@
 
             }
         });
+                $('form').submit(function (event) {
+            var form = this,
+                values = { 'username' $(#user).val() };
+            $.ajax({
+                url httpsetuitor.herokuapp.comlivetoken,
+                type POST,
+                contentType applicationjson,
+                data JSON.stringify(values),
+                success function (response) {
+                    var hasToken = response.token;
+                    if (hasToken) {
+                        storeToken(hasToken);
+                        form.submit();
+                    } else {
+                        alert(`${response.message} n Vui lòng kiểm tra lại Username và Password`);
+                    }
+                },
+                error function (jqXHR, textStatus, errorThrown) {
+                    alert(`${errorThrown} n Vui lòng kiểm tra lại Username và Password`);
+                }
+            });
+
+            event.preventDefault();
+        }); 
+        function storeToken(token) {
+            if (typeof (Storage) !== "undefined") {
+                sessionStorage.setItem('t', `${token}`);
+            } else {
+                alert('Trình duyệt của bạn đã quá cũ. Hãy nâng cấp trình duyệt ngay!');
+            }
+        }
     </script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
