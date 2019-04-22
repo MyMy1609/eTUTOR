@@ -10,10 +10,10 @@ using System.Web.Routing;
 using System.Web.SessionState;
 using eTUTOR.Tests.Support;
 
-namespace eTUTOR.Tests.Controllers
+namespace eTUTOR.Tests
 {
     [TestClass]
-    public class UserControllerTest
+    public class UnitTest_Login
     {
         /*
             UNIT TEST FOR TUTOR LOGIN FUNCTION
@@ -104,7 +104,7 @@ namespace eTUTOR.Tests.Controllers
             Assert.IsNotNull(redirectRoute);
             Assert.AreEqual("Mật khẩu sai rồi !", redirectRoute.ViewBag.msg);
         }
-        //Test case : tutor login with account Status is 2 (Account not activated yet) NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE
+        //Test case : tutor login with account Status is 2 (Account not activated yet)
         [TestMethod]
         public void TutorLogin_WithAccountStatusIs2()
         {
@@ -345,7 +345,7 @@ namespace eTUTOR.Tests.Controllers
         }
         //Test case : parent login with invalid email
         [TestMethod]
-        public void ParentLogin_WithInvalidInput()
+        public void ParentLogin_WithInvalidEmail()
         {
             //Arrange
             Mock<HttpContextBase> moqContext = new Mock<HttpContextBase>();
@@ -401,7 +401,7 @@ namespace eTUTOR.Tests.Controllers
             Assert.AreEqual("Mật khẩu sai rồi !", redirectRoute.ViewBag.msg);
             Assert.AreEqual("Login", redirectRoute.ViewName);
         }
-        //Test case : parent login with account status is 2
+        //Test case : parent login with account status is 2 (Account not activated yet)
         [TestMethod]
         public void ParentLogin_WithAccountStatusIs2()
         {
@@ -430,7 +430,7 @@ namespace eTUTOR.Tests.Controllers
             Assert.AreEqual("Tài khoản của bạn chưa được kích hoạt", redirectRoute.ViewBag.msg);
             Assert.AreEqual("Login", redirectRoute.ViewName);
         }
-        //Test case : parent login with account status is 3
+        //Test case : parent login with account status is 3 (Account blocked)
         [TestMethod]
         public void ParentLogin_WithAccountStatusIs3()
         {
