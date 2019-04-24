@@ -98,7 +98,7 @@ namespace eTUTOR.Controllers
             else if (files.ContentLength > 0)
             {
                 int MaxContentLength = 1024 * 1024 * 3; //3 MB
-                string[] AllowedFileExtensions = new string[] { ".jpg", ".png", ".pdf" };
+                string[] AllowedFileExtensions = new string[] { ".jpg", ".png" };
                 if (!AllowedFileExtensions.Contains(files.FileName.Substring(files.FileName.LastIndexOf('.'))))
                 {
                     setAlert("Vui lòng chọn file có đuôi : .JPG .PNG", "error");
