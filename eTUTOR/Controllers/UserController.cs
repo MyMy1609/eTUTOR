@@ -13,6 +13,7 @@ using System.Web.Mail;
 using System.Web.UI;
 using System.Net.Mail;
 using System.Web.Security;
+using eTUTOR.Filter;
 
 namespace eTUTOR.Controllers
 {
@@ -41,12 +42,12 @@ namespace eTUTOR.Controllers
             {
 
                 //add new tutor
-                tutor.status = 2;
+                //tutor.status = 2;
                 //if (certificate != null && certificate.ContentLength > 0)
                 //{
                 //    tutor.certificate = certificate.FileName;
                 //}
-                tutor.specialized = tutor.specialized.ToUpper();
+                //tutor.specialized = tutor.specialized.ToUpper();
 
                 tutor.password = commonService.hash(tutor.password);
                 tutor.dateCreate = DateTime.Now;
@@ -193,9 +194,9 @@ namespace eTUTOR.Controllers
         public ActionResult Login(string email, string password, string returnUrl)
         {
             var tutor = model.tutors.FirstOrDefault(x => x.email == email || x.username == email);
-            var student = model.students.FirstOrDefault(x => x.username == email || x.email == email);
+            var student = model.students.FirstOrDefault(x => x.email == email || x.username == email);
             var parent = model.parents.FirstOrDefault(x => x.email == email || x.username == email);
-            var admin = model.admins.FirstOrDefault(x => x.email == email || x.username == email);
+            //var admin = model.admins.FirstOrDefault(x => x.email == email || x.username == email);
 
             password = commonService.hash(password);
             if (tutor != null)
@@ -209,12 +210,15 @@ namespace eTUTOR.Controllers
                         Session["UserID"] = tutor.tutor_id;
                         Session["username"] = tutor.username;
                         Session["Role"] = "tutor";
+                        Session.Timeout = 180;
                         if (TempData["returnUrl"] != null && !string.IsNullOrWhiteSpace(TempData["returnUrl"].ToString()))
                         {
+                            Request.Headers.Add("demo", "1231231");
                             return Redirect(TempData["returnUrl"].ToString());
                         }
                         else
                         {
+                            Request.Headers.Add("demo", "1231231");
                             return RedirectToAction("InfoOfTutor", "Tutor");
                         }
                     }
@@ -249,12 +253,15 @@ namespace eTUTOR.Controllers
                         Session["UserID"] = student.student_id;
                         Session["username"] = student.username;
                         Session["Role"] = "student";
+                        Session.Timeout = 180;
                         if (TempData["returnUrl"] != null && !string.IsNullOrWhiteSpace(TempData["returnUrl"].ToString()))
                         {
+                            Request.Headers.Add("demo", "1231231");
                             return Redirect(TempData["returnUrl"].ToString());
                         }
                         else
                         {
+                            Request.Headers.Add("demo", "1231231");
                             return RedirectToAction("InfoOfStudent", "Student");
                         }
 
@@ -289,12 +296,15 @@ namespace eTUTOR.Controllers
                         Session["UserID"] = parent.parent_id;
                         Session["username"] = parent.username;
                         Session["Role"] = "parent";
+                        Session.Timeout = 180;
                         if (TempData["returnUrl"] != null && !string.IsNullOrWhiteSpace(TempData["returnUrl"].ToString()))
                         {
+                            Request.Headers.Add("demo", "1231231");
                             return Redirect(TempData["returnUrl"].ToString());
                         }
                         else
                         {
+                            Request.Headers.Add("demo", "1231231");
                             return RedirectToAction("InfoOfParent", "Parent");
                         }
 
@@ -339,7 +349,60 @@ namespace eTUTOR.Controllers
             return View("Login");
 
 
-        } 
+        }
+        [HttpPost]
+        public ActionResult TokenStream(string email)
+        {
+            var tutor = model.tutors.FirstOrDefault(x => x.email == email || x.username == email);
+            var student = model.students.FirstOrDefault(x => x.email == email || x.username == email);
+            var parent = model.parents.FirstOrDefault(x => x.email == email || x.username == email);
+            if(IntValue(student))
+            {
+                return Json(DataJSON(student), JsonRequestBehavior.AllowGet);
+            }
+            else if(IntValue(tutor))
+            {
+                return Json(DataJSON(tutor), JsonRequestBehavior.AllowGet);
+            }
+            else if (IntValue(parent))
+            {
+                return Json(DataJSON(parent), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var data = new { message="ERROR", status=404 };
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        private JSONObject DataJSON(dynamic data)
+        {
+            var jsonData = new JSONObject
+            {
+                email = data.email,
+                fullname = data.fullname,
+                username = data.username,
+                status = data.status,
+                avatar = data.avatar,
+                phone = data.phone
+            };
+            return jsonData;
+        }
+
+        private Boolean IntValue(dynamic data)
+        {
+            try
+            {
+                var email = data.email;
+                if (!string.IsNullOrEmpty(data.email))
+                {
+                    return true;
+                }
+                return false;
+            } catch (Exception ex) {
+                return false;
+            }
+        }
 
         public ActionResult Logout()
         {
@@ -537,6 +600,5 @@ namespace eTUTOR.Controllers
         }
 
     }
-
 }
 

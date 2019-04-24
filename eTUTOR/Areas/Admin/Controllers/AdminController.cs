@@ -30,6 +30,7 @@ namespace eTUTOR.Areas.Admin.Controllers
             if (admin != null)
             {
                 string pass = commonService.hash(password);
+                Session.Timeout = 30;
                 if (admin.password.Equals(pass))
                 {
                     Session["FullName"] = admin.fullname;
