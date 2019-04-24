@@ -101,7 +101,7 @@
                                   <th scope="row" id="day-@item.schedule_id">@item.day_otw</th>
                                   <th id="start-end-@item.schedule_id">@item.start_time.Value.Hours h - @item.end_time.Value.Hours h</th>
                                   <th>
-                                      <input type="number" id="soBuoi" name="soBuoi" min="5" max="10" value="10" class="form-control" style="width:50px"/>
+                                      <input type="number" id="soBuoi" name="soBuoi" min="5" max="99" value="10" class="form-control" style="width:50px"/>
                                   </th>
                               </tr>
                           }
@@ -236,16 +236,17 @@
             if (vals) vals = vals.substring(1);
             $('#lichhocc-1').val(vals);
 
-        });
-        var legnht = $('input[name="idschedule"]:checked').length;
-        if (legnht < 1) {
-            $('#submit-form').attr('disabled', 'disabled');
+            var legnht = $('input[name="idschedule"]:checked').length;
+            if (legnht < 1) {
+                $('#submit-form').attr('disabled', 'disabled');
 
-            alert("Vui lòng chọn thời gian học");
-        } else {
-            $('#submit-form').removeAttr('disabled');
-        };
-                                    //var lichhoc = document.getElementsByClassName('idschedule');
+                alert("Vui lòng chọn thời gian học");
+            } else {
+                $('#submit-form').removeAttr('disabled');
+            };
+
+
+        });                 //var lichhoc = document.getElementsByClassName('idschedule');
                                     //for (var i = 0; lichhoc[i]; ++i) {
                                     //    if (inputElements[i].checked) {
                                     //        checkedValue = inputElements[i].value;
